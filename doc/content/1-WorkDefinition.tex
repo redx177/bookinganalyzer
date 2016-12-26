@@ -1,1 +1,66 @@
 \chapter{Einleitung}
+Im Rahmen der Bachelorarbeit werden Buchungsdaten von Interhome analysiert, um daraus Erkenntnisse zu gewinnen. In der Einleitung wird die Aufgabenstellung erläutert, sowie Abgrenzungen definiert.
+ 
+\section{Aufgabenstellung}
+Nachfolgend ist die Aufgabenstellung aufgeführt, wie sie für die Projektfreigabe eingereicht wurde.
+
+\subsection{Ausgangslage}
+Interhome AG vertreibt Ferienwohnungen auf einer Webseite mit 26 Domains und 14 Sprachen, welche mit dem Content Management System Sitecore umgesetzt ist. Darauf können Kunden Ferienhäuser oder -wohnungen (Objekte) buchen. Zuerst muss der User eine Destination auswählen und kann dann die verschiedenen Objekte ansehen. Diese haben einen Namen, Bilder und 18 dargestellte Attribute. Beispiele solcher Attribute sind, ob die Wohnung einen Fernseher besitzt, Tiere erlaubt sind oder eine Sauna vorhanden ist. Dies sind binäre Werte, welche wahr oder falsch sein können. Es gibt zusätzlich noch kontinuierliche Attribute wie Distanz um Meer oder zum Zentrum.
+
+Die Buchungen werden in das System Irent (SAP) gespeichert. Die gesammelten Daten werden von einem Recommender System, welches von Interhome entwickelt wurde, analysiert. Weitere Untersuchungen der Daten finden im Moment nicht statt.
+
+\subsection{Ziel der Arbeit}
+Das Ziel der Arbeit ist es, Interhome eine Plattform zur Verfügung zu stellen, damit neue Informationen aus den Buchungsdaten extrahiert werden können (Knowledge Discovery). Es soll möglich sein, zum Beispiel eine folgende Frage zu beantworten: „Was für Objekte werden im Winter am meisten in Zermatt gebucht?“. Eine mögliche Antwort wäre: „Objekte welche unter CHF500 kosten und maximal 200 Meter von einem Skilift entfernt sind“.
+Dies sollte Interhome ermöglichen, ihre Marketing Strategie zu verbessern und gezielter Objekte einzukaufen.
+
+Um solche Fragen zu beantworten werden die Buchungsdaten von Interhome (Objekt, Zeitraum, Passagiere, etc.) ausgelesen (ca. 1-2 Millionen) und mit weiteren Daten (Objektattribute, Geolocation und Wetterinformation) angereicht. 
+Auf dem Endprodukt soll ein Mitarbeiter von Interhome in der Lage sein, ein Abfrage zu generieren, welche aus einem oder mehreren Attribute besteht. Die Applikation analysiert daraufhin die Daten mit Techniken des Data Mining, um eine Liste von Attributen zurück zu liefern, welche für die in der Abfrage aufgeführten Attributen am meisten Buchungen generieren. Die Elemente in der Antwort sollten gewichtet sein um das Resultat besser zu interpretieren.
+
+Bei dieser Arbeit gibt es einen theoretischen Aspekt für die Datenanalyse, sowie einen technischen für die Umsetzung. 
+Es soll vorgängig abgeklärt werden, ob es bereits wissenschaftliche Arbeiten gibt, welche sich mit einer ähnlichen Thematik im Bereich Knowledge Discovery befassen. Es soll danach analysiert werden ob sich die Vorgehensweisen aus diesen Arbeiten für die Bachelorarbeit eignen. Falls nicht, soll ein Konzept von Grund auf erarbeitet werden. Weiter soll eine Data Mining-Software gesucht werden, welche für die Analyse und Datenauswertung eingesetzt werden kann.
+
+\subsection{Aufgabenstellung}
+In der Beachelorthesis werden folgende Aufgaben durchgeführt:\\
+
+\noindent Recherche:\\
+1. Beschaffung der Buchungsdaten für die Auswertung.\\
+2. Evaluation von verschiedenen Techniken des Data Mining, welche für die Auswertung der Daten verwendet werden können.\\
+3. Vorhandene wissenschaftliche Arbeiten suchen, welche sich mit einer ähnlichen Problemstellung auseinandersetzen.\\
+4. Evaluation von verschiedenen Programmen für die Auswertung und Darstellung der Daten.\\
+
+\noindent Anforderungsanalyse:\\
+5. Beschreibung der Vorgehensweisen, welche in wissenschaftlichen Arbeiten gefunden wurden und sich für die Problemstellung eignen. \\
+6. Analyse der Buchungsdaten für die Auswertung.\\
+7. Anforderungen an das Programm für die Auswertung und Darstellung der Daten.\\
+
+\noindent Konzept:\\
+8. Definition einer Vorgehensweise für die Datenanalyse.\\
+9. Festlegen ob ein Programm für die Auswertung und Darstellung der Daten verwendet wird oder eine eigene Implementation.\\
+10. Design und Funktionalität des Programmes definieren.\\
+11. Definition der Testcases an das Programm.\\
+
+\noindent Proof of Concept:\\
+12. Vorbereitung der Daten für die Auswertung.\\
+13. Erstellung oder Verwendung eines Programmes für die Analyse und Darstellung der Daten.\\
+
+\noindent Testing \& Fazit\\
+14. Auswertung der Testcases.\\
+15. Einschätzung ob das Programm live für Interhome eingesetzt werden kann.\\
+
+\subsection{Erwartete Resultate}
+Nachfolgende Artefakte werden in der Arbeit generiert:\\
+1. Rohdaten der Buchungen für die Umsetzung.\\
+2. Beschreibung verschiedener Techniken des Data Mining.\\
+3. Auflistung von wissenschaftlichen Arbeiten zu ähnlichen Problemstellungen.\\
+4. Beschreibung von Programmen für das Data Mining und die Darstellung der Daten.\\
+5. Beschreibung geeigneter Vorgehensweisen, welche in wissenschaftlichen Arbeiten gefunden wurde.\\
+6. Beschreibung der Buchungsdaten.\\
+7. Anforderungen an das Programm.\\
+8. Beschreibung der einzusetzenden Techniken des Data Mining.\\
+9. Entscheid ob eine fertige Lösung (und welche) oder eine eigene Entwicklung für die Analyse und die Darstellung eingesetzt wird. \\
+10. Beschreibung des Design und der Funktionalität des Programmes.\\
+11. Testcases für die Verifikation des Programmes.\\
+12. Vorbereitete Daten für die Umsetzung.\\
+13. Programm für die Analyse und Darstellung der Daten.\\
+14. Testprotokol der definierten Testcases.\\
+15. Entscheid ob das Programm live für Interhome eingesetzt werden kann.\\
