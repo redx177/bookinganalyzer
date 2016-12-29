@@ -13,7 +13,7 @@ Interhome AG vertreibt Ferienwohnungen auf einer Webseite mit 26 Domains und 14 
 Die Buchungen werden in das System Irent (SAP) gespeichert. Die gesammelten Daten werden von einem Recommender System, welches von Interhome entwickelt wurde, analysiert. Weitere Untersuchungen der Daten finden im Moment nicht statt.
 
 \subsection{Ziel der Arbeit}
-Das Ziel der Arbeit ist es, Interhome eine Plattform zur Verfügung zu stellen, damit neue Informationen aus den Buchungsdaten extrahiert werden können (Knowledge Discovery). Es soll möglich sein, zum Beispiel eine folgende Frage zu beantworten: „Was für Objekte werden im Winter am meisten in Zermatt gebucht?“. Eine mögliche Antwort wäre: „Objekte welche unter CHF500 kosten und maximal 200 Meter von einem Skilift entfernt sind“.
+Das Ziel der Arbeit ist es, Interhome eine Plattform zur Verfügung zu stellen, damit neue Informationen aus den Buchungsdaten extrahiert werden können (Knowledge Discovery). Dafür wird entweder ein bestehendes Programm verwendet oder eine eigene Lösung entwickelt. Es soll möglich sein, zum Beispiel eine folgende Frage zu beantworten: „Was für Objekte werden im Winter am meisten in Zermatt gebucht?“. Eine mögliche Antwort wäre: „Objekte welche unter CHF500 kosten und maximal 200 Meter von einem Skilift entfernt sind“.
 Dies sollte Interhome ermöglichen, ihre Marketing Strategie zu verbessern und gezielter Objekte einzukaufen.
 
 Um solche Fragen zu beantworten werden die Buchungsdaten von Interhome (Objekt, Zeitraum, Passagiere, etc.) ausgelesen (ca. 1-2 Millionen) und mit weiteren Daten (Objektattribute, Geolocation und Wetterinformation) angereicht. 
@@ -53,3 +53,21 @@ Nicht beinhaltet in der Arbeit ist die Verbesserung der Marketing Strategie. Die
 		Experte & \gls{zhaw} & Christioph Burkhardt \\ \hline 
 	\end{tabular} 
 \end{table}
+
+\section{Vorgehen}
+Nachfolged wird das Vorgehen für die Analyse der Daten und die Umsetzung des Prototypen beschrieben.
+
+Zuerst wird in der Recherche (siehe \cref{sec:recherche} \nameref{sec:recherche}) die Daten beschafft, welche im Rahmen dieser Arbeit zu untersuchen sind. Für das Data Mining werden verschiedene Techniken aufgeführt, welche sich für die Analyse eignen könnten. Zusätzlich werden noch existierende wissenschaftliche Arbeiten gesucht welche sich mit derselben Thematik auseinandersetzen. Zum Abschluss werden noch Programme evaluiert, welche für das Data Mining eingesetzt werden können.
+
+Das zweite Kapitel widmet sich der Anforderungsanalyse (siehe \cref{sec:anforderungsanalyse} \nameref{sec:anforderungsanalyse}). Darin werden die Anforderungen an die Data Mining Techniken beschrieben, welche im Kapitel Recherche erläutert wurden. Zusätzlich werden Die Buchungsdaten analysiert und zuletzt die Voraussetzungen definiert, welche die Plattform für das Knowledge Discovery zu erfüllen hat.
+
+Nachdem die Anforderungen festgelegt wurden wird ein Konzept (siehe \cref{sec:konzept} \nameref{sec:konzept}) erstellt. Dieses legt fest, welche Data Mining Techniken in der Arbeit verwendet werden. Zusätzlich werden folgende Punkte im Bezug an die Platform für das Knowledge Discovery definiert:
+\begin{itemize}
+	\item Wird ein bestehendes Programm verwendet oder eine eigene Implementation.
+	\item Design und Funktionalität der Plattform.
+	\item Testcases der Plattform.
+\end{itemize}
+
+Anschliessend startet das Proof of Concept (siehe \cref{sec:proofofconcept} \nameref{sec:proofofconcept}). Darin müssen zuerst die Daten für die Analyse vorbereitet werden. Danach wird die Plattform aufgesetzt oder implementiert.
+
+Zum Abschluss werden die Testcases aus dem Konzept ausgewertet und ein Fazit gezogen.
