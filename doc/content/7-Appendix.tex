@@ -1,4 +1,174 @@
 
 \appendix
-\chapter{Testübersicht}
-\label{app:Testfälle}
+\chapter{Feldbeschreibungen}
+\label{app:feldbeschreibungen}
+
+\rowcolors{1}{tablebodycolor}{tablerowcolor}
+\begin{longtable}{ | c | c | c | c |} 
+	\hline 
+	\rowcolor{tableheadcolor}
+	\bfseries Zelle & \bfseries Name & \bfseries Beschreibung \\ \hline 
+	
+	\rowcolor{tableheadcolor}
+	\multicolumn{3}{|c|}{\textbf{Buchungsdaten}} \\ \hline
+	A & RESNRDIS & Eindeutige Buchungsnummer \\ \hline 
+	B & RESINSDATE & Erstellungsdatum der Buchung \\ \hline 
+	C & BOOKSTA & Status der Buchung \\ \hline 
+	D & SELCURR & Währung \\ \hline 
+	E & PRICES & Preis \\ \hline 
+	F & SONR & Sales Office Nummer \\ \hline 
+	G & MAINSONR & Main Sales Office Nummer \\ \hline 
+	H & BOOKLANG & Sprache der Benutzers \\ \hline 
+	I & NREF & Nummer des Gebuchten Objektes \\ \hline 
+	J & RESBEGDATE & Startdatum des Aufenthaltes \\ \hline 
+	K & RESENDDATE & Enddatum des Aufenthaltes \\ \hline 
+	L & REPAX & Anzahl Passagiere \\ \hline 
+	M & READULT & Anzahl Erwachsene \\ \hline 
+	N & RECHILD & Anzahl Kinder \\ \hline 
+	O & REBABY & Anzahl Babies \\ \hline 
+	P & CUTITLE & Anrede des Kunden \\ \hline 
+	Q & CUNAME & Name des Kunden \\ \hline 
+	R & CUSTRAS & Strasse des Kunden \\ \hline 
+	S & CUCNTRY & Land des Kunden \\ \hline 
+	T & CUZIP & Postleitzahl des Kunden \\ \hline 
+	U & CUORT & Ortschaft des Kunden \\ \hline 
+	
+	\rowcolor{tableheadcolor}
+	\multicolumn{3}{|c|}{\textbf{Objektdaten}} \\ \hline
+	V & OBGEOLAT & Breitengrad des Objektes \\ \hline 
+	W & OBGEOLONG & Längengrad des Objektes \\ \hline 
+	X & OBSTRAS & Strasse des Objektes \\ \hline 
+	Y & OBCNTRY & Land des Objektes \\ \hline 
+	Z & OBZIP & Postleitzahl des Objektes \\ \hline 
+	AA & OBORT & Ortschaft des Objektes \\ \hline 
+	AB & PAX & Anzahl möglicher Gäste \\ \hline 
+	AC & QUAL &  \\ \hline 
+	AD & ROOMS & Anzahl Zimmer \\ \hline 
+	AE & BEDROOMS & Anzahl Schlafzimmer \\ \hline 
+	AF & BRAND &  \\ \hline 
+	AG & ACCOMTYPE &  \\ \hline 
+	AH & PETS & Tiere erlaubt? \\ \hline 
+	AI & CHOUSE & A = Apartment (Wohnung), H = House (Haus) \\ \hline 
+	AJ & HOUSETYPE &  \\ \hline 
+	AK & DIWATER & Distanz zum Wasser \\ \hline 
+	AL & DISKI & Distanz zum Skigebiet \\ \hline 
+	AM & DIPUBT & Distanz zum öffentlichen Verkehr \\ \hline 
+	AN & DIGOLF & Distanz zum Golfplatz \\ \hline 
+	AO & CNATURE &  \\ \hline 
+	AP & CTRANQUILI &  \\ \hline 
+	AQ & CBATHANDSH &  \\ \hline 
+	AR & CAIRCOND &  \\ \hline 
+	AS & CCENTRAL &  \\ \hline 
+	AT & CSUNNY &  \\ \hline 
+	AU & CFENCED &  \\ \hline 
+	AV & CGARDEN &  \\ \hline 
+	AW & CPOOL &  \\ \hline 
+	AX & CPPOOL &  \\ \hline 
+	AY & CHEATED &  \\ \hline 
+	AZ & CSAFEPOOL &  \\ \hline 
+	BA & CCHILDPOOL &  \\ \hline 
+	BB & CTENNIS &  \\ \hline 
+	BC & CBBQ &  \\ \hline 
+	BD & CRECEPTION&  \\ \hline 
+	BE & CRESTAURAN &  \\ \hline 
+	BF & CSAUNA &  \\ \hline 
+	BG & CFITNESS &  \\ \hline 
+	BH & CMASSAGE &  \\ \hline 
+	BI & CJACUZZI&  \\ \hline 
+	BJ & CBILLARD &  \\ \hline 
+	BK & CTABLETENN &  \\ \hline 
+	BL & CELEVATOR &  \\ \hline 
+	BM & CWASHMACHI &  \\ \hline 
+	BN & CDRYER &  \\ \hline 
+	BO & CCHANGELIN &  \\ \hline 
+	BP & CCLEANING &  \\ \hline 
+	BQ & CMAIDENSER &  \\ \hline 
+	BR & CFRESHBREA &  \\ \hline 
+	BS & CBREAKFAST &  \\ \hline 
+	BT & CHALFBOARD &  \\ \hline 
+	BU & CPARKING &  \\ \hline 
+	BV & CDISHWASHE &  \\ \hline 
+	BW & CFIREPLACE &  \\ \hline 
+	BX & SCTV &  \\ \hline 
+	BY & SCBALCONY &  \\ \hline 
+	BZ & SCFREEZER &  \\ \hline 
+	CA & SCNOSMOKE &  \\ \hline 
+	CB & CSNATURECO &  \\ \hline 
+	CC & CWNATURECO &  \\ \hline 
+	CD & CBATHSEA &  \\ \hline 
+	CE & CBATHLAKE &  \\ \hline 
+	CF & CMOUNTLAKE &  \\ \hline 
+	CG & CSRESTRELA &  \\ \hline 
+	CH & CWRESTRELA &  \\ \hline 
+	CI & CMETROPOLI &  \\ \hline 
+	CJ & CHIKINGMOU &  \\ \hline 
+	CK & CHIKINGPLA&  \\ \hline 
+	CL & CNORDICWAL &  \\ \hline 
+	CM & CSACTFUNSP &  \\ \hline 
+	CN & CWACTFUNSP &  \\ \hline 
+	CO & CENTERPARK &  \\ \hline 
+	CP & CBIKINGMOU &  \\ \hline 
+	CQ & CBIKINGPLA &  \\ \hline 
+	CR & CSAILING &  \\ \hline 
+	CS & CSURFING &  \\ \hline 
+	CT & CWINDSURF &  \\ \hline 
+	CU & CSNIGHTLIF &  \\ \hline 
+	CV & CWNIGHTLIF &  \\ \hline 
+	CW & CSSENIOR &  \\ \hline 
+	CX & CWSENIOR &  \\ \hline 
+	CY & CSFAMILY &  \\ \hline 
+	CZ & CWFAMILY&  \\ \hline 
+	DA & CSIDYLIC &  \\ \hline 
+	DB & CWIDYLIC&  \\ \hline 
+	DC & CHISTORIC &  \\ \hline 
+	DD & CWINEDINE &  \\ \hline 
+	DE & CSUITHOMO &  \\ \hline 
+	DF & CTYPVILLAG &  \\ \hline 
+	DG & CCOVERPARK &  \\ \hline 
+	DH & CTYPRUSTIC &  \\ \hline 
+	DI & CTYPCOMFOR &  \\ \hline 
+	DJ & CTYPLUXUR &  \\ \hline 
+	DK & CTYPMODERN &  \\ \hline 
+	DL & CTYPHISTOR &  \\ \hline 
+	DM & AIRPORT1 &  \\ \hline 
+	DN & DIAIRPORT1 &  \\ \hline 
+	DO & CROSSSKIIN &  \\ \hline 
+	DP & ICERINK &  \\ \hline 
+	DQ & SKIAREA &  \\ \hline 
+	DR & SNOWBOARD &  \\ \hline 
+	DS & TOBOGGAN &  \\ \hline 
+	DT & WINTERWALK &  \\ \hline 
+	DU & OUTDPOOL &  \\ \hline 
+	DV & INDPOOL &  \\ \hline 
+	DW & DVDPLAYER &  \\ \hline 
+	DX & PTENNIS &  \\ \hline 
+	DY & SOLARIUM &  \\ \hline 
+	DZ & DICENTER &  \\ \hline 
+	EA & DISEA &  \\ \hline 
+	EB & DILAKE &  \\ \hline 
+	EC & CRESIDENCE &  \\ \hline 
+	ED & CPTENNIS &  \\ \hline 
+	EE & CHORSE &  \\ \hline 
+	EF & CVIEWSEA &  \\ \hline 
+	EG & INTERNET &  \\ \hline 
+	EH & CHILDPGRND &  \\ \hline 
+	EI & CISLAND &  \\ \hline 
+	EJ & CVIEWMOUNT &  \\ \hline 
+	EK & CVIEWCNTRY &  \\ \hline 
+	EL & CVIEWLAKE &  \\ \hline 
+	EM & CBATH &  \\ \hline 
+	EN & CSHOWER &  \\ \hline 
+	EO & CCARPORT &  \\ \hline 
+	EP & CSGARAGE &  \\ \hline 
+	EQ & CCGARAGE &  \\ \hline 
+	ER & CGOLFCOURS &  \\ \hline 
+	ES & CWELLNESS &  \\ \hline 
+	ET & CMICROWAVE &  \\ \hline 
+	EU & COVEN &  \\ \hline 
+	EV & CPHONE &  \\ \hline 
+	EW & CTERRACE &  \\ \hline 
+	
+	\caption{Projektbeteiligte}
+\end{longtable} 
+
+											
