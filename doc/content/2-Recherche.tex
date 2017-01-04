@@ -4,6 +4,50 @@
 
 
 \section{Datenbeschaffung}
+\label{sec:recherche:datenbeschaffung}
 Als erstes wurden die Daten für die Auswertung beschafft. Diese mussten aus dem \gls{irent} extrahiert werden. Dies musste von einer anderen Abteilung erledigt werden da nur Sie Zugriff auf die Export-Funktion des System haben. Da die Buchungen Kundendaten enthalten, können Sie nicht veröffentlicht werden.
 
 Die Daten liegen im Windows Excel Format vor. Es sind total 133'001 Datensätze mit jeweils 153 Felder. Die Zellen A-U sind Informationen im Bezug auf die Buchungen, alle anderen (V-EW) beziehen sich auf das Objekt selber. Die Felbeschreibungen sind im \cref{app:feldbeschreibungen} \nameref{app:feldbeschreibungen} aufgeführt.
+
+\section{Prozess des Data Mining}
+\label{sec:recherche:dataminingtechniken}
+Unter Data Mining versteht man die Anwendung von statistischen Methoden auf grossen Datenmengen mit dem Ziel, neue Erkenntnisse zu gewinnen.
+
+Data Mining sieht folgende Schritte vor:
+\begin{enumerate}
+	\item Datenbeschaffung
+	\item Daten vorbereiten
+	\item Methoden zur Gewinnung von Informationen anwenden
+	\item Überprüfung der Resultate
+\end{enumerate}
+
+Schritt 1 ist die Beschaffung der Daten, welche analysiert werden sollen (siehe \cref{sec:recherche:datenbeschaffung} \nameref{sec:recherche:datenbeschaffung}). 
+
+Die Vorbereitung der Daten Bereinigt, Transformiert und Reduziert Informationen und wird im \cref{sec:recherche:dataminingtechniken:datenvorbereiten} \nameref{sec:recherche:dataminingtechniken:datenvorbereiten} beschrieben.
+
+Der dritte Punkt ist das eigentliche Datengewinnung. Dabei werden Methoden des Data Mining auf die Daten angewendet. Mögliche Vorgehensweisen werden im \cref{sec:recherche:dataminingtechniken:disziplinen} \nameref{sec:recherche:dataminingtechniken:disziplinen} beschrieben.
+
+Beim letzten Schritt werden die Resultate überprüft. Ist das Resultat nicht zufriedenstellend, so werden Punkt 2-4 wiederholt.
+
+\subsection{Daten vorbereiten}
+\label{sec:recherche:dataminingtechniken:datenvorbereiten}
+
+Danach müssen die Daten vorbereitet werden. Dies umfasst die Bereinigung, Transformation sowie Reduktion von Informationen\footcite{feature_selection_2017-01-04}. Bei ersteren werden Messfehler behoben, fehlende Felder ergänzt oder Duplikate entfernt. Die Transformation wandelt Werte um damit sie für die Berechnung besser geeignet sind. Zum Beispiel können Wertebereiche in Intervalle aufgeteilt werden. Bei letzteren werden Instanzen der Datengrundlage entfernt, wodurch die Berechnungszeit verkürzt wird, oder Attribute von allen Instanzen entfernt, da deren Entropie zu gering ist. Weiteres hierzu im \cref{sec:proofofconcept:datenvorbereitung} \nameref{sec:proofofconcept:datenvorbereitung}.
+
+
+\subsection{Disziplinen im Data-Mining}
+\label{sec:recherche:dataminingtechniken:disziplinen}
+Die folgenden Methoden geben eine Übersicht über die gängigsten Techniken wider. Später wird im \cref{sec:konzept:vorgehensweise} \nameref{sec:konzept:vorgehensweise} eine Methode ausgewählt und genauer beschrieben.
+
+\subsubsection{Association rule learning}
+
+\subsubsection{Classification}
+
+\subsubsection{Clustering}
+Unterschied Classification <-> clustering: 
+- Classification: Bestehende Clusters
+- Clustering: Neue Clusters finden
+
+\subsubsection{Regression}
+
+\subsubsection{Collaborative Filtering}
