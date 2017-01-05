@@ -32,14 +32,19 @@ Beim letzten Schritt werden die Resultate überprüft. Ist das Resultat nicht zu
 \subsection{Daten vorbereiten}
 \label{sec:recherche:dataminingtechniken:datenvorbereiten}
 
-Danach müssen die Daten vorbereitet werden. Dies umfasst die Bereinigung, Transformation sowie Reduktion von Informationen\footcite{feature_selection_2017-01-04}. Bei ersteren werden Messfehler behoben, fehlende Felder ergänzt oder Duplikate entfernt. Die Transformation wandelt Werte um damit sie für die Berechnung besser geeignet sind. Zum Beispiel können Wertebereiche in Intervalle aufgeteilt werden. Bei letzteren werden Instanzen der Datengrundlage entfernt, wodurch die Berechnungszeit verkürzt wird, oder Attribute von allen Instanzen entfernt, da deren Entropie zu gering ist. Weiteres hierzu im \cref{sec:proofofconcept:datenvorbereitung} \nameref{sec:proofofconcept:datenvorbereitung}.
+Danach müssen die Daten vorbereitet werden. Dies umfasst die Bereinigung, Transformation sowie Reduktion von Informationen\footcite{feature_selection_2017-01-04}. Bei ersteren werden Messfehler behoben, fehlende Felder ergänzt oder Duplikate entfernt. Die Transformation wandelt Werte um damit sie für die Berechnung besser geeignet sind. Zum Beispiel können Wertebereiche in Intervalle aufgeteilt werden. Bei letzteren werden Instanzen der Datengrundlage entfernt, wodurch die Berechnungszeit verkürzt wird, oder Attribute von allen Instanzen entfernt, da deren Entropie zu gering ist. Weiteres hierzu im \cref{sec:proofofconcept:datenvorbereitung} \nameref{sec:proofofconcept:datenvorbereitung}. 
 
 
 \subsection{Disziplinen im Data-Mining}
 \label{sec:recherche:dataminingtechniken:disziplinen}
-Die folgenden Methoden geben eine Übersicht über die gängigsten Techniken wider. Später wird im \cref{sec:konzept:vorgehensweise} \nameref{sec:konzept:vorgehensweise} eine Methode ausgewählt und genauer beschrieben.
+Die folgenden Methoden geben eine Übersicht über die gängigsten Techniken wider. Später wird im \cref{sec:konzept:vorgehensweise} \nameref{sec:konzept:vorgehensweise} eine Methode ausgewählt und genauer beschrieben. 
 
 \subsubsection{Association rule learning}
+Bei Association rule learning (Assoziationsanalyse) werden Korrelationen zwischen Attributen aufgedeckt. Bei einer Warenkorbanalyse kann dadurch erkannt werden, welche Produkte oft zusammen auftreten.
+
+Der Prozess in der Assoziationsanalyse besteht aus zwei Schritten. Zuerst werden häufig auftretende Attributkombinationen gesucht, und anschliessend daraus Regeln generiert\footcite{association_rule_learning_2017-01-05}.
+
+Im Falle einer Warenkorbanalyse könnte eine Regeln die Form "Samstags wenn ein Kunde Käse und Brot kauft, dann kauft er auch Liquor". Oder im Falle von Interhome "Wenn ein Kunde eine Ferienwohnung mit Pool am Meer bucht, dann besitzt das Objekt auch eine Klimaanlage".
 
 \subsubsection{Classification}
 

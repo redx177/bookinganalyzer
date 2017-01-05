@@ -22,4 +22,6 @@
 *.mtc1
 *.out
 *.synctex.gz
+*.run.xml
+*-blx.bib
 bookinganalyzer.pdf
