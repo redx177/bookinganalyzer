@@ -32,7 +32,7 @@ Beim letzten Schritt werden die Resultate überprüft. Ist das Resultat nicht zu
 \subsection{Daten vorbereiten}
 \label{sec:recherche:dataminingtechniken:datenvorbereiten}
 
-Danach müssen die Daten vorbereitet werden. Dies umfasst die Bereinigung, Transformation sowie Reduktion von Informationen\footcite{feature_selection_2017-01-04}. Bei ersteren werden Messfehler behoben, fehlende Felder ergänzt oder Duplikate entfernt. Die Transformation wandelt Werte um damit sie für die Berechnung besser geeignet sind. Zum Beispiel können Wertebereiche in Intervalle aufgeteilt werden. Bei letzteren werden Instanzen der Datengrundlage entfernt, wodurch die Berechnungszeit verkürzt wird, oder Attribute von allen Instanzen entfernt, da deren Entropie zu gering ist. Weiteres hierzu im \cref{sec:proofofconcept:datenvorbereitung} \nameref{sec:proofofconcept:datenvorbereitung}. 
+Danach müssen die Daten vorbereitet werden. Dies umfasst die Bereinigung, Transformation sowie Reduktion von Informationen\footcite{feature_selection_2017-01-04}. Bei ersteren werden Messfehler behoben, fehlende Felder ergänzt oder Duplikate entfernt. Die Transformation wandelt Werte um damit sie für die Berechnung besser geeignet sind. Zum Beispiel können Wertebereiche in Intervalle aufgeteilt werden. Bei letzteren werden Instanzen der Datengrundlage entfernt, wodurch die Berechnungszeit verkürzt wird, oder Attribute von allen Instanzen entfernt, da deren Entropie zu gering ist. Weiteres hierzu im \cref{sec:proofofconcept:datenvorbereitung} \nameref{sec:proofofconcept:datenveorbereitung}. 
 
 
 \subsection{Disziplinen im Data-Mining}
@@ -40,18 +40,37 @@ Danach müssen die Daten vorbereitet werden. Dies umfasst die Bereinigung, Trans
 Die folgenden Methoden geben eine Übersicht über die gängigsten Techniken wider. Später wird im \cref{sec:konzept:vorgehensweise} \nameref{sec:konzept:vorgehensweise} eine Methode ausgewählt und genauer beschrieben. 
 
 \subsubsection{Association rule learning}
-Bei Association rule learning (Assoziationsanalyse) werden Korrelationen zwischen Attributen aufgedeckt. Bei einer Warenkorbanalyse kann dadurch erkannt werden, welche Produkte oft zusammen auftreten.
+Bei Association rule learning (Assoziationsanalyse) handelt es sich um \gls{supervisedlearning} wobei Korrelationen zwischen Attributen aufgedeckt werden. Bei einer Warenkorbanalyse kann dadurch erkannt werden, welche Produkte die Kunden oft zusammen eingekaufen.
 
 Der Prozess in der Assoziationsanalyse besteht aus zwei Schritten. Zuerst werden häufig auftretende Attributkombinationen gesucht, und anschliessend daraus Regeln generiert\footcite{association_rule_learning_2017-01-05}.
 
 Im Falle einer Warenkorbanalyse könnte eine Regeln die Form "Samstags wenn ein Kunde Käse und Brot kauft, dann kauft er auch Liquor". Oder im Falle von Interhome "Wenn ein Kunde eine Ferienwohnung mit Pool am Meer bucht, dann besitzt das Objekt auch eine Klimaanlage".
 
 \subsubsection{Classification}
+\label{sec:recherche:dataminingtechniken:disziplinen:classification}
+Das Ziel der Classification (Klassifikation) ist es, eine Instanz einer Klasse zuzuweisen. Dies könnte die Kreditwürdigkeit eines Kunden sein. Die Klassen sind dabei vordefiniert, wodurch es um ein \gls{supervisedlearning} handelt.
 
-\subsubsection{Clustering}
-Unterschied Classification <-> clustering: 
-- Classification: Bestehende Clusters
-- Clustering: Neue Clusters finden
+Es gibt verschiedene Techniken für die Zuweisung einer Instanz zu einer Klasse. Es können Entscheidungsregeln, Bayes-Klassifikatoren, neurale Netze und weitere verwendet werden. Entscheidungsregeln können als Bäume dargestellt werden und sind visuell einfach verständlich.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{images/decision_tree.png}
+	\caption{Entscheidungsbaum für die Kreditwürdigkeit eines Kunden.}
+	\label{fig:recherche:dataminingtechniken:disziplinen:classification}
+\end{figure}
+
+\cref{fig:recherche:dataminingtechniken:disziplinen:classification} zeigt einen Entscheidungsbaum, welcher von oben nach unten durchlaufen wird. Die Quadrate sind Entscheidungen, und bei den Ovalen handelt es sich um Zuweisungen zu der Klasse "`kreditwürdig"'.
+
+% Evt. noch was schreiben über Training- und Testdaten
+
+
+\subsubsection{Cluster analysis}
+Die Cluster analysis (Clusteranalyse) ist ähnlich zur Classification, denn es werden auch Instanzen einer Klasse zugeordnet. Jedoch sind diese zu beginn nicht bekannt wodruch es sich um ein \gls{unsupervisedlearning} handelt.
+
+%\\Source: \cite{association_rule_learning_2017-01-05}
+%Unterschied Classification <-> clustering: 
+%- Classification: Bestehende Clusters
+%- Clustering: Neue Clusters finden
 
 \subsubsection{Regression}
 
