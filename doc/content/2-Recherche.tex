@@ -42,7 +42,7 @@ Die folgenden Methoden geben eine Übersicht über die gängigsten Techniken wid
 \subsubsection{Association rule learning}
 Bei Association rule learning (Assoziationsanalyse) handelt es sich um \gls{supervisedlearning} wobei Korrelationen zwischen Attributen aufgedeckt werden. Bei einer Warenkorbanalyse kann dadurch erkannt werden, welche Produkte die Kunden oft zusammen eingekaufen.
 
-Der Prozess in der Assoziationsanalyse besteht aus zwei Schritten. Zuerst werden häufig auftretende Attributkombinationen gesucht, und anschliessend daraus Regeln generiert\footcite{association_rule_learning_2017-01-05}.
+Der Prozess in der Assoziationsanalyse besteht aus zwei Schritten. Zuerst werden häufig auftretende Attributkombinationen gesucht, aus welchen anschliessend Regeln generiert werden\footcite{association_rule_learning_2017-01-05}.
 
 Im Falle einer Warenkorbanalyse könnte eine Regeln die Form "Samstags wenn ein Kunde Käse und Brot kauft, dann kauft er auch Liquor". Oder im Falle von Interhome "Wenn ein Kunde eine Ferienwohnung mit Pool am Meer bucht, dann besitzt das Objekt auch eine Klimaanlage".
 
@@ -50,7 +50,7 @@ Im Falle einer Warenkorbanalyse könnte eine Regeln die Form "Samstags wenn ein 
 \label{sec:recherche:dataminingtechniken:disziplinen:classification}
 Das Ziel der Classification (Klassifikation) ist es, eine Instanz einer Klasse zuzuweisen. Dies könnte die Kreditwürdigkeit eines Kunden sein. Die Klassen sind dabei vordefiniert, wodurch es um ein \gls{supervisedlearning} handelt.
 
-Es gibt verschiedene Techniken für die Zuweisung einer Instanz zu einer Klasse. Es können Entscheidungsregeln, Bayes-Klassifikatoren, neurale Netze und weitere verwendet werden. Entscheidungsregeln können als Bäume dargestellt werden und sind visuell einfach verständlich.
+Es gibt verschiedene Techniken für die Zuweisung einer Instanz zu einer Klasse. Es können Entscheidungsregeln, Bayes-Klassifikatoren, neurale Netze und weitere verwendet werden\todo{cite}. Entscheidungsregeln können als Bäume dargestellt werden und sind visuell einfach verständlich.
 
 \begin{figure}[H]
 	\centering
@@ -63,12 +63,25 @@ Es gibt verschiedene Techniken für die Zuweisung einer Instanz zu einer Klasse.
 
 % Evt. noch was schreiben über Training- und Testdaten
 
+\subsubsection{Regression}
+Bei der Regresseion wird von einer abhängiger Variable Y auf eine unabhängige Grösse X zurückgeschlossen\todo{korrekt?}. Man spricht dann von einer Regression von Y auf X. Dabei werden bestehende Daten auf einem Koordinatensystem aufgetragen und eine Funktion definiert oder gesucht, welche die Messungen möglichst genau annähert. Für eine gegebene unabhängige Variable kann somit die abhängige Grösse errechnet werden\todo{cite}.
+
+\cref{fig:recherche:dataminingtechniken:disziplinen:regression} zeigt das Resultat einer linearen Regression.
+
+\begin{figure}[H]
+	\RawFloats
+	\centering
+	\includegraphics[width=0.8\textwidth]{images/Linear_regression.png}
+	\caption{Gerade einer linearen Regression durch eine Punktwolke}
+	\source{\cite{Linear_regression_2017-01-08}}
+	\label{fig:recherche:dataminingtechniken:disziplinen:regression}
+\end{figure}
 
 \subsubsection{Cluster analysis}
 \label{sec:recherche:dataminingtechniken:disziplinen:clusteranalysis}
-Die Cluster analysis (Clusteranalyse) weist, ähnlich zur Classification, den Instanzen eine Klasse zu. Jedoch sind diese zu beginn nicht bekannt, wodurch es sich um ein \gls{unsupervisedlearning} handelt.
+Die Cluster analysis (Clusteranalyse) weist, ähnlich zur \nameref{sec:recherche:dataminingtechniken:disziplinen:classification}, den Instanzen eine Klasse zu. Jedoch sind diese zu beginn nicht bekannt, wodurch es sich um ein \gls{unsupervisedlearning} handelt.
 
-In \cref{fig:recherche:dataminingtechniken:disziplinen:clusteranalysis} sind Punkte in einem Koordinatensystem eingetragen.
+In \cref{fig:recherche:dataminingtechniken:disziplinen:clusteranalysis} sind Punkte in einem Koordinatensystem eingetragen. Diese werden bei der Clusteranalyse in mehrere Gruppen unterteilt, welche die Klassen abbilden. Im Gegensatz zur \nameref{sec:recherche:dataminingtechniken:disziplinen:classification} haben diese jedoch keine weitere Bedeutung, sondern geben nur an dass sie ähnlich zu allen anderen Instanzen im selben Cluster sind. Je nach Verfahren ist es unterschiedlich, wie viele Klassen gebildet werden oder ob die Anzahl vorgegeben ist\todo{cite}.
 \begin{figure}[H]
 	\RawFloats
 	\centering
@@ -78,11 +91,7 @@ In \cref{fig:recherche:dataminingtechniken:disziplinen:clusteranalysis} sind Pun
 	\label{fig:recherche:dataminingtechniken:disziplinen:clusteranalysis}
 \end{figure}
 
-%
-%Unterschied Classification <-> clustering: 
-%- Classification: Bestehende Clusters
-%- Clustering: Neue Clusters finden
+Eingesetzt wird die Clusteranalyse zum Beispiel für die Erkennung von Kundengruppen oder zur  Zusammenfassung und Vergleich gleichartiger Produkten\footcite{einsatzgebiet_clusteranalyse}.
 
-\subsubsection{Regression}
 
 \subsubsection{Collaborative Filtering}
