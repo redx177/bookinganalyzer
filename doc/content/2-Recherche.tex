@@ -64,7 +64,7 @@ Es gibt verschiedene Techniken für die Zuweisung einer Instanz zu einer Klasse.
 % Evt. noch was schreiben über Training- und Testdaten
 
 \subsubsection{Regression}
-Bei der Regresseion wird von einer abhängiger Variable Y auf eine unabhängige Grösse X zurückgeschlossen\todo{korrekt?}. Man spricht dann von einer Regression von Y auf X. Dabei werden bestehende Daten auf einem Koordinatensystem aufgetragen und eine Funktion definiert oder gesucht, welche die Messungen möglichst genau annähert. Für eine gegebene abhängige Variable kann somit die unabhängige Grösse errechnet werden\todo{cite}.
+Bei der Regresseion wird von einer abhängiger Variable Y auf eine unabhängige Grösse X zurückgeschlossen\todo{korrekt?}. Man spricht dann von einer Regression von Y auf X. Dabei werden bestehende Daten auf einem Koordinatensystem aufgetragen und eine Funktion definiert oder gesucht, welche die Messungen möglichst genau annähert. Für eine gegebene abhängige Variable kann somit die unabhängige Grösse errechnet werden\todo{cite}. 
 
 \cref{fig:recherche:dataminingtechniken:disziplinen:regression} zeigt das Resultat einer linearen Regression.
 
@@ -95,3 +95,27 @@ Eingesetzt wird die Clusteranalyse zum Beispiel für die Erkennung von Kundengru
 
 
 \subsubsection{Collaborative Filtering}
+Beim Collaborative Filtering (kollaboratives Filtern) wird zu einer Instanz ähnliche Objekte gesucht. Die Ähnlichkeit wird durch Bewertung von anderen Kunden errechnet. 
+
+\begin{table}[H] 
+	\caption{Begriffsdefinition}
+	\centering
+	\rowcolors{1}{tablebodycolor}{tablerowcolor}
+	\label{fig:recherche:dataminingtechniken:disziplinen:collaborativefiltering}
+	
+	\begin{tabular}{ | l | c | c | c | c |} 
+		\hline 
+		\rowcolor{tableheadcolor}
+		\bfseries & 
+		\bfseries Maria & 
+		\bfseries Sandro & 
+		\bfseries Urs & 
+		\bfseries Heidi \\ \hline 
+		\textbf{Pulp Fiction} & - & - &  & + \\ \hline 
+		\textbf{The Matrix} & + & + & + & - \\ \hline 
+		\textbf{American Hustle} & - & + &  & + \\ \hline 
+		\textbf{12 Monkeys} & + & + & - & \cellcolor{yellow!75}? \\ \hline 
+	\end{tabular} 
+\end{table}
+
+Die Zeilen in der \cref{fig:recherche:dataminingtechniken:disziplinen:collaborativefiltering} sind Instanzen und die Spalten zeigen Bewertungen der Kunden. Minus steht für eine negative und Plus für eine positive Bewertung. Es ist auch möglich das ein Benutzer eine Instanz nicht bewertet. Mittels kollaborativen Filtern kann nun abgeschätzt werden, ob ein Benutzer eine Instanz positiv oder negativ Bewertet\todo{cite}.
