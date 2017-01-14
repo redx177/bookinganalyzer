@@ -5,6 +5,7 @@
 \IfDefined{newacronym}{%
 	\newacronym{zhaw}{ZHAW}{Zürcher Hochschule für Angewandte Wissenschaften}
 	\newacronym{crm}{CRM}{Customer Relationship Management}
+	\newacronym{weka}{Weka}{Waikato Environment for Knowledge Analysis}
 }
 
 % use it with \gls{glos:DVD}
@@ -29,6 +30,17 @@
 \newglossaryentry{unsupervisedlearning}{name=unüberwachtes lernen,
 	description={Unüberwachtes lernen ist ein Teilgebiet vom maschinellen Lernen. Beim lernen werden zusammenhänge zwischen Eingaben und Ausgaben aufgedeckt. Es handelt sich dabei um einen unüberwachten Prozess, wenn die Ausgabewerte zu Beginn nicht bekannt sind und diese zuerst gebildet werden müssen.}
 }
+\newglossaryentry{gls:gnugpl}{name=GNU General Public License,
+	description={GNU GPL ist eine Software Lizenz, welche es erlaubt, den Code auszuführen, zu studieren, zu teilen sowie zu modifizieren. Weitere Informationen unter \url{gnu.org/licenses/gpl.html}}
+}
+\newglossaryentry{acr:gnugpl}{
+	type=\acronymtype, 
+	name={GNU GPL}, 
+	description={GNU General Public License}, 
+	first={Application GNU General Public License (GNU GPL)\glsadd{gls:gnugpl}}, 
+	see=[Glossar:]{gls:gnugpl}}
+
+
 
 %\newglossaryentry{glos:failureSafetyLabel}{name=Ausfallsicherheit,
 %	description={Mit der Ausfallsicherheit wird die minimale zeitliche Erreichbarkeit (resp. maximale Ausfallzeit) eines Systems angegeben. Ist diese Ausfallzeit sehr gering spricht man von Hochverfügbarkeit (High Availability), dazu ist mindestens eine Verfügbarkeit von 99.9 \% nötig.
