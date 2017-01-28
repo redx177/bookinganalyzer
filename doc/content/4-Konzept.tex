@@ -42,11 +42,13 @@ Als erstes wird ein Mindestsupport $supmin$ definiert welcher Aussagt, wie oft e
 	$ C_{k+1} = \{c \cap l | \forall c \in C_k, \forall l \in L_k \} $
 	\end{center}
 \item Entferne Elemente aus $C_{k+1}$, welche nicht in $L_k$ enthalten sind.
-\item Breche ab, wenn $C_{k+1} = \emptyset$
-\item $k = k+1$ und gehe zu Schritt 1. 
+\item Wenn $C_{k+1} \neq \emptyset$ dann $k = k+1$ und gehe zu Schritt 1. 
+\item Wenn $C_{k+1} = \emptyset$ dann breche ab und gib $\bigcup\limits_{i=1}^{k} L_{i}$ zurück.
 \end{enumerate}
 
-\begin{figure}[H]
+In der \cref{fig:konzept:vorgehensweise:apriorialgorithmus} wird der Ablauf noch anhand eines Beispieles veranschaulicht.
+
+\begin{figure}[h]
 	\RawFloats
 	\centering
 	\includegraphics[width=0.8\textwidth]{images/Apriori-Algorithmus.png}
@@ -55,3 +57,24 @@ Als erstes wird ein Mindestsupport $supmin$ definiert welcher Aussagt, wie oft e
 	\label{fig:konzept:vorgehensweise:apriorialgorithmus}
 \end{figure}
 
+$D$ wird benötigt um die Vorkommen zu zählen. Die roten Elemente in $L$ werden entfernt weil $minsup$ nicht erreicht wurde, welches im Beispiel den Wert 2 hat. Die Elemente in $C$ können gelöscht werden, da sich der Apriori Algorithmus die Eigenschaft zunutze macht, dass wenn in $L_{k-1}$ ein Element $minsup$ nicht erfüllt, kann es dies auch nicht in $C_k$\todo{cite}.
+
+Der Algorithmus kann somit in drei Schritte aufgeteilt werden.
+\begin{enumerate}
+\item Häufigkeitszählung
+\item Generierung der x+1-Attributmenge (Apriori-gen Funktion, Join step)
+\item Entfernung der Elemente welche den $minsup$ nicht erfüllen (Apriori-gen Funktion, Prune step)
+\end{enumerate}
+
+\begin{lstlisting}
+procedure apriori(D: Datenmenge; minsup: Minimum support)
+	$L_1$ = find_frequent_1-itemsets(D)
+	for ($k = 2$; $L_{k-1} \neq \emptyset$; $k++$)
+		$C_k$ = apriori_gen($L_{k-1}$)
+		foreach transaction $t \in D$
+			$C_t$ = subset($C_k$, $t$)
+			foreach candidate $c \in C_t$
+				$c$.count++;
+		$L_k$ = {$c \in C_k|c$.count $\ge minsup$}
+	return $\bigcup\limits_{i=1}^{k} L_{i}$
+\end{lstlisting}
