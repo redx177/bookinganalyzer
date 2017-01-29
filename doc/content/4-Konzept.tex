@@ -37,9 +37,10 @@ Als erstes wird ein Mindestsupport $supmin$ definiert welcher Aussagt, wie oft e
 	$sup(t_k) \ge supmin$
 	\end{center}
 	Die übrig gebliebenen Mengen werden in $L_k$ vereint.
+\item \todo{sort}
 \item Es wird $L_k$ mit Elementen aus $C_k$ erweitert und ergibt $C_{k+1}$
 	\begin{center}
-	$ C_{k+1} = \{c \cap l | \forall c \in C_k, \forall l \in L_k \} $
+	$ C_{k+1} = \{l_1 \cup l_2 | \forall l_1 \in L_k, \forall l_2 \in L_k \} $
 	\end{center}
 \item Entferne Elemente aus $C_{k+1}$, welche nicht in $L_k$ enthalten sind.
 \item Wenn $C_{k+1} \neq \emptyset$ dann $k = k+1$ und gehe zu Schritt 1. 
@@ -48,7 +49,7 @@ Als erstes wird ein Mindestsupport $supmin$ definiert welcher Aussagt, wie oft e
 
 In der \cref{fig:konzept:vorgehensweise:apriorialgorithmus} wird der Ablauf noch anhand eines Beispieles veranschaulicht.
 
-\begin{figure}[h]
+\begin{figure}[H]
 	\RawFloats
 	\centering
 	\includegraphics[width=0.8\textwidth]{images/Apriori-Algorithmus.png}
@@ -67,14 +68,47 @@ Der Algorithmus kann somit in drei Schritte aufgeteilt werden.
 \end{enumerate}
 
 \begin{lstlisting}
-procedure apriori(D: Datenmenge; minsup: Minimum support)
+procedure apriori(D: Datenmenge; minsup: Minimum support) {
 	$L_1$ = find_frequent_1-itemsets(D)
-	for ($k = 2$; $L_{k-1} \neq \emptyset$; $k++$)
+	for ($k = 2$; $L_{k-1} \neq \emptyset$; $k++$) {
 		$C_k$ = apriori_gen($L_{k-1}$)
-		foreach transaction $t \in D$
+		foreach transaction $t \in D$ {
 			$C_t$ = subset($C_k$, $t$)
-			foreach candidate $c \in C_t$
+			foreach candidate $c \in C_t$ {
 				$c$.count++;
+			}
+		}
 		$L_k$ = {$c \in C_k|c$.count $\ge minsup$}
+	}
 	return $\bigcup\limits_{i=1}^{k} L_{i}$
+}
+\end{lstlisting}
+
+\begin{lstlisting}
+procedure apriori_gen($L_{k-1}$:frequent (k-1)-itemsets) {
+	C_k = $\emptyset$
+	foreach itemset $l_1 \in L_{k-1}$ {
+		foreach itemset $l_2 \in L_{k-1}$ {
+			if (($l_1$[1] = $l_2$[1]) $\wedge$ ($l_1$[2] = $l_2$[2]) $\wedge$ ... $\wedge$ ($l_1$[$k$-2] = $l_2$[$k$-2]) $\wedge$ ($l_1$[$k$-1] $<$ $l_2$[$k$-1])) {
+				$c = l_1 \cup l_2$
+				if has_infrequent_subset($c, L_{k-1}$) {
+					delete c
+				} else {
+					add $c$ to $C_k$
+				}
+			}
+		}
+	}
+}
+\end{lstlisting}
+
+\begin{lstlisting}
+procedure has_infrequent_subset(c: andidate k-itemset; L_{k-1}: frequent (k-1)-itemsets) {
+	foreach (k-1)-subset $s$ of $c$ {
+		if s $\notin$ L_{k-1} {
+			return TRUE
+		}
+	}
+	return FALSE
+}
 \end{lstlisting}
