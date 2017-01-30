@@ -1,4 +1,4 @@
-
+ 
 \chapter{Konzept}
 \label{sec:konzept}
 
@@ -21,7 +21,10 @@ Im ersten Schritt wird der Datenbestand durch die Auswahl von Attributen durch d
 \subsection{Apriori Algorithmus}
 Der Apriori Algorithmus ist der erste von zwei Schritten des \nameref{sec:recherche:dataminingtechniken:disziplinen:association} (\cref{sec:recherche:dataminingtechniken:disziplinen:association}), dessen Ziel es ist häufige Attribut-Kombinationen aufzufinden. 
 
-Als erstes wird ein Mindestsupport $supmin$ definiert welcher Aussagt, wie oft eine Attributmenge $t$ in einer Instanz $I$ in der Datenmenge $D$ vorkommen muss, damit diese als relevant betrachtet werden kann. Der Wertebereich von $submin$ ist dabei $[0,1]$. Danach wird Iterativ die Attributmenge um ein Element erweitert und nochmals auf $submit$ überprüft. Für die Attributmenge gilt zu Beginn $|t| = k = 1$.
+Als erstes wird ein Mindestsupport $supmin$ definiert, welches Aussagt, wie oft eine Attributmenge $t$ in einer Instanz $I$ in der Datenmenge $D$ vorkommen muss, damit diese als relevant betrachtet werden kann. Als erstes werden alle einzelnen Attribute (1-Attributmenge) gezählt und diejenigen gestrichen, welche $submin$ nicht erfüllen.
+
+Danach wird Iterativ die Attributmenge um ein Element erweitert und und wiederum auf $submin$ überprüft, bis keine Elemente mehr den Mindestsupport erreichen.
+
 \begin{enumerate}
 \item Für jedes $t_k$ mit $|t_k| = k$ wird gesucht wie oft es gebucht worden ist.
 	\begin{center}
@@ -67,48 +70,77 @@ Der Algorithmus kann somit in drei Schritte aufgeteilt werden.
 \item Entfernung der Elemente welche den $minsup$ nicht erfüllen (Apriori-gen Funktion, Prune step)
 \end{enumerate}
 
+Die nachfolgende Apriori-Methode führt die Häufigkeitszählung durch.
 \begin{lstlisting}
-procedure apriori(D: Datenmenge; minsup: Minimum support) {
-	$L_1$ = find_frequent_1-itemsets(D)
-	for ($k = 2$; $L_{k-1} \neq \emptyset$; $k++$) {
-		$C_k$ = apriori_gen($L_{k-1}$)
-		foreach transaction $t \in D$ {
-			$C_t$ = subset($C_k$, $t$)
-			foreach candidate $c \in C_t$ {
-				$c$.count++;
+procedure apriori($D$: Datenmenge; $minsup$: Minimum support) {
+	$L_1 \gets$ find_frequent_1-itemsets($D$)
+	$k \gets 2$
+	while $L_{k-1} \neq \emptyset$ {
+		$C_k \gets$ apriori_gen($L_{k-1}$)
+		foreach transaction $I \in D$ {
+			$C_I \gets \{ c | c \in C_k \wedge c \subseteq I \}$
+			foreach candidate $c \in C_I$ {
+				count[$c$] $\gets$ count[$c$] + 1
 			}
 		}
-		$L_k$ = {$c \in C_k|c$.count $\ge minsup$}
+		$L_k \gets \{c | c \in C_k \wedge$ count[$c$] $\ge minsup \}$
+		$k \gets k + 1$
 	}
-	return $\bigcup\limits_{i=1}^{k} L_{i}$
+	return $\bigcup\limits_{k} L_{k}$
 }
 \end{lstlisting}
+Übergeben wird die gesamte Datenmenge $D$, welche für die Häufigkeitszählung verwendet wird, sowie der minimum Support welche die Elemente zu erfüllen haben.
+Im ersten Schritt wird die 1-Attributmenge mit häufigen Elementen definiert. In den Zeilen 3 bis 12 wird für $k > 2$ die Items gesammelt, welche öfters vorkommen als der $minsup$. Dazu wird mittels der apriori\_gen Funktion die \textit{Candidates} $C_k$ generiert.
+Anschliessend werden die vorkommen von allen Elementen in $D$ gezählt, wie oft sie in $C_k$ vorkommen.
+
 
 \begin{lstlisting}
 procedure apriori_gen($L_{k-1}$:frequent (k-1)-itemsets) {
-	C_k = $\emptyset$
+	$C_k \gets \emptyset$
 	foreach itemset $l_1 \in L_{k-1}$ {
 		foreach itemset $l_2 \in L_{k-1}$ {
-			if (($l_1$[1] = $l_2$[1]) $\wedge$ ($l_1$[2] = $l_2$[2]) $\wedge$ ... $\wedge$ ($l_1$[$k$-2] = $l_2$[$k$-2]) $\wedge$ ($l_1$[$k$-1] $<$ $l_2$[$k$-1])) {
-				$c = l_1 \cup l_2$
-				if has_infrequent_subset($c, L_{k-1}$) {
-					delete c
-				} else {
-					add $c$ to $C_k$
-				}
-			}
+			$c \gets \{l_1 \cup \{i\} | i \in l_2 \wedge l_1 \cup \{i\} \in C_k \}$
+			$c_{pruned} \gets c - \{ i | i \subset c \wedge |i| = k-1 \wedge i \notin L_{k-1}) \}$
+			$C_k \gets C_k \cup c_{pruned}$
 		}
 	}
+	return $C_k$
 }
 \end{lstlisting}
+In der apriori\_gen Funktion werden k-Datenmengen generiert, indem eine k-1 Datenmenge erweitert wird. Dazu gibt es zwei Schleifen welche durchlaufen werden. Auf Zeile 5 wird $l_1$ um Elemente von $l_2$ erweitert. Zudem wird sichergestellt, dass gleiche Mengen nicht mehrfach hinzugefügt werden.
 
-\begin{lstlisting}
-procedure has_infrequent_subset(c: andidate k-itemset; L_{k-1}: frequent (k-1)-itemsets) {
-	foreach (k-1)-subset $s$ of $c$ {
-		if s $\notin$ L_{k-1} {
-			return TRUE
-		}
-	}
-	return FALSE
-}
-\end{lstlisting}
+Auf Zeile 6 werden die neuen
+
+% Longer version of apriori_gen
+%$c \gets \{l_1 \cup \{i\} | i \in l_2 \wedge l_1 \cup \{i\} \in C_k \}$
+%$c_{pruned} \gets \{ i | i \in c \wedge \forall j(j \subset i \wedge |j| = k-1 \wedge j \in L_{k-1}) \}$
+%$C_k \gets C_k \cup c_{pruned}$
+%
+% Looped version of apriori_gen
+%	$C_k \gets \emptyset$
+%	foreach itemset $l_1 \in L_{k-1}$ {
+%		foreach itemset $l_2 \in L_{k-1}$ {
+%			if (($l_1$[1] = $l_2$[1]) $\wedge$ ($l_1$[2] = $l_2$[2]) $\wedge$ ... $\wedge$ ($l_1$[$k$-2] = $l_2$[$k$-2]) $\wedge$ ($l_1$[$k$-1] $<$ $l_2$[$k$-1])) {
+%				$c \gets l_1 \cup l_2$
+%				if not has_infrequent_subset($c, L_{k-1}$) {
+%					delete $c$
+%				} else {
+%					$C_k \gets C_k \cup c$
+%					add $C_k \cup c$ 
+%				}
+%			}
+%		}
+%	}
+%	return $C_k$
+%
+%
+%\begin{lstlisting}
+%procedure has_infrequent_subset($c$: candidate k-itemset; $L_{k-1}$: frequent (k-1)-itemsets) {
+%	foreach (k-1)-subset $s of c$ {
+%		if $s \notin L_{k-1}$ {
+%			return TRUE
+%		}
+%	}
+%	return FALSE
+%}
+%\end{lstlisting}
