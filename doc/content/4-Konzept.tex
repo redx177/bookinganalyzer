@@ -21,36 +21,29 @@ Im ersten Schritt wird der Datenbestand durch die Auswahl von Attributen durch d
 \subsection{Apriori Algorithmus}
 Der Apriori Algorithmus ist der erste von zwei Schritten des \nameref{sec:recherche:dataminingtechniken:disziplinen:association} (\cref{sec:recherche:dataminingtechniken:disziplinen:association}), dessen Ziel es ist häufige Attribut-Kombinationen aufzufinden. 
 
-Als erstes wird ein Mindestsupport $supmin$ definiert, welches Aussagt, wie oft eine Attributmenge $t$ in einer Instanz $I$ in der Datenmenge $D$ vorkommen muss, damit diese als relevant betrachtet werden kann. Als erstes werden alle einzelnen Attribute (1-Attributmenge) gezählt und diejenigen gestrichen, welche $submin$ nicht erfüllen.
-
-Danach wird Iterativ die Attributmenge um ein Element erweitert und und wiederum auf $submin$ überprüft, bis keine Elemente mehr den Mindestsupport erreichen.
-
+Nachfolgend wird der Ablauf des Algorithmus erklärt.
 \begin{enumerate}
-\item Für jedes $t_k$ mit $|t_k| = k$ wird gesucht wie oft es gebucht worden ist.
-	\begin{center}
-	$cnt(t_k) = \big|\{I \in D | t_k \subseteq I \}\big|$
-	\end{center}
-	Die Mengen werden in der Liste $C_k$ zusammengefasst.
-\item Für jedes Attribut wird der Support $sup$ ausgerechnet.
-	\begin{center}
-	$sup(t_k) = \cfrac{cnt(t_k)}{|D|}$
-	\end{center}
-\item Es werden alle Attribute entfernt, welche $submin$ nicht erfüllen.
-	\begin{center}
-	$sup(t_k) \ge supmin$
-	\end{center}
-	Die übrig gebliebenen Mengen werden in $L_k$ vereint.
-\item \todo{sort}
-\item Es wird $L_k$ mit Elementen aus $C_k$ erweitert und ergibt $C_{k+1}$
-	\begin{center}
-	$ C_{k+1} = \{l_1 \cup l_2 | \forall l_1 \in L_k, \forall l_2 \in L_k \} $
-	\end{center}
-\item Entferne Elemente aus $C_{k+1}$, welche nicht in $L_k$ enthalten sind.
-\item Wenn $C_{k+1} \neq \emptyset$ dann $k = k+1$ und gehe zu Schritt 1. 
-\item Wenn $C_{k+1} = \emptyset$ dann breche ab und gib $\bigcup\limits_{i=1}^{k} L_{i}$ zurück.
+\item Zähle die Vorkommen von allen Attributen und fasse das Resultat in $C_1$ (Kandidaten (candidates) 1-Attributmengen) zusammen.
+\item Entferne Elemente aus $C_1$ welche $submin$ nicht erfüllen und speichere das Resultat in $L_1$ (frequente 1-Attributmengen).
+\item Setze $k=2$
+\item Solange $L_{k-1} \neq \emptyset$:
+	\begin {enumerate}
+	\item Generiere alle Möglichen Kombinationen für $C_k$ aus $L_{k-1}$ (apriori\_gen).
+	\item Entferne Elemente aus $C_k$ welche $submin$ nicht erfüllen und speichere das Resultat in $L_k$.
+	\item Erhöhe $k$ um eins.
+\end{enumerate}
+\item Das Resultat sind alle Elemente in $L_k$.
 \end{enumerate}
 
-In der \cref{fig:konzept:vorgehensweise:apriorialgorithmus} wird der Ablauf noch anhand eines Beispieles veranschaulicht.
+Gegeben ist ein Mindestsupport $supmin$ welcher definiert, wie oft eine Attributmenge $C$ in Instanzen $I$ in der Datenmenge $D$ vorkommen muss, damit diese als relevant betrachtet werden. 
+
+Als erstes (Schritte 1-2) werden alle einzelnen Attribute (1-Attributmenge) gezählt und diejenigen entfernt, welche $submin$ nicht erfüllen.
+
+Danach wird Iterativ die Attributmenge um ein Element erweitert und wiederum auf $submin$ überprüft, bis keine Elemente mehr den Mindestsupport erreichen (Schritt 3).
+
+Vereinfacht dargestellt ist der Punkt 3.a. Dieser Schritt heisst apriori\_gen und seine Aufgabe ist es, die häufigen Attriutmengen für die nächste Iteration zu generieren. Er nimmt die Liste mit den frequenten Datensätzen der vorherigen Iteration ($L{k-1}$) und erweitert alle Mengen um ein Element. Er macht sich die Eigenschaft zunutze, dass wenn in $L_{k-1}$ ein Element $minsup$ nicht erfüllt, kann es dies auch nicht in $C_k$, wodurch $C_k$ verkürzt und der Algorithmus beschleunigt wird.\todo{cite}.
+
+In der \cref{fig:konzept:vorgehensweise:apriorialgorithmus} wird der Ablauf am Beispiel eines Warenkorbes veranschaulicht.
 
 \begin{figure}[H]
 	\RawFloats
@@ -61,16 +54,19 @@ In der \cref{fig:konzept:vorgehensweise:apriorialgorithmus} wird der Ablauf noch
 	\label{fig:konzept:vorgehensweise:apriorialgorithmus}
 \end{figure}
 
-$D$ wird benötigt um die Vorkommen zu zählen. Die roten Elemente in $L$ werden entfernt weil $minsup$ nicht erreicht wurde, welches im Beispiel den Wert 2 hat. Die Elemente in $C$ können gelöscht werden, da sich der Apriori Algorithmus die Eigenschaft zunutze macht, dass wenn in $L_{k-1}$ ein Element $minsup$ nicht erfüllt, kann es dies auch nicht in $C_k$\todo{cite}.
+$D$ wird benötigt um die Vorkommen zu zählen. Die roten Elemente in $L_k$ werden entfernt weil $minsup$ nicht erreicht wurde, welches im Beispiel den Wert 2 hat. Nach der säuberung von $L_k$ erstellt der apriori\_gen die Kandidaten $C_k$ für den nächsten durchlauf (join). Anschliessend werden in $C_k$ diejenigen Elemente entfernt, welche in $L_{k-1}$ als nicht häufig erkannt wurde (prune). Zum Beispiel kann in $C_3$ das Element {Brot, Butter, Wurst} entfernt werden, da in $L_2$ {Butter, Wurst} den Wert $minsup$ unterschreitet.
+
+Der Algorithmus wird gestoppt, wenn es keine häufigen Kandidaten mehr gibt, was in $C_4$ der Fall ist.
 
 Der Algorithmus kann somit in drei Schritte aufgeteilt werden.
 \begin{enumerate}
 \item Häufigkeitszählung
-\item Generierung der x+1-Attributmenge (Apriori-gen Funktion, Join step)
-\item Entfernung der Elemente welche den $minsup$ nicht erfüllen (Apriori-gen Funktion, Prune step)
+\item Generierung der x+1-Attributmenge (Apriori-gen Funktion, join step)
+\item Entfernung der Elemente welche den $minsup$ nicht erfüllen (Apriori-gen Funktion, prune step)
 \end{enumerate}
 
 Die nachfolgende Apriori-Methode führt die Häufigkeitszählung durch.
+Gegen ist die gesamte Datenmenge $D$, welche für die Häufigkeitszählung verwendet wird, sowie der minimum Support welche die Attribute zu erfüllen haben.
 \begin{lstlisting}
 procedure apriori($D$: Datenmenge; $minsup$: Minimum support) {
 	$L_1 \gets$ find_frequent_1-itemsets($D$)
@@ -89,9 +85,8 @@ procedure apriori($D$: Datenmenge; $minsup$: Minimum support) {
 	return $\bigcup\limits_{k} L_{k}$
 }
 \end{lstlisting}
-Übergeben wird die gesamte Datenmenge $D$, welche für die Häufigkeitszählung verwendet wird, sowie der minimum Support welche die Elemente zu erfüllen haben.
-Im ersten Schritt wird die 1-Attributmenge mit häufigen Elementen definiert. In den Zeilen 3 bis 12 wird für $k > 2$ die Items gesammelt, welche öfters vorkommen als der $minsup$. Dazu wird mittels der apriori\_gen Funktion die \textit{Candidates} $C_k$ generiert.
-Anschliessend werden die vorkommen von allen Elementen in $D$ gezählt, wie oft sie in $C_k$ vorkommen.
+Im ersten Schritt wird die 1-Attributmenge mit häufigen Elementen definiert. In den Zeilen 3 bis 14 wird für $k > 2$ die Items gesammelt, welche öfters vorkommen als der $minsup$. Dazu wird mittels der apriori\_gen Funktion die \textit{Candidates} $C_k$ generiert (Zeile 5).
+Anschliessend werden die vorkommen von allen Elementen in $D$ gezählt, wie oft sie in $C_k$ vorkommen (Zeilen 6-12).
 
 
 \begin{lstlisting}
@@ -107,9 +102,9 @@ procedure apriori_gen($L_{k-1}$:frequent (k-1)-itemsets) {
 	return $C_k$
 }
 \end{lstlisting}
-In der apriori\_gen Funktion werden k-Datenmengen generiert, indem eine k-1 Datenmenge erweitert wird. Dazu gibt es zwei Schleifen welche durchlaufen werden. Auf Zeile 5 wird $l_1$ um Elemente von $l_2$ erweitert. Zudem wird sichergestellt, dass gleiche Mengen nicht mehrfach hinzugefügt werden.
+In der apriori\_gen Funktion werden k-Attributmengen generiert, indem eine (k-1)-Attributmenge erweitert wird. Dazu gibt es zwei Schleifen welche durchlaufen werden. Auf Zeile 5 wird $l_1$ um Elemente von $l_2$ erweitert. Zudem wird sichergestellt, dass gleiche Mengen nicht mehrfach in $C_k$ hinzugefügt werden können.
 
-Auf Zeile 6 werden die neuen
+Auf Zeile 6 werden die neuen Kandidaten überprüft, ob eine Submenge $minsup$ nicht erfüllt. Wenn die Menge nicht in $L_{k-1}$ vorkommt, so ist sie nicht frequent und somit kann der Kandidat verworfen werden. 
 
 % Longer version of apriori_gen
 %$c \gets \{l_1 \cup \{i\} | i \in l_2 \wedge l_1 \cup \{i\} \in C_k \}$
