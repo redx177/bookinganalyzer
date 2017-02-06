@@ -94,8 +94,8 @@ procedure apriori_gen($L_{k-1}$:frequent (k-1)-itemsets) {
 	$C_k \gets \emptyset$
 	foreach itemset $l_1 \in L_{k-1}$ {
 		foreach itemset $l_2 \in L_{k-1}$ {
-			$c \gets \{l_1 \cup \{i\} | i \in l_2 \wedge l_1 \cup \{i\} \in C_k \}$
-			$c_{pruned} \gets c - \{ i | i \subset c \wedge |i| = k-1 \wedge i \notin L_{k-1}) \}$
+			$c \gets \{l_1 \cup \{i\} | i \in l_2 \wedge l_1 \cup \{i\} \notin C_k \}$
+			$c_{pruned} \gets c - \{ i | i \in c \wedge j \subset c \wedge |j| = k-1 \wedge j \notin L_{k-1} \}$
 			$C_k \gets C_k \cup c_{pruned}$
 		}
 	}
