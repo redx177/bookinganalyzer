@@ -95,7 +95,7 @@ procedure apriori_gen($L_{k-1}$:frequent (k-1)-itemsets) {
 	foreach itemset $l_1 \in L_{k-1}$ {
 		foreach itemset $l_2 \in L_{k-1}$ {
 			$c \gets \{l_1 \cup \{i\} | i \in l_2 \wedge l_1 \cup \{i\} \notin C_k \}$
-			$c_{pruned} \gets c - \{ i | i \in c \wedge j \subset c \wedge |j| = k-1 \wedge j \notin L_{k-1} \}$
+			$c_{pruned} \gets c - \{ c' | c' \in c \wedge i \subset c \wedge |i| = k-1 \wedge i \notin L_{k-1} \}$
 			$C_k \gets C_k \cup c_{pruned}$
 		}
 	}
@@ -104,7 +104,7 @@ procedure apriori_gen($L_{k-1}$:frequent (k-1)-itemsets) {
 \end{lstlisting}
 In der apriori\_gen Funktion werden k-Attributmengen generiert, indem eine (k-1)-Attributmenge erweitert wird. Dazu gibt es zwei Schleifen welche durchlaufen werden. Auf Zeile 5 wird $l_1$ um Elemente von $l_2$ erweitert. Zudem wird sichergestellt, dass gleiche Mengen nicht mehrfach in $C_k$ hinzugefügt werden können.
 
-Auf Zeile 6 werden die neuen Kandidaten überprüft, ob eine Submenge $minsup$ nicht erfüllt. Wenn die Menge nicht in $L_{k-1}$ vorkommt, so ist sie nicht frequent und somit kann der Kandidat verworfen werden. 
+Auf Zeile 6 werden die k-Attributmengen gesäubert (prune), indem die neuen Kandidaten $c$ überprüft werden, ob eine Submenge $i$ eines Kandidaten $c'$ nicht in $L_{k-1}$ vorhanden ist. Wenn dies der Fall ist erfüllt $i$ den $minsup$ womit $c'$ den mindest support auch nicht erfüllen kann. Somit kann $c'$ aus $c$ entfernt werden.
 
 % Longer version of apriori_gen
 %$c \gets \{l_1 \cup \{i\} | i \in l_2 \wedge l_1 \cup \{i\} \in C_k \}$
@@ -139,3 +139,5 @@ Auf Zeile 6 werden die neuen Kandidaten überprüft, ob eine Submenge $minsup$ n
 %	return FALSE
 %}
 %\end{lstlisting}
+
+\subsection{Cluster analysis}
