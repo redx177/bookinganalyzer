@@ -141,3 +141,45 @@ Auf Zeile 6 werden die k-Attributmengen gesäubert (prune), indem die neuen Kand
 %\end{lstlisting}
 
 \subsection{Cluster analysis}
+Die Cluseranalyse weist Instanzen einer Klasse zu, welche zu Beginn noch nicht bekannt sind (siehe \cref{sec:recherche:dataminingtechniken:disziplinen:classification} \nameref{sec:recherche:dataminingtechniken:disziplinen:classification} und \cref{sec:recherche:dataminingtechniken:disziplinen:clusteranalysis} \nameref{sec:recherche:dataminingtechniken:disziplinen:clusteranalysis}).
+
+Es gibt diverse Algorithmen welche sich verschiedene Problemstellungen annehmen. Unterteilen lassen sich diese in vier Gruppen:
+\begin{itemize}
+	\item Partitioning
+	\item Hierarchical
+	\item Density-based
+	\item Grid-mased
+\end{itemize}
+Nicht alle Algorithmen lassen sich eindeutig einer Gruppe zuweisen. Jedoch hilft diese Auflistung eine Übersicht über die Verfahren zu geben\footcite{data_mining_concepts_and_techniques}.
+
+Für die Auswahl eines Algorithmus müssen die Charakteristiken der Daten bekannt sein, wie diese zum Beispiel verteilt sind oder wie viele Cluster sinnvoll sind. 
+Da solche Informationen noch nicht vorhanden sind werden aus den ersten drei Gruppen ein Algorithmus ausgewählt und die Fehler schlussendlich gegeneinander verglichen.
+Bei den ersten drei Gruppen wird jeweils das Clustering auf Basis der Distanz von Instanzen untereinander durchgeführt, wodurch diese verglichen werden können.
+ 
+% Wenn eine einheitliche Funktion dafür verwendet wird können die Resultate untereinander verglichen werden. Grid-based Methoden gliedern den Raum in ein Netz auf wodurch das Resultat schwerer zu vergleichen ist mit den anderen Algorithmen.
+
+Dafür wird zuerst eine einheitliche Funktion $d$ zur Distanzmessung definiert.
+Dazu wird die euklidische Distanz verwendet.
+
+$$ d(I_i, I_j) = \sqrt{\sum_{k=1}^{m} (A_{ik} - A_{jk})^2} $$
+$A_ik$ ist das k-te Attribute der Instanz $i$. 
+Die euklidische Distanz eignet sich nur für numerische Attribute.
+Da die Interhome Daten jedoch hauptsächlich aus kategorischen Attirbuten bestehen, wird  eine erweiterte Funktion zur Messung der Entfernung verwendet, welche im Artikel zum k-prototype Algorithmus von Zhexue Huang vorgeschlagen wird\footcite{clustering_numeric_and_categorical_values}.
+Dabei handelt es sich um eine Fusion der euklidischen- und der Hamming-Distanz\footcite{data_mining_concepts_and_techniques}.
+
+$$ d(I_i, I_j) = \sum_{k=1}^{m} (A^n_{ik} - A^n_{jk})^2 + \gamma \sum_{k=1}^{m} \delta(A^c_{ik}, A^c_{jk}) $$
+
+$A^n_{ik}$ und $A^c_{ik}$ stehen für die numerischen ($A^n$) beziehungsweise kategorischen ($A^c$) Attribute $k$ der Instanz $i$. 
+$\gamma$ ist das Gewicht mit welcher die numerischen und kategorischen Daten verglichen werden.
+$\delta$ ist definiert als:
+$$ \delta(p,q)= 
+\begin{cases}
+1,				& \text{if } p \neq q\\
+0,              & \text{otherwise}
+\end{cases} $$
+
+Dadurch erhalten Instanzen mit vielen Übereinstimmungen eine kleinere Distanz als wenn Attribute unterschiedliche Werte aufweisen.
+
+%Schlussendlich wird der Fehler pro Cluster durch die Residuenquadratsumme berechnet:
+
+%$$ E = \sum_{k=1}^{N} \sum_{j=1}^{|N_k|} $$
