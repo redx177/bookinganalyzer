@@ -18,7 +18,8 @@ Im ersten Schritt wird der Datenbestand durch die Auswahl von Attributen durch d
 
 %Dafür eignet sich die Häufigkeitszählung des \nameref{sec:recherche:dataminingtechniken:disziplinen:association} (\cref{sec:recherche:dataminingtechniken:disziplinen:association}), welche in diesem Abschnitt genauer beschrieben wird.
 
-\subsection{Apriori Algorithmus}
+\section{Apriori Algorithmus}
+\label{sec:konzept:apriori}
 Der Apriori Algorithmus ist der erste von zwei Schritten des \nameref{sec:recherche:dataminingtechniken:disziplinen:association} (\cref{sec:recherche:dataminingtechniken:disziplinen:association}), dessen Ziel es ist häufige Attribut-Kombinationen aufzufinden. 
 
 Nachfolgend wird der Ablauf des Algorithmus erklärt.
@@ -140,7 +141,8 @@ Auf Zeile 6 werden die k-Attributmengen gesäubert (prune), indem die neuen Kand
 %}
 %\end{lstlisting}
 
-\subsection{Cluster analysis}
+\section{Cluster analysis}
+\label{sec:konzept:clusteranalysis}
 Die Cluseranalyse weist Instanzen einer Klasse zu, welche zu Beginn noch nicht bekannt sind (siehe \cref{sec:recherche:dataminingtechniken:disziplinen:classification} \nameref{sec:recherche:dataminingtechniken:disziplinen:classification} und \cref{sec:recherche:dataminingtechniken:disziplinen:clusteranalysis} \nameref{sec:recherche:dataminingtechniken:disziplinen:clusteranalysis}).
 
 Es gibt diverse Algorithmen welche sich verschiedene Problemstellungen annehmen. Unterteilen lassen sich diese in vier Gruppen:
@@ -159,27 +161,64 @@ Bei den ersten drei Gruppen wird jeweils das Clustering auf Basis der Distanz vo
 % Wenn eine einheitliche Funktion dafür verwendet wird können die Resultate untereinander verglichen werden. Grid-based Methoden gliedern den Raum in ein Netz auf wodurch das Resultat schwerer zu vergleichen ist mit den anderen Algorithmen.
 
 Dafür wird zuerst eine einheitliche Funktion $d$ zur Distanzmessung definiert.
-Dazu wird die euklidische Distanz verwendet.
+Dazu wird die quadratische euklidische Distanz verwendet.
 
-$$ d(I_i, I_j) = \sqrt{\sum_{k=1}^{m} (A_{ik} - A_{jk})^2} $$
-$A_ik$ ist das k-te Attribute der Instanz $i$. 
-Die euklidische Distanz eignet sich nur für numerische Attribute.
+
+\begin{equation} \label{eq:konzept:clusteranalysis:1}
+d(I_i, I_j) = \sum_{k=1}^{m} (A_{ik} - A_{jk})^2
+\end{equation}
+
+$A_{ik}$ ist das k-te Attribute der Instanz $i$. 
+Die quadratische euklidische Distanz eignet sich nur für numerische Attribute.
 Da die Interhome Daten jedoch hauptsächlich aus kategorischen Attirbuten bestehen, wird  eine erweiterte Funktion zur Messung der Entfernung verwendet, welche im Artikel zum k-prototype Algorithmus von Zhexue Huang vorgeschlagen wird\footcite{clustering_numeric_and_categorical_values}.
-Dabei handelt es sich um eine Fusion der euklidischen- und der Hamming-Distanz\footcite{data_mining_concepts_and_techniques}.
+Dabei handelt es sich um eine Fusion der quadratischen euklidischen- und der Hamming-Distanz\footcite{data_mining_concepts_and_techniques}.
 
-$$ d(I_i, I_j) = \sum_{k=1}^{m} (A^n_{ik} - A^n_{jk})^2 + \gamma \sum_{k=1}^{m} \delta(A^c_{ik}, A^c_{jk}) $$
+\begin{equation} \label{eq:konzept:clusteranalysis:2}
+ d(I_i, I_j) = \sum_{k=1}^{m} (A^n_{ik} - A^n_{jk})^2 + \gamma \sum_{k=1}^{m} \delta(A^c_{ik}, A^c_{jk})
+\end{equation}
 
 $A^n_{ik}$ und $A^c_{ik}$ stehen für die numerischen ($A^n$) beziehungsweise kategorischen ($A^c$) Attribute $k$ der Instanz $i$. 
 $\gamma$ ist das Gewicht mit welcher die numerischen und kategorischen Daten verglichen werden.
 $\delta$ ist definiert als:
-$$ \delta(p,q)= 
+
+\begin{equation} \label{eq:konzept:clusteranalysis:3}
+\delta(p,q)= 
 \begin{cases}
 1,				& \text{if } p \neq q\\
 0,              & \text{otherwise}
-\end{cases} $$
+\end{cases}
+\end{equation}
 
 Dadurch erhalten Instanzen mit vielen Übereinstimmungen eine kleinere Distanz als wenn Attribute unterschiedliche Werte aufweisen.
 
 %Schlussendlich wird der Fehler pro Cluster durch die Residuenquadratsumme berechnet:
 
 %$$ E = \sum_{k=1}^{N} \sum_{j=1}^{|N_k|} $$
+
+\subsection{k-prototypes}
+Die k-prototypes Vorgehensweise gehört zu der Gruppe der partitionierenden Algorithmen. Er erweitert den \gls{pam} Algorithmus damit dieser auch mit kategorischen Attributen umgehen kann. Dazu wurde die Berechnung der Distanz gemäss (\ref{eq:konzept:clusteranalysis:2}) angepasst \footcite{data_mining_concepts_and_techniques}\footcite{clustering_numeric_and_categorical_values}.
+
+
+Der Ablauf von \gls{pam} und k-prototypes besteht aus fünf Schritten:
+\begin{enumerate}
+\item Initiale Prototypen-Auswahl ${o_1,...,o_k}$. Diese bilden die ersten Cluster.
+\item Alloziere jede Instanz zu ihrem nächsten Prototypen.
+\item Wähle zufällig einen Prototypen $o_{random}$ als Ersatz für den aktuellen Prototypen $o_j$ einses Clusters.
+\item Berechne die Kosten $E_{random}$ welche die durch eine Änderung von $o_j$ durch $o_{random}$ entstehen.
+\item \textbf{if} $E_j > E_{random}$ \textbf{then} Ersetze $o_j$ durch $o_{random}$ und wiederhole 2.-5. bis keine Änderungen an den Clustern mehr vorgenommen werden.
+\end{enumerate}
+
+
+Der neue Prototypen in Schritt 3. wird zufällig ausgewählt. Dadurch findet der Algorithmus ein lokales Optimum, jedoch nicht zwingend das beste Resultat\footcite{data_mining_concepts_and_techniques}.
+Für die Berechnung der Kosten in Schritt 4. wird das absolute-error criterion verwendet.
+\begin{equation}
+\sum_{i=1}^{k} \sum_{p \in C_i} d(p, o_i)
+\end{equation}
+
+Die Laufzeit des Algorithmus ist $O((t+1)kn)$, wobei $n$ die Anzahl Instanzen, $k$ die Anzahl Cluster und $t$ die Anzahl der Iterationen darstellt. Üblicherweise ist $k << n$ und $t < 100$, wodurch der Algorithmus sehr effizient ist und auch auf grossen Datenbeständen angewendet werden kann\footcite{clustering_numeric_and_categorical_values}.
+
+\subsection{complete-linkage/farthest-neighboor clustering}
+Eine Vertreter der hierarchical Cluster Algorithmen ist complete-linkage/farthest-neighbor clustering. Es handelt sich dabei um eine bottom-up Strategie, welche für jede Instanz einen Cluster erstellt und diese anhand volgender Formel Fusioniert. 
+\begin{equation}
+D(C_i, C_j) = \max_{p \in C_i, p' \in C_j} d(p, p')
+\end{equation}
