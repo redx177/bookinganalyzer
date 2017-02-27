@@ -218,7 +218,7 @@ Für die Berechnung der Kosten in Schritt 4. wird das absolute-error criterion v
 Die Laufzeit des Algorithmus ist $O((t+1)kn)$, wobei $n$ die Anzahl Instanzen, $k$ die Anzahl Cluster und $t$ die Anzahl der Iterationen darstellt. Üblicherweise ist $k << n$ und $t < 100$, wodurch der Algorithmus sehr effizient ist und auch auf grossen Datenbeständen angewendet werden kann\footcite{clustering_numeric_and_categorical_values}.
 
 \subsection{complete-linkage/farthest-neighboor clustering}
-Eine Vertreter der hierarchical Cluster Algorithmen ist complete-linkage/farthest-neighbor clustering. Es handelt sich dabei um eine bottom-up Strategie, welche für jede Instanz einen Cluster erstellt und diese anhand volgender Formel Fusioniert. 
+Eine Vertreter der hierarchical Cluster Algorithmen ist complete-linkage/farthest-neighbor clustering. Es handelt sich dabei um eine bottom-up Strategie, welche für jede Instanz einen eigenen Cluster erstellt und diese anschliessend zu grösseren Gruppen zusammenfasst. anhand volgender Formel Fusioniert. 
 \begin{equation}
 D(C_i, C_j) = \max_{p \in C_i, p' \in C_j} d(p, p')
 \end{equation}
