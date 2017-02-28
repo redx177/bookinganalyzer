@@ -154,13 +154,13 @@ Es gibt diverse Algorithmen welche sich verschiedene Problemstellungen annehmen.
 \end{itemize}
 Nicht alle Algorithmen lassen sich eindeutig einer Gruppe zuweisen. Jedoch hilft diese Auflistung eine Übersicht über die Verfahren zu geben\footcite{data_mining_concepts_and_techniques}.
 
-Für die Auswahl eines Algorithmus müssen die Charakteristiken der Daten bekannt sein, wie diese zum Beispiel verteilt sind oder wie viele Cluster sinnvoll sind. 
-Da solche Informationen noch nicht vorhanden sind werden aus den ersten drei Gruppen ein Algorithmus ausgewählt und die Fehler schlussendlich gegeneinander verglichen.
-Bei den ersten drei Gruppen wird jeweils das Clustering auf Basis der Distanz von Instanzen untereinander durchgeführt, wodurch diese verglichen werden können.
- 
+Für die Auswahl eines Algorithmus müssen die Charakteristiken der Daten bekannt sein, wie diese zum Beispiel verteilt (z.B. Kugel-, Kreis-, S-Förmig) oder wie viele Cluster sinnvoll sind. Diese sind bislang jedoch noch bekannt.
+Partitioning- und Hierarchical-Vorgehensweisen benötigen zur Berechnung der Clustern deren Anzahl. Bei ersteren kann diese anhand der Elbow-Method berechnet werden\footcite{elbow_method}. Bei Hierarchischen Clustern müsste man dies jedoch für jeden Ast ermittelt. Da die Laufzeit von solchen Algorithmen bereits $\mathcal{O}(k^2)$ beträgt ist diese Vorgehensweise nicht praktikabel\footcite{complexity_hierarchical_clustering}. Grid-based Methoden unterteilen den Datenraum in ein Netz wodurch die Clusters erzeugt werden. Unterstützt werden dabei nur numerische Daten weshalb sich diese Gruppe nicht eignet (weitere Forschung in dem Bereich ist jedoch im Gange\footcite{sting_categorical_data}).
+Aus diesen Gründen werden in dieser Arbeit ein Vertreter aus der Partitioning und der Density-based Gruppen umgesetzt.
+
 % Wenn eine einheitliche Funktion dafür verwendet wird können die Resultate untereinander verglichen werden. Grid-based Methoden gliedern den Raum in ein Netz auf wodurch das Resultat schwerer zu vergleichen ist mit den anderen Algorithmen.
 
-Dafür wird zuerst eine einheitliche Funktion $d$ zur Distanzmessung definiert.
+Um die Resultate der Algorithmen zu vergleichen wird eine einheitliche Funktion $d$ zur Distanzmessung definiert.
 Dazu wird die quadratische euklidische Distanz verwendet.
 
 
@@ -184,16 +184,12 @@ $\delta$ ist definiert als:
 \begin{equation} \label{eq:konzept:clusteranalysis:3}
 \delta(p,q)= 
 \begin{cases}
-1,				& \text{if } p \neq q\\
+1,				& \text{if} p \neq q\\
 0,              & \text{otherwise}
 \end{cases}
 \end{equation}
 
 Dadurch erhalten Instanzen mit vielen Übereinstimmungen eine kleinere Distanz als wenn Attribute unterschiedliche Werte aufweisen.
-
-%Schlussendlich wird der Fehler pro Cluster durch die Residuenquadratsumme berechnet:
-
-%$$ E = \sum_{k=1}^{N} \sum_{j=1}^{|N_k|} $$
 
 \subsection{k-prototypes}
 Die k-prototypes Vorgehensweise gehört zu der Gruppe der partitionierenden Algorithmen. Er erweitert den \gls{pam} Algorithmus damit dieser auch mit kategorischen Attributen umgehen kann. Dazu wurde die Berechnung der Distanz gemäss (\ref{eq:konzept:clusteranalysis:2}) angepasst \footcite{data_mining_concepts_and_techniques}\footcite{clustering_numeric_and_categorical_values}.
@@ -215,10 +211,56 @@ Für die Berechnung der Kosten in Schritt 4. wird das absolute-error criterion v
 \sum_{i=1}^{k} \sum_{p \in C_i} d(p, o_i)
 \end{equation}
 
-Die Laufzeit des Algorithmus ist $O((t+1)kn)$, wobei $n$ die Anzahl Instanzen, $k$ die Anzahl Cluster und $t$ die Anzahl der Iterationen darstellt. Üblicherweise ist $k << n$ und $t < 100$, wodurch der Algorithmus sehr effizient ist und auch auf grossen Datenbeständen angewendet werden kann\footcite{clustering_numeric_and_categorical_values}.
+Die Laufzeit des Algorithmus ist $\mathcal{O}((t+1)kn)$, wobei $n$ die Anzahl Instanzen, $k$ die Anzahl Cluster und $t$ die Anzahl der Iterationen darstellt. Üblicherweise ist $k << n$ und $t < 100$, wodurch der Algorithmus sehr effizient ist und auch auf grossen Datenbeständen angewendet werden kann\footcite{clustering_numeric_and_categorical_values}.
 
-\subsection{complete-linkage/farthest-neighboor clustering}
-Eine Vertreter der hierarchical Cluster Algorithmen ist complete-linkage/farthest-neighbor clustering. Es handelt sich dabei um eine bottom-up Strategie, welche für jede Instanz einen eigenen Cluster erstellt und diese anschliessend zu grösseren Gruppen zusammenfasst. anhand volgender Formel Fusioniert. 
-\begin{equation}
-D(C_i, C_j) = \max_{p \in C_i, p' \in C_j} d(p, p')
-\end{equation}
+\subsection{DBSCAN}
+Als vertreter der Density-based Algorithmen wird \gls{dbscan} verwendet. 
+Vorgegeben werden muss die Dichte $\epsilon$ und die minimum Anzahl an Instanzen $minpts$. Mit diesen Informationen kann der Algorithmus in einer Laufzeit von $\mathcal{O}(n\,log\,n)$ ein Clustering durchführen.
+
+Der Algorithmus führt mehrere Begriffe ein\footcite{data_mining_concepts_and_techniques}:
+\begin{itemize}
+\item \textit{neighborhood density}: Wie viele Instanzen befinden sich im Radius von $\epsilon$ um einen Punkt $p$. $\mathit{ND}_{\epsilon}(p)$
+\item \textit{core object}: Instanz für welche $|\mathit{ND}_{\epsilon}(p)| \geq minpts$ gilt.
+\item \textit{noise}: Instanz für welche $|\mathit{ND}_{\epsilon}(p)| < minpts$ gilt.
+\item \textit{directly density-reachable}: Alle Instanzen innerhalb des Radius $\epsilon$ um einen Punkt $q$, wenn $q$ ein \textit{core object} ist.
+\item \textit{density-reachable}: Punkt $p$ ist \textit{density-reachable} von $q$, wenn es Punkte $l_1,...,l_n$ gibt, so dass $l_1=q, l_n=p$ und $l_i+1$ \textit{directly density-reachable} von $l_i$ aus ist, für $1 \leq i \leq n$.
+\item \textit{density-connected}: Wenn es zwei \textit{core objects} $p_1,p_2$ und einen Punkt $q$ gibt, so dass $p_1$ und $p_2$ \textit{density-reachable} von $q$ aus sind.
+\end{itemize}
+
+Die Unterscheidung zwischen \textit{density-reachable} und \textit{density-connected} ist notwendig, da ersteres Kriterium asymmetrisch und letzteres symmetrisch ist. Veranschaulicht wird dies in \cref{fig:konzept:clusteranalysis:DBSCAN}.
+
+\begin{figure}[H]
+	\RawFloats
+	\centering
+	\includegraphics[width=0.8\textwidth]{images/density-reachable-vs-connected.png}
+	\caption{density-reachable vs density-connected}
+	\source{\cite{data_mining_concepts_and_techniques}}
+	\label{fig:konzept:clusteranalysis:DBSCAN}
+\end{figure}
+
+Punkte m,p,o und r sind \textit{core objects} da sich in den Radien $\epsilon$ mindestens 3 andere Instanzen ($minpts = 3$) befinden. Da m und p beides \textit{core objects} sind, sind beide Punkte untereinander \textit{density-reachable}. q ist \textit{density reachable} von m und von p aus, jedoch nicht umgekehrt, da q kein \textit{core object} ist. 
+
+Auf der rechten Seite sind r und s \textit{density-rechable} von Punkt o, weshalb r,s und o untereinander \textit{density-connected} sind.
+
+Clusters werden mit den Punkten gebildet, welche untereinander \textit{density-connected} sind. 
+Der Algorithmus geht folgendermassen vor:
+\begin{enumerate}
+\item Markiere alle Punkte als ''unvisited''.
+\item Wähle Zufälligerweise eine ''unvisited'' Instanz $p$.
+\item Markiere $p$ als ''visited''.
+\item \textbf{if}  $|\mathit{ND}_{\epsilon}(p)| \geq minpts$ \textbf{then} 
+\item \hspace{1cm} Erstelle einen Cluster für $p$.
+\item \hspace{1cm} Füge alle Punkte aus $\mathit{ND}_{\epsilon}(p)$ in $N$ ein. $N = \mathit{ND}_{\epsilon}(p)$
+\item \hspace{1cm} \textbf{foreach} $q$ \textbf{in} $N$
+\item \hspace{2cm} \textbf{if} $q$ ist ''unvisited'' \textbf{then}
+\item \hspace{3cm} Markiere $q$ als ''visited''.
+\item \hspace{3cm} Füge alle ''unvisited'' Instanzen aus $\mathit{ND}_{\epsilon}(q)$ in $N$ ein. $N \cup \mathit{ND}_{\epsilon}(q)$
+\item \textbf{if} Es hat noch ''unvisited'' Instanzen \textbf{then} Gehe zu 2.
+\end{enumerate}
+
+
+%\subsection{complete-linkage/farthest-neighboor clustering}
+%Eine Vertreter der hierarchical Cluster Algorithmen ist complete-linkage/farthest-neighbor clustering. Es handelt sich dabei um eine bottom-up Strategie, welche für jede Instanz einen eigenen Cluster erstellt und diese anschliessend zu grösseren Gruppen zusammenfasst. anhand volgender Formel Fusioniert. 
+%\begin{equation}
+%D(C_i, C_j) = \max_{p \in C_i, p' \in C_j} d(p, p')
+%\end{equation}
