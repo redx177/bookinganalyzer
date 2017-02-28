@@ -219,9 +219,18 @@ Vorgegeben werden muss die Dichte $\epsilon$ und die minimum Anzahl an Instanzen
 
 Der Algorithmus führt mehrere Begriffe ein\footcite{data_mining_concepts_and_techniques}:
 \begin{itemize}
-\item \textit{neighborhood density}: Wie viele Instanzen befinden sich im Radius von $\epsilon$ um einen Punkt $p$. $\mathit{ND}_{\epsilon}(p)$
-\item \textit{core object}: Instanz für welche $|\mathit{ND}_{\epsilon}(p)| \geq minpts$ gilt.
-\item \textit{noise}: Instanz für welche $|\mathit{ND}_{\epsilon}(p)| < minpts$ gilt.
+\item \textit{neighborhood density}: Wie viele Instanzen befinden sich im Radius von $\epsilon$ um einen Punkt $p$. 
+\begin{equation}
+\mathit{ND}_{\epsilon}(p) = \{q | q \in D \wedge d(p,q) \leq \epsilon\}
+\end{equation}
+\item \textit{core object}: Instanz welche mindestens $minpts$ in der Nachbarschaft haben.
+\begin{equation}
+|\mathit{ND}_{\epsilon}(p)| \geq minpts
+\end{equation}
+\item \textit{noise}: Instanz für welche weniger als $minpts$ in der Nachbarschaft haben.
+\begin{equation}
+|\mathit{ND}_{\epsilon}(p)| < minpts
+\end{equation}
 \item \textit{directly density-reachable}: Alle Instanzen innerhalb des Radius $\epsilon$ um einen Punkt $q$, wenn $q$ ein \textit{core object} ist.
 \item \textit{density-reachable}: Punkt $p$ ist \textit{density-reachable} von $q$, wenn es Punkte $l_1,...,l_n$ gibt, so dass $l_1=q, l_n=p$ und $l_i+1$ \textit{directly density-reachable} von $l_i$ aus ist, für $1 \leq i \leq n$.
 \item \textit{density-connected}: Wenn es zwei \textit{core objects} $p_1,p_2$ und einen Punkt $q$ gibt, so dass $p_1$ und $p_2$ \textit{density-reachable} von $q$ aus sind.
@@ -257,6 +266,8 @@ Der Algorithmus geht folgendermassen vor:
 \item \hspace{3cm} Füge alle ''unvisited'' Instanzen aus $\mathit{ND}_{\epsilon}(q)$ in $N$ ein. $N \cup \mathit{ND}_{\epsilon}(q)$
 \item \textbf{if} Es hat noch ''unvisited'' Instanzen \textbf{then} Gehe zu 2.
 \end{enumerate}
+
+
 
 
 %\subsection{complete-linkage/farthest-neighboor clustering}
