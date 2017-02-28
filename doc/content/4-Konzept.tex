@@ -254,17 +254,16 @@ Auf der rechten Seite sind r und s \textit{density-rechable} von Punkt o, weshal
 Clusters werden mit den Punkten gebildet, welche untereinander \textit{density-connected} sind. 
 Der Algorithmus geht folgendermassen vor:
 \begin{enumerate}
-\item Markiere alle Punkte als ''unvisited''.
-\item Wähle Zufälligerweise eine ''unvisited'' Instanz $p$.
-\item Markiere $p$ als ''visited''.
-\item \textbf{if}  $|\mathit{ND}_{\epsilon}(p)| \geq minpts$ \textbf{then} 
+\item Markiere alle Punkte in $D$ als ''unvisited''.
+\item \textbf{foreach} $p$ \textbf{in} $\{d | d \in D \wedge d $ ist ''unvisited''$\}$
+\item \hspace{0.5cm}Markiere $p$ als ''visited''.
+\item \hspace{0.5cm}\textbf{if}  $|\mathit{ND}_{\epsilon}(p)| \geq minpts$ \textbf{then} 
 \item \hspace{1cm} Erstelle einen Cluster für $p$.
 \item \hspace{1cm} Füge alle Punkte aus $\mathit{ND}_{\epsilon}(p)$ in $N$ ein. $N = \mathit{ND}_{\epsilon}(p)$
 \item \hspace{1cm} \textbf{foreach} $q$ \textbf{in} $N$
-\item \hspace{2cm} \textbf{if} $q$ ist ''unvisited'' \textbf{then}
-\item \hspace{3cm} Markiere $q$ als ''visited''.
-\item \hspace{3cm} Füge alle ''unvisited'' Instanzen aus $\mathit{ND}_{\epsilon}(q)$ in $N$ ein. $N \cup \mathit{ND}_{\epsilon}(q)$
-\item \textbf{if} Es hat noch ''unvisited'' Instanzen \textbf{then} Gehe zu 2.
+\item \hspace{1.5cm} \textbf{if} $q$ ist ''unvisited'' \textbf{then}
+\item \hspace{2cm} Markiere $q$ als ''visited''.
+\item \hspace{2cm} Füge alle ''unvisited'' Instanzen aus $\mathit{ND}_{\epsilon}(q)$ in $N$ ein.
 \end{enumerate}
 
 
