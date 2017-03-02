@@ -1050,12 +1050,10 @@
 \lstloadlanguages{% Check Dokumentation for further languages ...
 	C,
 	C++,
-	csh,
 	Java
 }
 
-\lstset{
-	language=csh,
+\lstdefinelanguage{csh}{
 	basicstyle=\footnotesize\ttfamily,
 	numbers=left,
 	numberstyle=\tiny,
@@ -1098,6 +1096,43 @@
 	keywordstyle=\color{cyan},
 	identifierstyle=\color{red},
 }
+
+
+\lstdefinelanguage{pseudocode}{
+	basicstyle=\footnotesize\ttfamily,
+	numbers=left,
+	numberstyle=\tiny,
+	numbersep=5pt,
+	tabsize=2,
+	extendedchars=true,
+	breaklines=true,
+	frame=b,
+	stringstyle=\color{blue}\ttfamily,
+	showspaces=false,
+	showtabs=false,
+	xleftmargin=17pt,
+	framexleftmargin=17pt,
+	framexrightmargin=5pt,
+	framexbottommargin=4pt,
+	commentstyle=\color{green},
+	morecomment=[l]{//}, %use comment-line-style!
+	morecomment=[s]{/*}{*/}, %for multiline comments
+	morecomment=[s][\color{blue}\ttfamily]{"}{"}, %for multiline comments
+	moredelim=[is][\color{red}\ttfamily]{\%}{\%}, 
+	showstringspaces=false,
+	morekeywords={ if, then, else, foreach, in },
+	keywordstyle=\color{cyan},
+	identifierstyle=\color{red}
+}
+
+\lstset{
+	language=pseudocode,
+	literate=%
+		{ö}{{\"o}}1
+		{ä}{{\"a}}1
+		{ü}{{\"u}}1
+}
+
 \usepackage{caption}
 \DeclareCaptionFont{white}{\color{white}}
 \DeclareCaptionFormat{listing}{\colorbox{blue}{\parbox{\textwidth}{\hspace{15pt}#1#2#3}}}

@@ -35,11 +35,11 @@ Beim letzten Schritt werden die Resultate überprüft. Ist das Resultat nicht zu
 Danach müssen die Daten vorbereitet werden. Dies umfasst die Bereinigung, Transformation sowie Reduktion von Informationen\footcite{feature_selection_2017-01-04}. Bei ersteren werden Messfehler behoben, fehlende Felder ergänzt oder Duplikate entfernt. Die Transformation wandelt Werte um damit sie für die Berechnung besser geeignet sind. Zum Beispiel können Wertebereiche in Intervalle aufgeteilt werden. Bei letzteren werden Instanzen der Datengrundlage entfernt, wodurch die Berechnungszeit verkürzt wird, oder Attribute von allen Instanzen entfernt, da deren Entropie zu gering ist. Weiteres hierzu im \cref{sec:proofofconcept:datenvorbereitung} \nameref{sec:proofofconcept:datenveorbereitung}. 
 
 
-\subsection{Disziplinen im Data-Mining}
+\section{Disziplinen im Data-Mining}
 \label{sec:recherche:dataminingtechniken:disziplinen}
-Die folgenden Methoden geben eine Übersicht über die gängigsten Techniken wider. Später wird im \cref{sec:konzept:vorgehensweise} \nameref{sec:konzept:vorgehensweise} eine Methode ausgewählt und genauer beschrieben. 
+Die folgenden Methoden geben eine Übersicht über die gängigsten Techniken im Data Mining wider\footcite{top_10_algorithms}. Beschrieben werden Problemstellungen, aus welchen im Konzept\todo{cref} dann passende Algorithmen ausgewählt werden.
 
-\subsubsection{Association rule learning}
+\subsection{Association rule learning}
 \label{sec:recherche:dataminingtechniken:disziplinen:association}
 Bei Association rule learning (Assoziationsanalyse) handelt es sich um \gls{supervisedlearning} wobei Korrelationen zwischen Attributen aufgedeckt werden. Bei einer Warenkorbanalyse kann dadurch erkannt werden, welche Produkte die Kunden oft zusammen eingekaufen.
 
@@ -47,7 +47,7 @@ Der Prozess in der Assoziationsanalyse besteht aus zwei Schritten. Zuerst werden
 
 Im Falle einer Warenkorbanalyse ein Beispiel einer Regel: "`Samstags wenn ein Kunde Käse und Brot kauft, dann kauft er auch Liquor"'. Oder im Falle von Interhome "Wenn ein Kunde eine Ferienwohnung mit Pool am Meer bucht, dann besitzt das Objekt auch eine Klimaanlage".
 
-\subsubsection{Classification}
+\subsection{Classification}
 \label{sec:recherche:dataminingtechniken:disziplinen:classification}
 Das Ziel der Classification (Klassifikation) ist es, eine Instanz einer Klasse zuzuweisen. Dies könnte die Kreditwürdigkeit eines Kunden sein. Die Klassen sind dabei vordefiniert, wodurch es um ein \gls{supervisedlearning} handelt.
 
@@ -64,7 +64,7 @@ Es gibt verschiedene Techniken für die Zuweisung einer Instanz zu einer Klasse.
 
 % Evt. noch was schreiben über Training- und Testdaten
 
-\subsubsection{Regression}
+\subsection{Regression}
 \label{sec:recherche:dataminingtechniken:disziplinen:regression}
 Bei der Regresseion wird von einer abhängiger Variable Y auf eine unabhängige Grösse X zurückgeschlossen\todo{korrekt?}. Man spricht dann von einer Regression von Y auf X. Dabei werden bestehende Daten auf einem Koordinatensystem aufgetragen und eine Funktion definiert oder gesucht, welche die Messungen möglichst genau annähert. Für eine gegebene abhängige Variable kann somit die unabhängige Grösse errechnet werden\todo{cite}. 
 
@@ -79,7 +79,7 @@ Bei der Regresseion wird von einer abhängiger Variable Y auf eine unabhängige 
 	\label{fig:recherche:dataminingtechniken:disziplinen:regression}
 \end{figure}
 
-\subsubsection{Cluster analysis}
+\subsection{Cluster analysis}
 \label{sec:recherche:dataminingtechniken:disziplinen:clusteranalysis}
 Die Cluster analysis (Clusteranalyse) weist, ähnlich zur \nameref{sec:recherche:dataminingtechniken:disziplinen:classification}, den Instanzen eine Klasse zu. Jedoch sind diese zu beginn nicht bekannt, wodurch es sich um ein \gls{unsupervisedlearning} handelt.
 
@@ -96,9 +96,10 @@ In \cref{fig:recherche:dataminingtechniken:disziplinen:clusteranalysis} sind Pun
 Eingesetzt wird die Clusteranalyse zum Beispiel für die Erkennung von Kundengruppen oder zur  Zusammenfassung und Vergleich gleichartiger Produkten\footcite{einsatzgebiet_clusteranalyse}.
 
 
-\subsubsection{Collaborative Filtering}
+\subsection{Collaborative Filtering}
 \label{sec:recherche:dataminingtechniken:disziplinen:collaborativefiltering}
 Beim Collaborative Filtering (kollaboratives Filtern) wird zu einer Instanz ähnliche Objekte gesucht. Die Ähnlichkeit wird durch Bewertung von anderen Kunden errechnet. 
+
 
 \begin{table}[H] 
 	\caption{Begriffsdefinition}
@@ -122,6 +123,277 @@ Beim Collaborative Filtering (kollaboratives Filtern) wird zu einer Instanz ähn
 \end{table}
 
 Die Zeilen in der \cref{fig:recherche:dataminingtechniken:disziplinen:collaborativefiltering} sind Instanzen und die Spalten zeigen Bewertungen der Kunden. Minus steht für eine negative und Plus für eine positive Bewertung. Es ist auch möglich das ein Benutzer eine Instanz nicht bewertet. Mittels kollaborativen Filtern kann nun abgeschätzt werden, ob ein Benutzer eine Instanz positiv oder negativ Bewertet\todo{cite}.
+
+\section{Algorithmen}
+\label{sec:recherche:algorithmen}
+Hier werden drei Algorithmen aus den Problembeschreibungen im \cref{sec:recherche:dataminingtechniken:disziplinen} \nameref{sec:recherche:dataminingtechniken:disziplinen} beschrieben. Die Auswahl dieser Vorgehensweisen wird im Konzept erläutert\todo{cref}.
+
+\subsection{Apriori Algorithmus}
+\label{sec:recherche:apriori}
+Der Apriori Algorithmus ist der erste von zwei Schritten des \nameref{sec:recherche:dataminingtechniken:disziplinen:association} (\cref{sec:recherche:dataminingtechniken:disziplinen:association}), dessen Ziel es ist häufige Attribut-Kombinationen aufzufinden. 
+
+Nachfolgend wird der Ablauf des Algorithmus erklärt.
+\begin{enumerate}
+	\item Zähle die Vorkommen von allen Attributen und fasse das Resultat in $C_1$ (Kandidaten (candidates) 1-Attributmengen) zusammen.
+	\item Entferne Elemente aus $C_1$ welche $submin$ nicht erfüllen und speichere das Resultat in $L_1$ (frequente 1-Attributmengen).
+	\item Setze $k=2$
+	\item Solange $L_{k-1} \neq \emptyset$:
+	\begin {enumerate}
+	\item Generiere alle Möglichen Kombinationen für $C_k$ aus $L_{k-1}$ (apriori\_gen).
+	\item Entferne Elemente aus $C_k$ welche $submin$ nicht erfüllen und speichere das Resultat in $L_k$.
+	\item Erhöhe $k$ um eins.
+\end{enumerate}
+\item Das Resultat sind alle Elemente in $L_k$.
+\end{enumerate}
+
+Gegeben ist ein Mindestsupport $supmin$ welcher definiert, wie oft eine Attributmenge $C$ in Instanzen $I$ in der Datenmenge $D$ vorkommen muss, damit diese als relevant betrachtet werden. 
+
+Als erstes (Schritte 1-2) werden alle einzelnen Attribute (1-Attributmenge) gezählt und diejenigen entfernt, welche $submin$ nicht erfüllen.
+
+Danach wird Iterativ die Attributmenge um ein Element erweitert und wiederum auf $submin$ überprüft, bis keine Elemente mehr den Mindestsupport erreichen (Schritt 3).
+
+Vereinfacht dargestellt ist der Punkt 3.a. Dieser Schritt heisst apriori\_gen und seine Aufgabe ist es, die häufigen Attriutmengen für die nächste Iteration zu generieren. Er nimmt die Liste mit den frequentierten Datensätzen der vorherigen Iteration ($L{k-1}$) und erweitert alle Mengen um ein Element. Er macht sich die Eigenschaft zunutze, dass wenn in $L_{k-1}$ ein Element $minsup$ nicht erfüllt, kann es dies auch nicht in $C_k$, wodurch $C_k$ verkürzt und der Algorithmus beschleunigt wird\footcite{data_mining_concepts_and_techniques}.
+
+In der \cref{fig:recherche:vorgehensweise:apriorialgorithmus} wird der Ablauf am Beispiel eines Warenkorbes veranschaulicht.
+
+\begin{figure}[H]
+\RawFloats
+\centering
+\includegraphics[width=0.8\textwidth]{images/Apriori-Algorithmus.png}
+\caption{Visualisierung des Apriori Algorithmus}
+\source{\cite{association_rule_learning_2017-01-05}}
+\label{fig:recherche:vorgehensweise:apriorialgorithmus}
+\end{figure}
+
+$D$ wird benötigt um die Vorkommen zu zählen. Die roten Elemente in $L_k$ werden entfernt weil $minsup$ nicht erreicht wurde, welches im Beispiel den Wert 2 hat. Nach der Säuberung von $L_k$ erstellt der apriori\_gen die Kandidaten $C_k$ für den nächsten durchlauf (join). Anschliessend werden in $C_k$ diejenigen Elemente entfernt, welche in $L_{k-1}$ als nicht häufig erkannt wurde (prune). Zum Beispiel kann in $C_3$ das Element {Brot, Butter, Wurst} entfernt werden, da in $L_2$ {Butter, Wurst} den Wert $minsup$ unterschreitet.
+
+Der Algorithmus wird gestoppt, wenn es keine häufigen Kandidaten mehr gibt, was in $C_4$ der Fall ist.
+
+Der Algorithmus kann somit in drei Schritte aufgeteilt werden.
+\begin{enumerate}
+\item Häufigkeitszählung
+\item Generierung der x+1-Attributmenge (Apriori-gen Funktion, join step)
+\item Entfernung der Elemente welche den $minsup$ nicht erfüllen (Apriori-gen Funktion, prune step)
+\end{enumerate}
+
+Die nachfolgende Apriori-Methode führt die Häufigkeitszählung durch.
+Gegeben ist die gesamte Datenmenge $D$, welche für die Häufigkeitszählung verwendet wird, sowie der minimum Support $minsup$ welche die Attribute zu erfüllen haben.
+\begin{lstlisting}[language=pseudocode]
+procedure apriori($D$: Datenmenge; $minsup$: Minimum support) {
+	$L_1 \gets$ find_frequent_1%-%itemsets($D$)
+	$k \gets 2$
+	while $L_{k-1} \neq \emptyset$ {
+		$C_k \gets$ apriori_gen($L_{k-1}$)
+		foreach transaction $I \in D$ {
+			$C_I \gets \{ c | c \in C_k \wedge c \subseteq I \}$
+			foreach candidate $c \in C_I$ {
+				count[$c$] $\gets$ count[$c$] + 1
+			}
+		}
+		$L_k \gets \{c | c \in C_k \wedge$ count[$c$] $\ge minsup \}$
+		$k \gets k + 1$
+	}
+	return $\bigcup\limits_{k} L_{k}$
+}
+\end{lstlisting}
+Im ersten Schritt wird die 1-Attributmenge mit häufigen Elementen definiert. In den Zeilen 3 bis 14 wird für $k > 2$ die Items gesammelt, welche öfters vorkommen als der $minsup$. Dazu wird mittels der apriori\_gen Funktion die \textit{Candidates} $C_k$ generiert (Zeile 5).
+Anschliessend werden die vorkommen von allen Elementen in $D$ gezählt, wie oft sie in $C_k$ vorkommen (Zeilen 6-12).
+
+
+\begin{lstlisting}[language=pseudocode]
+procedure apriori_gen($L_{k-1}$:frequent %(k-1)-%itemsets) {
+	$C_k \gets \emptyset$
+	foreach itemset $l_1 \in L_{k-1}$ {
+		foreach itemset $l_2 \in L_{k-1}$ {
+			$c \gets \{l_1 \cup \{i\} | i \in l_2 \wedge l_1 \cup \{i\} \notin C_k \}$
+			$c_{pruned} \gets c - \{ c' | c' \in c \wedge i \subset c \wedge |i| = k-1 \wedge i \notin L_{k-1} \}$
+			$C_k \gets C_k \cup c_{pruned}$
+		}
+	}
+	return $C_k$
+}
+\end{lstlisting}
+In der apriori\_gen Funktion werden k-Attributmengen generiert, indem eine (k-1)-Attributmenge erweitert wird. Dazu gibt es zwei Schleifen welche durchlaufen werden. Auf Zeile 5 wird $l_1$ um Elemente von $l_2$ erweitert. Zudem wird sichergestellt, dass gleiche Mengen nicht mehrfach in $C_k$ hinzugefügt werden können.
+
+Auf Zeile 6 werden die k-Attributmengen gesäubert (prune), indem die neuen Kandidaten $c$ überprüft werden, ob eine Submenge $i$ eines Kandidaten $c'$ nicht in $L_{k-1}$ vorhanden ist. Wenn dies der Fall ist erfüllt $i$ den $minsup$ womit $c'$ den mindest support auch nicht erfüllen kann. Somit kann $c'$ aus $c$ entfernt werden.
+
+% Longer version of apriori_gen
+%$c \gets \{l_1 \cup \{i\} | i \in l_2 \wedge l_1 \cup \{i\} \in C_k \}$
+%$c_{pruned} \gets \{ i | i \in c \wedge \forall j(j \subset i \wedge |j| = k-1 \wedge j \in L_{k-1}) \}$
+%$C_k \gets C_k \cup c_{pruned}$
+%
+% Looped version of apriori_gen
+%	$C_k \gets \emptyset$
+%	foreach itemset $l_1 \in L_{k-1}$ {
+%		foreach itemset $l_2 \in L_{k-1}$ {
+%			if (($l_1$[1] = $l_2$[1]) $\wedge$ ($l_1$[2] = $l_2$[2]) $\wedge$ ... $\wedge$ ($l_1$[$k$-2] = $l_2$[$k$-2]) $\wedge$ ($l_1$[$k$-1] $<$ $l_2$[$k$-1])) {
+%				$c \gets l_1 \cup l_2$
+%				if not has_infrequent_subset($c, L_{k-1}$) {
+%					delete $c$
+%				} else {
+%					$C_k \gets C_k \cup c$
+%					add $C_k \cup c$ 
+%				}
+%			}
+%		}
+%	}
+%	return $C_k$
+%
+%
+%\begin{lstlisting}
+%procedure has_infrequent_subset($c$: candidate k-itemset; $L_{k-1}$: frequent (k-1)-itemsets) {
+%	foreach (k-1)-subset $s of c$ {
+%		if $s \notin L_{k-1}$ {
+%			return TRUE
+%		}
+%	}
+%	return FALSE
+%}
+%\end{lstlisting}
+
+
+\section{Cluster analysis}
+\label{sec:recherche:clusteranalysis}
+Die Cluseranalyse weist Instanzen einer Klasse zu, welche zu Beginn noch nicht bekannt sind (siehe \cref{sec:recherche:dataminingtechniken:disziplinen:classification} \nameref{sec:recherche:dataminingtechniken:disziplinen:classification} und \cref{sec:recherche:dataminingtechniken:disziplinen:clusteranalysis} \nameref{sec:recherche:dataminingtechniken:disziplinen:clusteranalysis}).
+
+Es gibt diverse Algorithmen welche sich verschiedene Problemstellungen annehmen. Unterteilen lassen sich diese in vier Gruppen:
+\begin{itemize}
+	\item Partitioning
+	\item Hierarchical
+	\item Density-based
+	\item Grid-mased
+\end{itemize}
+Nicht alle Algorithmen lassen sich eindeutig einer Gruppe zuweisen. Jedoch hilft diese Auflistung eine Übersicht über die Verfahren zu geben\footcite{data_mining_concepts_and_techniques}.
+
+Für die Auswahl eines Algorithmus müssen die Charakteristiken der Daten bekannt sein, wie diese zum Beispiel verteilt (z.B. Kugel-, Kreis-, S-Förmig) oder wie viele Cluster sinnvoll sind. Diese sind bislang jedoch noch bekannt.
+Partitioning- und Hierarchical-Vorgehensweisen benötigen zur Berechnung der Clustern deren Anzahl. Bei ersteren kann diese anhand der Elbow-Method berechnet werden\footcite{elbow_method}. Bei Hierarchischen Clustern müsste man dies jedoch für jeden Ast ermittelt. Da die Laufzeit von solchen Algorithmen bereits $\mathcal{O}(k^2)$ beträgt ist diese Vorgehensweise nicht praktikabel\footcite{complexity_hierarchical_clustering}. Grid-based Methoden unterteilen den Datenraum in ein Netz wodurch die Clusters erzeugt werden. Unterstützt werden dabei nur numerische Daten weshalb sich diese Gruppe nicht eignet (weitere Forschung in dem Bereich ist jedoch im Gange\footcite{sting_categorical_data}).
+Aus diesen Gründen werden in dieser Arbeit ein Vertreter aus der Partitioning und der Density-based Gruppen umgesetzt.
+
+% Wenn eine einheitliche Funktion dafür verwendet wird können die Resultate untereinander verglichen werden. Grid-based Methoden gliedern den Raum in ein Netz auf wodurch das Resultat schwerer zu vergleichen ist mit den anderen Algorithmen.
+
+Um die Resultate der Algorithmen zu vergleichen wird eine einheitliche Funktion $d$ zur Distanzmessung definiert.
+Dazu wird die quadratische euklidische Distanz verwendet.
+
+
+\begin{equation} \label{eq:recherche:clusteranalysis:1}
+d(I_i, I_j) = \sum_{k=1}^{m} (A_{ik} - A_{jk})^2
+\end{equation}
+
+$A_{ik}$ ist das k-te Attribute der Instanz $i$. 
+Die quadratische euklidische Distanz eignet sich nur für numerische Attribute.
+Da die Interhome Daten jedoch hauptsächlich aus kategorischen Attirbuten bestehen, wird  eine erweiterte Funktion zur Messung der Entfernung verwendet, welche im Artikel zum k-prototype Algorithmus von Zhexue Huang vorgeschlagen wird\footcite{clustering_numeric_and_categorical_values}.
+Dabei handelt es sich um eine Fusion der quadratischen euklidischen- und der Hamming-Distanz\footcite{data_mining_concepts_and_techniques}.
+
+\begin{equation} \label{eq:recherche:clusteranalysis:2}
+d(I_i, I_j) = \sum_{k=1}^{m} (A^n_{ik} - A^n_{jk})^2 + \gamma \sum_{k=1}^{m} \delta(A^c_{ik}, A^c_{jk})
+\end{equation}
+
+$A^n_{ik}$ und $A^c_{ik}$ stehen für die numerischen ($A^n$) beziehungsweise kategorischen ($A^c$) Attribute $k$ der Instanz $i$. 
+$\gamma$ ist das Gewicht mit welcher die numerischen und kategorischen Daten verglichen werden.
+$\delta$ ist definiert als:
+
+\begin{equation} \label{eq:recherche:clusteranalysis:3}
+\delta(p,q)= 
+\begin{cases}
+1,				& \text{if } p \neq q\\
+0,              & \text{otherwise}
+\end{cases}
+\end{equation}
+
+Dadurch erhalten Instanzen mit vielen Übereinstimmungen eine kleinere Distanz als wenn Attribute unterschiedliche Werte aufweisen.
+
+\subsection{k-prototypes}
+Die k-prototypes Vorgehensweise gehört zu der Gruppe der partitionierenden Algorithmen. Er erweitert den \gls{pam} Algorithmus damit dieser auch mit kategorischen Attributen umgehen kann. Dazu wurde die Berechnung der Distanz gemäss (\ref{eq:recherche:clusteranalysis:2}) angepasst \footcite{data_mining_concepts_and_techniques}\footcite{clustering_numeric_and_categorical_values}.
+
+
+Der Ablauf von \gls{pam} und k-prototypes besteht aus fünf Schritten:
+\begin{enumerate}
+	\item Initiale Prototypen-Auswahl $\{o_1,\ldots,o_k\}$. Diese bilden die ersten Cluster.
+	\item Alloziere jede Instanz zu ihrem nächsten Prototypen.
+	\item Wähle zufällig einen Prototypen $o_{random}$ als Ersatz für den aktuellen Prototypen $o_j$ einses Clusters.
+	\item Berechne die Kosten $E_{random}$ welche die durch eine Änderung von $o_j$ durch $o_{random}$ entstehen.
+	\item \textbf{if} $E_j > E_{random}$ \textbf{then} Ersetze $o_j$ durch $o_{random}$ und wiederhole 2.-5. bis keine Änderungen an den Clustern mehr vorgenommen werden.
+\end{enumerate}
+
+Der neue Prototypen in Schritt 3. wird zufällig ausgewählt. Dadurch findet der Algorithmus ein lokales Optimum, jedoch nicht zwingend das beste Resultat\footcite{data_mining_concepts_and_techniques}.
+Für die Berechnung der Kosten in Schritt 4. wird das absolute-error criterion verwendet.
+\begin{equation}
+\sum_{i=1}^{k} \sum_{p \in C_i} d(p, o_i)
+\end{equation}
+
+Die Laufzeit des Algorithmus ist $\mathcal{O}((t+1)kn)$, wobei $n$ die Anzahl Instanzen, $k$ die Anzahl Cluster und $t$ die Anzahl der Iterationen darstellt. Üblicherweise ist $k << n$ und $t < 100$, wodurch der Algorithmus sehr effizient ist und auch auf grossen Datenbeständen angewendet werden kann\footcite{clustering_numeric_and_categorical_values}.
+
+\subsection{DBSCAN}
+Als Vertreter der Density-based Algorithmen wird \gls{dbscan} verwendet. 
+Vorgegeben werden muss die Dichte $\epsilon$ und die minimum Anzahl an Instanzen $minpts$. Mit diesen Informationen kann der Algorithmus in einer Laufzeit von $\mathcal{O}(n\,log\,n)$ ein Clustering durchführen.
+
+Der Algorithmus führt mehrere Begriffe ein\footcite{data_mining_concepts_and_techniques}:
+\begin{itemize}
+	\item \textit{neighborhood density}: Wie viele Instanzen befinden sich im Radius von $\epsilon$ um einen Punkt $p$. 
+	\begin{equation}
+	\mathit{ND}_{\epsilon}(p) = \{q | q \in D \wedge d(p,q) \leq \epsilon\}
+	\end{equation}
+	\item \textit{core object}: Instanz welche mindestens $minpts$ in der Nachbarschaft haben.
+	\begin{equation}
+	|\mathit{ND}_{\epsilon}(p)| \geq minpts
+	\end{equation}
+	\item \textit{noise}: Instanz für welche weniger als $minpts$ in der Nachbarschaft haben.
+	\begin{equation}
+	|\mathit{ND}_{\epsilon}(p)| < minpts
+	\end{equation}
+	\item \textit{directly density-reachable}: Alle Instanzen innerhalb des Radius $\epsilon$ um einen Punkt $q$, wenn $q$ ein \textit{core object} ist.
+	\item \textit{density-reachable}: Punkt $p$ ist \textit{density-reachable} von $q$, wenn es Punkte $l_1,...,l_n$ gibt, so dass $l_1=q, l_n=p$ und $l_i+1$ \textit{directly density-reachable} von $l_i$ aus ist, für $1 \leq i \leq n$.
+	\item \textit{density-connected}: Wenn es zwei \textit{core objects} $p_1,p_2$ und einen Punkt $q$ gibt, so dass $p_1$ und $p_2$ \textit{density-reachable} von $q$ aus sind.
+\end{itemize}
+
+Die Unterscheidung zwischen \textit{density-reachable} und \textit{density-connected} ist notwendig, da ersteres Kriterium asymmetrisch und letzteres symmetrisch ist. Veranschaulicht wird dies in \cref{fig:recherche:clusteranalysis:DBSCAN}.
+
+\begin{figure}[H]
+	\RawFloats
+	\centering
+	\includegraphics[width=0.8\textwidth]{images/density-reachable-vs-connected.png}
+	\caption{density-reachable vs density-connected}
+	\source{\cite{data_mining_concepts_and_techniques}}
+	\label{fig:recherche:clusteranalysis:DBSCAN}
+\end{figure}
+
+Punkte m,p,o und r sind \textit{core objects} da sich in den Radien $\epsilon$ mindestens 3 andere Instanzen ($minpts = 3$) befinden. Da m und p beides \textit{core objects} sind, sind beide Punkte untereinander \textit{density-reachable}. q ist \textit{density reachable} von m und von p aus, jedoch nicht umgekehrt, da q kein \textit{core object} ist. 
+
+Auf der rechten Seite sind r und s \textit{density-rechable} von Punkt o, weshalb r,s und o untereinander \textit{density-connected} sind.
+
+Clusters werden mit den Punkten gebildet, welche untereinander \textit{density-connected} sind. 
+Der Algorithmus geht folgendermassen vor:
+
+%\begin{enumerate}
+%\item Markiere alle Punkte in $D$ als ''unvisited''.
+%\item \textbf{foreach} $p$ \textbf{in} $\{d | d \in D \wedge d $ ist %''unvisited''$\}$
+%\item \hspace{0.5cm}Markiere $p$ als ''visited''.
+%\item \hspace{0.5cm}\textbf{if}  $|\mathit{ND}_{\epsilon}(p)| \geq minpts$ %\textbf{then} 
+%\item \hspace{1cm} Erstelle einen Cluster für $p$.
+%%\item \hspace{1cm} Füge alle Punkte aus $\mathit{ND}_{\epsilon}(p)$ in $N$ ein. %$N = \mathit{ND}_{\epsilon}(p)$
+%\item \hspace{1cm} \textbf{foreach} $q$ \textbf{in} $N$
+%\item \hspace{1.5cm} \textbf{if} $q$ ist ''unvisited'' \textbf{then}
+%\item \hspace{2cm} Markiere $q$ als ''visited''.
+%\item \hspace{2cm} Füge alle ''unvisited'' Instanzen aus %$\mathit{ND}_{\epsilon}(q)$ in $N$ ein.
+%\end{enumerate}
+
+\begin{lstlisting}
+unvisited $\gets D$
+foreach itemset $p \gets unvisited$ {
+	unvisited $\gets D - \{p\}$
+	if $|\mathit{ND}_{\epsilon}(p)| \geq minpts$ {
+		clusters[$p$] $\gets \{p\}$
+		candidates = $ND_{\epsilon}(p)$
+		foreach $q \in $ candidates
+			if $q \: \cap$ unvisited $\neq \emptyset$ {
+				unvisited $\gets D - \{p\}$
+				candidates $\gets$ candidates $\cup \: ND_{\epsilon}(q)$
+			}
+		}
+	}
+}
+\end{lstlisting}
+Zu Beginn werden alle Punkte als ''unvisited'' makriert. Anschliessend wird ein zufälliger Punkt $p$ gewählt welcher als ''visited'' markiert wird. Auf Zeile 4 wird überprüft ob die \textit{neighborhood density} von $p$ den mindestwert $minpts$ erfüllt. Wenn ja wird für diesen Punkt ein Cluster erstellt und all seine Nachbaren in ''candidates'' gespeichert. Die Zeilen 7-10 überprüfen ob die ''candidates'' noch ''unvisited'' sind. Wenn ja wird der Punk als ''visited'' markiert und all seine Nachbaren der Liste ''candidates'' angehängt.
 
 \section{Wissenschaftliche Arbeiten}
 \todo{}

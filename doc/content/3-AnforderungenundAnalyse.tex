@@ -5,9 +5,18 @@
 \label{sec:anforderungsanalyse}
 
 \section{Analyse der Buchungsdaten}
-\todo{...}
+\todo{konzept}
 
-\section{Anforderungen an das Programm}
+\section{Algorithmen}
+Dieser Abschnitt erläutert die Anforderungen welche an die Algorithmen gestellt werden.
+
+\subsection{Komplexität}
+Die Algorithmen sollten maximal ein super-lineares Wachstum ($\mathcal{O}(n\,log\,n)$) aufweisen. Diese Einschränkung ermöglicht die Erkundung der Daten im Programm ohne lange Wartezeiten zu generieren.
+
+\subsection{Mixed data types}
+Da die Buchungen von Interhome numerische (z.B. Anzahl Personen, Geolocations) und kategorische Daten (z.B. Aircondition vorhanden?, Objekttyp) beinhalten, müssen die Algorithmen in der Lage sein mit beiden Datentypen umgehen zu können.
+
+\section{Programm}
 Im \cref{sec:recherche:programmevaluation} \nameref{sec:recherche:programmevaluation} wurden zwei Programme für das Data Mining vorgestellt. Hier werden die Anforderungen aufgelistet, welche diese Programme zu erfüllen haben, damit sie im weiteren Verlauf dieser Arbeit verwendet werden können.
 
 \subsection{Lizenzen}
