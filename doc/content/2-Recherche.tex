@@ -387,13 +387,16 @@ foreach itemset $p \gets unvisited$ {
 		foreach $q \in $ candidates
 			if $q \: \cap$ unvisited $\neq \emptyset$ {
 				unvisited $\gets D - \{p\}$
+				clusters[$p$] $\gets$ clusters[$p$] $ \cap$ $\{q\}$
 				candidates $\gets$ candidates $\cup \: ND_{\epsilon}(q)$
 			}
 		}
 	}
 }
 \end{lstlisting}
-Zu Beginn werden alle Punkte als ''unvisited'' makriert. Anschliessend wird ein zufälliger Punkt $p$ gewählt welcher als ''visited'' markiert wird. Auf Zeile 4 wird überprüft ob die \textit{neighborhood density} von $p$ den mindestwert $minpts$ erfüllt. Wenn ja wird für diesen Punkt ein Cluster erstellt und all seine Nachbaren in ''candidates'' gespeichert. Die Zeilen 7-10 überprüfen ob die ''candidates'' noch ''unvisited'' sind. Wenn ja wird der Punk als ''visited'' markiert und all seine Nachbaren der Liste ''candidates'' angehängt.
+Zu Beginn werden alle Punkte als ''unvisited'' makriert. Anschliessend wird ein zufälliger Punkt $p$ gewählt welcher als ''visited'' markiert wird. Auf Zeile 4 wird überprüft ob die \textit{neighborhood density} von $p$ den mindestwert $minpts$ erfüllt. Wenn ja wird für diesen Punkt ein Cluster erstellt und all seine Nachbaren in ''candidates'' gespeichert. Schlussendlich überprüfen ob die ''candidates'' noch ''unvisited'' sind (Zeile 8). Wenn ja wird der Kandidat $q$ als ''visited'' markiert (Zeile 9), in den Cluster $p$ eingefügt (Zeile 10)und all seine Nachbaren der Liste ''candidates'' angehängt (Zeile 11).
+
+Abgebrochen wird wenn alle Punkte als ''visited'' markiert sind.
 
 \section{Wissenschaftliche Arbeiten}
 \todo{}
