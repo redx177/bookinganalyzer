@@ -2,8 +2,37 @@
 \chapter{Konzept}
 \label{sec:konzept}
 
-\section{Vorgehensweise}
-\label{sec:konzept:vorgehensweise}
+\section{Analyse der Buchungsdaten}
+\todo{...}
+
+\section{Algorithmenauswahl}
+\label{sec:konzept:algorithmenauswahl}
+Ziel dieser Arbeit ist es, Attribute von Objekten zu eruieren, welche in einer Gruppe von Buchungen oft vorkommen\todo{cref zu Kapitel 1}. Nachfolgend wird anhand dieser Aufgabenstellungen entschieden, welche Disziplinen im Data Mining (siehe \cref{sec:recherche:dataminingtechniken:disziplinen} \nameref{sec:recherche:dataminingtechniken:disziplinen}) sich dazu eignen. Als Grundlage der Entscheidung gelten die Anforderungen welche an die Algorithmen gestellt wurden (siehe \cref{sec:anforderungsanalyse:algorithmen} \nameref{sec:anforderungsanalyse:algorithmen}).
+
+\subsection{Association rule learning}
+\label{sec:konzept:algorithmenauswahl:association}
+Mittels Association rule learning (siehe \cref{sec:recherche:dataminingtechniken:disziplinen:association} \nameref{sec:recherche:dataminingtechniken:disziplinen:association}) lassen sich aus allen selektierten Buchungen die Häufigkeiten von Attributkombinationen herausfinden. Dadurch kann die Fragestellung beantwortet werden.
+
+
+\subsection{Classification}
+\label{sec:konzept:algorithmenauswahl:classification}
+Bei der Classification handelt es sich um ein \gls{supervisedlearning} (siehe \cref{sec:recherche:dataminingtechniken:disziplinen:classification} \nameref{sec:recherche:dataminingtechniken:disziplinen:classification}). Deshalb sind vorab Klassen zu definieren welche den Objekten zugewiesen werden. Diese Informationen sind jedoch noch nicht vorhanden, weshalb in den Anforderungen (siehe \cref{sec:anforderungsanalyse:algorithmen:resultat} \nameref{sec:anforderungsanalyse:algorithmen:resultat}) ein \gls{unsupervisedlearning} Algorithmus vorausgesetzt wurde. Deshalb eignet sich die Classification für diese Aufgabenstellung nicht.
+
+\subsection{Regression}
+\label{sec:konzept:algorithmenauswahl:regression}
+Regression Algorithmen suchen eine Formel, damit man von einer abhängiger Variable auf unabhängige Grössen schliessen kann (siehe \cref{sec:recherche:dataminingtechniken:disziplinen:regression} \nameref{sec:recherche:dataminingtechniken:disziplinen:regression}). Damit kann man bei den Interhome Daten für neue Buchungen Attribute voraussagen. zum Beispiel wenn man die Kreditwürdigkeit von Kunden überprüfen möchte auf Basis von alten Buchungen.
+
+Diese Algorithmen eignen sich jedoch nicht für diese Arbeit, da weder Attribute noch Gruppen von Buchungen zurückgeliefert werden (siehe \cref{sec:anforderungsanalyse:algorithmen:resultat} \nameref{sec:anforderungsanalyse:algorithmen:resultat}).
+
+\subsection{Cluster analysis}
+\label{sec:konzept:algorithmenauswahl:clusteranalysis}
+Das Resultat einer Cluster analysis sind Gruppen (Clusters) von Buchungen, die untereinander ähnlich, und zu allen anderen Gruppen möglichst unähnlich sind (siehe \cref{sec:recherche:dataminingtechniken:disziplinen:clusteranalysis} \nameref{sec:recherche:dataminingtechniken:disziplinen:clusteranalysis}). Da die Instanzen innerhalb des Clusters ähnlich zueinander sind, ist zu erwarten dass eine Häufigkeitszählung der Attribute innerhalb der Clusters aufzeigt, welche Eigenschaften besonders oft miteinander gebucht werden. Unter Berücksichtigung dieser Annahme eignen sich diese Algorithmen für die Beantwortung der Fragestellung.
+
+\subsection{Collaborative Filtering}
+\label{sec:konzept:algorithmenauswahl:collaborativefiltering}
+Collaborative Filtering werden für recommender systems eingesetzt um dem Benutzer Instanzen vorzuschlagen die er auch mögen könnte. Grundlage für diese Entscheidungen sind seine bisherigen Interaktionen mit dem System verglichen mit denen von anderen Benutzern. Dadurch könnte bei den Interhome Daten Objekte vorgeschlagen werden die der Kunde auch mögen könnte. Es werden jedoch keine Attribute oder Instanzgruppen gebildet, womit die Anforderung \cref{sec:anforderungsanalyse:algorithmen:resultat} nicht erfüllt sind.
+
+
 Für die Umsetzung in diesem Projekt eigen sich der Apriori Algorithmus (oder eine Variante davon), welcher im ersten Schritt des \nameref{sec:recherche:dataminingtechniken:disziplinen:association} (\cref{sec:recherche:dataminingtechniken:disziplinen:association}) verwendet wird sowie die \nameref{sec:recherche:dataminingtechniken:disziplinen:clusteranalysis} (\cref{sec:recherche:dataminingtechniken:disziplinen:clusteranalysis}), welche in diesem Abschnitt weiter beschrieben werden.
 
 \nameref{sec:recherche:dataminingtechniken:disziplinen:classification} (\cref{sec:recherche:dataminingtechniken:disziplinen:classification}) fällt weg, da damit bekannte Klassen zugeteilt werden welche in diesem Projekt jedoch nicht bekannt sind. Die \nameref{sec:recherche:dataminingtechniken:disziplinen:regression} (\cref{sec:recherche:dataminingtechniken:disziplinen:regression}) eignet sich nicht, da dadurch nur numerische Werte vorausgesagt werden können, in dieser Arbeit jedoch Klassen vergeben werden müssen. \nameref{sec:recherche:dataminingtechniken:disziplinen:collaborativefiltering} (\cref{sec:recherche:dataminingtechniken:disziplinen:collaborativefiltering}) versucht durch Kundenbewertungen ähnliche Objekte vorzuschlagen. Dies kann für einen Recommender eingesetzt werden, jedoch nicht für die Auffindung von häufigen Attributen.

@@ -4,22 +4,30 @@
 \chapter{Anforderungsanalyse}
 \label{sec:anforderungsanalyse}
 
-\section{Analyse der Buchungsdaten}
-\todo{konzept}
-
 \section{Algorithmen}
+\label{sec:anforderungsanalyse:algorithmen}
 Dieser Abschnitt erläutert die Anforderungen welche an die Algorithmen gestellt werden.
 
 \subsection{Komplexität}
-Die Algorithmen sollten maximal ein super-lineares Wachstum ($\mathcal{O}(n\,log\,n)$) aufweisen. Diese Einschränkung ermöglicht die Erkundung der Daten im Programm ohne lange Wartezeiten zu generieren.
+\label{sec:anforderungsanalyse:algorithmen:komplexitaet}
+Die Algorithmen sollten maximal ein super-lineares Wachstum ($\mathcal{O}(n\,log\,n)$) aufweisen. Diese Einschränkung ermöglicht die Erkundung der Daten im Programm ohne lange Wartezeiten zu generieren\todo{apriori O(n log n)?}.
 
 \subsection{Mixed data types}
+\label{sec:anforderungsanalyse:algorithmen:mixed-data-types}
 Da die Buchungen von Interhome numerische (z.B. Anzahl Personen, Geolocations) und kategorische Daten (z.B. Aircondition vorhanden?, Objekttyp) beinhalten, müssen die Algorithmen in der Lage sein mit beiden Datentypen umgehen zu können.
 
+\subsection{Resultat des Algorithmus}
+\label{sec:anforderungsanalyse:algorithmen:resultat}
+Ein Algorithmus muss Attribute als Resultat zurückliefern, damit die Fragenstellungen aus Kapitel 1\todo{cref} beantwortet werden können. Alternativ können auch Gruppen von Buchungen ausgegeben werden, in welchen anschliessend die Häufigkeiten der Attribute nachgezählt werden müssen. Auf jeden Fall müssen schlussendlich Attribute und deren Häufigkeiten eruiert werden können.
+
+Zusätzlich muss ein Algorithmus selbständig Muster erkennen können, da bislang noch keine Informationen zu den Daten vorhanden sind. Es wird demnach ein \gls{unsupervisedlearning} durchgeführt.
+
 \section{Programm}
+\label{sec:anforderungsanalyse:programm}
 Im \cref{sec:recherche:programmevaluation} \nameref{sec:recherche:programmevaluation} wurden zwei Programme für das Data Mining vorgestellt. Hier werden die Anforderungen aufgelistet, welche diese Programme zu erfüllen haben, damit sie im weiteren Verlauf dieser Arbeit verwendet werden können.
 
 \subsection{Lizenzen}
+\label{sec:anforderungsanalyse:programm:lizenzen}
 Die Applikation sollte kostenlos einsetzbar sein. Sie benötigt demnach eine der folgenden Lizenzmodellen:
 \begin{itemize}
 \item OpenSource. Software kann verwendet und angepasst werden (siehe \url{https://opensource.org/licenses}).
@@ -28,10 +36,12 @@ Die Applikation sollte kostenlos einsetzbar sein. Sie benötigt demnach eine der
 \end{itemize}
 
 \subsection{Betriebsystem}
+\label{sec:anforderungsanalyse:programm:betriebsystem}
 Die Entwicklung wird privat auf einem Linux Rechner durchgeführt, und Zeitweise auch bei der Arbeit auf Windows Computern welche von Hotelplan Management AG bereitgestellt werden.
 Demnach ist es nötig, dass die Software unter Linux sowie auch Windows gestartet werden kann.
 
 \subsection{Funktionsumfang}
+\label{sec:anforderungsanalyse:programm:funktionsumfang}
 Da der Datenbestand 133'001 Einträge umfasst, muss die Plattform und das Lizenzmodel diese Anzahl an Items unterstützen.
 
 Zusätzlich das Programm die im \cref{sec:recherche:dataminingtechniken:disziplinen} \nameref{sec:recherche:dataminingtechniken:disziplinen}) beschriebenen Techniken beherrschen. 
