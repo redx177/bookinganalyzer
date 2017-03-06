@@ -1,41 +1,105 @@
- 
 \chapter{Konzept}
 \label{sec:konzept}
 
 \section{Analyse der Buchungsdaten}
 \todo{...}
 
-\section{Algorithmenauswahl}
-\label{sec:konzept:algorithmenauswahl}
+\section{Einschränkung der Data Mining Disziplinen}
+\label{sec:konzept:disziplinauswahl}
 Ziel dieser Arbeit ist es, Attribute von Objekten zu eruieren, welche in einer Gruppe von Buchungen oft vorkommen\todo{cref zu Kapitel 1}. Nachfolgend wird anhand dieser Aufgabenstellungen entschieden, welche Disziplinen im Data Mining (siehe \cref{sec:recherche:dataminingtechniken:disziplinen} \nameref{sec:recherche:dataminingtechniken:disziplinen}) sich dazu eignen. Als Grundlage der Entscheidung gelten die Anforderungen welche an die Algorithmen gestellt wurden (siehe \cref{sec:anforderungsanalyse:algorithmen} \nameref{sec:anforderungsanalyse:algorithmen}).
 
 \subsection{Association rule learning}
-\label{sec:konzept:algorithmenauswahl:association}
+\label{sec:konzept:disziplinauswahl:association}
 Mittels Association rule learning (siehe \cref{sec:recherche:dataminingtechniken:disziplinen:association} \nameref{sec:recherche:dataminingtechniken:disziplinen:association}) lassen sich aus allen selektierten Buchungen die Häufigkeiten von Attributkombinationen herausfinden. Dadurch kann die Fragestellung beantwortet werden.
 
 
 \subsection{Classification}
-\label{sec:konzept:algorithmenauswahl:classification}
+\label{sec:konzept:disziplinauswahl:classification}
 Bei der Classification handelt es sich um ein \gls{supervisedlearning} (siehe \cref{sec:recherche:dataminingtechniken:disziplinen:classification} \nameref{sec:recherche:dataminingtechniken:disziplinen:classification}). Deshalb sind vorab Klassen zu definieren welche den Objekten zugewiesen werden. Diese Informationen sind jedoch noch nicht vorhanden, weshalb in den Anforderungen (siehe \cref{sec:anforderungsanalyse:algorithmen:resultat} \nameref{sec:anforderungsanalyse:algorithmen:resultat}) ein \gls{unsupervisedlearning} Algorithmus vorausgesetzt wurde. Deshalb eignet sich die Classification für diese Aufgabenstellung nicht.
 
 \subsection{Regression}
-\label{sec:konzept:algorithmenauswahl:regression}
+\label{sec:konzept:disziplinauswahl:regression}
 Regression Algorithmen suchen eine Formel, damit man von einer abhängiger Variable auf unabhängige Grössen schliessen kann (siehe \cref{sec:recherche:dataminingtechniken:disziplinen:regression} \nameref{sec:recherche:dataminingtechniken:disziplinen:regression}). Damit kann man bei den Interhome Daten für neue Buchungen Attribute voraussagen. zum Beispiel wenn man die Kreditwürdigkeit von Kunden überprüfen möchte auf Basis von alten Buchungen.
 
 Diese Algorithmen eignen sich jedoch nicht für diese Arbeit, da weder Attribute noch Gruppen von Buchungen zurückgeliefert werden (siehe \cref{sec:anforderungsanalyse:algorithmen:resultat} \nameref{sec:anforderungsanalyse:algorithmen:resultat}).
 
 \subsection{Cluster analysis}
-\label{sec:konzept:algorithmenauswahl:clusteranalysis}
+\label{sec:konzept:disziplinauswahl:clusteranalysis}
 Das Resultat einer Cluster analysis sind Gruppen (Clusters) von Buchungen, die untereinander ähnlich, und zu allen anderen Gruppen möglichst unähnlich sind (siehe \cref{sec:recherche:dataminingtechniken:disziplinen:clusteranalysis} \nameref{sec:recherche:dataminingtechniken:disziplinen:clusteranalysis}). Da die Instanzen innerhalb des Clusters ähnlich zueinander sind, ist zu erwarten dass eine Häufigkeitszählung der Attribute innerhalb der Clusters aufzeigt, welche Eigenschaften besonders oft miteinander gebucht werden. Unter Berücksichtigung dieser Annahme eignen sich diese Algorithmen für die Beantwortung der Fragestellung.
 
 \subsection{Collaborative Filtering}
-\label{sec:konzept:algorithmenauswahl:collaborativefiltering}
+\label{sec:konzept:disziplinauswahl:collaborativefiltering}
 Collaborative Filtering werden für recommender systems eingesetzt um dem Benutzer Instanzen vorzuschlagen die er auch mögen könnte. Grundlage für diese Entscheidungen sind seine bisherigen Interaktionen mit dem System verglichen mit denen von anderen Benutzern. Dadurch könnte bei den Interhome Daten Objekte vorgeschlagen werden die der Kunde auch mögen könnte. Es werden jedoch keine Attribute oder Instanzgruppen gebildet, womit die Anforderung \cref{sec:anforderungsanalyse:algorithmen:resultat} nicht erfüllt sind.
 
 
-Für die Umsetzung in diesem Projekt eigen sich der Apriori Algorithmus (oder eine Variante davon), welcher im ersten Schritt des \nameref{sec:recherche:dataminingtechniken:disziplinen:association} (\cref{sec:recherche:dataminingtechniken:disziplinen:association}) verwendet wird sowie die \nameref{sec:recherche:dataminingtechniken:disziplinen:clusteranalysis} (\cref{sec:recherche:dataminingtechniken:disziplinen:clusteranalysis}), welche in diesem Abschnitt weiter beschrieben werden.
+\section{Algorithmenauswahl}
+\label{sec:konzept:algorithmenauswahl}
+Im \cref{sec:konzept:disziplinauswahl} wurden die Disziplinen auf Association rule learning und Cluster analysis eingeschränkt und im \cref{sec:recherche:algorithmen} die einzusetzenden Algorithmen beschrieben. Nachfolgend wird beschrieben wieso jene Abläufe ausgewählt wurden.
 
-\nameref{sec:recherche:dataminingtechniken:disziplinen:classification} (\cref{sec:recherche:dataminingtechniken:disziplinen:classification}) fällt weg, da damit bekannte Klassen zugeteilt werden welche in diesem Projekt jedoch nicht bekannt sind. Die \nameref{sec:recherche:dataminingtechniken:disziplinen:regression} (\cref{sec:recherche:dataminingtechniken:disziplinen:regression}) eignet sich nicht, da dadurch nur numerische Werte vorausgesagt werden können, in dieser Arbeit jedoch Klassen vergeben werden müssen. \nameref{sec:recherche:dataminingtechniken:disziplinen:collaborativefiltering} (\cref{sec:recherche:dataminingtechniken:disziplinen:collaborativefiltering}) versucht durch Kundenbewertungen ähnliche Objekte vorzuschlagen. Dies kann für einen Recommender eingesetzt werden, jedoch nicht für die Auffindung von häufigen Attributen.
+\subsection{Apriori}
+Das Association rule learning besteht aus zwei Schritten. Zuerst werden mittels des Apriori Algorithmus häufige Attributkombinationen gesucht und anschliessend Regeln aufgestellt um Korrelationen zwischen gemeinsam auftretenden Eigenschaften aufzuzeigen.
+Der zweite Schritt wird nicht benötigt, da die Regeln für die Aufgabenstellung dieser Arbeit nicht benötigt werden.
+
+Es gibt Alternativen zum Apriori Algorithmus. Dies sind zum Beispiel der AprioriTid oder AprioriHybrid. Diese generieren die identischen Resultate und unterscheiden sich nur in der Laufzeit. Der AprioriTid kann zu beginn der Häufigkeitszählung bessere Leistung aufzeigen, ist jedoch langsamer gegen dessen Ende. Der AprioriHybrid verwendet zu Beginn der Apriori, und am Schluss den AprioriTid\footcite{association_rule_learning_2017-01-05}. 
+
+Es ist noch unklar, welcher Algorithmus die besseren Laufzeiten aufweist. Zum Schluss oder nach der Arbeit kann in einer Vertiefung der AprioriTid oder der AprioriHybrid eingesetzt werden um die Leistungen der Algorithmen zu vergleichen. Im ersten Schritt wird der Apriori benutzt um zu analysieren ob die Resultate brauchbare Informationen liefern.
+
+\subsection{Clustering}
+\label{sec:konzept:algorithmenauswahl:clustering}
+Es gibt diverse Algorithmen welche sich verschiedene Problemstellungen annehmen. Unterteilen lassen sich diese in vier Gruppen:
+\begin{itemize}
+	\item Partitioning
+	\item Hierarchical
+	\item Density-based
+	\item Grid-mased
+\end{itemize}
+Nicht alle Algorithmen lassen sich eindeutig einer Gruppe zuweisen. Jedoch hilft diese Auflistung eine Übersicht über die Verfahren zu geben\footcite{data_mining_concepts_and_techniques}.
+
+Für die Auswahl eines Algorithmus müssen die Charakteristiken der Daten bekannt sein, wie diese zum Beispiel verteilt (z.B. Kugel-, Kreis-, S-Förmig) oder wie viele Cluster sinnvoll sind. Diese sind bislang jedoch noch bekannt.
+Partitioning- und Hierarchical-Vorgehensweisen benötigen zur Berechnung der Clustern deren Anzahl. Bei ersteren kann diese anhand der Elbow-Method berechnet werden\footcite{elbow_method}. Bei Hierarchischen Clustern müsste man dies jedoch für jeden Ast ermittelt. Da die Laufzeit von solchen Algorithmen bereits $\mathcal{O}(k^2)$ beträgt ist diese Vorgehensweise nicht praktikabel\footcite{complexity_hierarchical_clustering} (siehe \cref{sec:anforderungsanalyse:algorithmen:komplexitaet} \nameref{sec:anforderungsanalyse:algorithmen:komplexitaet}). Grid-based Methoden unterteilen den Datenraum in ein Netz wodurch die Clusters erzeugt werden. Unterstützt werden dabei nur numerische Daten weshalb sich diese Gruppe nicht eignet (weitere Forschung in dem Bereich ist jedoch im Gange\footcite{sting_categorical_data}).
+Aus diesen Gründen werden in dieser Arbeit ein Vertreter aus der Partitioning (k-prototype) und der Density-based (DBSCAN) Gruppen umgesetzt.
+
+
+\subsubsection{Distanzmessung}
+\label{sec:konzept:algorithmenauswahl:clustering:distanzmessung}
+Um die Resultate der Algorithmen zu vergleichen wird eine einheitliche Funktion $d$ zur Distanzmessung definiert.
+Dazu eignet sich zum Beispiel die quadratische euklidische Distanz wie sie in der \cref{eq:recherche:clusteranalysis:1} aufgezeigt wird.
+
+\begin{equation} \label{eq:recherche:clusteranalysis:1}
+d(I_i, I_j) = \sum_{k=1}^{m} (A_{ik} - A_{jk})^2
+\end{equation}
+
+$A_{ik}$ ist das k-te Attribute der Instanz $i$. 
+Diese Distanzmessung eignet sich nur für numerische Attribute.
+Da die Interhome Daten jedoch hauptsächlich aus kategorischen Attirbuten bestehen, wird  eine erweiterte Funktion zur Messung der Entfernung verwendet, welche im Artikel zum k-prototype Algorithmus von Zhexue Huang vorgeschlagen wird\footcite{clustering_numeric_and_categorical_values}.
+Dabei handelt es sich um eine Fusion der quadratischen euklidischen- und der Hamming-Distanz\footcite{data_mining_concepts_and_techniques}.
+
+\begin{equation} \label{eq:recherche:clusteranalysis:2}
+d(I_i, I_j) = \sum_{k=1}^{m} (A^n_{ik} - A^n_{jk})^2 + \gamma \sum_{k=1}^{m} \delta(A^c_{ik}, A^c_{jk})
+\end{equation}
+
+$A^n_{ik}$ und $A^c_{ik}$ stehen für die numerischen ($A^n$) beziehungsweise kategorischen ($A^c$) Attribute $k$ der Instanz $i$. 
+$\gamma$ ist das Gewicht mit welcher die numerischen und kategorischen Daten verglichen werden.
+$\delta$ ist definiert als:
+
+\begin{equation} \label{eq:recherche:clusteranalysis:3}
+\delta(p,q)= 
+\begin{cases}
+1,				& \text{if } p \neq q\\
+0,              & \text{otherwise}
+\end{cases}
+\end{equation}
+
+Dadurch erhalten Instanzen mit vielen Übereinstimmungen eine kleinere Distanz als wenn Attribute unterschiedliche Werte aufweisen.
+
+\subsubsection{k-prototypes als partitionierender Algorithmus}
+\label{sec:konzept:algorithmenauswahl:clustering:kprototypes}
+Bei den partitionierenden Algorithmen sind die bekanntesten Vetreter der k-means und der k-medoids. Beide funktionieren nur mit numerischen Daten, weshalb eine alternative mit dem k-prototypes eruiert wurde. 
+
+\subsubsection{DBSCAN als density-based Algorithmus}
+\label{sec:konzept:algorithmenauswahl:clustering:dbscan}
+
+
 
 %Die Umsetzung in diesem Projekt wird zweistufig durchgeführt. Als erstes gibt der User eine Abfrage ein, für welche anschliessend eine eine Liste von häufig auftretenden Attributen gesucht werden soll (siehe \cref{sec:einletung:ziel} \nameref{sec:einletung:ziel}). Die Abfrage schränkt dabei den Datenbestand ein. Dafür kann der erste Schritt des \nameref{sec:recherche:dataminingtechniken:disziplinen:association} (\cref{sec:recherche:dataminingtechniken:disziplinen:association}) eingesetzt werden. Für die Analyse der Restmenge eignet sich die \nameref{sec:recherche:dataminingtechniken:disziplinen:clusteranalysis} (\cref{sec:recherche:dataminingtechniken:disziplinen:clusteranalysis}), da zu Beginn die Klassen noch nicht bekannt sind. Dadurch fällt \nameref{sec:recherche:dataminingtechniken:disziplinen:classification} (\cref{sec:recherche:dataminingtechniken:disziplinen:classification}) weg. Die \nameref{sec:recherche:dataminingtechniken:disziplinen:regression} (\cref{sec:recherche:dataminingtechniken:disziplinen:regression}) eignet sich nicht, da dadurch nur numerische Werte vorausgesagt werden können, in dieser Arbeit jedoch Klassen vergeben werden müssen. \nameref{sec:recherche:dataminingtechniken:disziplinen:collaborativefiltering} (\cref{sec:recherche:dataminingtechniken:disziplinen:collaborativefiltering}) versucht durch Kundenbewertungen ähnliche Objekte vorzuschlagen. Dies kann für einen Recommender eingesetzt werden, jedoch nicht für die Auffindung von häufigen Attributen.
 

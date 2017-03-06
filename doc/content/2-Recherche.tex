@@ -37,7 +37,7 @@ Danach müssen die Daten vorbereitet werden. Dies umfasst die Bereinigung, Trans
 
 \section{Disziplinen im Data Mining}
 \label{sec:recherche:dataminingtechniken:disziplinen}
-Die folgenden Methoden geben eine Übersicht über die gängigsten Techniken im Data Mining wider\footcite{top_10_algorithms}. Beschrieben werden Problemstellungen welche mittels Data Mining beantwortet werden. Wie die Auswahl dieser Algorithmen getroffen wurde wird im \cref{sec:konzept:algorithmenauswahl} \nameref{sec:konzept:algorithmenauswahl} erläutert.
+Die folgenden Methoden geben eine Übersicht über die gängigsten Techniken im Data Mining wider\footcite{top_10_algorithms}. Beschrieben werden Problemstellungen welche mittels Data Mining beantwortet werden. Wie die Auswahl dieser Algorithmen getroffen wurde wird im \cref{sec:konzept:disziplinauswahl} \nameref{sec:konzept:disziplinauswahl} erläutert.
 
 \subsection{Association rule learning}
 \label{sec:recherche:dataminingtechniken:disziplinen:association}
@@ -128,7 +128,7 @@ Die Zeilen in der \cref{fig:recherche:dataminingtechniken:disziplinen:collaborat
 \label{sec:recherche:algorithmen}
 Hier werden drei Algorithmen aus den Problembeschreibungen im \cref{sec:recherche:dataminingtechniken:disziplinen} \nameref{sec:recherche:dataminingtechniken:disziplinen} beschrieben. Die Auswahl dieser Vorgehensweisen wird im Konzept erläutert\todo{cref}.
 
-\subsection{Apriori Algorithmus}
+\subsection{Apriori}
 \label{sec:recherche:apriori}
 Der Apriori Algorithmus ist der erste von zwei Schritten des \nameref{sec:recherche:dataminingtechniken:disziplinen:association} (\cref{sec:recherche:dataminingtechniken:disziplinen:association}), dessen Ziel es ist häufige Attribut-Kombinationen aufzufinden. 
 
@@ -254,59 +254,14 @@ Auf Zeile 6 werden die k-Attributmengen gesäubert (prune), indem die neuen Kand
 
 \section{Cluster analysis}
 \label{sec:recherche:clusteranalysis}
-Die Cluseranalyse weist Instanzen einer Klasse zu, welche zu Beginn noch nicht bekannt sind (siehe \cref{sec:recherche:dataminingtechniken:disziplinen:classification} \nameref{sec:recherche:dataminingtechniken:disziplinen:classification} und \cref{sec:recherche:dataminingtechniken:disziplinen:clusteranalysis} \nameref{sec:recherche:dataminingtechniken:disziplinen:clusteranalysis}).
-
-Es gibt diverse Algorithmen welche sich verschiedene Problemstellungen annehmen. Unterteilen lassen sich diese in vier Gruppen:
-\begin{itemize}
-	\item Partitioning
-	\item Hierarchical
-	\item Density-based
-	\item Grid-mased
-\end{itemize}
-Nicht alle Algorithmen lassen sich eindeutig einer Gruppe zuweisen. Jedoch hilft diese Auflistung eine Übersicht über die Verfahren zu geben\footcite{data_mining_concepts_and_techniques}.
-
-Für die Auswahl eines Algorithmus müssen die Charakteristiken der Daten bekannt sein, wie diese zum Beispiel verteilt (z.B. Kugel-, Kreis-, S-Förmig) oder wie viele Cluster sinnvoll sind. Diese sind bislang jedoch noch bekannt.
-Partitioning- und Hierarchical-Vorgehensweisen benötigen zur Berechnung der Clustern deren Anzahl. Bei ersteren kann diese anhand der Elbow-Method berechnet werden\footcite{elbow_method}. Bei Hierarchischen Clustern müsste man dies jedoch für jeden Ast ermittelt. Da die Laufzeit von solchen Algorithmen bereits $\mathcal{O}(k^2)$ beträgt ist diese Vorgehensweise nicht praktikabel\footcite{complexity_hierarchical_clustering}. Grid-based Methoden unterteilen den Datenraum in ein Netz wodurch die Clusters erzeugt werden. Unterstützt werden dabei nur numerische Daten weshalb sich diese Gruppe nicht eignet (weitere Forschung in dem Bereich ist jedoch im Gange\footcite{sting_categorical_data}).
-Aus diesen Gründen werden in dieser Arbeit ein Vertreter aus der Partitioning und der Density-based Gruppen umgesetzt.
-
-% Wenn eine einheitliche Funktion dafür verwendet wird können die Resultate untereinander verglichen werden. Grid-based Methoden gliedern den Raum in ein Netz auf wodurch das Resultat schwerer zu vergleichen ist mit den anderen Algorithmen.
-
-Um die Resultate der Algorithmen zu vergleichen wird eine einheitliche Funktion $d$ zur Distanzmessung definiert.
-Dazu wird die quadratische euklidische Distanz verwendet.
+Die Cluseranalyse weist Instanzen einer Klasse zu, welche zu Beginn noch nicht bekannt sind (siehe \cref{sec:recherche:dataminingtechniken:disziplinen:classification} \nameref{sec:recherche:dataminingtechniken:disziplinen:classification} und \ref{sec:recherche:dataminingtechniken:disziplinen:clusteranalysis} \nameref{sec:recherche:dataminingtechniken:disziplinen:clusteranalysis}).
 
 
-\begin{equation} \label{eq:recherche:clusteranalysis:1}
-d(I_i, I_j) = \sum_{k=1}^{m} (A_{ik} - A_{jk})^2
-\end{equation}
-
-$A_{ik}$ ist das k-te Attribute der Instanz $i$. 
-Die quadratische euklidische Distanz eignet sich nur für numerische Attribute.
-Da die Interhome Daten jedoch hauptsächlich aus kategorischen Attirbuten bestehen, wird  eine erweiterte Funktion zur Messung der Entfernung verwendet, welche im Artikel zum k-prototype Algorithmus von Zhexue Huang vorgeschlagen wird\footcite{clustering_numeric_and_categorical_values}.
-Dabei handelt es sich um eine Fusion der quadratischen euklidischen- und der Hamming-Distanz\footcite{data_mining_concepts_and_techniques}.
-
-\begin{equation} \label{eq:recherche:clusteranalysis:2}
-d(I_i, I_j) = \sum_{k=1}^{m} (A^n_{ik} - A^n_{jk})^2 + \gamma \sum_{k=1}^{m} \delta(A^c_{ik}, A^c_{jk})
-\end{equation}
-
-$A^n_{ik}$ und $A^c_{ik}$ stehen für die numerischen ($A^n$) beziehungsweise kategorischen ($A^c$) Attribute $k$ der Instanz $i$. 
-$\gamma$ ist das Gewicht mit welcher die numerischen und kategorischen Daten verglichen werden.
-$\delta$ ist definiert als:
-
-\begin{equation} \label{eq:recherche:clusteranalysis:3}
-\delta(p,q)= 
-\begin{cases}
-1,				& \text{if } p \neq q\\
-0,              & \text{otherwise}
-\end{cases}
-\end{equation}
-
-Dadurch erhalten Instanzen mit vielen Übereinstimmungen eine kleinere Distanz als wenn Attribute unterschiedliche Werte aufweisen.
 
 \subsection{k-prototypes}
-Die k-prototypes Vorgehensweise gehört zu der Gruppe der partitionierenden Algorithmen. Er erweitert den \gls{pam} Algorithmus damit dieser auch mit kategorischen Attributen umgehen kann. Dazu wurde die Berechnung der Distanz gemäss (\ref{eq:recherche:clusteranalysis:2}) angepasst \footcite{data_mining_concepts_and_techniques}\footcite{clustering_numeric_and_categorical_values}.
+Die k-prototypes Vorgehensweise gehört zu der Gruppe der partitionierenden Algorithmen. Er ist eine Kombination des Lloyd- und des \gls{pam}- Algorithmus. Er verwendet eine angepasste Version der quadratischen euklidischen Distanz (siehe \cref{sec:konzept:algorithmenauswahl:clustering} \nameref{sec:konzept:algorithmenauswahl:clustering}), wie sie Lloyd verwendet und benutzt für die Zentren der Clusters Medoiden, wie sie von \gls{pam} benutzt werden\footcite{data_mining_concepts_and_techniques}\footcite{clustering_numeric_and_categorical_values}.
 
-
-Der Ablauf von \gls{pam} und k-prototypes besteht aus fünf Schritten:
+Der Ablauf von k-prototypes besteht aus fünf Schritten\footcite{clustering_numeric_and_categorical_values}:
 \begin{enumerate}
 	\item Initiale Prototypen-Auswahl $\{o_1,\ldots,o_k\}$. Diese bilden die ersten Cluster.
 	\item Alloziere jede Instanz zu ihrem nächsten Prototypen.
@@ -316,10 +271,7 @@ Der Ablauf von \gls{pam} und k-prototypes besteht aus fünf Schritten:
 \end{enumerate}
 
 Der neue Prototypen in Schritt 3. wird zufällig ausgewählt. Dadurch findet der Algorithmus ein lokales Optimum, jedoch nicht zwingend das beste Resultat\footcite{data_mining_concepts_and_techniques}.
-Für die Berechnung der Kosten in Schritt 4. wird das absolute-error criterion verwendet.
-\begin{equation}
-\sum_{i=1}^{k} \sum_{p \in C_i} d(p, o_i)
-\end{equation}
+Die Funktion für die Kostenberechnung im Schritt 4 wird im \cref{sec:konzept:algorithmenauswahl:clustering:distanzmessung} vorgestellt.
 
 Die Laufzeit des Algorithmus ist $\mathcal{O}((t+1)kn)$, wobei $n$ die Anzahl Instanzen, $k$ die Anzahl Cluster und $t$ die Anzahl der Iterationen darstellt. Üblicherweise ist $k << n$ und $t < 100$, wodurch der Algorithmus sehr effizient ist und auch auf grossen Datenbeständen angewendet werden kann\footcite{clustering_numeric_and_categorical_values}.
 
@@ -412,7 +364,7 @@ Zwingend notwendig ist es, dass das Programm gratis ist, sowie unter den Betrieb
 \subsection{RapidMiner Studio}
 RapidMiner, früher YALE (Yet Another Learning Environment) wurde von der Technischen Universität Dortmund entwickelt und bietet eine kostenlose Version an, welche auf 10'000 Datensätze und einen logischen Prozessor beschränkt ist. Es gibt jedoch für Studenten eine Version mit welcher beliebig Grosse Daten bearbeitet werden können. Die Applikation ist in Java geschrieben und somit auf allen gängigen Betriebssystemen lauffähig\footcite{RapidMiner_Studio_2017-01-14}.
 
-RapidMiner Studio bietet für eine grosse Anzahl an Algorithmen fertige Bausteine an, welche verwendet werden können. Alle unter \cref{sec:recherche:dataminingtechniken:disziplinen} \nameref{sec:recherche:dataminingtechniken:disziplinen} aufgeführten Methoden sind in der Applikation als Operatoren implementiert und können durch einige klicks verwendet werden. Eine Auflistung aller Operatoren ist in der RapidMiner Dokumentation aufgeführt: \url{http://docs.rapidminer.com/studio/operators/}
+RapidMiner Studio bietet für eine grosse Anzahl an Algorithmen fertige Bausteine an, welche verwendet werden können. Alle unter \cref{sec:recherche:dataminingtechniken:disziplinen} aufgeführten Methoden sind in der Applikation als Operatoren implementiert und können durch einige klicks verwendet werden. Eine Auflistung aller Operatoren ist in der RapidMiner Dokumentation aufgeführt: \url{http://docs.rapidminer.com/studio/operators/}
 
 \subsection{Weka}
 \gls{weka} ist ein in Java entwickeltes Programm der University of Waikato, New Zealand. Veröffentlicht wurde die Software unter der \gls{acr:gnugpl} und ist somit frei verfüg- und modifizierbar\footcite{Weka_2017-01-14}.
