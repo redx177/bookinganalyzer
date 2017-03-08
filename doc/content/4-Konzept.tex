@@ -38,7 +38,7 @@ Im \cref{sec:konzept:disziplinauswahl} wurden die Disziplinen auf Association ru
 
 \subsection{Association rule learning: Apriori}
 Das Association rule learning besteht aus zwei Schritten. Zuerst werden mittels des Apriori Algorithmus häufige Attributkombinationen gesucht und anschliessend Regeln aufgestellt um Korrelationen zwischen gemeinsam auftretenden Eigenschaften aufzuzeigen.
-Der zweite Schritt wird nicht benötigt, da die Regeln für die Aufgabenstellung dieser Arbeit nicht benötigt werden.
+Der zweite Schritt wird nicht durchgeführt, da die Regeln des Association rule learning für die Aufgabenstellung dieser Arbeit nicht benötigt werden.
 
 Es gibt Alternativen zum Apriori Algorithmus. Dies sind zum Beispiel der AprioriTid oder AprioriHybrid. Diese generieren die identischen Resultate und unterscheiden sich nur in der Laufzeit. Der AprioriTid kann zu beginn der Häufigkeitszählung bessere Leistung aufzeigen, ist jedoch langsamer gegen dessen Ende. Der AprioriHybrid verwendet zu Beginn der Apriori, und am Schluss den AprioriTid\footcite{association_rule_learning_2017-01-05}. 
 
@@ -56,7 +56,7 @@ Es gibt diverse Algorithmen welche sich verschiedene Problemstellungen annehmen.
 Nicht alle Algorithmen lassen sich eindeutig einer Gruppe zuweisen. Jedoch hilft diese Auflistung eine Übersicht über die Verfahren zu geben\footcite{data_mining_concepts_and_techniques}.
 
 Für die Auswahl eines Algorithmus müssen die Charakteristiken der Daten bekannt sein, wie diese zum Beispiel verteilt (z.B. Kugel-, Kreis-, S-Förmig) oder wie viele Cluster sinnvoll sind. Diese sind bislang jedoch noch bekannt.
-Partitioning- und Hierarchical-Vorgehensweisen benötigen zur Berechnung der Clustern deren Anzahl. Bei ersteren kann diese anhand der Elbow-Method berechnet werden\footcite{elbow_method}. Bei Hierarchischen Clustern müsste man dies jedoch für jeden Ast ermittelt. Da die Laufzeit von solchen Algorithmen bereits $\mathcal{O}(k^2)$ beträgt ist diese Vorgehensweise nicht praktikabel\footcite{complexity_hierarchical_clustering} (siehe \cref{sec:anforderungsanalyse:algorithmen:komplexitaet} \nameref{sec:anforderungsanalyse:algorithmen:komplexitaet}). Grid-based Methoden unterteilen den Datenraum in ein Netz wodurch die Clusters erzeugt werden. Unterstützt werden dabei nur numerische Daten weshalb sich diese Gruppe nicht eignet (weitere Forschung in dem Bereich ist jedoch im Gange\footcite{sting_categorical_data}).
+Partitioning- und Hierarchical-Vorgehensweisen benötigen zur Berechnung der Clustern deren Anzahl. Bei ersteren kann diese anhand der Elbow-Methode berechnet werden\footcite{elbow_method}. Bei Hierarchischen Clustern müsste man dies jedoch für jeden Ast ermittelt. Da die Laufzeit von solchen Algorithmen bereits $\mathcal{O}(k^2)$ beträgt ist diese Vorgehensweise nicht praktikabel\footcite{complexity_hierarchical_clustering} (siehe \cref{sec:anforderungsanalyse:algorithmen:komplexitaet} \nameref{sec:anforderungsanalyse:algorithmen:komplexitaet}). Grid-based Methoden unterteilen den Datenraum in ein Netz wodurch die Clusters erzeugt werden. Unterstützt werden dabei nur numerische Daten weshalb sich diese Gruppe nicht eignet (weitere Forschung in dem Bereich ist jedoch im Gange\footcite{sting_categorical_data}).
 Aus diesen Gründen werden in dieser Arbeit ein Vertreter aus der Partitioning (k-prototype) und der Density-based (DBSCAN) Gruppen umgesetzt.
 
 \subsubsection{k-prototypes als partitionierender Algorithmus}
@@ -99,8 +99,28 @@ $\delta$ ist definiert als:
 
 Dadurch erhalten Instanzen mit vielen Übereinstimmungen eine kleinere Distanz als wenn Attribute unterschiedliche Werte aufweisen.
 
-\section{Auswertung der Resultate}
+\section{Parameterauswahl}
+\label{sec:konzept:parameterauswahl}
+Für die Clustering Algorithmen und die Distanzmessung werden Eingabeparameter benötigt, dessen Auswahl in diesem Abschnitt erläutert wird.
 
+Für \gls{dbscan} wird $\epsilon$ und $minpts$ benötigt, sowie $\gamma$ für die Distanzmessung (siehe \cref{sec:recherche:algorithmen:dbscan} \nameref{sec:recherche:algorithmen:dbscan} sowie \cref{sec:konzept:algorithmenauswahl:clustering:distanzmessung} \nameref{sec:konzept:algorithmenauswahl:clustering:distanzmessung}). Diese Werte müssen explorativ ermittelt werden.
+
+Die Ermittlung des $k$ Wertes beim k-prototypes Algorithmus wird im \cref{sec:konzept:parameterauswahl:kprototypes} beschrieben.
+
+\subsection{k Auswahl für k-prototypes}
+\label{sec:konzept:parameterauswahl:kprototypes}
+Der k-prototypes benötigt die Anzahl an Clustern $k$ die generiert werden sollen. Zu Beginn ist jedoch noch unklar wie dieser Parameter gewählt werden soll. Mithilfe der Elbow-Methode kann der optimale Wert für $k$ ermittelt werden. Dazu wird der Algorithmus mit einem Cluster durchgeführt und danach der Wert um jeweils 1 erhöht. Der Gesamtfehler des Clusterings (total within-cluster variation) wird schlussendlich über alle Werte für $k$ in ein Koordinatensystem eingetragen. Dies ergibt eine Kurve wie sie in \cref{fig:konzept:parameterauswahl:kprototypes} aufgezeigt wird.
+
+\begin{figure}[H]
+	\RawFloats
+	\centering
+	\includegraphics[width=0.8\textwidth]{images/elbow-curve.png}
+	\caption{Elbow-Kurve}
+	\source{\cite{elbow_method}}
+	\label{fig:konzept:parameterauswahl:kprototypes}
+\end{figure}
+
+Bei einem Cluster $k=1$ am grössten und wird 0 erreichen wenn $k=n$, wobei $n$ die Anzahl Instanzen darstellt. Der optimale Wert liegt dort wo die Kurve beginnt abzuflachen.
 
 %Die Umsetzung in diesem Projekt wird zweistufig durchgeführt. Als erstes gibt der User eine Abfrage ein, für welche anschliessend eine eine Liste von häufig auftretenden Attributen gesucht werden soll (siehe \cref{sec:einletung:ziel} \nameref{sec:einletung:ziel}). Die Abfrage schränkt dabei den Datenbestand ein. Dafür kann der erste Schritt des \nameref{sec:recherche:dataminingtechniken:disziplinen:association} (\cref{sec:recherche:dataminingtechniken:disziplinen:association}) eingesetzt werden. Für die Analyse der Restmenge eignet sich die \nameref{sec:recherche:dataminingtechniken:disziplinen:clusteranalysis} (\cref{sec:recherche:dataminingtechniken:disziplinen:clusteranalysis}), da zu Beginn die Klassen noch nicht bekannt sind. Dadurch fällt \nameref{sec:recherche:dataminingtechniken:disziplinen:classification} (\cref{sec:recherche:dataminingtechniken:disziplinen:classification}) weg. Die \nameref{sec:recherche:dataminingtechniken:disziplinen:regression} (\cref{sec:recherche:dataminingtechniken:disziplinen:regression}) eignet sich nicht, da dadurch nur numerische Werte vorausgesagt werden können, in dieser Arbeit jedoch Klassen vergeben werden müssen. \nameref{sec:recherche:dataminingtechniken:disziplinen:collaborativefiltering} (\cref{sec:recherche:dataminingtechniken:disziplinen:collaborativefiltering}) versucht durch Kundenbewertungen ähnliche Objekte vorzuschlagen. Dies kann für einen Recommender eingesetzt werden, jedoch nicht für die Auffindung von häufigen Attributen.
 
