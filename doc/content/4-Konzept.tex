@@ -36,7 +36,7 @@ Collaborative Filtering werden für recommender systems eingesetzt um dem Benutz
 \label{sec:konzept:algorithmenauswahl}
 Im \cref{sec:konzept:disziplinauswahl} wurden die Disziplinen auf Association rule learning und Cluster analysis eingeschränkt und im \cref{sec:recherche:algorithmen} die einzusetzenden Algorithmen beschrieben. Nachfolgend wird beschrieben wieso jene Abläufe ausgewählt wurden.
 
-\subsection{Apriori}
+\subsection{Association rule learning: Apriori}
 Das Association rule learning besteht aus zwei Schritten. Zuerst werden mittels des Apriori Algorithmus häufige Attributkombinationen gesucht und anschliessend Regeln aufgestellt um Korrelationen zwischen gemeinsam auftretenden Eigenschaften aufzuzeigen.
 Der zweite Schritt wird nicht benötigt, da die Regeln für die Aufgabenstellung dieser Arbeit nicht benötigt werden.
 
@@ -59,10 +59,17 @@ Für die Auswahl eines Algorithmus müssen die Charakteristiken der Daten bekann
 Partitioning- und Hierarchical-Vorgehensweisen benötigen zur Berechnung der Clustern deren Anzahl. Bei ersteren kann diese anhand der Elbow-Method berechnet werden\footcite{elbow_method}. Bei Hierarchischen Clustern müsste man dies jedoch für jeden Ast ermittelt. Da die Laufzeit von solchen Algorithmen bereits $\mathcal{O}(k^2)$ beträgt ist diese Vorgehensweise nicht praktikabel\footcite{complexity_hierarchical_clustering} (siehe \cref{sec:anforderungsanalyse:algorithmen:komplexitaet} \nameref{sec:anforderungsanalyse:algorithmen:komplexitaet}). Grid-based Methoden unterteilen den Datenraum in ein Netz wodurch die Clusters erzeugt werden. Unterstützt werden dabei nur numerische Daten weshalb sich diese Gruppe nicht eignet (weitere Forschung in dem Bereich ist jedoch im Gange\footcite{sting_categorical_data}).
 Aus diesen Gründen werden in dieser Arbeit ein Vertreter aus der Partitioning (k-prototype) und der Density-based (DBSCAN) Gruppen umgesetzt.
 
+\subsubsection{k-prototypes als partitionierender Algorithmus}
+\label{sec:konzept:algorithmenauswahl:clustering:kprototypes}
+Bei den partitionierenden Algorithmen sind die bekanntesten Vertreter der k-means und der k-medoids. Beide funktionieren nur mit numerischen Daten, weshalb eine alternative mit dem k-prototypes eruiert wurde. Der k-prototypes ist eine Abwandlung vom k-medoids und wurde im \cref{sec:recherche:algorithmen:k-prototypes} beschrieben. Dieser Algorithmus wurde gewählt, da er mit numerischen, sowie mit kategorischen Daten umgehen kann und mit Medoiden anstelle vom geometrischer Schwerpunkt arbeitet. Letzteres hat den Vorteil, dass der Algorithmus damit robuster gegenüber Ausreissern ist\footcite{data_mining_concepts_and_techniques}. Ob es Ausreisser in den Interhome Daten gibt ist noch unbekannt. Es ist jedoch zu erwarten, dass es einige exotische Objekte gibt, die selten gebucht werden und das Clustering damit verziehen. 
 
-\subsubsection{Distanzmessung}
+\subsubsection{DBSCAN als density-based Algorithmus}
+\label{sec:konzept:algorithmenauswahl:clustering:dbscan}
+Als Vertreter der Density-based Algorithmen wird \gls{dbscan} verwendet. Beschrieben der er im \cref{sec:recherche:algorithmen:dbscan}. Als alternative bietet sich \gls{optics} an. Dabei handelt es sich um eine Erweiterung von \gls{dbscan}, bei welchem kein Dichte $\epsilon$ angegeben werden muss. Jedoch erstellt \gls{optics} keine Clusters, sondern eine geordnete aufsteigende Liste, sodass räumlich benachbarte Punkte in dieser Ordnung nahe aufeinander liegen. Die Auswertung der Liste muss nachgelagert ausgeführt werden\footcite{data_mining_concepts_and_techniques}. In dieser Arbeit wird \gls{dbscan} verwendet da mit geeigneten, noch zu ermittelnden, werten für $\epsilon$ und $minpts$ ein Clustering erstellt werden kann und der Benutzer die Resultate nicht noch weiter interpretieren muss. Sollte es nötig sein, so kann nach der Arbeit überprüft werden ob \gls{optics} bessere Resultate liefert.
+
+\section{Distanzmessung}
 \label{sec:konzept:algorithmenauswahl:clustering:distanzmessung}
-Um die Resultate der Algorithmen zu vergleichen wird eine einheitliche Funktion $d$ zur Distanzmessung definiert.
+Um die Resultate der Clustering Algorithmen zu vergleichen wird eine einheitliche Funktion $d$ zur Distanzmessung definiert.
 Dazu eignet sich zum Beispiel die quadratische euklidische Distanz wie sie in der \cref{eq:recherche:clusteranalysis:1} aufgezeigt wird.
 
 \begin{equation} \label{eq:recherche:clusteranalysis:1}
@@ -92,13 +99,7 @@ $\delta$ ist definiert als:
 
 Dadurch erhalten Instanzen mit vielen Übereinstimmungen eine kleinere Distanz als wenn Attribute unterschiedliche Werte aufweisen.
 
-\subsubsection{k-prototypes als partitionierender Algorithmus}
-\label{sec:konzept:algorithmenauswahl:clustering:kprototypes}
-Bei den partitionierenden Algorithmen sind die bekanntesten Vertreter der k-means und der k-medoids. Beide funktionieren nur mit numerischen Daten, weshalb eine alternative mit dem k-prototypes eruiert wurde. Der k-prototypes ist eine Abwandlung vom k-medoids und wurde im \cref{sec:recherche:clusteranalysis:k-prototypes} beschrieben. Dieser Algorithmus wurde gewählt, da er mit numerischen, sowie mit kategorischen Daten umgehen kann und mit Medoiden anstelle vom geometrischer Schwerpunkt arbeitet. Letzteres hat den Vorteil, dass der Algorithmus damit robuster gegenüber Ausreissern ist\footcite{data_mining_concepts_and_techniques}. Ob es Ausreisser in den Interhome Daten gibt ist noch unbekannt. Es ist jedoch zu erwarten, dass es einige exotische Objekte gibt, die selten gebucht werden und das Clustering damit verziehen. 
-
-\subsubsection{DBSCAN als density-based Algorithmus}
-\label{sec:konzept:algorithmenauswahl:clustering:dbscan}
-Als Vertreter der Density-based Algorithmen wird \gls{dbscan} verwendet. Als alternative bietet sich \gls{optics} an. Dabei handelt es sich um eine Erweiterung von \gls{dbscan}, bei welchem kein Dichte $\epsilon$ angegeben werden muss. Jedoch erstellt \gls{optics} keine Clusters, sondern eine geordnete aufsteigende Liste, sodass räumlich benachbarte Punkte in dieser Ordnung nahe aufeinander liegen. Die Auswertung der Liste muss nachgelagert ausgeführt werden\footcite{data_mining_concepts_and_techniques}. In dieser Arbeit wird \gls{dbscan} verwendet da mit geigneten, noch zu ermittelnden, werten für $\epsilon$ und $minpts$ ein Clustering erstellt werden kann. Sollte es nötig sein, so kann nach der Arbeit überprüft werden ob \gls{optics} bessere Resultate liefert.
+\section{Auswertung der Resultate}
 
 
 %Die Umsetzung in diesem Projekt wird zweistufig durchgeführt. Als erstes gibt der User eine Abfrage ein, für welche anschliessend eine eine Liste von häufig auftretenden Attributen gesucht werden soll (siehe \cref{sec:einletung:ziel} \nameref{sec:einletung:ziel}). Die Abfrage schränkt dabei den Datenbestand ein. Dafür kann der erste Schritt des \nameref{sec:recherche:dataminingtechniken:disziplinen:association} (\cref{sec:recherche:dataminingtechniken:disziplinen:association}) eingesetzt werden. Für die Analyse der Restmenge eignet sich die \nameref{sec:recherche:dataminingtechniken:disziplinen:clusteranalysis} (\cref{sec:recherche:dataminingtechniken:disziplinen:clusteranalysis}), da zu Beginn die Klassen noch nicht bekannt sind. Dadurch fällt \nameref{sec:recherche:dataminingtechniken:disziplinen:classification} (\cref{sec:recherche:dataminingtechniken:disziplinen:classification}) weg. Die \nameref{sec:recherche:dataminingtechniken:disziplinen:regression} (\cref{sec:recherche:dataminingtechniken:disziplinen:regression}) eignet sich nicht, da dadurch nur numerische Werte vorausgesagt werden können, in dieser Arbeit jedoch Klassen vergeben werden müssen. \nameref{sec:recherche:dataminingtechniken:disziplinen:collaborativefiltering} (\cref{sec:recherche:dataminingtechniken:disziplinen:collaborativefiltering}) versucht durch Kundenbewertungen ähnliche Objekte vorzuschlagen. Dies kann für einen Recommender eingesetzt werden, jedoch nicht für die Auffindung von häufigen Attributen.
@@ -106,7 +107,7 @@ Als Vertreter der Density-based Algorithmen wird \gls{dbscan} verwendet. Als alt
 % Assoziationsanalyse
 %Als erstes werden Attributkombinationen (Mengen von Attributen) in der Datenbasis gesucht, welche häufig auftauchen. Dies wird durch den A-priori Algorithmus (oder Abwandlungen dadurch) erreicht. Zu Beginn wird eine mindestens Prozentzahl definiert, wie oft ein Attributmenge auftauchen muss, der sogenannte Minimal-Support. Anschliessend werden für alle 1-elementigen Mengen überpüft, ob sie den . Danach werden diese um ein Attribut erweitert und es wird erneut gezählt.  Wird dieser Wert nicht erreicht, wird die Menge als uninteressant eingestuft und nicht weiter verfolgt. 
 
-\subsection{Einschränkung des Datenbestandes}
+\section{Einschränkung des Datenbestandes}
 Im ersten Schritt wird der Datenbestand durch die Auswahl von Attributen durch den Benutzer eingeschränkt. 
 
 %Dafür eignet sich die Häufigkeitszählung des \nameref{sec:recherche:dataminingtechniken:disziplinen:association} (\cref{sec:recherche:dataminingtechniken:disziplinen:association}), welche in diesem Abschnitt genauer beschrieben wird.
