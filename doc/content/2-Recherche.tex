@@ -259,6 +259,7 @@ Die Cluseranalyse weist Instanzen einer Klasse zu, welche zu Beginn noch nicht b
 
 
 \subsection{k-prototypes}
+\label{sec:recherche:clusteranalysis:k-prototypes}
 Die k-prototypes Vorgehensweise gehört zu der Gruppe der partitionierenden Algorithmen. Er ist eine Kombination des Lloyd- und des \gls{pam}- Algorithmus. Er verwendet eine angepasste Version der quadratischen euklidischen Distanz (siehe \cref{sec:konzept:algorithmenauswahl:clustering} \nameref{sec:konzept:algorithmenauswahl:clustering}), wie sie Lloyd verwendet und benutzt für die Zentren der Clusters Medoiden, wie sie von \gls{pam} benutzt werden\footcite{data_mining_concepts_and_techniques}\footcite{clustering_numeric_and_categorical_values}.
 
 Der Ablauf von k-prototypes besteht aus fünf Schritten\footcite{clustering_numeric_and_categorical_values}:
@@ -276,7 +277,7 @@ Die Funktion für die Kostenberechnung im Schritt 4 wird im \cref{sec:konzept:al
 Die Laufzeit des Algorithmus ist $\mathcal{O}((t+1)kn)$, wobei $n$ die Anzahl Instanzen, $k$ die Anzahl Cluster und $t$ die Anzahl der Iterationen darstellt. Üblicherweise ist $k << n$ und $t < 100$, wodurch der Algorithmus sehr effizient ist und auch auf grossen Datenbeständen angewendet werden kann\footcite{clustering_numeric_and_categorical_values}.
 
 \subsection{DBSCAN}
-Als Vertreter der Density-based Algorithmen wird \gls{dbscan} verwendet. 
+\gls{dbscan} gehört zu der Gruppe der Density-based Algorithmen. 
 Vorgegeben werden muss die Dichte $\epsilon$ und die minimum Anzahl an Instanzen $minpts$. Mit diesen Informationen kann der Algorithmus in einer Laufzeit von $\mathcal{O}(n\,log\,n)$ ein Clustering durchführen.
 
 Der Algorithmus führt mehrere Begriffe ein\footcite{data_mining_concepts_and_techniques}:
