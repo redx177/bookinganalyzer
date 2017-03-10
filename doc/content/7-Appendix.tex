@@ -2,171 +2,182 @@
 \appendix
 \chapter{Feldbeschreibungen}
 \label{app:feldbeschreibungen}
+Nachfolgend werden die Felder der Daten beschrieben.
+
+Es gibt dabei folgende Datentypen:
+\begin{itemize}
+\item integer: geordnete Ganzzahlen $\mathbb{Z}$
+\item date: 
+\item categorical: Limitierte Liste von ungeordneten Werten
+\item boolean: Attribut kann zwei Werte, "`wahr"' oder "`falsch"', annehmen. 
+\item string: Beliebiger ungeordneter Text.
+\item float: geordnete reelle Zahl $\mathbb{R}$
+\end{itemize}
 
 \rowcolors{1}{tablebodycolor}{tablerowcolor}
-\begin{longtable}{ | c | c | L{10cm} |} 
+\begin{longtable}{ | c | c | c | L{7.5cm} |} 
 	\hline 
 	\rowcolor{tableheadcolor}
-	\bfseries Zelle & \bfseries Name & \bfseries Beschreibung \\ \hline 
+	\bfseries Zelle & \bfseries Name & \bfseries Datentyp & \bfseries Beschreibung \\ \hline 
 	
 	\rowcolor{tableheadcolor}
-	\multicolumn{3}{|c|}{\textbf{Buchungsdaten}} \\ \hline
-	A & RESNRDIS & Eindeutige Buchungsnummer \\ \hline 
-	B & RESINSDATE & Erstellungsdatum der Buchung \\ \hline 
-	C & BOOKSTA & Status der Buchung \\ \hline 
-	D & SELCURR & Währung \\ \hline 
-	E & PRICES & Preis \\ \hline 
-	F & SONR & Sales Office Nummer \\ \hline 
-	G & MAINSONR & Main Sales Office Nummer \\ \hline 
-	H & BOOKLANG & Sprache der Benutzers \\ \hline 
-	I & NREF & Nummer des Gebuchten Objektes \\ \hline 
-	J & RESBEGDATE & Startdatum des Aufenthaltes \\ \hline 
-	K & RESENDDATE & Enddatum des Aufenthaltes \\ \hline 
-	L & REPAX & Anzahl Passagiere \\ \hline 
-	M & READULT & Anzahl Erwachsene \\ \hline 
-	N & RECHILD & Anzahl Kinder \\ \hline 
-	O & REBABY & Anzahl Babies \\ \hline 
-	P & CUTITLE & Anrede des Kunden \\ \hline 
-	Q & CUNAME & Name des Kunden \\ \hline 
-	R & CUSTRAS & Strasse des Kunden \\ \hline 
-	S & CUCNTRY & Land des Kunden \\ \hline 
-	T & CUZIP & Postleitzahl des Kunden \\ \hline 
-	U & CUORT & Ortschaft des Kunden \\ \hline 
+	\multicolumn{4}{|c|}{\textbf{Buchungsdaten}} \\ \hline
+	A & RESNRDIS & integer & Eindeutige Buchungsnummer \\ \hline 
+	B & RESINSDATE & date & Erstellungsdatum der Buchung \\ \hline 
+	C & BOOKSTA & categorical & Status der Buchung \\ \hline 
+	D & SELCURR & categorical & Währung \\ \hline 
+	E & PRICES & integer & Preis \\ \hline 
+	F & SONR & categorical & Sales Office Nummer \\ \hline 
+	G & MAINSONR & categorical & Main Sales Office Nummer \\ \hline 
+	H & BOOKLANG & categorical & Sprache der Benutzers \\ \hline 
+	I & NREF & categorical & Nummer des Gebuchten Objektes \\ \hline 
+	J & RESBEGDATE & date & Startdatum des Aufenthaltes \\ \hline 
+	K & RESENDDATE & date & Enddatum des Aufenthaltes \\ \hline 
+	L & REPAX & integer & Anzahl Passagiere \\ \hline 
+	M & READULT & integer & Anzahl Erwachsene \\ \hline 
+	N & RECHILD & integer & Anzahl Kinder \\ \hline 
+	O & REBABY & integer & Anzahl Babies \\ \hline 
+	P & CUTITLE & categorical & Anrede des Kunden \\ \hline 
+	Q & CUNAME & string & Name des Kunden \\ \hline 
+	R & CUSTRAS & string & Strasse des Kunden \\ \hline 
+	S & CUCNTRY & categorical & Land des Kunden \\ \hline 
+	T & CUZIP & integer & Postleitzahl des Kunden \\ \hline 
+	U & CUORT & string & Ortschaft des Kunden \\ \hline 
 	
 	\rowcolor{tableheadcolor}
-	\multicolumn{3}{|c|}{\textbf{Objektdaten}} \\ \hline
-	V & OBGEOLAT & Breitengrad des Objektes \\ \hline 
-	W & OBGEOLONG & Längengrad des Objektes \\ \hline 
-	X & OBSTRAS & Strasse des Objektes \\ \hline 
-	Y & OBCNTRY & Land des Objektes \\ \hline 
-	Z & OBZIP & Postleitzahl des Objektes \\ \hline 
-	AA & OBORT & Ortschaft des Objektes \\ \hline 
-	AB & PAX & Anzahl möglicher Gäste \\ \hline 
-	AC & QUAL & Sterne Bewertung des Objektes \\ \hline 
-	AD & ROOMS & Anzahl Zimmer \\ \hline 
-	AE & BEDROOMS & Anzahl Schlafzimmer \\ \hline 
-	AF & BRAND & Provider des Objektes. A = Villa Vacant, B = Bungalow.Net, C = Interchalet, DAC = Dan Center, D = Sol og Strang, E = DanCenter, F = Belvilla, FER = Feratel, G = Adagio, H = Hotelpac, I = Interhome, J = Just France, JAS = Jassu Travel, L = Lomarengas, M = HR Special Residence, NFM = Norddeich Ferienwohnungen Maus GmbH, O = Roompot, P = Topic Travel, Q = Aquadelta, R = Resortquest, S = TOMAS, T = Tui Wolters, V = Vacando, W = PO for IH, Y = Centerparcs, Z = Sunpars, IL = Interhome Light, TAB = Total Accommodation Booking System, APA = Apartments Apart, PVI = Portvil, AMA = Interhome, SPR = Swisspeak Resorts\\ \hline 
-	AG & ACCOMTYPE & Typ des Objektes\\ \hline 
-	AH & PETS & Tiere erlaubt? \\ \hline 
-	AI & CHOUSE & A = Apartment (Wohnung), H = House (Haus) \\ \hline 
-	AJ & HOUSETYPE & Typ des Hauses ??? \\ \hline 
-	AK & DIWATER & Distanz zum Wasser (m) \\ \hline 
-	AL & DISKI & Distanz zum Skigebiet (m) \\ \hline 
-	AM & DIPUBT & Distanz zum öffentlichen Verkehr (m) \\ \hline 
-	AN & DIGOLF & Distanz zum Golfplatz (m) \\ \hline 
-	AO & CNATURE & Naturbelassene Umgebung \\ \hline 
-	AP & CTRANQUILI & Ruhige Umgebung \\ \hline 
-	AQ & CBATHANDSH & Bad oder eine Dusche im Objekt \\ \hline 
-	AR & CAIRCOND & Aircondition im Objekt\\ \hline 
-	AS & CCENTRAL & Objekt liegt zentral gelegen \\ \hline 
-	AT & CSUNNY & Umgebung des Objektes ist sonnig \\ \hline 
-	AU & CFENCED & Objekt ist umzäunt \\ \hline 
-	AV & CGARDEN & Objekt besitzt einen Garten \\ \hline 
-	AW & CPOOL & Objekt besitzt einen Pool \\ \hline 
-	AX & CPPOOL & Objekt besitzt einen privaten Pool \\ \hline 
-	AY & CHEATED & Objekt besitzt einen geheizten Pool \\ \hline 
-	AZ & CSAFEPOOL & Objekt besitzt einen sicheren Pool \\ \hline 
-	BA & CCHILDPOOL & Objekt besitzt einen kindersicheren Pool \\ \hline 
-	BB & CTENNIS & Objekt besitzt einen Tennisplatz \\ \hline 
-	BC & CBBQ & Objekt besitzt einen Grill \\ \hline 
-	BD & CRECEPTION& Objekt besitzt eine Rezeption \\ \hline 
-	BE & CRESTAURAN & Objekt besitzt ein Restaurant \\ \hline 
-	BF & CSAUNA & Objekt besitzt eine Saune \\ \hline 
-	BG & CFITNESS & Objekt besitzt ein Fitness \\ \hline 
-	BH & CMASSAGE & Massagen können bezogen werden \\ \hline 
-	BI & CJACUZZI& Objekt besitzt ein Jacuzzi \\ \hline 
-	BJ & CBILLARD & Objekt besitzt einen Billiardtisch \\ \hline 
-	BK & CTABLETENN & Objekt besitzt einen Tischtennis Tisch \\ \hline 
-	BL & CELEVATOR & Objekt besitzt einen Lift \\ \hline 
-	BM & CWASHMACHI & Objekt besitzt eine Waschmaschine \\ \hline 
-	BN & CDRYER & Objekt besitzt einen Trockner \\ \hline 
-	BO & CCHANGELIN & Es gibt einen Service um die Bettwäsche zu wechseln \\ \hline 
-	BP & CCLEANING & Es gibt einen Reinigungsservice \\ \hline 
-	BQ & CMAIDENSER & Es gibt einen Aufräumservice \\ \hline 
-	BR & CFRESHBREA & Frisches Brot kann in nächster Umgebung bezogen werden \\ \hline 
-	BS & CBREAKFAST & Es kann in nächster Umgebung gefrühstückt werden \\ \hline 
-	BT & CHALFBOARD & Es wird halbpension angeboten \\ \hline 
-	BU & CPARKING & Es gibt einen Parkplatz \\ \hline 
-	BV & CDISHWASHE & Objekt besitzt einen Geschirrspühler \\ \hline 
-	BW & CFIREPLACE & Objekt besitzt ein Cheminée \\ \hline 
-	BX & SCTV & Objekt besitzt einen Fernseher \\ \hline 
-	BY & SCBALCONY & Objekt besitzt ein Balkon \\ \hline 
-	BZ & SCFREEZER & Objekt besitzt einen Tiefkühler \\ \hline 
-	CA & SCNOSMOKE & Im Objekt darf nicht geraucht werden \\ \hline 
-	CB & CSNATURECO & Naturbelassene Umgebung im Sommer \\ \hline 
-	CC & CWNATURECO & Naturbelassene Umgebung im Winter \\ \hline 
-	CD & CBATHSEA & In der Umgebung kann im Mehr gebadet werden \\ \hline 
-	CE & CBATHLAKE & In der Umgebung kann in einem See gebadet werden \\ \hline 
-	CF & CMOUNTLAKE & In der Umgebung kann in einem Bergsee gebadet werden \\ \hline 
-	CG & CSRESTRELA & ??? \\ \hline 
-	CH & CWRESTRELA & ??? \\ \hline 
-	CI & CMETROPOLI & Objekt liegt in einer Metropole \\ \hline 
-	CJ & CHIKINGMOU & In der Umgebung kann kann in den Bergen gewandert werden \\ \hline 
-	CK & CHIKINGPLA& In der Umgebung kann  \\ \hline 
-	CL & CNORDICWAL & In der Umgebung kann im Flachland gewandert werden \\ \hline 
-	CM & CSACTFUNSP & In der Umgebung kann im Sommer Aktivsport betrieben werden \\ \hline 
-	CN & CWACTFUNSP & In der Umgebung kann im Winter Aktivsport betrieben werden \\ \hline 
-	CO & CENTERPARK & In der Umgebung kann gibt es ein Vergnügungspark \\ \hline 
-	CP & CBIKINGMOU & In der Umgebung kann in den Bergen Fahrrad gefahren werden \\ \hline 
-	CQ & CBIKINGPLA & In der Umgebung kann im Flachland Fahrrad gefahren werden \\ \hline 
-	CR & CSAILING & In der Umgebung kann kann gesegelt werden \\ \hline 
-	CS & CSURFING & In der Umgebung kann man surfen \\ \hline 
-	CT & CWINDSURF & In der Umgebung kann windsurfen \\ \hline 
-	CU & CSNIGHTLIF & In der Umgebung gibt es Nachtleben im Sommer \\ \hline 
-	CV & CWNIGHTLIF & In der Umgebung gibt es Nachtlegen im Winter \\ \hline 
-	CW & CSSENIOR & Objekt ist im Sommer seniorentauglich \\ \hline 
-	CX & CWSENIOR & Objekt ist im Winter seniorentauglich \\ \hline 
-	CY & CSFAMILY & Objekt ist im Sommer familientauglich \\ \hline 
-	CZ & CWFAMILY& Objekt ist im Winter familientauglich \\ \hline 
-	DA & CSIDYLIC & Objekt ist im Sommer idyllisch \\ \hline 
-	DB & CWIDYLIC& Objekt ist im Winter idyllisch \\ \hline 
-	DC & CHISTORIC & Objekt liegt in einer historischen Umgebung \\ \hline 
-	DD & CWINEDINE & ??? \\ \hline 
-	DE & CSUITHOMO & ??? \\ \hline 
-	DF & CTYPVILLAG & Objekt liegt in einem Dorf \\ \hline 
-	DG & CCOVERPARK & ??? \\ \hline 
-	DH & CTYPRUSTIC & Objekt ist rustikal eingerichtet \\ \hline 
-	DI & CTYPCOMFOR & Objekt ist konfortabel eingerichtet \\ \hline 
-	DJ & CTYPLUXUR & Objekt ist luxuriös eingerichtet \\ \hline 
-	DK & CTYPMODERN & Objekt ist modern eingerichtet \\ \hline 
-	DL & CTYPHISTOR & Objekt ist historisch eingerichtet \\ \hline 
-	DM & AIRPORT1 & IATA Code des nächsten Flughafen \\ \hline 
-	DN & DIAIRPORT1 & Distanz bis zum nächsten Flughafen (km) \\ \hline 
-	DO & CROSSSKIIN & In der Umgebung kann Crossski gefahren werden \\ \hline 
-	DP & ICERINK & In der Umgebung gibt es eine Eisbahn \\ \hline 
-	DQ & SKIAREA & In der Umgebung gibt es ein Skigebiet \\ \hline 
-	DR & SNOWBOARD & In der Umgebung kann Snowboard gefahren werden \\ \hline 
-	DS & TOBOGGAN & In der Umgebung kann man Rodeln \\ \hline 
-	DT & WINTERWALK & In der Umgebung kann man im Winter wandern \\ \hline 
-	DU & OUTDPOOL & Objekt besitzt einen aussen Pool \\ \hline 
-	DV & INDPOOL & Objekt besitzt einen innen Pool \\ \hline 
-	DW & DVDPLAYER & Objekt besitzt einen DVD Player \\ \hline 
-	DX & PTENNIS & Objekt besitzt einen privaten Tennisplatz \\ \hline 
-	DY & SOLARIUM & Objekt besitzt ein Solarium \\ \hline 
-	DZ & DICENTER & Distanz bis zum Zentrum (m) \\ \hline 
-	EA & DISEA & Distanz bis zum Meer (m) \\ \hline 
-	EB & DILAKE & Distanz bis zum See (m) \\ \hline 
-	EC & CRESIDENCE & Objekt ist eine Residenz \\ \hline 
-	ED & CPTENNIS & Objekt besitzt einen privaten Tennisplatz \\ \hline 
-	EE & CHORSE & In der Umgebung kann man reiten \\ \hline 
-	EF & CVIEWSEA & Objekt besitzt eine Aussicht auf das Meer \\ \hline 
-	EG & INTERNET & Objekt besitzt Internet \\ \hline 
-	EH & CHILDPGRND & Objekt besitzt einen Kinderspielplatz \\ \hline 
-	EI & CISLAND & Objekt liegt auf einer Insel \\ \hline 
-	EJ & CVIEWMOUNT & Objekt besitzt eine Aussicht auf die Berge \\ \hline 
-	EK & CVIEWCNTRY & Objekt besitzt eine Aussicht auf das Flachland \\ \hline 
-	EL & CVIEWLAKE & Objekt besitzt eine Aussicht auf einen See \\ \hline 
-	EM & CBATH & Objekt besitzt ein Bad \\ \hline 
-	EN & CSHOWER & Objekt besitzt eine Dusche \\ \hline 
-	EO & CCARPORT & ??? \\ \hline 
-	EP & CSGARAGE & ??? \\ \hline 
-	EQ & CCGARAGE & ??? \\ \hline 
-	ER & CGOLFCOURS & In der Umgebung gibt es einen Golfplatz \\ \hline 
-	ES & CWELLNESS & In der Umgebung gibt es ein Wellness \\ \hline 
-	ET & CMICROWAVE & Objekt besitzt eine Mikrowelle \\ \hline 
-	EU & COVEN & Objekt besitzt einen Ofen \\ \hline 
-	EV & CPHONE & Objekt besitzt ein Telefon \\ \hline 
-	EW & CTERRACE & Objekt besitzt eine Terasse \\ \hline 
+	\multicolumn{4}{|c|}{\textbf{Objektdaten}} \\ \hline
+	V & OBGEOLAT & float & Breitengrad des Objektes \\ \hline 
+	W & OBGEOLONG & float & Längengrad des Objektes \\ \hline 
+	X & OBSTRAS & string & Strasse des Objektes \\ \hline 
+	Y & OBCNTRY & categorical & Land des Objektes \\ \hline 
+	Z & OBZIP & integer & Postleitzahl des Objektes \\ \hline 
+	AA & OBORT & string & Ortschaft des Objektes \\ \hline 
+	AB & PAX & string & Anzahl möglicher Gäste \\ \hline 
+	AC & QUAL & string & Sterne Bewertung des Objektes \\ \hline 
+	AD & ROOMS & string & Anzahl Zimmer \\ \hline 
+	AE & BEDROOMS & string & Anzahl Schlafzimmer \\ \hline 
+	AF & BRAND & categorical & Provider des Objektes. A = Villa Vacant, B = Bungalow.Net, C = Interchalet, DAC = Dan Center, D = Sol og Strang, E = DanCenter, F = Belvilla, FER = Feratel, G = Adagio, H = Hotelpac, I = Interhome, J = Just France, JAS = Jassu Travel, L = Lomarengas, M = HR Special Residence, NFM = Norddeich Ferienwohnungen Maus GmbH, O = Roompot, P = Topic Travel, Q = Aquadelta, R = Resortquest, S = TOMAS, T = Tui Wolters, V = Vacando, W = PO for IH, Y = Centerparcs, Z = Sunpars, IL = Interhome Light, TAB = Total Accommodation Booking System, APA = Apartments Apart, PVI = Portvil, AMA = Interhome, SPR = Swisspeak Resorts\\ \hline 
+	AG & ACCOMTYPE & categorical & Typ des Objektes\\ \hline 
+	AH & PETS & boolean & Haustiere erlaubt? \\ \hline 
+	AI & CHOUSE & categorical & A = Apartment (Wohnung), H = ) \\ \hline 
+	AJ & HOUSETYPE & categorical & Typ des Hauses ??? \\ \hline 
+	AK & DIWATER & integer & Distanz zum Wasser (m) \\ \hline 
+	AL & DISKI & integer & Distanz zum Skigebiet (m) \\ \hline 
+	AM & DIPUBT & integer & Distanz zum öffentlichen Verkehr (m) \\ \hline 
+	AN & DIGOLF & integer & Distanz zum Golfplatz (m) \\ \hline 
+	AO & CNATURE & boolean & Naturbelassene Umgebung \\ \hline 
+	AP & CTRANQUILI & boolean & Ruhige Umgebung \\ \hline 
+	AQ & CBATHANDSH & boolean & Bad oder eine Dusche im Objekt \\ \hline 
+	AR & CAIRCOND & boolean & Aircondition im Objekt\\ \hline 
+	AS & CCENTRAL & boolean & Objekt liegt zentral gelegen \\ \hline 
+	AT & CSUNNY & boolean & Umgebung des Objektes ist sonnig \\ \hline 
+	AU & CFENCED & boolean & Objekt ist umzäunt \\ \hline 
+	AV & CGARDEN & boolean & Objekt besitzt einen Garten \\ \hline 
+	AW & CPOOL & boolean & Objekt besitzt einen Pool \\ \hline 
+	AX & CPPOOL & boolean & Objekt besitzt einen privaten Pool \\ \hline 
+	AY & CHEATED & boolean & Objekt besitzt einen geheizten Pool \\ \hline 
+	AZ & CSAFEPOOL & boolean & Objekt besitzt einen sicheren Pool \\ \hline 
+	BA & CCHILDPOOL & boolean & Objekt besitzt einen kindersicheren Pool \\ \hline 
+	BB & CTENNIS & boolean & Objekt besitzt einen Tennisplatz \\ \hline 
+	BC & CBBQ & boolean & Objekt besitzt einen Grill \\ \hline 
+	BD & CRECEPTION & boolean & Objekt besitzt eine Rezeption \\ \hline 
+	BE & CRESTAURAN & boolean & Objekt besitzt ein Restaurant \\ \hline 
+	BF & CSAUNA & boolean & Objekt besitzt eine Saune \\ \hline 
+	BG & CFITNESS & boolean & Objekt besitzt ein Fitness \\ \hline 
+	BH & CMASSAGE & boolean & Massagen können bezogen werden \\ \hline 
+	BI & CJACUZZI & boolean & Objekt besitzt ein Jacuzzi \\ \hline 
+	BJ & CBILLARD & boolean & Objekt besitzt einen Billiardtisch \\ \hline 
+	BK & CTABLETENN & boolean & Objekt besitzt einen Tischtennis Tisch \\ \hline 
+	BL & CELEVATOR & boolean & Objekt besitzt einen Lift \\ \hline 
+	BM & CWASHMACHI & boolean & Objekt besitzt eine Waschmaschine \\ \hline 
+	BN & CDRYER & boolean & Objekt besitzt einen Trockner \\ \hline 
+	BO & CCHANGELIN & boolean & Es gibt einen Service um die Bettwäsche zu wechseln \\ \hline 
+	BP & CCLEANING & boolean & Es gibt einen Reinigungsservice \\ \hline 
+	BQ & CMAIDENSER & boolean & Es gibt einen Aufräumservice \\ \hline 
+	BR & CFRESHBREA & boolean & Frisches Brot kann in nächster Umgebung bezogen werden \\ \hline 
+	BS & CBREAKFAST & boolean & Es kann in nächster Umgebung gefrühstückt werden \\ \hline 
+	BT & CHALFBOARD & boolean & Es wird halbpension angeboten \\ \hline 
+	BU & CPARKING & boolean & Es gibt einen Parkplatz \\ \hline 
+	BV & CDISHWASHE & boolean & Objekt besitzt einen Geschirrspühler \\ \hline 
+	BW & CFIREPLACE & boolean & Objekt besitzt ein Cheminée \\ \hline 
+	BX & SCTV & boolean & Objekt besitzt einen Fernseher \\ \hline 
+	BY & SCBALCONY & boolean & Objekt besitzt ein Balkon \\ \hline 
+	BZ & SCFREEZER & boolean & Objekt besitzt einen Tiefkühler \\ \hline 
+	CA & SCNOSMOKE & boolean & Im Objekt darf nicht geraucht werden \\ \hline 
+	CB & CSNATURECO & boolean & Naturbelassene Umgebung im Sommer \\ \hline 
+	CC & CWNATURECO & boolean & Naturbelassene Umgebung im Winter \\ \hline 
+	CD & CBATHSEA & boolean & In der Umgebung kann im Mehr gebadet werden \\ \hline 
+	CE & CBATHLAKE & boolean & In der Umgebung kann in einem See gebadet werden \\ \hline 
+	CF & CMOUNTLAKE & boolean & In der Umgebung kann in einem Bergsee gebadet werden \\ \hline 
+	CG & CSRESTRELA & boolean & ??? \\ \hline 
+	CH & CWRESTRELA & boolean & ??? \\ \hline 
+	CI & CMETROPOLI & boolean & Objekt liegt in einer Metropole \\ \hline 
+	CJ & CHIKINGMOU & boolean & In der Umgebung kann kann in den Bergen gewandert werden \\ \hline 
+	CK & CHIKINGPLA & boolean & In der Umgebung kann  \\ \hline 
+	CL & CNORDICWAL & boolean & In der Umgebung kann im Flachland gewandert werden \\ \hline 
+	CM & CSACTFUNSP & boolean & In der Umgebung kann im Sommer Aktivsport betrieben werden \\ \hline 
+	CN & CWACTFUNSP & boolean & In der Umgebung kann im Winter Aktivsport betrieben werden \\ \hline 
+	CO & CENTERPARK & boolean & In der Umgebung kann gibt es ein Vergnügungspark \\ \hline 
+	CP & CBIKINGMOU & boolean & In der Umgebung kann in den Bergen Fahrrad gefahren werden \\ \hline 
+	CQ & CBIKINGPLA & boolean & In der Umgebung kann im Flachland Fahrrad gefahren werden \\ \hline 
+	CR & CSAILING & boolean & In der Umgebung kann kann gesegelt werden \\ \hline 
+	CS & CSURFING & boolean & In der Umgebung kann man surfen \\ \hline 
+	CT & CWINDSURF & boolean & In der Umgebung kann windsurfen \\ \hline 
+	CU & CSNIGHTLIF & boolean & In der Umgebung gibt es Nachtleben im Sommer \\ \hline 
+	CV & CWNIGHTLIF & boolean & In der Umgebung gibt es Nachtlegen im Winter \\ \hline 
+	CW & CSSENIOR & boolean & Objekt ist im Sommer seniorentauglich \\ \hline 
+	CX & CWSENIOR & boolean & Objekt ist im Winter seniorentauglich \\ \hline 
+	CY & CSFAMILY & boolean & Objekt ist im Sommer familientauglich \\ \hline 
+	CZ & CWFAMILY & boolean & Objekt ist im Winter familientauglich \\ \hline 
+	DA & CSIDYLIC & boolean & Objekt ist im Sommer idyllisch \\ \hline 
+	DB & CWIDYLIC & boolean & Objekt ist im Winter idyllisch \\ \hline 
+	DC & CHISTORIC & boolean & Objekt liegt in einer historischen Umgebung \\ \hline 
+	DD & CWINEDINE & boolean & ??? \\ \hline 
+	DE & CSUITHOMO & boolean & ??? \\ \hline 
+	DF & CTYPVILLAG & boolean & Objekt liegt in einem Dorf \\ \hline 
+	DG & CCOVERPARK & boolean & ??? \\ \hline 
+	DH & CTYPRUSTIC & boolean & Objekt ist rustikal eingerichtet \\ \hline 
+	DI & CTYPCOMFOR & boolean & Objekt ist konfortabel eingerichtet \\ \hline 
+	DJ & CTYPLUXUR & boolean & Objekt ist luxuriös eingerichtet \\ \hline 
+	DK & CTYPMODERN & boolean & Objekt ist modern eingerichtet \\ \hline 
+	DL & CTYPHISTOR & boolean & Objekt ist historisch eingerichtet \\ \hline 
+	DM & AIRPORT1 & categorical & IATA Code des nächsten Flughafen \\ \hline 
+	DN & DIAIRPORT1 & integer & Distanz bis zum nächsten Flughafen (km) \\ \hline 
+	DO & CROSSSKIIN & boolean & In der Umgebung kann Crossski gefahren werden \\ \hline 
+	DP & ICERINK & boolean & In der Umgebung gibt es eine Eisbahn \\ \hline 
+	DQ & SKIAREA & boolean & In der Umgebung gibt es ein Skigebiet \\ \hline 
+	DR & SNOWBOARD & boolean & In der Umgebung kann Snowboard gefahren werden \\ \hline 
+	DS & TOBOGGAN & boolean & In der Umgebung kann man Rodeln \\ \hline 
+	DT & WINTERWALK & boolean & In der Umgebung kann man im Winter wandern \\ \hline 
+	DU & OUTDPOOL & categorical & Objekt besitzt einen aussen Pool \\ \hline 
+	DV & INDPOOL & boolean & Objekt besitzt einen innen Pool \\ \hline 
+	DW & DVDPLAYER & boolean & Objekt besitzt einen DVD Player \\ \hline 
+	DX & PTENNIS & boolean & Objekt besitzt einen privaten Tennisplatz \\ \hline 
+	DY & SOLARIUM & boolean & Objekt besitzt ein Solarium \\ \hline 
+	DZ & DICENTER & integer & Distanz bis zum Zentrum (m) \\ \hline 
+	EA & DISEA & integer & Distanz bis zum Meer (m) \\ \hline 
+	EB & DILAKE & integer & Distanz bis zum See (m) \\ \hline 
+	EC & CRESIDENCE & boolean & Objekt ist eine Residenz \\ \hline 
+	ED & CPTENNIS & boolean & Objekt besitzt einen privaten Tennisplatz \\ \hline 
+	EE & CHORSE & boolean & In der Umgebung kann man reiten \\ \hline 
+	EF & CVIEWSEA & boolean & Objekt besitzt eine Aussicht auf das Meer \\ \hline 
+	EG & INTERNET & boolean & Objekt besitzt Internet \\ \hline 
+	EH & CHILDPGRND & boolean & Objekt besitzt einen Kinderspielplatz \\ \hline 
+	EI & CISLAND & boolean & Objekt liegt auf einer Insel \\ \hline 
+	EJ & CVIEWMOUNT & boolean & Objekt besitzt eine Aussicht auf die Berge \\ \hline 
+	EK & CVIEWCNTRY & boolean & Objekt besitzt eine Aussicht auf das Flachland \\ \hline 
+	EL & CVIEWLAKE & boolean & Objekt besitzt eine Aussicht auf einen See \\ \hline 
+	EM & CBATH & boolean & Objekt besitzt ein Bad \\ \hline 
+	EN & CSHOWER & boolean & Objekt besitzt eine Dusche \\ \hline 
+	EO & CCARPORT & boolean & ??? \\ \hline 
+	EP & CSGARAGE & boolean & ??? \\ \hline 
+	EQ & CCGARAGE & boolean & ??? \\ \hline 
+	ER & CGOLFCOURS & boolean & In der Umgebung gibt es einen Golfplatz \\ \hline 
+	ES & CWELLNESS & boolean & In der Umgebung gibt es ein Wellness \\ \hline 
+	ET & CMICROWAVE & boolean & Objekt besitzt eine Mikrowelle \\ \hline 
+	EU & COVEN & boolean & Objekt besitzt einen Ofen \\ \hline 
+	EV & CPHONE & boolean & Objekt besitzt ein Telefon \\ \hline 
+	EW & CTERRACE & boolean & Objekt besitzt eine Terasse \\ \hline 
 	\caption{Attributbeschreibung}
 \end{longtable} 
 
