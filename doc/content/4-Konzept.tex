@@ -276,7 +276,9 @@ Die Umsetzung in diesem Projekt wird zweistufig durchgeführt. Als erstes gibt d
 Im ersten Schritt wird der Datenbestand durch die Auswahl von Attributen durch den Benutzer eingeschränkt. Er kann 0-n Werte aus den in der \cref{fig:recherche:attributeinschraenkung:2} gelisteten Attributen selektieren. Anschliessend werden alle Instanzen aus der Datenmenge entfernt welche den Kriterien nicht genügen. Dies bildet die Grundlage für die Analyse im Schritt 2.
 
 \subsection{Auffinden von Attributen}
+Für den zweiten Schritt wird entweder ein \nameref{sec:konzept:disziplinauswahl:association} (siehe \cref{sec:konzept:disziplinauswahl:association}) oder eine \nameref{sec:konzept:disziplinauswahl:clusteranalysis} (siehe \cref{sec:konzept:disziplinauswahl:clusteranalysis}) durchgeführt. 
 
+Möchte der Benutzer wissen, welche Attribute in der vor-selektierten Datenmenge oft vorkommen, so kann der Apriori-Algorithmus gewählt werden. Liefert dieser keine zufriedenstellenden Antworten oder ist von vornherein zu erwarten, dass es verschiedene Gruppen von Buchungen gibt, so kann zuerst die Cluster Analysis durchgeführt werden. Die Instanzen werden damit in Clusters/Klassen aufgeteilt, der Benutzer würde jedoch nicht sehen weshalb. Deshalb wird auf jeder Klasse der Apriori-Algorithmus durchgeführt. Da die Instnzen in einer Klasse untereinander möglichst Homogen sein sollen und möglichst unterschiedlich zu anderen Clusters, ist anzunehmen, dass die häufigsten Attribute, welche durch den Apriori-Algorithmus gefunden werden, aussagekräftig die Klassen beschreiben.
 
 
 \section{Testcases}
