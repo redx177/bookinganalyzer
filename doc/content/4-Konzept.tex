@@ -174,6 +174,7 @@ Folgende Modifikationen wurden an den Rohdaten vorgenommen:
 		\rowcolor{tableheadcolor}
 		\bfseries Min & \bfseries Max & \bfseries Wert \\ \hline 
 		0 & 499 & budget \\ \hline 
+		500 & 1999 &  \\ \hline 
 		2000 & $\infty$ & luxury \\ \hline 
 	\end{tabular}
 \end{table}
@@ -182,24 +183,6 @@ Die Diskretisierung wird durchgeführt, damit nach dem Clustering die Häufigkei
 
 Es gibt verschiedene Diskretisierungsmethoden. Diese Teilen die Werte in gleiche Intervalle auf oder stellen sicher dass in jeder Kategorie die selbe Anzahl an Instanzen vorhanden sind.
 Die verwendeten Werte aus \cref{fig:recherche:datenvorbereitung:1} und \cref{fig:recherche:datenvorbereitung:2} wurde mit Interhome abgesprochen. 
-
-
-\begin{figure}[htb]
-	\begin{subfigure}[t]{0.8\linewidth}
-		\centering
-		\includegraphics[width=1\linewidth]{images/rapidminer-process-1.png}
-		\caption{Teil 1}
-		\label{fig:recherche:datenvorbereitung:3:1}
-	\end{subfigure} \\
-	\begin{subfigure}[t]{0.8\linewidth}
-		\centering
-		\includegraphics[width=1\linewidth]{images/rapidminer-process-2.png}
-		\caption{Teil 2}
-		\label{fig:recherche:datenvorbereitung:3:2}
-	\end{subfigure}
-	\caption{RapidMiner Prozess für die Vorbereitung der Daten}
-	\label{fig:recherche:datenvorbereitung:3}
-\end{figure}
 
 \subsection{Attributeinschränkung}
 \label{sec:recherche:attributeinschraenkung}
@@ -267,6 +250,41 @@ In Absprache mit Interhome wurde entschieden, dass in einem ersten Schritt jene 
 \end{table}
 
 %Einige Attribute sind mehrfach
+
+\subsection{RapidMiner Prozess für die Datenvorbereitung}
+\label{sec:recherche:rapidminer}
+
+Die Datenvorbereitung (data preprocessing) wird mit dem Programm RapidMiner durchgeführt.
+Zuerst werden die Daten aus dem \gls{csv} File geladen. Anschliessend die Attribute gemäss \cref{fig:recherche:attributeinschraenkung:2} eingeschränkt, die Diskretisierung entsprechend \cref{fig:recherche:datenvorbereitung:1} und \ref{fig:recherche:datenvorbereitung:2} durchgeführt.
+
+\cref{fig:recherche:rapidminer:1} zeigt den Prozess im RapidMiner Studio. In \ref{fig:recherche:rapidminer:1:1} wird der Hauptprozess gezeigt. Zusätzlich sind die Schritte "`Set Role"' und "`Write CSV"'. Ersterer setzt das Feld "`RESNRDIS"' als "`ID"', was intern für RapidMiner benötigt wird. Der letzte Schritt schreibt das Resultat in ein \gls{csv} File damit es nachher weiterverwendet werden kann.
+
+\cref{fig:recherche:rapidminer:1:2} ist ein Unterprozess welcher die Diskretisierung des Preises und der Distanzen vornimmt. Im \cref{sec:recherche:datenvorbereitung} wird beschrieben dass nicht alle Bereich der zu diskretierenden Attribute verwendet werden soll (z.B. Distanzen >499 werden nicht berücksichtigt). Dies kann mit den "`Discretize"' Operatoren in RapidMiner nicht abgebildet werden. Deshalb werden alle Werte diskretiert und die zu ignorierenden nachher entfernt.
+
+\cref{fig:recherche:rapidminer:1:3} zeigt den Unterprozess für die Ersetzung von Attributwerten. Zuerst werden, wie im \cref{sec:recherche:datenbeschaffung} beschrieben, "`X"' Werte von kategorischen Werten mit "`1"' ersetzt und leere Werte mit "`0"'. Danach werden die nicht zu verwendenden diskretierten Werte der Preise und Distanzen entfernt.
+
+\begin{figure}[htb]
+	\begin{subfigure}[t]{1\textwidth}
+		\centering
+		\includegraphics[width=1\textwidth]{images/rapidminer-process}
+		\caption{Hauptprocess}
+		\label{fig:recherche:rapidminer:1:1}
+	\end{subfigure} \\
+	\begin{subfigure}[t]{0.5\textwidth}
+		\centering
+		\includegraphics[width=1\textwidth]{images/rapidminer-process-discretization}
+		\caption{Subprocess für die Diskretisierung}
+		\label{fig:recherche:rapidminer:1:2}
+	\end{subfigure}
+	\begin{subfigure}[t]{0.8\textwidth}
+		\centering
+		\includegraphics[width=1\textwidth]{images/rapidminer-process-replace-values}
+		\caption{Subprocess für die Ersetzung von Attributwerten}
+		\label{fig:recherche:rapidminer:1:3}
+	\end{subfigure}
+	\caption{RapidMiner Prozess für die Vorbereitung der Daten}
+	\label{fig:recherche:rapidminer:1}
+\end{figure}
 
 \section{Ablauf}
 Die Umsetzung in diesem Projekt wird zweistufig durchgeführt. Als erstes gibt der User eine Abfrage ein, für welche anschliessend eine eine Liste von häufig auftretenden Attributen gesucht werden soll (siehe \cref{sec:einletung:ziel} \nameref{sec:einletung:ziel}).
