@@ -131,24 +131,23 @@ Hier werden drei Algorithmen aus den Problembeschreibungen im \cref{sec:recherch
 Der Apriori Algorithmus ist der erste von zwei Schritten des \nameref{sec:recherche:dataminingtechniken:disziplinen:association} (\cref{sec:recherche:dataminingtechniken:disziplinen:association}), dessen Ziel es ist häufige Attribut-Kombinationen aufzufinden. 
 
 Nachfolgend wird der Ablauf des Algorithmus erklärt.
+Als Parameter verlangt dieser den Mindestsupport $minsup$ welcher definiert, wie oft eine Attributmenge $C$ in Instanzen $I$ in der Datenmenge $D$ vorkommen muss, damit diese als relevant betrachtet werden.
 \begin{enumerate}
 	\item Zähle die Vorkommen von allen Attributen und fasse das Resultat in $C_1$ (Kandidaten (candidates) 1-Attributmengen) zusammen.
-	\item Entferne Elemente aus $C_1$ welche $submin$ nicht erfüllen und speichere das Resultat in $L_1$ (frequente 1-Attributmengen).
+	\item Entferne Elemente aus $C_1$ welche $minsup$ nicht erfüllen und speichere das Resultat in $L_1$ (frequente 1-Attributmengen).
 	\item Setze $k=2$
 	\item Solange $L_{k-1} \neq \emptyset$:
 	\begin {enumerate}
 	\item Generiere alle Möglichen Kombinationen für $C_k$ aus $L_{k-1}$ (apriori\_gen).
-	\item Entferne Elemente aus $C_k$ welche $submin$ nicht erfüllen und speichere das Resultat in $L_k$.
+	\item Entferne Elemente aus $C_k$ welche $minsup$ nicht erfüllen und speichere das Resultat in $L_k$.
 	\item Erhöhe $k$ um eins.
 \end{enumerate}
 \item Das Resultat sind alle Elemente in $L_k$.
 \end{enumerate}
 
-Gegeben ist ein Mindestsupport $supmin$ welcher definiert, wie oft eine Attributmenge $C$ in Instanzen $I$ in der Datenmenge $D$ vorkommen muss, damit diese als relevant betrachtet werden. 
+Als erstes (Schritte 1-2) werden alle einzelnen Attribute (1-Attributmenge) gezählt und diejenigen entfernt, welche $minsup$ nicht erfüllen.
 
-Als erstes (Schritte 1-2) werden alle einzelnen Attribute (1-Attributmenge) gezählt und diejenigen entfernt, welche $submin$ nicht erfüllen.
-
-Danach wird Iterativ die Attributmenge um ein Element erweitert und wiederum auf $submin$ überprüft, bis keine Elemente mehr den Mindestsupport erreichen (Schritt 3).
+Danach wird Iterativ die Attributmenge um ein Element erweitert und wiederum auf $minsup$ überprüft, bis keine Elemente mehr den Mindestsupport erreichen (Schritt 3).
 
 Vereinfacht dargestellt ist der Punkt 3.a. Dieser Schritt heisst apriori\_gen und seine Aufgabe ist es, die häufigen Attriutmengen für die nächste Iteration zu generieren. Er nimmt die Liste mit den frequentierten Datensätzen der vorherigen Iteration ($L{k-1}$) und erweitert alle Mengen um ein Element. Er macht sich die Eigenschaft zunutze, dass wenn in $L_{k-1}$ ein Element $minsup$ nicht erfüllt, kann es dies auch nicht in $C_k$, wodurch $C_k$ verkürzt und der Algorithmus beschleunigt wird\footcite{data_mining_concepts_and_techniques}.
 
@@ -252,7 +251,7 @@ Auf Zeile 6 werden die k-Attributmengen gesäubert (prune), indem die neuen Kand
 
 \section{Cluster analysis: k-prototype}
 \label{sec:recherche:algorithmen:k-prototypes}
-Die k-prototypes Vorgehensweise gehört zu der Gruppe der partitionierenden Clustering Algorithmen. Er ist eine Kombination des Lloyd- und des \gls{pam}- Algorithmus. Er verwendet eine angepasste Version der quadratischen euklidischen Distanz (siehe \cref{sec:konzept:algorithmenauswahl:clustering} \nameref{sec:konzept:algorithmenauswahl:clustering}), wie sie Lloyd verwendet und benutzt für die Zentren der Clusters Medoiden, wie sie von \gls{pam} benutzt werden\footcite{data_mining_concepts_and_techniques}\footcite{clustering_numeric_and_categorical_values}.
+Die k-prototypes Vorgehensweise gehört zu der Gruppe der partitionierenden Clustering Algorithmen. Er ist eine Kombination des Lloyd- und des \gls{pam}- Algorithmus. Er verwendet eine angepasste Version der quadratischen euklidischen Distanz (siehe \cref{sec:konzept:algorithmenauswahl:clustering} \nameref{sec:konzept:algorithmenauswahl:clustering}), wie sie Lloyd verwendet und benutzt für die Zentren der Clusters Medoiden, wie dies der \gls{pam} Algorithmus macht\footcite{data_mining_concepts_and_techniques}\footcite{clustering_numeric_and_categorical_values}. Im k-prototype heissen die Zentren nicht Medoiden, sondern "`Prototyp"', woher auch der Name kommt.
 
 Der Ablauf von k-prototypes besteht aus fünf Schritten\footcite{clustering_numeric_and_categorical_values}:
 \begin{enumerate}
@@ -271,7 +270,7 @@ Die Laufzeit des Algorithmus ist $\mathcal{O}((t+1)kn)$, wobei $n$ die Anzahl In
 \subsection{Cluster analysis: DBSCAN}
 \label{sec:recherche:algorithmen:dbscan}
 \gls{dbscan} gehört zu der Gruppe der Density-based Clustering Algorithmen. 
-Vorgegeben werden muss die Dichte $\epsilon$ und die minimum Anzahl an Instanzen $minpts$. Mit diesen Informationen kann der Algorithmus in einer Laufzeit von $\mathcal{O}(n\,log\,n)$ ein Clustering durchführen.
+Vorgegeben werden muss der Radius $\epsilon$ und die minimum Anzahl an Instanzen $minpts$. Ein Cluster wird gebildet wenn um einen Punkt im Radius $\epsilon$ mindestens $minpts$ andere Instanzen liegen. Mit diesen Informationen kann der Algorithmus in einer Laufzeit von $\mathcal{O}(n\,log\,n)$ ein Clustering durchführen.
 
 Der Algorithmus führt mehrere Begriffe ein\footcite{data_mining_concepts_and_techniques}:
 \begin{itemize}
