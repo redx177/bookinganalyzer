@@ -18,9 +18,9 @@ Mittels Association rule learning (siehe \cref{sec:recherche:dataminingtechniken
 \label{sec:konzept:disziplinauswahl:classification}
 Bei der Classification handelt es sich um ein \gls{supervisedlearning} (siehe \cref{sec:recherche:dataminingtechniken:disziplinen:classification} \nameref{sec:recherche:dataminingtechniken:disziplinen:classification}). Deshalb sind vorab Klassen zu definieren welche den Objekten zugewiesen werden. Diese Informationen sind jedoch noch nicht vorhanden, weshalb in den Anforderungen (siehe \cref{sec:anforderungsanalyse:algorithmen:resultat} \nameref{sec:anforderungsanalyse:algorithmen:resultat}) ein \gls{unsupervisedlearning} Algorithmus vorausgesetzt wurde. Deshalb eignet sich die Classification für diese Aufgabenstellung nicht.
 
-\subsubsection{Regression}
+\subsubsection{Lineare Regression}
 \label{sec:konzept:disziplinauswahl:regression}
-Regression Algorithmen suchen eine Formel, damit man von einer abhängiger Variable auf unabhängige Grössen schliessen kann (siehe \cref{sec:recherche:dataminingtechniken:disziplinen:regression} \nameref{sec:recherche:dataminingtechniken:disziplinen:regression}). Damit kann man bei den Interhome Daten für neue Buchungen Attribute voraussagen. zum Beispiel wenn man die Kreditwürdigkeit von Kunden überprüfen möchte auf Basis von alten Buchungen.
+Linere Regression Algorithmen suchen eine Formel, damit man von einer abhängiger Variable auf unabhängige Grössen schliessen kann (siehe \cref{sec:recherche:dataminingtechniken:disziplinen:regression} \nameref{sec:recherche:dataminingtechniken:disziplinen:regression}). Damit kann man bei den Interhome Daten für neue Buchungen Attribute voraussagen. zum Beispiel wenn man die Kreditwürdigkeit von Kunden überprüfen möchte auf Basis von alten Buchungen.
 
 Diese Algorithmen eignen sich jedoch nicht für diese Arbeit, da weder Attribute noch Gruppen von Buchungen zurückgeliefert werden (siehe \cref{sec:anforderungsanalyse:algorithmen:resultat} \nameref{sec:anforderungsanalyse:algorithmen:resultat}).
 
@@ -142,6 +142,8 @@ Die Daten liegen im Windows Excel Format vor. Es sind total 133'001 Datensätze 
 
 \subsection{Datenvorbereitung}
 \label{sec:recherche:datenvorbereitung}
+Die Datenvorbereitung wandelt die Daten so um dass sie für das Data Mining möglichst effizient verwendet werden können. Dies umfasst die Bereinigung, Transformation sowie Reduktion von Informationen\footcite{feature_selection_2017-01-04}. Bei ersteren werden Messfehler im Datenbestand behoben, fehlende Felder ergänzt oder Duplikate entfernt. Die Transformation wandelt Werte um damit sie für die Berechnung besser geeignet sind. Zum Beispiel können Wertebereiche in Intervalle aufgeteilt werden. Bei letzteren werden Instanzen der Datengrundlage entfernt, wodurch die Berechnungszeit verkürzt wird, oder Attribute von allen Instanzen entfernt, da deren Entropie zu gering ist. Weiteres hierzu im \cref{sec:proofofconcept:datenvorbereitung} \nameref{sec:proofofconcept:datenveorbereitung}. 
+
 Folgende Modifikationen wurden an den Rohdaten vorgenommen:
 \begin{itemize}
 \item Das Datenformat wurde für die einfachere programmatische Handhabung von Windows Excel in das \gls{csv}-Format transferiert.
@@ -287,7 +289,7 @@ Zuerst werden die Daten aus dem \gls{csv} File geladen. Anschliessend die Attrib
 \end{figure}
 
 \section{Ablauf}
-Die Umsetzung in diesem Projekt wird zweistufig durchgeführt. Als erstes gibt der User eine Abfrage ein, für welche anschliessend eine eine Liste von häufig auftretenden Attributen gesucht werden soll (siehe \cref{sec:einletung:ziel} \nameref{sec:einletung:ziel}).
+Der Ablauf des Data Mining im zu entwickelnden Programm ist zweistufig. Als erstes gibt der User eine Abfrage ein, für welche anschliessend eine eine Liste von häufig auftretenden Attributen gesucht werden soll (siehe \cref{sec:einletung:ziel} \nameref{sec:einletung:ziel}).
 
 
 \subsection{Einschränkung des Datenbestandes}
