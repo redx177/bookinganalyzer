@@ -98,11 +98,11 @@ Eingesetzt wird die Clusteranalyse zum Beispiel für die Erkennung von Kundengru
 
 \subsection{Collaborative Filtering}
 \label{sec:recherche:dataminingtechniken:disziplinen:collaborativefiltering}
-Beim Collaborative Filtering (kollaboratives Filtern) wird zu einer Instanz ähnliche Objekte gesucht. Die Ähnlichkeit wird durch Bewertung von anderen Kunden errechnet. 
+Beim Collaborative Filtering werden Verhaltensmuster von Benutzern analysiert um daraus Empfehlungen für andere Kunden zu generieren. Am Beispiel einer Videotheke sind die einzelnen Instanzen die Filme, und die Empfehlungen die Bewertungen der Filme durch die Kunden. 
 
-
+In der \cref{fig:recherche:dataminingtechniken:disziplinen:collaborativefiltering} sind in den Zeilen Filme (Instanzen) aufgeführt und in den Spalten die Kunden. Ein Feld stellt eine Bewertungen eines Kunden dar. "`+"' steht für eine positive und "`-"' für eine negative Bewertung. Leere Felder bedeutet dass der Kunde diesen Film nicht bewertet hat. Mittels kollaborativen Filtern kann nun vorhergesagt werden, ob ein Benutzer die gelb hinterlegte Instanz positiv oder negativ bewertet\todo{cite} 
 \begin{table}[H] 
-	\caption{Begriffsdefinition}
+	\caption{Beispiel von Collaborative Filtering einer Videotheke}
 	\centering
 	\rowcolors{1}{tablebodycolor}{tablerowcolor}
 	\label{fig:recherche:dataminingtechniken:disziplinen:collaborativefiltering}
@@ -121,8 +121,6 @@ Beim Collaborative Filtering (kollaboratives Filtern) wird zu einer Instanz ähn
 		\textbf{12 Monkeys} & + & + & - & \cellcolor{yellow!75}? \\ \hline 
 	\end{tabular} 
 \end{table}
-
-Die Zeilen in der \cref{fig:recherche:dataminingtechniken:disziplinen:collaborativefiltering} sind Instanzen und die Spalten zeigen Bewertungen der Kunden. Minus steht für eine negative und Plus für eine positive Bewertung. Es ist auch möglich das ein Benutzer eine Instanz nicht bewertet. Mittels kollaborativen Filtern kann nun abgeschätzt werden, ob ein Benutzer eine Instanz positiv oder negativ Bewertet\todo{cite}.
 
 \section{Algorithmen}
 \label{sec:recherche:algorithmen}
