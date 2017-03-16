@@ -40,6 +40,7 @@ Collaborative Filtering werden für recommender systems eingesetzt um dem Benutz
 Im \cref{sec:konzept:disziplinauswahl} wurden die Disziplinen auf Association rule learning und Cluster analysis eingeschränkt und im \cref{sec:recherche:algorithmen} die einzusetzenden Algorithmen beschrieben. Nachfolgend wird beschrieben wieso jene Abläufe ausgewählt wurden.
 
 \subsubsection{Association rule learning: Apriori}
+\label{sec:konzept:algorithmenauswahl:apriori}
 Das Association rule learning besteht aus zwei Schritten. Zuerst werden mittels des Apriori Algorithmus häufige Attributkombinationen gesucht und anschliessend Regeln aufgestellt um Korrelationen zwischen gemeinsam auftretenden Eigenschaften aufzuzeigen.
 Der zweite Schritt wird nicht durchgeführt, da die Regeln des Association rule learning für die Aufgabenstellung dieser Arbeit nicht benötigt werden.
 
@@ -254,7 +255,7 @@ In Absprache mit Interhome wurde entschieden, dass in einem ersten Schritt jene 
 %Einige Attribute sind mehrfach
 
 \subsection{RapidMiner Prozess für die Datenvorbereitung}
-\label{sec:recherche:rapidminer}
+\label{sec:konzept:rapidminer}
 
 Die Datenvorbereitung (data preprocessing) wird mit dem Programm RapidMiner durchgeführt.
 Zuerst werden die Daten aus dem \gls{csv} File geladen. Anschliessend die Attribute gemäss \cref{fig:recherche:attributeinschraenkung:2} eingeschränkt, die Diskretisierung entsprechend \cref{fig:recherche:datenvorbereitung:1} und \ref{fig:recherche:datenvorbereitung:2} durchgeführt.
@@ -300,6 +301,37 @@ Für den zweiten Schritt wird entweder ein \nameref{sec:konzept:disziplinauswahl
 
 Möchte der Benutzer wissen, welche Attribute in der vor-selektierten Datenmenge oft vorkommen, so kann der Apriori-Algorithmus gewählt werden. Liefert dieser keine zufriedenstellenden Antworten oder ist von vornherein zu erwarten, dass es verschiedene Gruppen von Buchungen gibt, so kann zuerst die Cluster Analysis durchgeführt werden. Die Instanzen werden damit in Clusters/Klassen aufgeteilt, der Benutzer würde jedoch nicht sehen weshalb. Deshalb wird auf jeder Klasse der Apriori-Algorithmus durchgeführt. Da die Instnzen in einer Klasse untereinander möglichst Homogen sein sollen und möglichst unterschiedlich zu anderen Clusters, ist anzunehmen, dass die häufigsten Attribute, welche durch den Apriori-Algorithmus gefunden werden, aussagekräftig die Klassen beschreiben.
 
+\section{Mockups des Programmes}
+\label{sec:konzept:mockups}
+Die graphischen Oberfläche des Programmes wird nachfolgend anhand von Mockups aufgezeigt. Die Auflistung der Stammdaten sowie der Resultate ist einfachheitshalber verkürzt dargestellt. Auf jeder Seite zuoberst ist das Interhome Logo sowie die Navigation platziert.
+
+In \cref{fig:konzept:mockups:stammdaten} ist die Startseite abgebildet in welcher der Benutzer die Stammdaten (FA4) einsehen kann. Im oberen Bereich sind die Filter, mit welchen der Datenbestand eingeschränkt werden kann. 
+\begin{figure}[H]
+	\RawFloats
+	\centering
+	\includegraphics[width=1\textwidth]{images/wireframe-explore}
+	\caption{Mockup für das einsehen der Stammdaten (FA4)}
+	\label{fig:konzept:mockups:stammdaten}
+\end{figure}
+
+Auf der zweiten Seite, welche in \cref{fig:konzept:mockups:apriori} dargestellt ist, kann der Benutzer eine apriori Analyse durchführen (siehe \cref{sec:konzept:algorithmenauswahl:apriori} \nameref{sec:konzept:algorithmenauswahl:apriori}). Wie vorher sind zuoberst die selben Filter plaziert. Darunter sind die Attribute aufgelistet, welche vom Algorithmus gefunden wurde sowie deren Häufigkeit. Zuunterst ist zur Kontrolle noch der analysierte Datenbestand aufgeführt.
+\begin{figure}[H]
+	\RawFloats
+	\centering
+	\includegraphics[width=1\textwidth]{images/wireframe-apriori}
+	\caption{Mockup für die Analyse mit dem apriori Algorithmus}
+	\label{fig:konzept:mockups:apriori}
+\end{figure}
+
+Der dritte Reiter führt zur Analyse mit den Clustering Algorithmen k-prototypes und DBSCAN (\cref{sec:konzept:algorithmenauswahl:clustering} \nameref{sec:konzept:algorithmenauswahl:clustering}). Die Filter sind entsprechend den vorherigen Seite zuoberst platziert. Es gibt jedoch zwei Buttons um die Analyse mit den entsprechenden Algorithmen zu starten. Zuunterst sind die gefunden Clusters abgebildet, mit den häufigen Attributen sowie den Buchungen, welche zu den entsprechenden Clustern gehören. Zur Verbesserung der Übericht können die Bereiche auf- und zugeklappt werden.
+
+\begin{figure}[H]
+	\RawFloats
+	\centering
+	\includegraphics[width=1\textwidth]{images/wireframe-clustering}
+	\caption{Mockup für die Analyse mit dem apriori Algorithmus}
+	\label{fig:konzept:mockups:apriori}
+\end{figure}
 
 \section{Testcases}
 \label{sec:recherche:testcases}
