@@ -71,7 +71,7 @@ Bei den partitionierenden Algorithmen sind die bekanntesten Vertreter der k-mean
 Als Vertreter der Density-based Algorithmen wird \gls{dbscan} verwendet. Beschrieben der er im \cref{sec:recherche:algorithmen:dbscan}. Als alternative bietet sich \gls{optics} an. Dabei handelt es sich um eine Erweiterung von \gls{dbscan}, bei welchem kein Dichte $\epsilon$ angegeben werden muss. Jedoch erstellt \gls{optics} keine Clusters, sondern eine geordnete aufsteigende Liste, sodass räumlich benachbarte Punkte in dieser Ordnung nahe aufeinander liegen. Die Auswertung der Liste muss nachgelagert ausgeführt werden\footcite{data_mining_concepts_and_techniques}. In dieser Arbeit wird \gls{dbscan} verwendet da mit geeigneten, noch zu ermittelnden, werten für $\epsilon$ und $minpts$ ein Clustering erstellt werden kann und der Benutzer die Resultate nicht noch weiter interpretieren muss. Sollte es nötig sein, so kann nach der Arbeit überprüft werden ob \gls{optics} bessere Resultate liefert.
 
 \section{Anwendung der Algorithmen}
-Bei der Anwendung der Algorithmen gibt es Probleme, welche in diesem Abschnitt beschrieben werden. Zum einen müssen die Algorithmen vergleichbar sein, wozu eine einheitliche Distanzmessung eingesetzt wird. Zum anderen müssen die verschiedenen Parameter, welche die Algorithmen benötigen, korrekt gesetzt werden. Diese beiden Themen werden nachfolgend besprochen.
+Bei der Anwendung der Algorithmen gibt es Probleme, welche in diesem Abschnitt beschrieben werden. Zum einen müssen die Algorithmen vergleichbar sein, wozu eine einheitliche Distanzmessung eingesetzt wird und sie müssen mit kategorischen Attributen arbeiten können. Diese Problematik wird im \cref{sec:konzept:algorithmenauswahl:clustering:distanzmessung} näher erläutert. Zum anderen müssen die verschiedenen Parameter, welche die Algorithmen benötigen, korrekt gesetzt werden, was im \cref{sec:konzept:parameterauswahl} besprochen wird.
 
 \subsection{Distanzmessung}
 \label{sec:konzept:algorithmenauswahl:clustering:distanzmessung}
@@ -157,7 +157,7 @@ Folgende Modifikationen wurden an den Rohdaten vorgenommen:
 	\centering
 	\rowcolors{1}{tablebodycolor}{tablerowcolor}
 	\label{fig:recherche:datenvorbereitung:1}
-	\begin{tabular}{ | c | c | c |} 
+	\begin{tabular}{ | c | c | c | } 
 		\hline 
 		\rowcolor{tableheadcolor}
 		\bfseries Min & \bfseries Max & \bfseries Wert \\ \hline 
@@ -171,7 +171,7 @@ Folgende Modifikationen wurden an den Rohdaten vorgenommen:
 	\centering
 	\rowcolors{1}{tablebodycolor}{tablerowcolor}
 	\label{fig:recherche:datenvorbereitung:2}
-	\begin{tabular}{ | c | c | c |} 
+	\begin{tabular}{ | c | c | c | } 
 		\hline 
 		\rowcolor{tableheadcolor}
 		\bfseries Min & \bfseries Max & \bfseries Wert \\ \hline 
@@ -199,7 +199,7 @@ Der Datenbestand besteht aus 127 Attributen/Spalten. Aus folgenden Gründen soll
 	\centering
 	\rowcolors{1}{tablebodycolor}{tablerowcolor}
 		\label{fig:recherche:attributeinschraenkung:1}
-	\begin{tabular}{ | c | c | c | l |} 
+	\begin{tabular}{ | c | c | c | l | } 
 		\hline 
 		\rowcolor{tableheadcolor}
 		\bfseries Zelle & \bfseries Name & \bfseries Datentyp & \bfseries Beschreibung \\ \hline 
@@ -220,7 +220,7 @@ In Absprache mit Interhome wurde entschieden, dass in einem ersten Schritt jene 
 	\centering
 	\rowcolors{1}{tablebodycolor}{tablerowcolor}
 		\label{fig:recherche:attributeinschraenkung:2}
-	\begin{tabular}{ | c | c | c | l |} 
+	\begin{tabular}{ | c | c | c | l | } 
 		\hline 
 		\rowcolor{tableheadcolor}
 		\bfseries Zelle & \bfseries Name & \bfseries Datentyp & \bfseries Beschreibung \\ \hline 

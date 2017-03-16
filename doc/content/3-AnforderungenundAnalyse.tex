@@ -4,63 +4,285 @@
 \chapter{Anforderungsanalyse}
 \label{sec:anforderungsanalyse}
 
-\section{Algorithmen}
-\label{sec:anforderungsanalyse:algorithmen}
-Dieser Abschnitt erläutert die Anforderungen welche an die Algorithmen gestellt werden.
+\section{Anforderungsanalyse des Programmes}
+\subsection{Stakeholders}
+\label{sec:anforderungsanalyse:stakeholders}
+In der \cref{fig:anfoderungsanalyse:stakeholders} sind die Stakeholders des Projekt abgebildet.
+\begin{table}[h] 
+	\caption{Stakeholders}
+	\centering
+	\rowcolors{1}{tablebodycolor}{tablerowcolor}
+	\label{fig:anfoderungsanalyse:stakeholders}
+	\begin{tabular}{ | c | L{5cm} | L{5cm} | } 
+		\hline 
+		\rowcolor{tableheadcolor}
+		\bfseries Stakeholder & \bfseries Beschreibung & \bfseries Erwartungen \\ \hline 
+		%Kunde & Besucher der Webseite, welcher Objekte buchen möchte und Werbung wahrnimmt. & Durch das Projekt sollen ihm passendere Objekte und Vorschläge angezeigt werden. \\ \hline 
+		Interhome Marketing & Das Marketing ist für die Werbung auf der Interhome Webseite verantwortlich. & Möchte auf der Webseite passendere Angebote dem Benutzer darstellen.  \\ \hline 
+		Interhome Einkauf & Abteilung welche die Objekte einkauft welche auf der Interhome Webseite dargestellt werden. & Sie sollen durch das Projekt den Kunden besser verstehen und somit die Objekte einkaufen, welche von den Kunden gewünscht sind. \\ \hline 
+		Interhome Tester & Testet das Programm und gibt Feedback ob es korrekt arbeitet. & Eine gut entwickeltes Programm welches bereits grundlegend von der Hotelplan Entwicklung getestet wurde. \\ \hline 
+		Hotelplan Entwickler & Verantwortlich für die Umsetzung dieses Projektes. & Eine reibungslose Umsetzung des Projektes sowie eine konstruktive Kooperation mit den Testern. \\ \hline 
+	\end{tabular}
+\end{table} 
 
-\subsection{Komplexität}
-\label{sec:anforderungsanalyse:algorithmen:komplexitaet}
-Die Algorithmen sollten maximal ein super-lineares Wachstum ($\mathcal{O}(n\,log\,n)$) aufweisen. Diese Einschränkung ermöglicht die Erkundung der Daten im Programm ohne lange Wartezeiten zu generieren\todo{apriori O(n log n)?}.
+\subsection{Anwendungsfälle}
+\label{sec:anforderungsanalyse:anwendungsfaelle}
+In der \cref{fig:anfoderungsanalyse:anwendungsfaelle:1} werden die Anwendungsfälle des Programmes dargestellt. Die Aktoren sind von der \cref{fig:anfoderungsanalyse:stakeholders} übernommen worden. Nachfolgend werden die einzelnen Anwendungsfälle beschrieben.
+\begin{figure}[H]
+	\RawFloats
+	\centering
+	\includegraphics[width=0.7\textwidth]{images/usecase}
+	\caption{density-reachable vs density-connected}
+	\label{fig:anfoderungsanalyse:anwendungsfaelle:1}
+\end{figure}
 
-\subsection{Mixed data types}
-\label{sec:anforderungsanalyse:algorithmen:mixed-data-types}
-Da die Buchungen von Interhome numerische (z.B. Anzahl Personen, Geolocations) und kategorische Daten (z.B. Aircondition vorhanden?, Objekttyp) beinhalten, müssen die Algorithmen in der Lage sein mit beiden Datentypen umgehen zu können.
+\paragraph{Daten einschränken} Es muss möglich sein, die Daten einzuschränken. Dies sollte über vordefinierte Filterkriterien geschehen die vom Benutzer ausgewählt werden können.
 
-\subsection{Resultat des Algorithmus}
-\label{sec:anforderungsanalyse:algorithmen:resultat}
-Ein Algorithmus muss Attribute als Resultat zurückliefern, damit die Fragenstellungen aus Kapitel 1\todo{cref} beantwortet werden können. Alternativ können auch Gruppen von Buchungen ausgegeben werden, in welchen anschliessend die Häufigkeiten der Attribute nachgezählt werden müssen. Auf jeden Fall müssen schlussendlich Attribute und deren Häufigkeiten eruiert werden können.
+\paragraph{Daten einsehen} Um ein Überblick über die gesamten Daten zu haben und um einen Algorithmus zu überprüfen, soll eine Ansicht erstellt werden welche die Daten unbearbeitet darstellt. Sie sollen jedoch gefiltert werden können damit man die selbe Einschränkung vornehmen kann welche auch bei den Algorithmen eingestellt werden kann.
 
-Zusätzlich muss ein Algorithmus selbständig Muster erkennen können, da bislang noch keine Informationen zu den Daten vorhanden sind. Es wird demnach ein \gls{unsupervisedlearning} durchgeführt.
+\paragraph{Analyse durchführen} Es sollte möglich sein, einen oder mehrere Algorithmen auf die Daten anzuwenden und so eine Analyse durchzuführen. Die Daten sollen initial eingeschränkt werden können um nur eine Untermenge zu analysieren.
 
-\section{Programm}
-\label{sec:anforderungsanalyse:programm}
-Im \cref{sec:recherche:programmevaluation} wurden zwei Programme für das Data Mining vorgestellt. Hier werden die Anforderungen aufgelistet, welche diese Programme zu erfüllen haben, damit sie im weiteren Verlauf dieser Arbeit verwendet werden können.
+\paragraph{Änderungswünsche anbringen} Wenn die Daten oder die Algorithmen nicht korrekt sind kann dies über Änderungswünsche eingebracht werden. Diese können die Einschränkung der Daten sowie die Analyse betreffen. Sie müssen bewertet und wenn möglich umgesetzt werden.
 
-\subsection{Lizenzen}
-\label{sec:anforderungsanalyse:programm:lizenzen}
-Die Applikation sollte kostenlos einsetzbar sein. Sie benötigt demnach eine der folgenden Lizenzmodellen:
-\begin{itemize}
-\item OpenSource. Software kann verwendet und angepasst werden (siehe \url{https://opensource.org/licenses}).
-\item Freeware. Software kann verwendet, jedoch nicht angepasst werden.
-\item Studenten Lizenz. Software kann als Student kostenlos eingesetzt werden.
-\end{itemize}
+\subsection{Ablauf}
+\label{sec:anforderungsanalyse:ablauf}
+In diesem Abschnitt wird der Ablauf von der Dateneinschränkung bis zum anbringen von Änderungswünschen erklärt.
 
-\subsection{Betriebsystem}
-\label{sec:anforderungsanalyse:programm:betriebsystem}
-Die Entwicklung wird privat auf einem Linux Rechner durchgeführt, und Zeitweise auch bei der Arbeit auf Windows Computern welche von Hotelplan Management AG bereitgestellt werden.
-Demnach ist es nötig, dass die Software unter Linux sowie auch Windows gestartet werden kann.
+Zuerst kann der Benutzer die Daten einschränken. Der gesamte oder gefilterte Datenbestand wird anschliessend von einem Algorithmus analysiert. Daraufhin kann der Benutzer die Resultate überprüfen und wenn Fehler aufgedeckt werden diese an den Entwickler weiterleiten.
+Visualisiert wird der Ablauf in \cref{fig:anfoderungsanalyse:ablauf:1}.
 
-\subsection{Funktionsumfang}
-\label{sec:anforderungsanalyse:programm:funktionsumfang}
-Da der Datenbestand 133'001 Einträge umfasst, muss die Plattform und das Lizenzmodel diese Anzahl an Items unterstützen.
+\begin{figure}[H]
+	\RawFloats
+	\centering
+	\includegraphics[width=0.8\textwidth]{images/flowchart}
+	\caption{Ablauf}
+	\label{fig:anfoderungsanalyse:ablauf:1}
+\end{figure}
 
-Zusätzlich muss das Programm die im \cref{sec:recherche:dataminingtechniken:disziplinen} \todo{fix cref} beschriebenen Techniken beherrschen.
+\subsection{Funktionale Anforderungen}
+\label{sec:anforderungsanalyse:funktionaleanforderung}
+Nachfolgend werden die funktionale Anforderungen an das Programm gestellt.
 
-\section{Funktionsumfang}
-Das Programm muss für die Gewinnung neues Wissens aus der bisherigen Buchungen von Interhome gestaltet werden. Dazu sollen Algorithmen evaluiert werden welche folgende beispielhaften Fragestellungen beantworten können:
-\begin{enumerate}
-\item Welche Attribute werden im Winter wenn schneit in der Schweiz gebucht?
-\item Welche Häuser im Tessin mit Sicht auf einen See werden am meisten gebucht?
-\end{enumerate}
+\begin{table}[H] 
+	\caption{FA1: Häufigkeitsanalyse der Attribute}
+	\centering
+	\rowcolors{1}{tablebodycolor}{tablerowcolor}
+	\label{fig:anforderungsanalyse:funktionaleanforderung:fa1}
+	\begin{tabular}{ | l | L{10cm} | } 
+		\hline 
+		\rowcolor{tableheadcolor}
+		\multicolumn{2}{|l|}{\bfseries ID: FA1} \\ \hline 
+		Titel & Häufigkeitsanalyse der Attribute \\ \hline 
+		Beschreibung & Das Programm muss für die Gewinnung neues Wissens aus der bisherigen Buchungen von Interhome gestaltet werden. Dazu sollen Algorithmen eingesetzt werden welche folgende beispielhaften Fragestellungen beantworten können:
+		\begin{enumerate}
+		\item Welche Attribute werden im Winter wenn schneit in der Schweiz gebucht?
+		\item Welche Häuser im Tessin mit Sicht auf einen See werden am meisten gebucht?
+		\end{enumerate}
+		
+		Als Antwort sollte der Algorithmus eine Liste von Attributen zurückliefern. Auf die obigen Beispiele könnte dies folgendes sein:
+		\begin{enumerate}
+		\item Objekte in Süditalien mit einem Pool.
+		\item Luxushäuser mit einem Grill und 3 Zimmern.
+		\end{enumerate} \\ \hline 
+		Abhängigkeit & \\ \hline 
+		Status & Offen \\ \hline 
+	\end{tabular}
+\end{table}
 
-Als Antwort sollte der Algorithmus eine Liste von Attributen zurückliefern. Auf die obigen Beispiele könnte dies folgendes sein:
-\begin{enumerate}
-\item Objekte in Süditalien mit einem Pool.
-\item Luxushäuser mit einem Grill und 3 Zimmern.
-\end{enumerate}
+\begin{table}[H] 
+	\caption{FA2: Nachvollziehbarkeit der Attributanalyse}
+	\centering
+	\rowcolors{1}{tablebodycolor}{tablerowcolor}
+	\label{fig:anforderungsanalyse:funktionaleanforderung:fa2}
+	\begin{tabular}{ | l | L{10cm} | } 
+		\hline 
+		\rowcolor{tableheadcolor}
+		\multicolumn{2}{|l|}{\bfseries ID: FA2} \\ \hline 
+		Titel & Nachvollziehbarkeit der Attributanalyse \\ \hline 
+		Beschreibung & Die Resultate aus FA1 sollten nachvollziehbar sein. Es sollte dem Benutzer verständlich gemacht werden, wieso der Algorithmus diese Attribute gewählt hat. Jede Eigenschaft sollte demnach mit einer Anzahl oder einer Prozentzahl versehen sein. Zum Beispiel:
+			\begin{enumerate}
+			\item Sütitalien (223 von 319) und Pool (150 von 319)
+			\item Luxushäuser (53\%), Grill (35\%) und 3 Zimmer (32\%)
+			\end{enumerate} \\ \hline 
+		Abhängigkeit & FA1 \\ \hline 
+		Status & Offen \\ \hline 
+	\end{tabular}
+\end{table}
 
-Zusätzlich sollte nachvollziehbar sein, wieso der Algorithmus diese Attribute gewählt hat. Jede Eigenschaft sollte demnach mit einer Anzahl oder einer Prozentzahl versehen sein. Zum Beispiel:
-\begin{enumerate}
-\item Sütitalien (223 von 319) und Pool (150 von 319)
-\item Luxushäuser (53\%), Grill (35\%) und 3 Zimmer (32\%)
-\end{enumerate}
+\begin{table}[H] 
+	\caption{FA3: Häufigkeitsanalyse auf einer Untermenge der Daten}
+	\centering
+	\rowcolors{1}{tablebodycolor}{tablerowcolor}
+	\label{fig:anforderungsanalyse:funktionaleanforderung:fa3}
+	\begin{tabular}{ | l | L{10cm} | } 
+		\hline 
+		\rowcolor{tableheadcolor}
+		\multicolumn{2}{|l|}{\bfseries ID: FA3} \\ \hline 
+		Titel & Häufigkeitsanalyse auf einer Untermenge der Daten \\ \hline 
+		Beschreibung & Eine Häufigkeitsanalyse solle gemäss FA1 auch auf einer Untermenge der Daten möglich sein. Der Benutzer soll befähigt werden den Datenbestand vor der Analyse einzuschränken. \\ \hline 
+		Abhängigkeit & FA1 \\ \hline 
+		Status & Offen \\ \hline 
+	\end{tabular}
+\end{table}
+
+\begin{table}[H] 
+	\caption{FA4: Stammdaten einsehen}
+	\centering
+	\rowcolors{1}{tablebodycolor}{tablerowcolor}
+	\label{fig:anforderungsanalyse:funktionaleanforderung:fa4}
+	\begin{tabular}{ | l | L{10cm} | } 
+		\hline 
+		\rowcolor{tableheadcolor}
+		\multicolumn{2}{|l|}{\bfseries ID: FA4} \\ \hline 
+		Titel & Stammdaten einsehen \\ \hline 
+		Beschreibung & Um die Analyse der Daten zu validieren, sollte es möglich sein die Stammdaten einzusehen. Deshalb sollen im Programm alle Daten dargestellt werden können und vom Benutzer durchstöbert werden können. \\ \hline 
+		Abhängigkeit & \\ \hline 
+		Status & Offen \\ \hline 
+	\end{tabular}
+\end{table}
+
+\begin{table}[H] 
+	\caption{FA5: Untermenge der Stammdaten einsehen}
+	\centering
+	\rowcolors{1}{tablebodycolor}{tablerowcolor}
+	\label{fig:anforderungsanalyse:funktionaleanforderung:fa4}
+	\begin{tabular}{ | l | L{10cm} | } 
+		\hline 
+		\rowcolor{tableheadcolor}
+		\multicolumn{2}{|l|}{\bfseries ID: FA5} \\ \hline 
+		Titel & Untermenge der Stammdaten einsehen \\ \hline 
+		Beschreibung & Eine Untermenge der Stammdaten soll gemäss FA3 eingesehen werden können. Diese sollen gleich wie in FA2 einschränkbar sein.  \\ \hline 
+		Abhängigkeit & FA1 \& FA4 \\ \hline 
+		Status & Offen \\ \hline 
+	\end{tabular}
+\end{table}
+
+
+\subsection{Nicht funktionale Anforderungen}
+\label{sec:anforderungsanalyse:nichtfunktionaleanforderung}
+Nachfolgend sind die nicht funktionale Anforderungen an das Programm spezifiziert. Diese gehen nicht auf die Funktionalität der Applikation ein, sondern auf die Komplexität, Performanz, etc.
+
+\begin{table}[H] 
+	\caption{NFA1: Geschwindigkeit}
+	\centering
+	\rowcolors{1}{tablebodycolor}{tablerowcolor}
+	\label{fig:anforderungsanalyse:nichtfunktionaleanforderung:nfa1}
+	\begin{tabular}{ | l | L{10cm} | } 
+		\hline 
+		\rowcolor{tableheadcolor}
+		\multicolumn{2}{|l|}{\bfseries ID: NFA1} \\ \hline 
+		Titel & Geschwindigkeit \\ \hline 
+		Beschreibung & Da das Programm explorativ verwendet werden soll, muss das Programm eine zügige Antwortszeit aufweisen. Deshalb soll die Attributanalyse innerhalb von 20 Sekunden Resultate liefern können. Die Algorithmen sollten daher maximal ein super-lineares Wachstum ($\mathcal{O}(n\,log\,n)$) aufweisen. \\ \hline 
+		Abhängigkeit & \\ \hline 
+		Status & Offen \\ \hline 
+	\end{tabular}
+\end{table}
+\todo{apriori O(n log n)?}
+
+\begin{table}[H] 
+	\caption{NFA2: Komplexität}
+	\centering
+	\rowcolors{1}{tablebodycolor}{tablerowcolor}
+	\label{fig:anforderungsanalyse:nichtfunktionaleanforderung:nfa2}
+	\begin{tabular}{ | l | L{10cm} | } 
+		\hline 
+		\rowcolor{tableheadcolor}
+		\multicolumn{2}{|l|}{\bfseries ID: NFA2} \\ \hline 
+		Titel & Komplexität \\ \hline 
+		Beschreibung & Verwendet wird das Programm von Interhome Mitarbeitern ohne Vorwissen im Data Mining. Deshalb sollte die Bedingung dementsprechend ausgelegt sein. \\ \hline 
+		Abhängigkeit & \\ \hline 
+		Status & Offen \\ \hline 
+	\end{tabular}
+\end{table}
+
+\begin{table}[H] 
+	\caption{NFA3: Modularität}
+	\centering
+	\rowcolors{1}{tablebodycolor}{tablerowcolor}
+	\label{fig:anforderungsanalyse:nichtfunktionaleanforderung:nfa3}
+	\begin{tabular}{ | l | L{10cm} | } 
+		\hline 
+		\rowcolor{tableheadcolor}
+		\multicolumn{2}{|l|}{\bfseries ID: NFA3} \\ \hline 
+		Titel & Modularität \\ \hline 
+		Beschreibung & In Zukunft ist zu erwarten, dass das Programm um weitere Techniken des Data Mining erweitert werden soll. Deshalb sollte es Modular aufgebaut werden dass einfach weitere Algorithmen hinzugefügt werden. \\ \hline 
+		Abhängigkeit & \\ \hline 
+		Status & Offen \\ \hline 
+	\end{tabular}
+\end{table}
+
+\begin{table}[H] 
+	\caption{NFA4: Erweiterbarkeit der Daten}
+	\centering
+	\rowcolors{1}{tablebodycolor}{tablerowcolor}
+	\label{fig:anforderungsanalyse:nichtfunktionaleanforderung:nfa4}
+	\begin{tabular}{ | l | L{10cm} | } 
+		\hline 
+		\rowcolor{tableheadcolor}
+		\multicolumn{2}{|l|}{\bfseries ID: NFA4} \\ \hline 
+		Titel & Erweiterbarkeit der Daten \\ \hline 
+		Beschreibung & Um die aktualität der Informationen zu gewährleisten, soll der Datenbestand in Zukunft leicht erweitert werden können. \\ \hline 
+		Abhängigkeit & \\ \hline 
+		Status & Offen \\ \hline 
+	\end{tabular}
+\end{table}
+ 
+ \begin{table}[H] 
+	\caption{NFA5: Kosten}
+	\centering
+	\rowcolors{1}{tablebodycolor}{tablerowcolor}
+	\label{fig:anforderungsanalyse:nichtfunktionaleanforderung:nfa5}
+	\begin{tabular}{ | l | L{10cm} | } 
+		\hline 
+		\rowcolor{tableheadcolor}
+		\multicolumn{2}{|l|}{\bfseries ID: NFA5} \\ \hline 
+		Titel & Kosten \\ \hline 
+		Beschreibung & Falls ein bestehendes Programm eingesetzt wird, sollen folgende Kostenfaktoren beachtet werden: 
+		\begin{itemize}
+		\item Die Applikation sollte kostenlos einsetzbar sein. Sie benötigt demnach eine der folgenden Lizenzmodellen:
+		\begin{itemize}
+		\item OpenSource. Software kann verwendet und angepasst werden (siehe \url{https://opensource.org/licenses}).
+		\item Freeware. Software kann verwendet, jedoch nicht angepasst werden.
+		\item Studenten Lizenz. Software kann als Student kostenlos eingesetzt werden.
+		\end{itemize}
+		\item Die Entwicklung wird privat auf einem Linux Rechner durchgeführt, und Zeitweise auch bei der Arbeit auf Windows Computern welche von Hotelplan Management AG bereitgestellt werden.
+		Demnach ist es nötig, dass die Software unter Linux sowie auch Windows gestartet werden kann.
+		\item Da der Datenbestand 133'001 Einträge umfasst, muss die Plattform und das Lizenzmodel diese Anzahl an Items unterstützen.
+		\end{itemize}\\ \hline 
+		Abhängigkeit & \\ \hline 
+		Status & Offen \\ \hline 
+	\end{tabular}
+\end{table}
+
+\begin{table}[H] 
+	\caption{NFA6: Mixed data types}
+	\centering
+	\rowcolors{1}{tablebodycolor}{tablerowcolor}
+	\label{fig:anforderungsanalyse:nichtfunktionaleanforderung:nfa6}
+	\begin{tabular}{ | l | L{10cm} | } 
+		\hline 
+		\rowcolor{tableheadcolor}
+		\multicolumn{2}{|l|}{\bfseries ID: NFA6} \\ \hline 
+		Titel & Mixed data types \\ \hline 
+		Beschreibung & Da die Buchungen von Interhome numerische (z.B. Anzahl Personen, Geolocations) und kategorische Daten (z.B. Aircondition vorhanden?, Objekttyp) beinhalten, müssen die Algorithmen in der Lage sein mit beiden Datentypen umgehen zu können. \\ \hline 
+		Abhängigkeit & \\ \hline 
+		Status & Offen \\ \hline 
+	\end{tabular}
+\end{table}
+
+\begin{table}[H] 
+	\caption{NFA7: Selbständigkeit}
+	\centering
+	\rowcolors{1}{tablebodycolor}{tablerowcolor}
+	\label{fig:anforderungsanalyse:nichtfunktionaleanforderung:nfa7}
+	\begin{tabular}{ | l | L{10cm} | } 
+		\hline 
+		\rowcolor{tableheadcolor}
+		\multicolumn{2}{|l|}{\bfseries ID: NFA7} \\ \hline 
+		Titel & Selbständigkeit \\ \hline 
+		Beschreibung & Die Analyse der Attribute sollte selbständig Muster erkennen können. Es wird keine vorherige Eingabe vom Benutzer benötigt. Siehe \gls{unsupervisedlearning} im Glossar. \\ \hline 
+		Abhängigkeit & \\ \hline 
+		Status & Offen \\ \hline 
+	\end{tabular}
+\end{table}
+
