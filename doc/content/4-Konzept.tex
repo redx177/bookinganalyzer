@@ -143,7 +143,7 @@ Die Daten liegen im Windows Excel Format vor. Es sind total 133'001 Datensätze 
 
 \subsection{Datenvorbereitung}
 \label{sec:recherche:datenvorbereitung}
-Die Datenvorbereitung wandelt die Daten so um dass sie für das Data Mining möglichst effizient verwendet werden können. Dies umfasst die Bereinigung, Transformation sowie Reduktion von Informationen\footcite{feature_selection_2017-01-04}. Bei ersteren werden Messfehler im Datenbestand behoben, fehlende Felder ergänzt oder Duplikate entfernt. Die Transformation wandelt Werte um damit sie für die Berechnung besser geeignet sind. Zum Beispiel können Wertebereiche in Intervalle aufgeteilt werden. Bei letzteren werden Instanzen der Datengrundlage entfernt, wodurch die Berechnungszeit verkürzt wird, oder Attribute von allen Instanzen entfernt, da deren Entropie zu gering ist. Weiteres hierzu im \cref{sec:proofofconcept:datenvorbereitung} \nameref{sec:proofofconcept:datenveorbereitung}. 
+Die Datenvorbereitung wandelt die Daten so um dass sie für das Data Mining möglichst effizient verwendet werden können. Dies umfasst die Bereinigung, Transformation sowie Reduktion von Informationen\footcite{feature_selection_2017-01-04}. Bei ersteren werden Messfehler im Datenbestand behoben, fehlende Felder ergänzt oder Duplikate entfernt. Die Transformation wandelt Werte um damit sie für die Berechnung besser geeignet sind. Zum Beispiel können Wertebereiche in Intervalle aufgeteilt werden. Bei letzteren werden Instanzen der Datengrundlage entfernt, wodurch die Berechnungszeit verkürzt wird, oder Attribute von allen Instanzen entfernt, da deren Entropie zu gering ist. Zum Beispiel ist es unspannend, wenn ein Attribut bei (fast) allen Instanzen gleich ist. 
 
 Folgende Modifikationen wurden an den Rohdaten vorgenommen:
 \begin{itemize}
@@ -214,7 +214,7 @@ Der Datenbestand besteht aus 127 Attributen/Spalten. Aus folgenden Gründen soll
 	\end{tabular}
 \end{table}
 
-In Absprache mit Interhome wurde entschieden, dass in einem ersten Schritt jene Attribute verwendet werden sollen, welche auch direkt auf der Webseite dargestellt werden. Die zu verendenden Spalten sind in der \cref{fig:recherche:attributeinschraenkung:2} aufgeführt.
+In Absprache mit Interhome wurde entschieden, dass in einem ersten Schritt jene Attribute verwendet werden sollen, welche auch direkt auf der Webseite dargestellt werden. Die zu verendenden Spalten sind in der \cref{fig:recherche:attributeinschraenkung:2} aufgeführt. Das Feld "`NREF"' beinhaltet die Objektidentifikation. Dieses wird für die Attributanalyse nicht verwendet, hilft jedoch den Testern bei der Validierung der Resultate und sollte deshalb beim einsehen des Datenbestandes mit angezeigt werden.
 
 \begin{table}[H] 
 	\caption{Zu verwendende Attribute}
@@ -226,6 +226,7 @@ In Absprache mit Interhome wurde entschieden, dass in einem ersten Schritt jene 
 		\rowcolor{tableheadcolor}
 		\bfseries Zelle & \bfseries Name & \bfseries Datentyp & \bfseries Beschreibung \\ \hline 
 		E & PRICES & integer & Preis \\ \hline 
+		I & NREF & categorical & Nummer des gebuchten Objektes \\ \hline 
 		AC & QUAL & integer & Sterne Bewertung des Objektes \\ \hline 
 		AD & ROOMS & integer & Anzahl Zimmer \\ \hline 
 		AE & BEDROOMS & integer & Anzahl Schlafzimmer \\ \hline 
@@ -258,7 +259,7 @@ In Absprache mit Interhome wurde entschieden, dass in einem ersten Schritt jene 
 \label{sec:konzept:rapidminer}
 
 Die Datenvorbereitung (data preprocessing) wird mit dem Programm RapidMiner durchgeführt.
-Zuerst werden die Daten aus dem \gls{csv} File geladen. Anschliessend die Attribute gemäss \cref{fig:recherche:attributeinschraenkung:2} eingeschränkt, die Diskretisierung entsprechend \cref{fig:recherche:datenvorbereitung:1} und \ref{fig:recherche:datenvorbereitung:2} durchgeführt.
+Zuerst werden die Daten aus dem \gls{csv} File geladen. Anschliessend die Attribute gemäss \cref{fig:recherche:attributeinschraenkung:2} eingeschränkt sowie die Diskretisierung entsprechend \cref{fig:recherche:datenvorbereitung:1} und \ref{fig:recherche:datenvorbereitung:2} durchgeführt.
 
 \cref{fig:recherche:rapidminer:1} zeigt den Prozess im RapidMiner Studio. In \ref{fig:recherche:rapidminer:1:1} wird der Hauptprozess gezeigt. Zusätzlich sind die Operatoren "`Generate ID"' und "`Write CSV"' vorhanden. Ersterer generiert eine neue ID. Da im Schritt "`Select Attributes"' keine Kundenspezifischen Daten ausgewählt werden, sind die Informationen nacher voll anonymisiert und können auch veröffentlicht werden. Der letzte Schritt schreibt das Resultat in ein \gls{csv} File damit es nachher weiterverwendet werden kann.
 
