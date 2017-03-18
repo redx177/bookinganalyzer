@@ -79,7 +79,7 @@ Zum Abschluss werden die Testcases aus dem Konzept ausgewertet und ein Fazit gez
 In der \cref{fig:einleitung:projektablaufplan} \nameref{fig:einleitung:projektablaufplan} ist der Projektablaufplan dargestellt.
 \begin{sidewaysfigure}[h]
 	\centering
-	\includegraphics[width=1\textwidth]{images/projektablaufplan.png}
+	\includegraphics[width=1\textwidth]{images/projektablaufplan}
 	\caption{Projektablaufplan}
 	\label{fig:einleitung:projektablaufplan}
 \end{sidewaysfigure}
@@ -114,25 +114,58 @@ Testing \& Fazit\\
 }
 
 \section{Begriffsdefinition}
-Im Data Mining gibt es häufige Begriffe, welche nachfolgenden Beschrieben und in diesem Dokument verwendet werden.
+\label{sec:einletung:begriffsdefinition}
+In der Arbeit werden durchgehend einige Begriffe verwendet welche hier erläutert werden. Für ein besseres Verständnis wird zuerst noch der Aufbau eines Objektes von Interhome aufgezeigt.
+
+\cref{fig:einletung:begriffsdefinition:2} zeigt ein Objekt von Interhome wie es auf der Webseite \href{https://www.interhome.ch/de}{www.interhome.ch} gezeigt wird. Rot hinterlegt ist die Identifikation des Appartments. Diese wird ID oder im Interhome Jargon auch NREF genannt. Die grundlegenden Infos wie der Name des Objektes, wo es liegt, wie viele Sterne es hat, etc. ist im grünen Bereich ersichtlich. Die Preise und allfällige Aktionen sind im blauen Kasten und weitere Charakteristiken des Objektes zuunterst im gelben Bereich aufgeführt. Die Bilder werden in Analyse der Daten nicht verwendet weshalb sie nicht näher erläutert werden.
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=1\textwidth]{images/interhome-object}
+	\caption{Erklärung eines Interhome Objektes.}
+	\label{fig:einletung:begriffsdefinition:2}
+\end{figure}
+
+Die zu erklärenden Begriffe sind in der \cref{fig:einletung:begriffsdefinition:1} aufgeführt. Diese werden im Text sowie in Formeln verwendet, weshalb zusätzlich zur Erklärung noch eine Variable definiert wurde.
 
 \begin{table}[H] 
 	\caption{Begriffsdefinition}
 	\centering
 	\rowcolors{1}{tablebodycolor}{tablerowcolor}
-	
-	\begin{tabular}{ | c | c | p{8cm} |} 
+	\label{fig:einletung:begriffsdefinition:1}
+	\begin{tabular}{ | c | C{2.5cm} | p{12cm} |} 
 		\hline 
 		\rowcolor{tableheadcolor}
-		\bfseries Variabel & 
+		\bfseries Var & 
 		\bfseries Begriff & 
 		\bfseries Beschreibung \\ \hline 
-		$A$ & Attribut & Ein Feld mit einem Wert. 1-n Attribute bilden eine Instanz. \\ \hline 
-		$I$ & Instanz & Zusammenfassung von Attributen. 0-n Instanzen bilden eine Datenmenge \\ \hline 
-		$D$ & Datenmenge & Menge aller Daten \\ \hline 
-		$K$ & Konzept & Hypothesen über die Daten. \ z.B. Wenn jemand Bier kauft, dann meistens auch Windeln. \\ \hline 
-		& Kategorische Attribute & Attribute welche eine endliche Anzahl von Ausprägungen annehmen können. In dieser Arbeit haben kategorische Attribute keine Reihenfolge. Z.B. Bluttyp: A, B, AB oder 0 \\ \hline
-		& Numerische Attribute & Attribute welche eine reele Zahl $\mathbb{R}$ annehmen können.\\ \hline
-		& i-Attributmenge & Eine Menge mit i Attributwerten \\ \hline 
+		$A$ & Attribut & Ein Feld mit einem Wert. 1-n Attribute bilden eine Instanz. Beispiele:\
+			\begin{itemize}
+			\item ID: 5
+			\item Distanz bis zum Meer: Nahe / Fern
+			\item Sauna vorhanden: \checkmark
+			\end{itemize} \\ \hline 
+		$I$ & Instanz & Zusammenfassung von Attributen. 0-n Instanzen bilden eine Datenmenge. Nachfolgend wird ein Beispiel gezeigt, wie ein Objekt von Interhome vereinfacht aufgebaut sein könnte. Alle Attribute zusammen bilden eine Instanz.\
+			\begin{itemize}
+			\item ID: CH1000.400.1
+			\item Preis (CHF): 500
+			\item Sauna vorhanden: \checkmark
+			\end{itemize} \\ \hline 
+		$D$ & Datenmenge & In dieser Arbeit ist damit die Gesamtheit aller Buchungen von Interhome zu verstehen. Im folgenden Beispiel sind die Instanzen als Tupel dargestellt in der Form (ID, Preis, Anzahl Zimmer). Alle zusammen bilden die Datenmenge.\
+			\begin{itemize}
+			\item (CH1000.400.1, CHF500, 5)
+			\item (CH1000.400.2, CHF340, 2)
+			\end{itemize}\\ \hline 
+		%$K$ & Konzept & Hypothesen über die Daten. \ z.B. Wenn jemand Bier kauft, dann meistens auch Windeln. \\ \hline 
+		$A^c$ & Kategorische Attribute & Attribute welche eine endliche Anzahl von Ausprägungen annehmen können. In dieser Arbeit haben kategorische Attribute keine Reihenfolge. Z.B.: \
+			\begin{itemize}
+			\item Saune vorhanden: \checkmark, \ding{55}
+			\item Distanz bis zum Meer: Nahe, Fern
+			\end{itemize} \\ \hline
+		$A^n$ & Numerische Attribute & Attribute welche eine reele Zahl $\mathbb{R}$ annehmen können.\\ \hline
+		& i-Attributmenge & Eine Menge mit i Attributwerten. Z.B.:
+			\begin{itemize}
+			\item 1-Attributmenge: { (ID, 5) }
+			\item 2-Attributmenge: { (ID, 5), (Preis, CHF500)}
+			\end{itemize}\\ \hline 
 	\end{tabular} 
 \end{table}
