@@ -1,6 +1,62 @@
 \chapter{Proof of Concept}
 \label{sec:proofofconcept}
 
+% PHP/XEDUB installation: https://ubuntuforums.org/showthread.php?t=525257
+%						  https://www.youtube.com/watch?v=OlcsQ8TCU3A
+%	> sudo add-apt-repository ppa:ondrej/php
+%	> sudo apt-get update
+%	> sudo apt-get apache2
+% 	> sudo apt-get install php7.1-dev php-pear php7.1-mbstring php7.1-cgi	  			// old... > sudo apt-get install php5-dev php-pear
+%	> sudo apt-get install libapache2-mod-php7.0
+% 	> sudo pecl install xdebug
+% 	> find / -name 'xdebug.so' 2> /dev/null
+% 	/usr/lib/php5/20060613/xdebug.so
+% 	> sudo gedit /etc/php/7.1/apache2/php.ini		
+%		[xdebug]
+%		zend_extension=/usr/lib/php/20160303/xdebug.so
+%		xdebug.default_enable=1
+%		xdebug.idekey=PHPSTORM
+%		xdebug.remote_enable=1
+%		xdebug.remote_port=9000
+%		xdebug.remote_connect_back=1
+
+% Enabling error msg. Set "`display_errors = On"' in:
+%	> sudo gedit /etc/php/7.1/apache2/php.ini	
+
+% Change document root:
+% 	> sudo gedit /etc/apache2/sites-available/000-default.conf
+%	> sudo gedit /etc/apache2/apache2.conf
+% 	> sudo /etc/init.d/apache2 restart
+
+% Installing grunt (as npm package):
+%	> npm init
+%	> npm install grunt --save-dev
+%	create Gruntfile and update package.json according to: https://gruntjs.com/getting-started and http://www.wearecube.ch/from-less-to-css-with-grunt-js/
+%	> npm install
+%	> grunt
+%					// > grunt watch &				// grunt watch will be stoped when the commandline closes
+
+% installing composer/twig:
+% 	download to project root: https://getcomposer.org
+% 	> php composer-setup.php --filename=composer
+%	create composer.json in project root. content:
+% 		{
+%			"require": {
+%   			"twig/twig": "1.*",
+%			    "twbs/bootstrap": "3.3.7"
+%  			}
+%		}
+%	> php composer.phar install 		or			php composer.phar update
+%	> sudo chown www-data:www-data bookinganalyzerimpl/compilation_cache/
+
+
+
+% Getting bookinganalyzerimpl to run:
+% git clone git@github.com:soultemptation/bookinganalyzerimpl.git
+% npm install
+% grunt
+% php composer.phar install
+
 \section{Datenvorbereitung}
 \label{sec:proofofconcept:datenvorbereitung}
 

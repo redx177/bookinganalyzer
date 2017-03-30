@@ -7,7 +7,7 @@ Im \cref{sec:recherche} wurden Disziplinen und Algorithmen erläutert. In diesem
 
 \subsection{Einschränkung der Data Mining Disziplinen}
 \label{sec:konzept:disziplinauswahl}
-Ziel dieser Arbeit ist es, Attribute von Objekten zu eruieren, welche in einer Gruppe von Buchungen oft vorkommen\todo{cref zu Kapitel 1}. Nachfolgend wird anhand dieser Aufgabenstellungen entschieden, welche Disziplinen im Data Mining (siehe \cref{sec:recherche:dataminingtechniken:disziplinen} \nameref{sec:recherche:dataminingtechniken:disziplinen}) sich dazu eignen. Als Grundlage der Entscheidung gelten die Anforderungen welche an die Algorithmen gestellt wurden (siehe \cref{sec:anforderungsanalyse:algorithmen} \nameref{sec:anforderungsanalyse:algorithmen}).
+Ziel dieser Arbeit ist es, Attribute von Objekten zu eruieren, welche in einer Gruppe von Buchungen oft vorkommen\todo{cref zu Kapitel 1}. Nachfolgend wird anhand dieser Aufgabenstellungen entschieden, welche Disziplinen im Data Mining (siehe \cref{sec:recherche:dataminingtechniken:disziplinen} \nameref{sec:recherche:dataminingtechniken:disziplinen}) sich dazu eignen. Als Grundlage der Entscheidung gelten die gestellten Anforderungen welche in der Anforderungsanalyse definiert wurden (siehe \cref{sec:anforderungsanalyse:funktionaleanforderung} \nameref{sec:anforderungsanalyse:funktionaleanforderung}).
 
 \subsubsection{Association rule learning}
 \label{sec:konzept:disziplinauswahl:association}
@@ -16,13 +16,13 @@ Mittels Association rule learning (siehe \cref{sec:recherche:dataminingtechniken
 
 \subsubsection{Classification}
 \label{sec:konzept:disziplinauswahl:classification}
-Bei der Classification handelt es sich um ein \gls{supervisedlearning} (siehe \cref{sec:recherche:dataminingtechniken:disziplinen:classification} \nameref{sec:recherche:dataminingtechniken:disziplinen:classification}). Deshalb sind vorab Klassen zu definieren welche den Objekten zugewiesen werden. Diese Informationen sind jedoch noch nicht vorhanden, weshalb in den Anforderungen (siehe \cref{sec:anforderungsanalyse:algorithmen:resultat} \nameref{sec:anforderungsanalyse:algorithmen:resultat}) ein \gls{unsupervisedlearning} Algorithmus vorausgesetzt wurde. Deshalb eignet sich die Classification für diese Aufgabenstellung nicht.
+Bei der Classification handelt es sich um ein \gls{supervisedlearning} (siehe \cref{sec:recherche:dataminingtechniken:disziplinen:classification} \nameref{sec:recherche:dataminingtechniken:disziplinen:classification}). Deshalb sind vorab Klassen zu definieren welche den Objekten zugewiesen werden. Diese Informationen sind jedoch noch nicht vorhanden, weshalb in der Anforderung \nameref{fig:anforderungsanalyse:nichtfunktionaleanforderung:fa7} ein \gls{unsupervisedlearning} Algorithmus vorausgesetzt wurde. Deshalb eignet sich die Classification für diese Aufgabenstellung nicht.
 
 \subsubsection{Lineare Regression}
 \label{sec:konzept:disziplinauswahl:regression}
 Linere Regression Algorithmen suchen eine Formel, damit man von einer abhängiger Variable auf unabhängige Grössen schliessen kann (siehe \cref{sec:recherche:dataminingtechniken:disziplinen:regression} \nameref{sec:recherche:dataminingtechniken:disziplinen:regression}). Damit kann man bei den Interhome Daten für neue Buchungen Attribute voraussagen. zum Beispiel wenn man die Kreditwürdigkeit von Kunden überprüfen möchte auf Basis von alten Buchungen.
 
-Diese Algorithmen eignen sich jedoch nicht für diese Arbeit, da weder Attribute noch Gruppen von Buchungen zurückgeliefert werden (siehe \cref{sec:anforderungsanalyse:algorithmen:resultat} \nameref{sec:anforderungsanalyse:algorithmen:resultat}).
+Diese Algorithmen eignen sich jedoch nicht für diese Arbeit, da weder Attribute noch Gruppen von Buchungen zurückgeliefert werden (siehe  \nameref{fig:anforderungsanalyse:funktionaleanforderung:fa1}).
 
 \subsubsection{Cluster analysis}
 \label{sec:konzept:disziplinauswahl:clusteranalysis}
@@ -32,7 +32,7 @@ Dies erweitert die Resultate des \nameref{sec:konzept:disziplinauswahl:associati
 
 \subsubsection{Collaborative Filtering}
 \label{sec:konzept:disziplinauswahl:collaborativefiltering}
-Collaborative Filtering werden für recommender systems eingesetzt um dem Benutzer Instanzen vorzuschlagen die er auch mögen könnte. Grundlage für diese Entscheidungen sind seine bisherigen Interaktionen mit dem System verglichen mit denen von anderen Benutzern. Dadurch könnte bei den Interhome Daten Objekte vorgeschlagen werden die der Kunde auch mögen könnte. Es werden jedoch keine Attribute oder Instanzgruppen gebildet, womit die Anforderung \cref{sec:anforderungsanalyse:algorithmen:resultat} nicht erfüllt sind.
+Collaborative Filtering werden für recommender systems eingesetzt um dem Benutzer Instanzen vorzuschlagen die er auch mögen könnte. Grundlage für diese Entscheidungen sind seine bisherigen Interaktionen mit dem System verglichen mit denen von anderen Benutzern. Dadurch könnte bei den Interhome Daten Objekte vorgeschlagen werden die der Kunde auch mögen könnte. Es werden jedoch keine Attribute oder Instanzgruppen gebildet, womit die Anforderung \nameref{fig:anforderungsanalyse:funktionaleanforderung:fa1} nicht erfüllt ist.
 
 
 \subsection{Algorithmenauswahl}
@@ -306,7 +306,7 @@ Möchte der Benutzer wissen, welche Attribute in der vor-selektierten Datenmenge
 \label{sec:konzept:mockups}
 Die graphischen Oberfläche des Programmes wird nachfolgend anhand von Mockups aufgezeigt. Die Auflistung der Stammdaten sowie der Resultate ist einfachheitshalber verkürzt dargestellt. Auf jeder Seite zuoberst ist das Interhome Logo sowie die Navigation platziert.
 
-In \cref{fig:konzept:mockups:stammdaten} ist die Startseite abgebildet in welcher der Benutzer die Stammdaten (FA4) einsehen kann. Im oberen Bereich sind die Filter, mit welchen der Datenbestand eingeschränkt werden kann. 
+In \cref{fig:konzept:mockups:stammdaten} ist die Startseite abgebildet in welcher der Benutzer die Stammdaten (\nameref{fig:anforderungsanalyse:funktionaleanforderung:fa4}) einsehen kann. Im oberen Bereich sind die Filter, mit welchen der Datenbestand eingeschränkt werden kann. 
 \begin{figure}[H]
 	\RawFloats
 	\centering
@@ -315,7 +315,7 @@ In \cref{fig:konzept:mockups:stammdaten} ist die Startseite abgebildet in welche
 	\label{fig:konzept:mockups:stammdaten}
 \end{figure}
 
-Auf der zweiten Seite, welche in \cref{fig:konzept:mockups:apriori} dargestellt ist, kann der Benutzer eine apriori Analyse durchführen (siehe \cref{sec:konzept:algorithmenauswahl:apriori} \nameref{sec:konzept:algorithmenauswahl:apriori}). Wie vorher sind zuoberst die selben Filter plaziert. Darunter sind die Attribute aufgelistet, welche vom Algorithmus gefunden wurde sowie deren Häufigkeit. Zuunterst ist zur Kontrolle noch der analysierte Datenbestand aufgeführt.
+Auf der zweiten Seite, welche in \cref{fig:konzept:mockups:apriori} dargestellt ist, kann der Benutzer eine apriori Analyse durchführen (siehe \cref{sec:konzept:algorithmenauswahl:apriori} \nameref{sec:konzept:algorithmenauswahl:apriori}). Wie vorher sind zuoberst die selben Filter platziert. Darunter sind die Attribute aufgelistet, welche vom Algorithmus gefunden wurde sowie deren Häufigkeit. Zuunterst ist zur Kontrolle noch der analysierte Datenbestand aufgeführt.
 \begin{figure}[H]
 	\RawFloats
 	\centering
@@ -324,7 +324,7 @@ Auf der zweiten Seite, welche in \cref{fig:konzept:mockups:apriori} dargestellt 
 	\label{fig:konzept:mockups:apriori}
 \end{figure}
 
-Der dritte Reiter führt zur Analyse mit den Clustering Algorithmen k-prototypes und DBSCAN (\cref{sec:konzept:algorithmenauswahl:clustering} \nameref{sec:konzept:algorithmenauswahl:clustering}). Die Filter sind entsprechend den vorherigen Seite zuoberst platziert. Es gibt jedoch zwei Buttons um die Analyse mit den entsprechenden Algorithmen zu starten. Zuunterst sind die gefunden Clusters abgebildet, mit den häufigen Attributen sowie den Buchungen, welche zu den entsprechenden Clustern gehören. Zur Verbesserung der Übericht können die Bereiche auf- und zugeklappt werden.
+Der dritte Reiter führt zur Analyse mit den Clustering Algorithmen k-prototypes und DBSCAN (\cref{sec:konzept:algorithmenauswahl:clustering} \nameref{sec:konzept:algorithmenauswahl:clustering}). Die Filter sind entsprechend den vorherigen Seite zuoberst platziert. Es gibt jedoch zwei Buttons um die Analyse mit den entsprechenden Algorithmen zu starten. Zuunterst sind die gefunden Clusters abgebildet, mit den häufigen Attributen sowie den Buchungen, welche zu den entsprechenden Clustern gehören. Zur Verbesserung der Übersicht können die Bereiche auf- und zugeklappt werden.
 
 \begin{figure}[H]
 	\RawFloats
@@ -336,19 +336,27 @@ Der dritte Reiter führt zur Analyse mit den Clustering Algorithmen k-prototypes
 
 \section{Testcases}
 \label{sec:recherche:testcases}
-
-
-
+Da 
+Testfall 1 (TC1) wurde so gewählt dass eine Häufigkeitsanalyse die Attribute DISKI, DIPUBT, SCTV und SCBALCONY finden sollte.
+%ski, publictransport
 \begin{sidewaystable}[H] 
-	\caption{Beispiel eines Attributaggregators}
+	\caption{TC1: Häufige Attribute sind DISKI, DIPUBT, SCTV \& SCBALCONY}
 	\centering
 	\rowcolors{1}{tablebodycolor}{tablerowcolor}
-	\label{fig:recherche:attributeinschraenkung:1}
-	\begin{tabular}{ | c | c | c |  c | c |  c | c | c |  c | c | c |  c | c | c |  c | c | c |  c | c | c |  c | c | c |  c | c | c | c |} 
+	\label{sec:recherche:testcases:tc1}
+	\begin{tabular}{ | c | c | c |  c | c | c |  c | c | c |  c | c | c |  c | c | c |  c | c | c |  c | c | c |  c | c | c | c |} 
 		\hline 
 		\rowcolor{tableheadcolor}
-		\bfseries \rotatebox{270}{DIWATER} & \bfseries \rotatebox{270}{DISKI} & \bfseries \rotatebox{270}{DIPUBT} & \bfseries \rotatebox{270}{DICENTER} & \bfseries \rotatebox{270}{DISEA} & \bfseries \rotatebox{270}{DILAKE} & \bfseries \rotatebox{270}{PRICES} & \bfseries \rotatebox{270}{QUAL} & \bfseries \rotatebox{270}{ROOMS} & \bfseries \rotatebox{270}{BEDROOMS} & \bfseries \rotatebox{270}{PETS} & \bfseries \rotatebox{270}{CAIRCOND} & \bfseries \rotatebox{270}{CPOOL} & \bfseries \rotatebox{270}{CBBQ} & \bfseries \rotatebox{270}{CSAUNA} & \bfseries \rotatebox{270}{CJACUZZI} & \bfseries \rotatebox{270}{CWASHMACHI} & \bfseries \rotatebox{270}{CPARKING} & \bfseries \rotatebox{270}{CDISHWASHE} & \bfseries \rotatebox{270}{CFIREPLACE} & \bfseries \rotatebox{270}{SCTV} & \bfseries \rotatebox{270}{SCBALCONY} & \bfseries \rotatebox{270}{SCNOSMOKE} & \bfseries \rotatebox{270}{INTERNET} & \bfseries \rotatebox{270}{longitude} & \bfseries \rotatebox{270}{latitude} & \bfseries \rotatebox{270}{id} \\ \hline
-		 & c & c &  &  &  & b & 3 & 4 & 3 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 1 & 0 & 1 & 1 & 1 & 0 & 1 & 40.45538 & -3.79278 & 1.0 \\ \hline
+		\multicolumn{2}{|l|}{\bfseries ID} & \multicolumn{23}{l|}{\bfseries TC1} \\ \hline
+		\rowcolor{tableheadcolor}
+		\bfseries \rotatebox{270}{DIWATER} & \bfseries \rotatebox{270}{DISKI} & \bfseries \rotatebox{270}{DIPUBT} & \bfseries \rotatebox{270}{DICENTER} & \bfseries \rotatebox{270}{DISEA} & \bfseries \rotatebox{270}{DILAKE} & \bfseries \rotatebox{270}{PRICES} & \bfseries \rotatebox{270}{QUAL} & \bfseries \rotatebox{270}{ROOMS} & \bfseries \rotatebox{270}{BEDROOMS} & \bfseries \rotatebox{270}{PETS} & \bfseries \rotatebox{270}{CAIRCOND} & \bfseries \rotatebox{270}{CPOOL} & \bfseries \rotatebox{270}{CBBQ} & \bfseries \rotatebox{270}{CSAUNA} & \bfseries \rotatebox{270}{CJACUZZI} & \bfseries \rotatebox{270}{CWASHMACHI} & \bfseries \rotatebox{270}{CPARKING} & \bfseries \rotatebox{270}{CDISHWASHE} & \bfseries \rotatebox{270}{CFIREPLACE} & \bfseries \rotatebox{270}{SCTV} & \bfseries \rotatebox{270}{SCBALCONY} & \bfseries \rotatebox{270}{SCNOSMOKE} & \bfseries \rotatebox{270}{INTERNET} & \bfseries \rotatebox{270}{id} \\
+		 & c & c &  &  &  & b & 3 & 4 & 3 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 1 & 0 & 1 & 1 & 1 & 0 & 1 & 1 \\
+		  & c & c &  &  &  & b & 4 & 4 & 3 & 0 & 0 & 1 & 0 & 1 & 0 & 1 & 1 & 1 & 0 & 1 & 1 & 1 & 0 & 30 \\
+		  & c & c &  &  &  &  & 3 & 4 & 3 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 1 & 0 & 1 & 1 & 1 & 0 & 1 & 46 \\
+		  & c & c & c &  &  &  & 2 & 2 & 1 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 1 & 0 & 0 & 83 \\
+		  & c & c & c &  &  & b & 1 & 1 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 1 & 1 & 0 & 0 & 151 \\
+		  &  &  &  &  &  &  & 3 & 3 & 2 & 1 & 0 & 1 & 1 & 0 & 0 & 1 & 1 & 0 & 0 & 0 & 0 & 0 & 1 & 158 \\
+		 
 	\end{tabular}
 \end{sidewaystable}
 

@@ -145,7 +145,7 @@ Nachfolgend werden die funktionale Anforderungen an das Programm gestellt.
 	\caption{FA5: Untermenge der Stammdaten einsehen}
 	\centering
 	\rowcolors{1}{tablebodycolor}{tablerowcolor}
-	\label{fig:anforderungsanalyse:funktionaleanforderung:fa4}
+	\label{fig:anforderungsanalyse:funktionaleanforderung:fa5}
 	\begin{tabular}{ | l | L{10cm} | } 
 		\hline 
 		\rowcolor{tableheadcolor}
@@ -153,6 +153,38 @@ Nachfolgend werden die funktionale Anforderungen an das Programm gestellt.
 		Titel & Untermenge der Stammdaten einsehen \\ \hline 
 		Beschreibung & Eine Untermenge der Stammdaten soll gemäss FA3 eingesehen werden können. Diese sollen gleich wie in FA2 einschränkbar sein.  \\ \hline 
 		Abhängigkeit & FA1 \& FA4 \\ \hline 
+		Status & Offen \\ \hline 
+	\end{tabular}
+\end{table}
+
+\begin{table}[H] 
+	\caption{FA6: Mixed data types}
+	\centering
+	\rowcolors{1}{tablebodycolor}{tablerowcolor}
+	\label{fig:anforderungsanalyse:nichtfunktionaleanforderung:fa6}
+	\begin{tabular}{ | l | L{10cm} | } 
+		\hline 
+		\rowcolor{tableheadcolor}
+		\multicolumn{2}{|l|}{\bfseries ID: FA6} \\ \hline 
+		Titel & Mixed data types \\ \hline 
+		Beschreibung & Da die Buchungen von Interhome numerische (z.B. Anzahl Personen, Geolocations) und kategorische Daten (z.B. Aircondition vorhanden?, Objekttyp) beinhalten, müssen die Algorithmen in der Lage sein mit beiden Datentypen umgehen zu können. \\ \hline 
+		Abhängigkeit & \\ \hline 
+		Status & Offen \\ \hline 
+	\end{tabular}
+\end{table}
+
+\begin{table}[H] 
+	\caption{FA7: Selbständigkeit}
+	\centering
+	\rowcolors{1}{tablebodycolor}{tablerowcolor}
+	\label{fig:anforderungsanalyse:nichtfunktionaleanforderung:fa7}
+	\begin{tabular}{ | l | L{10cm} | } 
+		\hline 
+		\rowcolor{tableheadcolor}
+		\multicolumn{2}{|l|}{\bfseries ID: FA7} \\ \hline 
+		Titel & Selbständigkeit \\ \hline 
+		Beschreibung & Die Analyse der Attribute sollte selbständig Muster erkennen können. Es wird keine vorherige Eingabe vom Benutzer benötigt. Siehe \gls{unsupervisedlearning} im Glossar. \\ \hline 
+		Abhängigkeit & \\ \hline 
 		Status & Offen \\ \hline 
 	\end{tabular}
 \end{table}
@@ -172,7 +204,7 @@ Nachfolgend sind die nicht funktionale Anforderungen an das Programm spezifizier
 		\rowcolor{tableheadcolor}
 		\multicolumn{2}{|l|}{\bfseries ID: NFA1} \\ \hline 
 		Titel & Geschwindigkeit \\ \hline 
-		Beschreibung & Da das Programm explorativ verwendet werden soll, muss das Programm eine zügige Antwortszeit aufweisen. Deshalb soll die Attributanalyse innerhalb von 20 Sekunden Resultate liefern können. Die Algorithmen sollten daher maximal ein super-lineares Wachstum ($\mathcal{O}(n\,log\,n)$) aufweisen. \\ \hline 
+		Beschreibung & Da das Programm explorativ verwendet werden soll, muss das Programm eine zügige Antwortszeit aufweisen. Deshalb soll die Attributanalyse innerhalb von 30 Sekunden Resultate liefern können. Die Algorithmen sollten daher maximal ein super-lineares Wachstum ($\mathcal{O}(n\,log\,n)$) aufweisen. \\ \hline 
 		Abhängigkeit & \\ \hline 
 		Status & Offen \\ \hline 
 	\end{tabular}
@@ -249,38 +281,6 @@ Nachfolgend sind die nicht funktionale Anforderungen an das Programm spezifizier
 		Demnach ist es nötig, dass die Software unter Linux sowie auch Windows gestartet werden kann.
 		\item Da der Datenbestand 133'001 Einträge umfasst, muss die Plattform und das Lizenzmodel diese Anzahl an Items unterstützen.
 		\end{itemize}\\ \hline 
-		Abhängigkeit & \\ \hline 
-		Status & Offen \\ \hline 
-	\end{tabular}
-\end{table}
-
-\begin{table}[H] 
-	\caption{NFA6: Mixed data types}
-	\centering
-	\rowcolors{1}{tablebodycolor}{tablerowcolor}
-	\label{fig:anforderungsanalyse:nichtfunktionaleanforderung:nfa6}
-	\begin{tabular}{ | l | L{10cm} | } 
-		\hline 
-		\rowcolor{tableheadcolor}
-		\multicolumn{2}{|l|}{\bfseries ID: NFA6} \\ \hline 
-		Titel & Mixed data types \\ \hline 
-		Beschreibung & Da die Buchungen von Interhome numerische (z.B. Anzahl Personen, Geolocations) und kategorische Daten (z.B. Aircondition vorhanden?, Objekttyp) beinhalten, müssen die Algorithmen in der Lage sein mit beiden Datentypen umgehen zu können. \\ \hline 
-		Abhängigkeit & \\ \hline 
-		Status & Offen \\ \hline 
-	\end{tabular}
-\end{table}
-
-\begin{table}[H] 
-	\caption{NFA7: Selbständigkeit}
-	\centering
-	\rowcolors{1}{tablebodycolor}{tablerowcolor}
-	\label{fig:anforderungsanalyse:nichtfunktionaleanforderung:nfa7}
-	\begin{tabular}{ | l | L{10cm} | } 
-		\hline 
-		\rowcolor{tableheadcolor}
-		\multicolumn{2}{|l|}{\bfseries ID: NFA7} \\ \hline 
-		Titel & Selbständigkeit \\ \hline 
-		Beschreibung & Die Analyse der Attribute sollte selbständig Muster erkennen können. Es wird keine vorherige Eingabe vom Benutzer benötigt. Siehe \gls{unsupervisedlearning} im Glossar. \\ \hline 
 		Abhängigkeit & \\ \hline 
 		Status & Offen \\ \hline 
 	\end{tabular}
