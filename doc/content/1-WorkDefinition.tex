@@ -2,28 +2,109 @@
 % !TeX spellcheck = de_CH_frami
 
 \chapter{Einleitung}
-\label{sec:vorgehen}
-Im Rahmen der Bachelorarbeit werden Buchungsdaten von Interhome analysiert, um daraus Erkenntnisse zu gewinnen. In der Einleitung wird die Aufgabenstellung erläutert, sowie Abgrenzungen definiert.
+\label{sec:einleitung}
+%Im Rahmen der Bachelorarbeit werden Buchungsdaten von Interhome analysiert, um daraus Erkenntnisse zu gewinnen. In der Einleitung wird die Aufgabenstellung erläutert, sowie Abgrenzungen definiert.
  
-\section{Aufgabenstellung}
-Nachfolgend ist die Aufgabenstellung aufgeführt, wie sie für die Projektfreigabe eingereicht wurde.
+ 
 
-\subsection{Ausgangslage}
-Interhome AG vertreibt Ferienwohnungen auf einer Webseite mit 26 Domains und 14 Sprachen, welche mit dem Content Management System Sitecore umgesetzt ist. Darauf können Kunden Ferienhäuser oder -wohnungen (Objekte) buchen. Zuerst muss der User eine Destination auswählen und kann dann die verschiedenen Objekte ansehen. Diese haben einen Namen, Bilder und 18 dargestellte Attribute. Beispiele solcher Attribute sind, ob die Wohnung einen Fernseher besitzt, Tiere erlaubt sind oder eine Sauna vorhanden ist. Dies sind binäre Werte, welche wahr oder falsch sein können. Es gibt zusätzlich noch kontinuierliche Attribute wie Distanz um Meer oder zum Zentrum.
+%\section{Aufgabenstellung}
+%\label{sec:vorgehen:aufgabenstellung}
+%Nachfolgend ist die Aufgabenstellung aufgeführt, wie sie für die Projektfreigabe eingereicht wurde.
+
+\section{Ausgangslage}
+\label{sec:einleitung:ausgangslage}
+
+Die Interhome AG ist eine Internationale Firma mit Büros in 10 Ländern. Sie vertreibt Ferienhäuser und -wohnungen (Objekte) auf einer Webseite welche in 26 Domains und 14 Sprachen aufgerufen werden kann. Darauf können Kunden Objekte suchen und Buchen. Dazu muss der User eine Destination auswählen und kann daraufhin verschiedenen Objekte ansehen. Diese haben einen Namen, Bilder und diverse Attribute. Beispiele solcher Attribute sind, ob die Wohnung einen Fernseher besitzt, Tiere erlaubt sind oder eine Sauna vorhanden ist.
 
 Die Buchungen werden in das \gls{irent} gespeichert. Die gesammelten Daten werden von einem Recommender System, welches von Interhome entwickelt wurde, analysiert. Weitere Untersuchungen der Daten finden im Moment nicht statt.
 
-\subsection{Ziel der Arbeit}
-\label{sec:einletung:ziel}
+\section{Organisationsstruktur}
+\label{sec:einleitung:ausgangslage:organisationsstruktur}
+Die Hotelplan Holding AG ist eine Tochtergesellschaft des Migros-Genossenschafts-Bundes. Darin sind verschiedene \glspl{sbu} angesiedelt, unter anderem auch die Interhome AG. Veranschaulicht wird das in \cref{fig:einleitung:organisationsstruktur:1}.
+\label{sec:einleitung:organisationsstruktur}
+\begin{figure}[h]
+	\RawFloats
+	\centering
+	\includegraphics[width=0.7\textwidth]{images/organisationsstruktur}
+	\caption{Organisationsstruktur der Hotelplan Group}
+	\label{fig:einleitung:organisationsstruktur:1}
+\end{figure}
+
+In der \cref{fig:einleitung:organisationsstruktur:2} werden die Marken der verschiedenen \glspl{sbu} aufgeführt.
+\begin{table}[h] 
+	\caption{Markenaufstellung der Hotelplan Management AG}
+	\centering
+	\rowcolors{1}{tablebodycolor}{tablerowcolor}
+	\label{fig:einleitung:organisationsstruktur:2}
+	\begin{tabular}{ | c | c | c |} 
+		\hline 		
+		\rowcolor{tableheadcolor}
+		\bfseries \gls{sbu} & \bfseries Marke & \bfseries Portal \\ \hline 
+		Hotelplan Managment AG & Hotelplan Management & \href{http://www.hotelplan.com}{www.hotelplan.com} \\ \hline 
+		MTCH AG & Globus Reisen & \href{http://www.globusreisen.ch}{www.globusreisen.ch} \\ \hline 
+		MTCH AG & Travelhouse & \href{http://www.travelhouse.ch}{www.travelhouse.ch} \\ \hline 
+		MTCH AG & Tourisme pour Tous & \href{http://www.tourismepourtous.ch/}{www.tourismepourtous.ch} \\ \hline 
+		MTCH AG & Hotelplan & \href{http://www.hotelplan.ch}{www.hotelplan.ch} \\ \hline 
+		MTCH AG & Migros Ferien & \href{http://www.migros-ferien.ch}{www.migros-ferien.ch} \\ \hline 
+		MTCH AG & Travelwindow & \href{http://www.travel.ch}{www.travel.ch} \\ \hline 
+		bta first travel ag & bta first & \href{http://www.btafirst.com}{www.btafirst.com} \\ \hline 
+		Hotelplan UK & Inghams & \href{http://www.inghams.co.uk}{www.inghams.co.uk} \\ \hline 
+		Hotelplan UK & Inntravel & \href{http://www.inntravel.co.uk}{www.inntravel.co.uk} \\ \hline 
+		Hotelplan UK & Esprit & \href{http://www.esprit-holidays.co.uk}{www.esprit-holidays.co.uk} \\ \hline 
+		Hotelplan UK & Ski Total & \href{http://www.skitotal.com}{www.skitotal.com} \\ \hline 
+		Hotelplan UK & Santa's Lapland & \href{http://www.santaslapland.com}{www.santaslapland.com} \\ \hline 
+		Hotelplan UK & Explore & \href{http://www.explore.co.uk}{www.explore.co.uk} \\ \hline 
+		Hotelplan UK & Regaldive & \href{http://www.regal-diving.co.uk}{www.regal-diving.co.uk} \\ \hline 
+		bedfinder ag & Bedfinder & \href{http://www.bedfinder.com}{www.bedfinder.com} \\ \hline 
+		Holiday Home Division & Interhome & \href{http://www.interhome.ch}{www.interhome.ch} \\ \hline 
+		Holiday Home Division & Interchalet & \href{http://www.interchalet.de}{www.interchalet.de} \\ \hline 
+		Holiday Home Division & Casa & \href{http://casa.interchalet.de}{casa.interchalet.de} \\ \hline 
+		Holiday Home Division & Vacando & \href{http://www.vacando.ch}{www.vacando.ch} \\ \hline 
+	\end{tabular}
+\end{table}
+
+\section{Ziel der Arbeit}
+\label{sec:einleitung:ziel}
 Das Ziel der Arbeit ist es, Interhome eine Plattform zur Verfügung zu stellen, damit neue Informationen aus den Buchungsdaten extrahiert werden können (Knowledge Discovery). Dafür wird entweder ein bestehendes Programm verwendet oder eine eigene Lösung entwickelt. Es soll möglich sein, zum Beispiel eine folgende Frage zu beantworten: „Was für Objekte werden im Winter am meisten in Zermatt gebucht?“. Eine mögliche Antwort wäre: „Objekte welche unter CHF500 kosten und maximal 200 Meter von einem Skilift entfernt sind“.
 Dies sollte Interhome ermöglichen, ihre Marketing Strategie zu verbessern und gezielter Objekte einzukaufen.
 
 Um solche Fragen zu beantworten werden die Buchungsdaten von Interhome (Objekt, Zeitraum, Passagiere, etc.) ausgelesen und mit weiteren Daten (Objektattribute, Geolocation und Wetterinformation) angereicht. 
 Auf dem Endprodukt soll ein Mitarbeiter von Interhome in der Lage sein, ein Abfrage zu generieren, welche aus einem oder mehreren Attribute besteht. Die Applikation analysiert daraufhin die Daten mit Techniken des Data Mining, um eine Liste von Attributen zurück zu liefern, welche für die in der Abfrage aufgeführten Attributen am meisten Buchungen generieren. Die Elemente in der Antwort sollten gewichtet sein um das Resultat besser zu interpretieren.
 
-Die Daten können schlussendlich weiterverwendet werden, um gezielter Werbung an die Kunden zu bringen. Es sollte möglich sein, personalisierte Werbung zu schalten. Wenn ein Kunde aus dem Grossraum Zürich die Webseite bucht, können Objekte angezeigt werden welche von Personen aus dieser Region am meisten gebucht wird. 
+Um dies besser zu veranschaulichen sollte hier ein Beispiel gemacht werden. Dazu wird zuerst mal einige Buchungen vereinfacht aufgezeigt.
+
+\begin{table}[h] 
+	\caption{Beispielhafte Rohdaten}
+	\centering
+	\rowcolors{1}{tablebodycolor}{tablerowcolor}
+	\label{fig:einletung:ziel:1}
+	\begin{tabular}{ | c | c | c | c | c | c | c | c | c | c |} 
+		\hline 
+		\rowcolor{tableheadcolor}
+		\multicolumn{8}{|c|}{\bfseries Objektdaten} & \multicolumn{2}{c|}{\bfseries Kundendaten} \\ \hline
+		
+		\rowcolor{tableheadcolor}
+		\bfseries \rotatebox{90}{ID} & \bfseries \rotatebox{90}{Ortschaft} & \bfseries \rotatebox{90}{Preis (CHF)} & \bfseries \rotatebox{90}{Tiere erlaubt} & \bfseries \rotatebox{90}{Grill vorhanden} & \bfseries \rotatebox{90}{Balkon vorhanden} & \bfseries \rotatebox{90}{Distanz zum Meer (m)} & \bfseries \rotatebox{90}{Distanz zum Skilift (m)} &  
+		
+		\bfseries \rotatebox{90}{Ortschaft} & \bfseries \rotatebox{90}{Wetter} \\ \hline 
+		
+		1 & Zermatt & 230 & \checkmark &  &  &  & 150 & Bern & Sonne \\ \hline 
+		2 & Cannes & 450 & & \checkmark & \checkmark & 700 & &  Grindelwald & Schnee \\ \hline 
+		3 & Cannes & 2301 &  & \checkmark &  & 350 &  &  Mallorca & Regen \\ \hline 
+		4 & Zermatt & 879 & \checkmark & & \checkmark &  & 350  & Nizza & Regen \\ \hline 
+		5 & Zermatt & 149 & \checkmark & \checkmark & \checkmark &  & 500 & Zürich & \\
+		6 & Cannes & 873 &  & \checkmark &  & 80 &  &  Mallorca & Regen \\ \hline 
+		7 & Paris & 620 &  & \checkmark &  &  &  &  Zürich & Regen \\ \hline 
+	\end{tabular}
+\end{table}
+
+Als Beispiel möchte das Marketing wissen, was gebucht wird wenn es regnet. Die Anfrage würde somit lautet "`Wetter = Regen"'. Das Resultat aus dem Datenstamm in \cref{fig:einletung:ziel:1} wäre somit: "`Ortschaft = Zermatt, Tiere erlaubt = \checkmark, in 3/4 Buchungen"'. Oder in Worten: "`In 75\% der selektieren Buchungen wurden Objekte in Zermatt gebucht, in welchen Haustiere erlaubt sind."'. 
+
+Die Daten können schlussendlich weiterverwendet werden, um gezielter Werbung an die Kunden zu bringen. Im obigen Beispiel könnte man durch die IP-Adresse des Users auf der Webseite von Interhome den ungefähren Ort herausfinden wo dieser wohnt. Durch weitere bestehende Services kann zusätzlich das momentane Wetter des Benutzers ermittelt werden. Ist es dort zur Zeit am regnen, kann dem Kunden Objekte in Zermatt angezeigt werden, in welchen Haustiere erlaubt sind.
+
 
 \section{Abgrenzung}
+\label{sec:einleitung:abgrenzung}
 Dieses Kapitel beschreibt sämtliche Projektabgrenzungen, welche für dieses Projekt definiert
 wurden.
 
