@@ -68,10 +68,10 @@ In der \cref{fig:einleitung:organisationsstruktur:2} werden die Marken der versc
 Das Ziel der Arbeit ist es, Interhome eine Plattform zur Verfügung zu stellen, damit neue Informationen aus den Buchungsdaten extrahiert werden können (Knowledge Discovery). Dafür wird entweder ein bestehendes Programm verwendet oder eine eigene Lösung entwickelt. Es soll möglich sein, zum Beispiel eine folgende Frage zu beantworten: „Was für Objekte werden im Winter am meisten in Zermatt gebucht?“. Eine mögliche Antwort wäre: „Objekte welche unter CHF500 kosten und maximal 200 Meter von einem Skilift entfernt sind“.
 Dies sollte Interhome ermöglichen, ihre Marketing Strategie zu verbessern und gezielter Objekte einzukaufen.
 
-Um solche Fragen zu beantworten werden die Buchungsdaten von Interhome (Objekt, Zeitraum, Passagiere, etc.) ausgelesen und mit weiteren Daten (Objektattribute, Geolocation und Wetterinformation) angereicht. 
+Um solche Fragen zu beantworten werden die Buchungsdaten von Interhome (Objekt, Zeitraum, Passagiere, etc.) verwendet und mit weiteren Daten (Geolocation, Wetterinformation) angereicht. 
 Auf dem Endprodukt soll ein Mitarbeiter von Interhome in der Lage sein, ein Abfrage zu generieren, welche aus einem oder mehreren Attribute besteht. Die Applikation analysiert daraufhin die Daten mit Techniken des Data Mining, um eine Liste von Attributen zurück zu liefern, welche für die in der Abfrage aufgeführten Attributen am meisten Buchungen generieren. Die Elemente in der Antwort sollten gewichtet sein um das Resultat besser zu interpretieren.
 
-Um dies besser zu veranschaulichen sollte hier ein Beispiel gemacht werden. Dazu ist in der \cref{fig:einletung:ziel:1} eine Datenmenge aufgeführt. Die ersten 9 Spalten sind die Rohdaten, und das Wetter muss zusätzlich angereichert werden.
+Um dies besser zu veranschaulichen sollte hier ein Beispiel gemacht werden. Dazu ist in der \cref{fig:einletung:ziel:1} eine Datenmenge aufgeführt. Die ersten 9 Spalten sind Rohdaten und das Wetter (letzte Spalte) muss zusätzlich angereichert werden.
 
 \begin{table}[h] 
 	\caption{Beispielhafte angereicherte Buchungsdaten}
@@ -98,7 +98,7 @@ Um dies besser zu veranschaulichen sollte hier ein Beispiel gemacht werden. Dazu
 	\end{tabular}
 \end{table}
 
-Als Beispiel möchte das Marketing wissen, was gebucht wird wenn es regnet. Die Anfrage würde somit lautet "`Wetter = Regen"'. Das Resultat aus dem Datenstamm in \cref{fig:einletung:ziel:1} wäre somit: "`Ortschaft = Zermatt, Tiere erlaubt = \checkmark, in 3/4 Buchungen"'. Oder in Worten: "`In 75\% der selektieren Buchungen wurden Objekte in Zermatt gebucht, in welchen Haustiere erlaubt sind."'. 
+Als Beispiel möchte das Marketing wissen, was gebucht wird wenn es regnet. Die Anfrage  lautet "`Wetter = Regen"'. Dies passt auf die Elemente 3, 4, 6 und 7 zu. Das Resultat der Datenanalyse \cref{fig:einletung:ziel:1} ist in diesem Fall "`Ortschaft = Zermatt, Tiere erlaubt = \checkmark, in 3/4 Buchungen"'. Oder in Worten: "`In 75\% der selektieren Buchungen wurden Objekte in Zermatt gebucht, in welchen Haustiere erlaubt sind."'. 
 
 Die Daten können schlussendlich weiterverwendet werden, um gezielter Werbung an die Kunden zu bringen. Im obigen Beispiel könnte man durch die IP-Adresse des Users auf der Webseite von Interhome den ungefähren Ort herausfinden wo dieser wohnt. Durch weitere bestehende Services kann zusätzlich das momentane Wetter des Benutzers ermittelt werden. Ist es dort zur Zeit am regnen, kann dem Kunden Objekte in Zermatt angezeigt werden, in welchen Haustiere erlaubt sind.
 
