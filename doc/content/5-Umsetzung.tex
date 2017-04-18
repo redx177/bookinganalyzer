@@ -49,6 +49,19 @@
 %	> php composer.phar install 		or			php composer.phar update
 %	> sudo chown www-data:www-data bookinganalyzerimpl/compilation_cache/
 
+% https://nikic.github.io/2011/12/12/How-big-are-PHP-arrays-really-Hint-BIG.html
+% installing redis
+%	> sudo pecl install redis
+%	Adding "extension=redis.so" to php.ini
+%	  	> sudo gedit /etc/php/7.1/apache2/php.ini	
+%	  	> sudo gedit /etc/php/7.1/cli/php.ini	
+% 	> sudo /etc/init.d/apache2 restart
+%
+%	> wget http://download.redis.io/releases/redis-3.2.8.tar.gz
+%	> tar xzf redis-3.2.8.tar.gz
+%	> cd redis-3.2.8
+%	> make
+% 	> ~/programs/redis-3.2.8/src/redis-server
 
 
 % Getting bookinganalyzerimpl to run:
@@ -64,3 +77,38 @@
 % https://en.wikipedia.org/wiki/Feature_selection
 % http://dollar.biz.uiowa.edu/~street/research/dmoc.pdf
 % http://www.jmlr.org/papers/volume3/guyon03a/guyon03a.pdf
+
+\subsection{RapidMiner Prozess für die Datenvorbereitung}
+\label{sec:konzept:rapidminer}
+
+Die Datenvorbereitung (data preprocessing) wird mit dem Programm RapidMiner durchgeführt.
+Zuerst werden die Daten aus dem \gls{csv} File geladen. Anschliessend die Attribute gemäss \cref{fig:recherche:attributeinschraenkung:2} eingeschränkt sowie die Diskretisierung entsprechend \cref{fig:recherche:datenvorbereitung:1} und \ref{fig:recherche:datenvorbereitung:2} durchgeführt.
+
+\cref{fig:recherche:rapidminer:1} zeigt den Prozess im RapidMiner Studio. In \ref{fig:recherche:rapidminer:1:1} wird der Hauptprozess gezeigt. Zusätzlich sind die Operatoren "`Generate ID"' und "`Write CSV"' vorhanden. Ersterer generiert eine neue ID. Da im Schritt "`Select Attributes"' keine Kundenspezifischen Daten ausgewählt werden, sind die Informationen nacher voll anonymisiert und können auch veröffentlicht werden. Der letzte Schritt schreibt das Resultat in ein \gls{csv} File damit es nachher weiterverwendet werden kann.
+
+\cref{fig:recherche:rapidminer:1:2} ist ein Unterprozess welcher die Diskretisierung des Preises und der Distanzen vornimmt. Im \cref{sec:recherche:datenvorbereitung} wird beschrieben dass nicht alle Bereich der zu diskretierenden Attribute verwendet werden soll (z.B. Distanzen >499 werden nicht berücksichtigt). Dies kann mit den "`Discretize"' Operatoren in RapidMiner nicht abgebildet werden. Deshalb werden alle Werte diskretiert und die zu ignorierenden nachher entfernt.
+
+\cref{fig:recherche:rapidminer:1:3} zeigt den Unterprozess für die Ersetzung von Attributwerten. Zuerst werden, wie im \cref{sec:recherche:datenbeschaffung} beschrieben, "`X"' Werte von kategorischen Feldern mit "`1"' ersetzt und leere mit "`0"'. Danach werden die nicht zu verwendenden diskretierten Werte der Preise und Distanzen entfernt.
+
+\begin{figure}[htb]
+	\begin{subfigure}[t]{1\textwidth}
+		\centering
+		\includegraphics[width=1\textwidth]{images/rapidminer-process}
+		\caption{Hauptprocess}
+		\label{fig:recherche:rapidminer:1:1}
+	\end{subfigure} \\
+	\begin{subfigure}[t]{0.5\textwidth}
+		\centering
+		\includegraphics[width=1\textwidth]{images/rapidminer-process-discretization}
+		\caption{Subprocess für die Diskretisierung}
+		\label{fig:recherche:rapidminer:1:2}
+	\end{subfigure}
+	\begin{subfigure}[t]{0.8\textwidth}
+		\centering
+		\includegraphics[width=1\textwidth]{images/rapidminer-process-replace-values}
+		\caption{Subprocess für die Ersetzung von Attributwerten}
+		\label{fig:recherche:rapidminer:1:3}
+	\end{subfigure}
+	\caption{RapidMiner Prozess für die Vorbereitung der Daten}
+	\label{fig:recherche:rapidminer:1}
+\end{figure}

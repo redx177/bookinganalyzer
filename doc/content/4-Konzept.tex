@@ -1,5 +1,6 @@
 \chapter{Konzept}
 \label{sec:konzept}
+Im Konzept wird beschrieben, wie die Problemstellung, welch im \cref{sec:einleitung:ziel} aufgezeigt wurde, gelöst werden kann. Dazu werden zuerst die einzusetzenden Algorithmen evaluiert (siehe \cref{sec:konzept:disziplin-und-algorithmen} \nameref{sec:konzept:disziplin-und-algorithmen}) und aufgezeigt, wie diese angewendet werden (siehe \cref{sec:konzept:anwendungderalgorithmen} \nameref{sec:konzept:anwendungderalgorithmen}). Anschliessend werden die Daten beschrieben und deren Vorbereitung erläutert (siehe \cref{sec:recherche:datenbestand} \nameref{sec:recherche:datenbestand}). \todo{ergänzen 4.4-4.6}
 
 \section{Selektion der Disziplinen und Algorithmenen}
 \label{sec:konzept:disziplin-und-algorithmen}
@@ -7,7 +8,7 @@ Im \cref{sec:recherche} wurden Disziplinen und Algorithmen erläutert. In diesem
 
 \subsection{Einschränkung der Data Mining Disziplinen}
 \label{sec:konzept:disziplinauswahl}
-Ziel dieser Arbeit ist es, Attribute von Objekten zu eruieren, welche in einer Gruppe von Buchungen oft vorkommen\todo{cref zu Kapitel 1}. Nachfolgend wird anhand dieser Aufgabenstellungen entschieden, welche Disziplinen im Data Mining (siehe \cref{sec:recherche:dataminingtechniken:disziplinen} \nameref{sec:recherche:dataminingtechniken:disziplinen}) sich dazu eignen. Als Grundlage der Entscheidung gelten die gestellten Anforderungen welche in der Anforderungsanalyse definiert wurden (siehe \cref{sec:anforderungsanalyse:funktionaleanforderung} \nameref{sec:anforderungsanalyse:funktionaleanforderung}).
+Ziel dieser Arbeit ist es, Attribute von Objekten zu eruieren, welche in einer Gruppe von Buchungen oft vorkommen (siehe \cref{sec:einleitung:ziel} \nameref{sec:einleitung:ziel}). Nachfolgend wird anhand dieser Aufgabenstellungen entschieden, welche Disziplinen im Data Mining (siehe \cref{sec:recherche:dataminingtechniken:disziplinen} \nameref{sec:recherche:dataminingtechniken:disziplinen}) sich dazu eignen. Als Grundlage der Entscheidung gelten die gestellten Anforderungen welche in der Anforderungsanalyse definiert wurden (siehe \cref{sec:anforderungsanalyse:funktionaleanforderung} \nameref{sec:anforderungsanalyse:funktionaleanforderung}).
 
 \subsubsection{Association rule learning}
 \label{sec:konzept:disziplinauswahl:association}
@@ -33,7 +34,6 @@ Dies erweitert die Resultate des \nameref{sec:konzept:disziplinauswahl:associati
 \subsubsection{Collaborative Filtering}
 \label{sec:konzept:disziplinauswahl:collaborativefiltering}
 Collaborative Filtering werden für recommender systems eingesetzt um dem Benutzer Instanzen vorzuschlagen die er auch mögen könnte. Grundlage für diese Entscheidungen sind seine bisherigen Interaktionen mit dem System verglichen mit denen von anderen Benutzern. Dadurch könnte bei den Interhome Daten Objekte vorgeschlagen werden die der Kunde auch mögen könnte. Es werden jedoch keine Attribute oder Instanzgruppen gebildet, womit die Anforderung \nameref{fig:anforderungsanalyse:funktionaleanforderung:fa1} nicht erfüllt ist.
-
 
 \subsection{Algorithmenauswahl}
 \label{sec:konzept:algorithmenauswahl}
@@ -72,10 +72,11 @@ Bei den partitionierenden Algorithmen sind die bekanntesten Vertreter der k-mean
 Als Vertreter der Density-based Algorithmen wird \gls{dbscan} verwendet. Beschrieben der er im \cref{sec:recherche:algorithmen:dbscan}. Als alternative bietet sich \gls{optics} an. Dabei handelt es sich um eine Erweiterung von \gls{dbscan}, bei welchem kein Dichte $\epsilon$ angegeben werden muss. Jedoch erstellt \gls{optics} keine Clusters, sondern eine geordnete aufsteigende Liste, sodass räumlich benachbarte Punkte in dieser Ordnung nahe aufeinander liegen. Die Auswertung der Liste muss nachgelagert ausgeführt werden\footcite{data_mining_concepts_and_techniques}. In dieser Arbeit wird \gls{dbscan} verwendet da mit geeigneten, noch zu ermittelnden, werten für $\epsilon$ und $minpts$ ein Clustering erstellt werden kann und der Benutzer die Resultate nicht noch weiter interpretieren muss. Sollte es nötig sein, so kann nach der Arbeit überprüft werden ob \gls{optics} bessere Resultate liefert.
 
 \section{Anwendung der Algorithmen}
-Bei der Anwendung der Algorithmen gibt es Probleme, welche in diesem Abschnitt beschrieben werden. Zum einen müssen die Algorithmen vergleichbar sein, wozu eine einheitliche Distanzmessung eingesetzt wird und sie müssen mit kategorischen Attributen arbeiten können. Diese Problematik wird im \cref{sec:konzept:algorithmenauswahl:clustering:distanzmessung} näher erläutert. Zum anderen müssen die verschiedenen Parameter, welche die Algorithmen benötigen, korrekt gesetzt werden, was im \cref{sec:konzept:parameterauswahl} besprochen wird.
+\label{sec:konzept:anwendungderalgorithmen}
+Bei der Anwendung der Algorithmen gibt es Probleme, welche in diesem Abschnitt beschrieben werden. Zum einen müssen die Algorithmen vergleichbar sein, wozu eine einheitliche Distanzmessung eingesetzt wird und sie müssen mit kategorischen Attributen arbeiten können. Diese Problematik wird im \cref{sec:konzept:anwendungderalgorithmen:distanzmessung} näher erläutert. Zum anderen müssen die verschiedenen Parameter, welche die Algorithmen benötigen, korrekt gesetzt werden, was im \cref{sec:konzept:parameterauswahl} besprochen wird.
 
 \subsection{Distanzmessung}
-\label{sec:konzept:algorithmenauswahl:clustering:distanzmessung}
+\label{sec:konzept:anwendungderalgorithmen:distanzmessung}
 Um die Resultate der Clustering Algorithmen zu vergleichen wird eine einheitliche Funktion $d$ zur Distanzmessung definiert.
 Dazu eignet sich zum Beispiel die quadratische euklidische Distanz wie sie in der \cref{eq:recherche:clusteranalysis:1} aufgezeigt wird.
 
@@ -110,7 +111,7 @@ Dadurch erhalten Instanzen mit vielen Übereinstimmungen eine kleinere Distanz a
 \label{sec:konzept:parameterauswahl}
 Für die Clustering Algorithmen und die Distanzmessung werden Eingabeparameter benötigt, dessen Auswahl in diesem Abschnitt erläutert wird.
 
-Für \gls{dbscan} wird $\epsilon$ und $minpts$ benötigt, sowie $\gamma$ für die Distanzmessung (siehe \cref{sec:recherche:algorithmen:dbscan} \nameref{sec:recherche:algorithmen:dbscan} sowie \cref{sec:konzept:algorithmenauswahl:clustering:distanzmessung} \nameref{sec:konzept:algorithmenauswahl:clustering:distanzmessung}). Diese Werte müssen explorativ ermittelt werden. Dazu werden im \cref{sec:recherche:testcases} Testcases definiert welche Clusters beinhaltet. Die Parameter müssen so gesetzt werden, dass die vordefinierten Clusters gefunden werden. Anschliessend können die selben Werte auf den produktiven Daten angewendet werden.
+Für \gls{dbscan} wird $\epsilon$ und $minpts$ benötigt, sowie $\gamma$ für die Distanzmessung (siehe \cref{sec:recherche:algorithmen:dbscan} \nameref{sec:recherche:algorithmen:dbscan} sowie \cref{sec:konzept:anwendungderalgorithmen:distanzmessung} \nameref{sec:konzept:anwendungderalgorithmen:distanzmessung}). Diese Werte müssen explorativ ermittelt werden. Dazu werden im \cref{sec:recherche:testcases} Testcases definiert welche Clusters beinhaltet. Die Parameter müssen so gesetzt werden, dass die vordefinierten Clusters gefunden werden. Anschliessend können die selben Werte auf den produktiven Daten angewendet werden.
 
 Die Ermittlung des $k$ Wertes beim k-prototypes Algorithmus wird im \cref{sec:konzept:parameterauswahl:kprototypes} beschrieben.
 
@@ -127,7 +128,7 @@ Der k-prototypes benötigt die Anzahl an Clustern $k$ die generiert werden solle
 	\label{fig:konzept:parameterauswahl:kprototypes}
 \end{figure}
 
-Bei einem Cluster $k=1$ am grössten und wird 0 erreichen wenn $k=n$, wobei $n$ die Anzahl Instanzen darstellt. Der optimale Wert liegt dort wo die Kurve beginnt abzuflachen.
+Bei einem Cluster $k=1$ ist der Fehler am grössten und erreichen 0 wenn $k=n$, wobei $n$ die Anzahl Instanzen darstellt. Der optimale Wert liegt dort wo die Kurve beginnt abzuflachen. Im obigen Beispiel ist dies $k=3$.
 
 \section{Datenbestand}
 \label{sec:recherche:datenbestand}
@@ -137,7 +138,7 @@ Nachfolgend wird der Datenbestand und die selektion der Attribute erklärt.
 \label{sec:recherche:datenbeschaffung}
 Die Daten für die Auswertung wurden aus dem \gls{irent} extrahiert werden. Da die Buchungen Kundendaten enthalten, können sie nicht veröffentlicht werden.
 
-Die Daten liegen im Windows Excel Format vor. Es sind total 133'001 Datensätze mit jeweils 153 Felder. Die Zellen A-U sind Informationen im Bezug auf die Buchungen, alle anderen (V-EW) beziehen sich auf das Objekt selber. Die Felbeschreibungen sind im \cref{app:feldbeschreibungen} aufgeführt.
+Die Daten liegen im Windows Excel Format vor. Es sind total 183'051 Datensätze mit jeweils 153 Felder. Die Felbeschreibungen sind im \cref{app:feldbeschreibungen} aufgeführt. Zellen A-U sind Informationen im Bezug auf die Buchungen, alle anderen (V-EW) beziehen sich auf das Objekt selber.
 
 "`boolean"' Datentypen werden behandelt wie "`categorical"' Werte mit nur zwei Ausprägungen, sprich "`0"' und "`1"',
 
@@ -145,10 +146,10 @@ Die Daten liegen im Windows Excel Format vor. Es sind total 133'001 Datensätze 
 \label{sec:recherche:datenvorbereitung}
 Die Datenvorbereitung wandelt die Daten so um dass sie für das Data Mining möglichst effizient verwendet werden können. Dies umfasst die Bereinigung, Transformation sowie Reduktion von Informationen\footcite{feature_selection_2017-01-04}. Bei ersteren werden Messfehler im Datenbestand behoben, fehlende Felder ergänzt oder Duplikate entfernt. Die Transformation wandelt Werte um damit sie für die Berechnung besser geeignet sind. Zum Beispiel können Wertebereiche in Intervalle aufgeteilt werden. Bei letzteren werden Instanzen der Datengrundlage entfernt, wodurch die Berechnungszeit verkürzt wird, oder Attribute von allen Instanzen entfernt, da deren Entropie zu gering ist. Zum Beispiel ist es unspannend, wenn ein Attribut bei (fast) allen Instanzen gleich ist. 
 
-Folgende Modifikationen wurden an den Rohdaten vorgenommen:
+Folgende Modifikationen werden an den Rohdaten vorgenommen:
 \begin{itemize}
-\item Das Datenformat wurde für die einfachere programmatische Handhabung von Windows Excel in das \gls{csv}-Format transferiert.
-\item Boolsche Werte waren entweder leer (gleichbedeutend mit "`0"') oder "`X"' (gleichbedeutend mit "`1"'). Die Werte wurden geändert auf 0 und 1.
+%\item Das Datenformat wurde für die einfachere programmatische Handhabung von Windows Excel in das \gls{csv}-Format transferiert.
+\item Boolsche Werte ist entweder leer (gleichbedeutend mit "`0"') oder "`X"' (gleichbedeutend mit "`1"'). Die Werte werden geändert auf 0 und 1.
 \item Distanzen in den Zeilen AK (Distanz zum Wasser), AL (Distanz zum Skigebiet), AM (Distanz zum öffentlichen Verkehr), DZ (Distanz zum Zentrum), EA (Distanz bis zum Meer) und EB (Distanz bis zum See) wurden diskretisiert. Dabei interessiert es Interhome nur, wenn die Nähe kleiner als 500 ist. Alles über oder gleich 500 wird nicht verwendet. Siehe \cref{fig:recherche:datenvorbereitung:1}.
 \item Der Preis wurde diskretisiert. Spannend für die Interpretation sind nur werte welche kleiner als 500 sind oder über 2000. Siehe \cref{fig:recherche:datenvorbereitung:2}.
 \end{itemize}
@@ -179,6 +180,48 @@ Folgende Modifikationen wurden an den Rohdaten vorgenommen:
 		0 & 499 & budget \\ \hline 
 		500 & 1999 &  \\ \hline 
 		2000 & $\infty$ & luxury \\ \hline 
+	\end{tabular}
+\end{table}
+
+In den Tabellen \ref{fig:recherche:datenvorbereitung:3} und \ref{fig:recherche:datenvorbereitung:4} wird ein Beispiel gegeben. In der ersten Tabelle sind Buchungen vor der diskretisierung aufgeführt und in der zweiten danach. Distanzwerte von 500 oder mehr und Preise zwischen 499 und 2000 wurden entfernt. Dies ist zum Beispiel bei dem Wert "`Distanz zum Skilift"' der Buchung mit ID 3 geschehen.
+
+\begin{table}[H] 
+	\caption{Datenbestand vor der Diskretisierung}
+	\centering
+	\rowcolors{1}{tablebodycolor}{tablerowcolor}
+	\label{fig:recherche:datenvorbereitung:3}
+	\begin{tabular}{ | c | c | c | c | c | c | c | c | } 
+		\hline 		
+		\rowcolor{tableheadcolor}
+		\bfseries \rotatebox{90}{ID} & \bfseries \rotatebox{90}{Ortschaft} & \bfseries \rotatebox{90}{Preis (CHF)} & \bfseries \rotatebox{90}{Tiere erlaubt} & \bfseries \rotatebox{90}{Grill vorhanden} & \bfseries \rotatebox{90}{Balkon vorhanden} & \bfseries \rotatebox{90}{Distanz zum Meer (m)} & \bfseries \rotatebox{90}{Distanz zum Skilift (m)} \\ \hline 
+		
+		1 & Zermatt & 230 & \checkmark &  &  &  & 150 \\ \hline 
+		2 & Cannes & 450 & & \checkmark & \checkmark & 260 & \\ \hline 
+		3 & Zermatt & 2301 & \checkmark & \checkmark & & 350 & 850 \\ \hline 
+		4 & Zermatt & 879 & \checkmark & & \checkmark &  & 350 \\ \hline 
+		5 & Zermatt & 149 & \checkmark &  & \checkmark &  & 450 \\
+		6 & Cannes & 873 &  & \checkmark &  & 80 & 1200 \\ \hline 
+		7 & Zermatt & 1800 & \checkmark & \checkmark &  & 760 & \\ \hline 
+	\end{tabular}
+\end{table}
+
+\begin{table}[H] 
+	\caption{Datenbestand nach der Diskretisierung}
+	\centering
+	\rowcolors{1}{tablebodycolor}{tablerowcolor}
+	\label{fig:recherche:datenvorbereitung:4}
+	\begin{tabular}{ | c | c | c | c | c | c | c | c | } 
+		\hline 		
+		\rowcolor{tableheadcolor}
+		\bfseries \rotatebox{90}{ID} & \bfseries \rotatebox{90}{Ortschaft} & \bfseries \rotatebox{90}{Preis} & \bfseries \rotatebox{90}{Tiere erlaubt} & \bfseries \rotatebox{90}{Grill vorhanden} & \bfseries \rotatebox{90}{Balkon vorhanden} & \bfseries \rotatebox{90}{Distanz zum Meer (m)} & \bfseries \rotatebox{90}{Distanz zum Skilift (m)} \\ \hline 
+		
+		1 & Zermatt & budget & \checkmark &  &  &  & close \\ \hline 
+		2 & Cannes & budget & & \checkmark & \checkmark & close & \\ \hline 
+		3 & Zermatt & luxury & \checkmark & \checkmark &  & close & \\ \hline 
+		4 & Zermatt &  & \checkmark & & \checkmark &  & close \\ \hline 
+		5 & Zermatt & budget & \checkmark &  & \checkmark &  & close \\
+		6 & Cannes &  &  & \checkmark &  & close &  \\ \hline 
+		7 & Zermatt & luxury & \checkmark & \checkmark &  &  & \\ \hline 
 	\end{tabular}
 \end{table}
 
@@ -214,7 +257,7 @@ Der Datenbestand besteht aus 127 Attributen/Spalten. Aus folgenden Gründen soll
 	\end{tabular}
 \end{table}
 
-In Absprache mit Interhome wurde entschieden, dass in einem ersten Schritt jene Attribute verwendet werden sollen, welche auch direkt auf der Webseite dargestellt werden. Die zu verendenden Spalten sind in der \cref{fig:recherche:attributeinschraenkung:2} aufgeführt. Das Feld "`NREF"' beinhaltet die Objektidentifikation. Dieses wird für die Attributanalyse nicht verwendet, hilft jedoch den Testern bei der Validierung der Resultate und sollte deshalb beim einsehen des Datenbestandes mit angezeigt werden.
+In Absprache mit Interhome wurde entschieden, dass in einem ersten Schritt jene Attribute verwendet werden sollen, welche auch direkt auf der Webseite dargestellt werden. Die zu verwendenden Spalten sind in der \cref{fig:recherche:attributeinschraenkung:2} aufgeführt. Das Feld "`NREF"' beinhaltet die Objektidentifikation. Dieses wird für die Attributanalyse nicht verwendet, hilft jedoch den Testern bei der Validierung der Resultate und sollte deshalb beim einsehen des Datenbestandes mit angezeigt werden.
 
 \begin{table}[H] 
 	\caption{Zu verwendende Attribute}
@@ -255,52 +298,75 @@ In Absprache mit Interhome wurde entschieden, dass in einem ersten Schritt jene 
 
 %Einige Attribute sind mehrfach
 
-\subsection{RapidMiner Prozess für die Datenvorbereitung}
-\label{sec:konzept:rapidminer}
-
-Die Datenvorbereitung (data preprocessing) wird mit dem Programm RapidMiner durchgeführt.
-Zuerst werden die Daten aus dem \gls{csv} File geladen. Anschliessend die Attribute gemäss \cref{fig:recherche:attributeinschraenkung:2} eingeschränkt sowie die Diskretisierung entsprechend \cref{fig:recherche:datenvorbereitung:1} und \ref{fig:recherche:datenvorbereitung:2} durchgeführt.
-
-\cref{fig:recherche:rapidminer:1} zeigt den Prozess im RapidMiner Studio. In \ref{fig:recherche:rapidminer:1:1} wird der Hauptprozess gezeigt. Zusätzlich sind die Operatoren "`Generate ID"' und "`Write CSV"' vorhanden. Ersterer generiert eine neue ID. Da im Schritt "`Select Attributes"' keine Kundenspezifischen Daten ausgewählt werden, sind die Informationen nacher voll anonymisiert und können auch veröffentlicht werden. Der letzte Schritt schreibt das Resultat in ein \gls{csv} File damit es nachher weiterverwendet werden kann.
-
-\cref{fig:recherche:rapidminer:1:2} ist ein Unterprozess welcher die Diskretisierung des Preises und der Distanzen vornimmt. Im \cref{sec:recherche:datenvorbereitung} wird beschrieben dass nicht alle Bereich der zu diskretierenden Attribute verwendet werden soll (z.B. Distanzen >499 werden nicht berücksichtigt). Dies kann mit den "`Discretize"' Operatoren in RapidMiner nicht abgebildet werden. Deshalb werden alle Werte diskretiert und die zu ignorierenden nachher entfernt.
-
-\cref{fig:recherche:rapidminer:1:3} zeigt den Unterprozess für die Ersetzung von Attributwerten. Zuerst werden, wie im \cref{sec:recherche:datenbeschaffung} beschrieben, "`X"' Werte von kategorischen Feldern mit "`1"' ersetzt und leere mit "`0"'. Danach werden die nicht zu verwendenden diskretierten Werte der Preise und Distanzen entfernt.
-
-\begin{figure}[htb]
-	\begin{subfigure}[t]{1\textwidth}
-		\centering
-		\includegraphics[width=1\textwidth]{images/rapidminer-process}
-		\caption{Hauptprocess}
-		\label{fig:recherche:rapidminer:1:1}
-	\end{subfigure} \\
-	\begin{subfigure}[t]{0.5\textwidth}
-		\centering
-		\includegraphics[width=1\textwidth]{images/rapidminer-process-discretization}
-		\caption{Subprocess für die Diskretisierung}
-		\label{fig:recherche:rapidminer:1:2}
-	\end{subfigure}
-	\begin{subfigure}[t]{0.8\textwidth}
-		\centering
-		\includegraphics[width=1\textwidth]{images/rapidminer-process-replace-values}
-		\caption{Subprocess für die Ersetzung von Attributwerten}
-		\label{fig:recherche:rapidminer:1:3}
-	\end{subfigure}
-	\caption{RapidMiner Prozess für die Vorbereitung der Daten}
-	\label{fig:recherche:rapidminer:1}
-\end{figure}
-
 \section{Ablauf}
-Der Ablauf des Data Mining im zu entwickelnden Programm ist zweistufig. Als erstes gibt der User eine Abfrage ein, für welche anschliessend eine eine Liste von häufig auftretenden Attributen gesucht werden soll (siehe \cref{sec:einletung:ziel} \nameref{sec:einletung:ziel}).
+\label{sec:konzept:ablauf}
+Der Ablauf des Data Mining im zu entwickelnden Programm ist zweistufig. Als erstes gibt der User eine Abfrage ein, für welche anschliessend eine Liste von häufig auftretenden Attributen gesucht werden soll (siehe \cref{sec:einleitung:ziel} \nameref{sec:einleitung:ziel}).
 
 
 \subsection{Einschränkung des Datenbestandes}
+\label{sec:konzept:ablauf:einschraenkung}
 Im ersten Schritt wird der Datenbestand durch die Auswahl von Attributen durch den Benutzer eingeschränkt. Er kann 0-n Werte aus den in der \cref{fig:recherche:attributeinschraenkung:2} gelisteten Attributen selektieren. Anschliessend werden alle Instanzen aus der Datenmenge entfernt welche den Kriterien nicht genügen. Dies bildet die Grundlage für die Analyse im Schritt 2.
 
+\begin{figure}[H]
+	\RawFloats
+	\centering
+	\includegraphics[width=1\textwidth]{images/wireframe-filtering}
+	\caption{Mockup für das Filtrieren von Buchungen}
+	\label{fig:konzept:ablauf:einschraenkung:1}
+\end{figure}
+
+\cref{fig:konzept:ablauf:einschraenkung:1} zeigt einige Filters welche der User auswählen kann. Mit einem Klick auf den "`Run analysis"' Button werden die Daten zuerst eingeschränkt und der Analyseprozess gestartet.
+
+Nach der Einschränkung der Daten werden nur noch folgende Buchungen berücksichtigt, welche den Filtern genügen. \cref{fig:konzept:ablauf:einschraenkung:2} zeigt einen Datenbestand vor der Anwendung von Filtern, und \cref{fig:konzept:ablauf:einschraenkung:3} die Daten danach.
+\begin{table}[H] 
+	\caption{Datenbestand vor der Anwendung der Filterkriterien}
+	\centering
+	\rowcolors{1}{tablebodycolor}{tablerowcolor}
+	\label{fig:konzept:ablauf:einschraenkung:2}
+	\begin{tabular}{ | c | c | c | c | c | c | c | c | c | c |} 
+		\hline 		
+		\rowcolor{tableheadcolor}
+		\bfseries \rotatebox{90}{ID} & \bfseries \rotatebox{90}{Ortschaft} & \bfseries \rotatebox{90}{Preis} & \bfseries \rotatebox{90}{Qualität} & \bfseries \rotatebox{90}{Tiere erlaubt} & \bfseries \rotatebox{90}{Grill vorhanden} & \bfseries \rotatebox{90}{Balkon vorhanden} & \bfseries \rotatebox{90}{Distanz zum Meer (m)} & \bfseries \rotatebox{90}{Distanz zum Skilift (m)} \\ \hline 
+		
+		1 & Zermatt & budget & 3 & \checkmark &  &  &  & close \\ \hline 
+		2 & Cannes & & 3 & & \checkmark & \checkmark & close & \\ \hline 
+		3 & Zermatt & luxury & 4 & \checkmark & \checkmark &  & close & \\ \hline 
+		4 & Zermatt &  & 4 & \checkmark & & \checkmark &  & close  \\ \hline 
+		5 & Zermatt & budget & 2 & \checkmark &  & \checkmark &  & close \\
+		6 & Cannes & luxury & 5 &  & \checkmark &  & close &  \\ \hline 
+		7 & Zermatt & luxury & 2 & \checkmark & \checkmark &  &  &  \\ \hline 
+	\end{tabular}
+\end{table}
+
+\begin{table}[H] 
+	\caption{Datenbestand nach Anwendung der Filterkriterien}
+	\centering
+	\rowcolors{1}{tablebodycolor}{tablerowcolor}
+	\label{fig:konzept:ablauf:einschraenkung:3}
+	\begin{tabular}{ | c | c | c | c | c | c | c | c | c | } 
+		\hline 		
+		\rowcolor{tableheadcolor}
+		\bfseries \rotatebox{90}{ID} & \bfseries \rotatebox{90}{Ortschaft} & \bfseries \rotatebox{90}{Preis} & \bfseries \rotatebox{90}{Qualität} & \bfseries \rotatebox{90}{Tiere erlaubt} & \bfseries \rotatebox{90}{Grill vorhanden} & \bfseries \rotatebox{90}{Balkon vorhanden} & \bfseries \rotatebox{90}{Distanz zum Meer (m)} & \bfseries \rotatebox{90}{Distanz zum Skilift (m)} \\ \hline 
+		
+		3 & Zermatt & luxury & 4 & \checkmark & \checkmark &  & 350 & \\ \hline 
+		6 & Cannes & luxury & 5 &  & \checkmark &  & 80 &  \\ \hline 
+	\end{tabular}
+\end{table}
+
 \subsection{Auffinden von Attributen}
+\label{sec:konzept:ablauf:analyse}
 Für den zweiten Schritt wird entweder ein \nameref{sec:konzept:disziplinauswahl:association} (siehe \cref{sec:konzept:disziplinauswahl:association}) oder eine \nameref{sec:konzept:disziplinauswahl:clusteranalysis} (siehe \cref{sec:konzept:disziplinauswahl:clusteranalysis}) durchgeführt. 
 
-Möchte der Benutzer wissen, welche Attribute in der vor-selektierten Datenmenge oft vorkommen, so kann der Apriori-Algorithmus gewählt werden. Liefert dieser keine zufriedenstellenden Antworten oder ist von vornherein zu erwarten, dass es verschiedene Gruppen von Buchungen gibt, so kann zuerst die Cluster Analysis durchgeführt werden. Die Instanzen werden damit in Clusters/Klassen aufgeteilt, der Benutzer würde jedoch nicht sehen weshalb. Deshalb wird auf jeder Klasse der Apriori-Algorithmus durchgeführt. Da die Instnzen in einer Klasse untereinander möglichst Homogen sein sollen und möglichst unterschiedlich zu anderen Clusters, ist anzunehmen, dass die häufigsten Attribute, welche durch den Apriori-Algorithmus gefunden werden, aussagekräftig die Klassen beschreiben.
+Möchte der Benutzer wissen, welche Attribute in der (vorselektierten) Datenmenge oft vorkommen, so kann der Apriori-Algorithmus verwendet werden. Eine beispielhafte Ausgabe ist in der \cref{fig:konzept:ablauf:analyse:1} aufgezeigt. Die erste Tabelle beinhaltet alle einzelnen Attribute welche als häufig erachtet werden, die zweiten Tabelle sind alle häufigen zweier Attributkombinationen, die dritte Tabelle alle dreier Attributkombinationen. Dies geht weiter bis der Apriori-Algorithmus keine häufigen Kombinationen mehr findet.
+\begin{figure}[H]
+	\RawFloats
+	\centering
+	\includegraphics[width=1\textwidth]{images/wireframe-histogram}
+	\caption{Mockup für das einsehen der Stammdaten (FA4 \& FA5)}
+	\label{fig:konzept:ablauf:analyse:1}
+\end{figure}
+
+Liefert der Apriori keine zufriedenstellenden Antworten oder ist von vornherein zu erwarten, dass es verschiedene Gruppen von Buchungen gibt, so kann zuerst die Cluster Analysis durchgeführt werden. Die Instanzen werden damit in Clusters/Klassen aufgeteilt, der Benutzer würde jedoch nicht sehen weshalb. Deshalb wird auf jeder Klasse der Apriori-Algorithmus durchgeführt. Da die Instnzen in einer Klasse untereinander möglichst Homogen sein sollen und möglichst unterschiedlich zu anderen Clusters, ist anzunehmen, dass die häufigsten Attribute, welche durch den Apriori-Algorithmus gefunden werden, aussagekräftig die Klassen beschreiben.
 
 \section{Mockups des Programmes}
 \label{sec:konzept:mockups}

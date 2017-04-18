@@ -71,34 +71,62 @@ Dies sollte Interhome ermöglichen, ihre Marketing Strategie zu verbessern und g
 Um solche Fragen zu beantworten werden die Buchungsdaten von Interhome (Objekt, Zeitraum, Passagiere, etc.) verwendet und mit weiteren Daten (Geolocation, Wetterinformation) angereicht. 
 Auf dem Endprodukt soll ein Mitarbeiter von Interhome in der Lage sein, ein Abfrage zu generieren, welche aus einem oder mehreren Attribute besteht. Die Applikation analysiert daraufhin die Daten mit Techniken des Data Mining, um eine Liste von Attributen zurück zu liefern, welche für die in der Abfrage aufgeführten Attributen am meisten Buchungen generieren. Die Elemente in der Antwort sollten gewichtet sein um das Resultat besser zu interpretieren.
 
-Um dies besser zu veranschaulichen sollte hier ein Beispiel gemacht werden. Dazu ist in der \cref{fig:einletung:ziel:1} eine Datenmenge aufgeführt. Die ersten 9 Spalten sind Rohdaten und das Wetter (letzte Spalte) muss zusätzlich angereichert werden.
+Um dies besser zu veranschaulichen sollte hier ein Beispiel gemacht werden. Dazu ist in der \cref{fig:einleitung:ziel:1} eine Datenmenge aufgeführt. Die ersten 9 Spalten sind Rohdaten und das Wetter (letzte Spalte) muss zusätzlich angereichert werden.
 
 \begin{table}[h] 
 	\caption{Beispielhafte angereicherte Buchungsdaten}
 	\centering
 	\rowcolors{1}{tablebodycolor}{tablerowcolor}
-	\label{fig:einletung:ziel:1}
+	\label{fig:einleitung:ziel:1}
 	\begin{tabular}{ | c | c | c | c | c | c | c | c | c | c |} 
 		\hline 
 		\rowcolor{tableheadcolor}
 		\multicolumn{8}{|c|}{\bfseries Objektdaten} & \multicolumn{2}{c|}{\bfseries Kundendaten} \\ \hline
 		
 		\rowcolor{tableheadcolor}
-		\bfseries \rotatebox{90}{ID} & \bfseries \rotatebox{90}{Ortschaft} & \bfseries \rotatebox{90}{Preis (CHF)} & \bfseries \rotatebox{90}{Tiere erlaubt} & \bfseries \rotatebox{90}{Grill vorhanden} & \bfseries \rotatebox{90}{Balkon vorhanden} & \bfseries \rotatebox{90}{Distanz zum Meer (m)} & \bfseries \rotatebox{90}{Distanz zum Skilift (m)} &  
+		\bfseries \rotatebox{90}{ID} & \bfseries \rotatebox{90}{Objekt Ortschaft} & \bfseries \rotatebox{90}{Preis (CHF)} & \bfseries \rotatebox{90}{Tiere erlaubt} & \bfseries \rotatebox{90}{Grill vorhanden} & \bfseries \rotatebox{90}{Balkon vorhanden} & \bfseries \rotatebox{90}{Distanz zum Meer (m)} & \bfseries \rotatebox{90}{Distanz zum Skilift (m)} &  
 		
-		\bfseries \rotatebox{90}{Ortschaft} & \bfseries \rotatebox{90}{Wetter} \\ \hline 
+		\bfseries \rotatebox{90}{Kunde Ortschaft} & \bfseries \rotatebox{90}{Wetter} \\ \hline 
 		
-		1 & Zermatt & 230 & \checkmark &  &  &  & 150 & Bern & Sonne \\ \hline 
-		2 & Cannes & 450 & & \checkmark & \checkmark & 700 & &  Grindelwald & Schnee \\ \hline 
-		3 & Zermatt & 2301 & \checkmark & \checkmark &  & 350 &  &  Mallorca & Regen \\ \hline 
-		4 & Zermatt & 879 & \checkmark & & \checkmark &  & 350  & Nizza & Regen \\ \hline 
-		5 & Zermatt & 149 & \checkmark &  & \checkmark &  & 500 & Zürich & \\
-		6 & Cannes & 873 &  & \checkmark &  & 80 &  &  Mallorca & Regen \\ \hline 
-		7 & Zermatt & 620 & \checkmark & \checkmark &  &  &  &  Zürich & Regen \\ \hline 
+1 & Zermatt & 230 	& \checkmark & 			  &			   & 		& 150 	& Bern 		  & Sonne 	\\ \hline 
+2 & Cannes 	& 450 	& 			 & \checkmark & \checkmark & 700 	& 		& Grindelwald & Schnee  \\ \hline 
+3 & Zermatt & 2301	& \checkmark & \checkmark & 		   & 350	&  		& Mallorca	  & Regen 	\\ \hline 
+4 & Zermatt & 879 	& \checkmark & 			  & \checkmark & 150	& 350 	& Nizza 	  & Regen 	\\ \hline 
+5 & Zermatt & 149 	& \checkmark & 			  & \checkmark & 		& 500 	& Zürich	  & 		\\ \hline
+6 & Berlin 	& 873 	& 			 & \checkmark & 		   & 	 	&		& Nizza 	  & Regen	\\ \hline 
+7 & Zermatt & 620 	& \checkmark & \checkmark &  		   & 280 	&  		& Amsterdam	  & Regen	\\ \hline
+\multicolumn{10}{|c|}{... mehr ...} \\ \hline 
 	\end{tabular}
 \end{table}
 
-Als Beispiel möchte das Marketing wissen, was gebucht wird wenn es regnet. Die Anfrage  lautet "`Wetter = Regen"'. Dies passt auf die Elemente mit den IDs 3, 4, 6 und 7 zu. Das Resultat der Datenanalyse \cref{fig:einletung:ziel:1} ist in diesem Fall "`Ortschaft = Zermatt, Tiere erlaubt = \checkmark, in 3/4 Buchungen"'. Oder in Worten: "`In 75\% der selektieren Buchungen wurden Objekte in Zermatt gebucht, in welchen Haustiere erlaubt sind."'. 
+Als Beispiel möchte das Marketing wissen, was gebucht wird wenn es regnet. Die Anfrage  lautet "`Wetter = Regen"' was auf die Elemente mit den IDs 3, 4, 6 und 7 zutrifft. Das Resultat der Abfrage ist in \cref{fig:einleitung:ziel:2} aufgeführt.
+
+\begin{table}[h] 
+	\caption{Resultat einer Anfrage}
+	\centering
+	\rowcolors{1}{tablebodycolor}{tablerowcolor}
+	\label{fig:einleitung:ziel:2}
+	\begin{tabular}{ | c | c | c | c | c | c | c | c | c | c |} 
+		\hline 
+		\rowcolor{tableheadcolor}
+		\multicolumn{8}{|c|}{\bfseries Objektdaten} & \multicolumn{2}{c|}{\bfseries Kundendaten} \\ \hline
+		
+		\rowcolor{tableheadcolor}
+		\bfseries \rotatebox{90}{ID} & \bfseries \rotatebox{90}{Objekt Ortschaft} & \bfseries \rotatebox{90}{Preis (CHF)} & \bfseries \rotatebox{90}{Tiere erlaubt} & \bfseries \rotatebox{90}{Grill vorhanden} & \bfseries \rotatebox{90}{Balkon vorhanden} & \bfseries \rotatebox{90}{Distanz zum Meer (m)} & \bfseries \rotatebox{90}{Distanz zum Skilift (m)} &  
+		
+		\bfseries \rotatebox{90}{Kunde Ortschaft} & \bfseries \rotatebox{90}{Wetter} \\ \hline 
+		
+3   & Zermatt 	& 2301 & \checkmark & \checkmark &				& 	  &		&  Mallorca  & Regen \\ \hline 
+4   & Zermatt 	& 879  & \checkmark & 			 & \checkmark 	& 	  & 350 &  Nizza 	 & Regen \\ \hline 
+6   & Berlin  	& 873  &  			& \checkmark & 				&     &		&  Nizza 	 & Regen \\ \hline 
+7   & Zermatt	& 620  & \checkmark & \checkmark & 				& 280 &		&  Amsterdam & Regen \\ \hline
+28  & Mallorca 	& 870  & 			& 			 & 				& 80  &		&  Nizza 	 & Regen \\ \hline
+58  & Cannes 	& 1870 & \checkmark	& 			 & \checkmark	& 185 &		&  Nizza 	 & Regen \\ \hline
+99  & Zermatt 	& 150  & \checkmark	& \checkmark & 				& 270 &		&  Nizza 	 & Regen \\ \hline
+	\end{tabular}
+\end{table}
+
+Das Resultat der Datenanalyse ist in diesem Fall "`Objekt Ortschaft = Zermatt, Tiere erlaubt = \checkmark in 4/7 Buchungen"' (Buchungen mit den IDs 3, 4, 7, 99). Oder in Worten: "`In 57\% der selektieren Buchungen wurden Objekte in Zermatt gebucht, in welchen Haustiere erlaubt sind."'. Ein weiteres Resultat für die obige Abfrage wäre "`Kunden Ortschaft = Nizza, Distanz zum Meer < 300 in 3/7 Buchungen"' (Buchungen mit den IDs 28, 58, 99), welche ebenfalls gefunden werden soll. 
 
 Die Daten können schlussendlich weiterverwendet werden, um gezielter Werbung an die Kunden zu bringen. Im obigen Beispiel könnte man durch die IP-Adresse des Users auf der Webseite von Interhome den ungefähren Ort herausfinden wo dieser wohnt. Durch weitere bestehende Services kann zusätzlich das momentane Wetter des Benutzers ermittelt werden. Ist es dort zur Zeit am regnen, kann dem Kunden Objekte in Zermatt angezeigt werden, in welchen Haustiere erlaubt sind.
 
