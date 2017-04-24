@@ -138,7 +138,7 @@ Nachfolgend wird der Datenbestand und die selektion der Attribute erklärt.
 \label{sec:recherche:datenbeschaffung}
 Die Daten für die Auswertung wurden aus dem \gls{irent} extrahiert werden. Da die Buchungen Kundendaten enthalten, können sie nicht veröffentlicht werden.
 
-Die Daten liegen im Windows Excel Format vor. Es sind total 183'051 Datensätze mit jeweils 153 Felder. Die Felbeschreibungen sind im \cref{app:feldbeschreibungen} aufgeführt. Zellen A-U sind Informationen im Bezug auf die Buchungen, alle anderen (V-EW) beziehen sich auf das Objekt selber.
+Die Daten liegen im Windows Excel Format vor. Es sind total 133'001 Datensätze mit jeweils 153 Felder. Die Felbeschreibungen sind im \cref{app:feldbeschreibungen} aufgeführt. Zellen A-U sind Informationen im Bezug auf die Buchungen, alle anderen (V-EW) beziehen sich auf das Objekt selber.
 
 "`boolean"' Datentypen werden behandelt wie "`categorical"' Werte mit nur zwei Ausprägungen, sprich "`0"' und "`1"',
 
@@ -146,13 +146,32 @@ Die Daten liegen im Windows Excel Format vor. Es sind total 183'051 Datensätze 
 \label{sec:recherche:datenvorbereitung}
 Die Datenvorbereitung wandelt die Daten so um dass sie für das Data Mining möglichst effizient verwendet werden können. Dies umfasst die Bereinigung, Transformation sowie Reduktion von Informationen\footcite{feature_selection_2017-01-04}. Bei ersteren werden Messfehler im Datenbestand behoben, fehlende Felder ergänzt oder Duplikate entfernt. Die Transformation wandelt Werte um damit sie für die Berechnung besser geeignet sind. Zum Beispiel können Wertebereiche in Intervalle aufgeteilt werden. Bei letzteren werden Instanzen der Datengrundlage entfernt, wodurch die Berechnungszeit verkürzt wird, oder Attribute von allen Instanzen entfernt, da deren Entropie zu gering ist. Zum Beispiel ist es unspannend, wenn ein Attribut bei (fast) allen Instanzen gleich ist. 
 
-Folgende Modifikationen werden an den Rohdaten vorgenommen:
-\begin{itemize}
-%\item Das Datenformat wurde für die einfachere programmatische Handhabung von Windows Excel in das \gls{csv}-Format transferiert.
-\item Boolsche Werte ist entweder leer (gleichbedeutend mit "`0"') oder "`X"' (gleichbedeutend mit "`1"'). Die Werte werden geändert auf 0 und 1.
-\item Distanzen in den Zeilen AK (Distanz zum Wasser), AL (Distanz zum Skigebiet), AM (Distanz zum öffentlichen Verkehr), DZ (Distanz zum Zentrum), EA (Distanz bis zum Meer) und EB (Distanz bis zum See) wurden diskretisiert. Dabei interessiert es Interhome nur, wenn die Nähe kleiner als 500 ist. Alles über oder gleich 500 wird nicht verwendet. Siehe \cref{fig:recherche:datenvorbereitung:1}.
-\item Der Preis wurde diskretisiert. Spannend für die Interpretation sind nur werte welche kleiner als 500 sind oder über 2000. Siehe \cref{fig:recherche:datenvorbereitung:2}.
-\end{itemize}
+\paragraph{Boolsche Werte} In der Datenbasis sind boolsche Werte entweder leer oder "`X"'. Dies wird umgewandelt auf "`0"' oder "`1"'.
+
+\paragraph{Datennormierung von numerischen Werten} Die im \cref{sec:konzept:anwendungderalgorithmen:distanzmessung} vorgestellte Distanzmessung arbeitet mit der euklidischen Distanz für numerische Werte. Wenn ein Attribut $A_1$ einer Buchung den Wert 1'000 hat und das einer anderen Buchung 300, so ergibt sich eine Distanz von 700. Betrachtet man ein anderes Attribut $A_2$, welches den Wert 1 hat beziehungsweise 0.3, so ist die Distanz 0.7. Dadurch fällt $A_2$ in der gesamten Distanz zwischen den beiden Buchungen überhaupt nicht in Gewicht, da es um einen Faktor 1'000 kleiner ist. Deshalb werden numerische Attribute genormt, damit alle in den gleichen Wertebereich liegen.
+
+In dieser Arbeit gibt es drei numerische Attribute.
+\begin{table}[H] 
+	\caption{Zu verwendende Attribute}
+	\centering
+	\rowcolors{1}{tablebodycolor}{tablerowcolor}
+		\label{fig:recherche:attributeinschraenkung:2}
+	\begin{tabular}{ | c | c | c | l | } 
+		\hline 
+		\rowcolor{tableheadcolor}
+		\bfseries Zelle & \bfseries Name & \bfseries Datentyp & \bfseries Beschreibung \\ \hline 
+		E & PRICES & integer & Preis \\ \hline 
+		AC & QUAL & integer & Sterne Bewertung des Objektes \\ \hline 
+		AD & ROOMS & integer & Anzahl Zimmer \\ \hline 
+		AE & BEDROOMS & integer & Anzahl Schlafzimmer \\ \hline 
+	\end{tabular}
+\end{table}
+
+Normiert werden die Spalten AC (Sterne Bewertung des Objektes), AD (Anzahl Zimmer) und AE (Anzahl Schlafzimmer). Diese werden in ein Intervall zwischen 0 und 1 überführt.
+
+Der Preis in der Spalte E giltet für die gesamte Buchung. Dieser wird in einen Wochenpreis und pro Person normiert. Wenn eine Buchung CHF 2'000 kostet für 10 Tage für 2 Personen, so ergibt das "`CHF 1'400 / 10 Tage * 7 Tage / 2 Personen = CHF 490"'. Es wird keine Normierung auf einen Wert von 0-1 durchgeführt, da dieser Wert noch diskretiert wird (siehe nächsten Paragraphen).
+
+\paragraph{Diskretierung von Distanzen und des Wochenpreises} Die Zeilen AK (Distanz zum Wasser), AL (Distanz zum Skigebiet), AM (Distanz zum öffentlichen Verkehr), DZ (Distanz zum Zentrum), EA (Distanz bis zum Meer) und EB (Distanz bis zum See) sind numerische Werte, welche die Anzahl an Metern zu einem Punkt angeben. Die Werte dieser Spalten wird in folgenden Wert diskretiert. 
 
 \begin{table}[h] 
 	\caption{Diskretisierungswerte für Distanzattribute}
@@ -168,6 +187,7 @@ Folgende Modifikationen werden an den Rohdaten vorgenommen:
 	\end{tabular}
 \end{table}
 
+Ebenfalls wird der Wochenpreise in nachfolgende Intervalle unterteilt.
 \begin{table}[h] 
 	\caption{Diskretisierungswerte des Preises}
 	\centering
@@ -177,11 +197,30 @@ Folgende Modifikationen werden an den Rohdaten vorgenommen:
 		\hline 
 		\rowcolor{tableheadcolor}
 		\bfseries Min & \bfseries Max & \bfseries Wert \\ \hline 
-		0 & 499 & budget \\ \hline 
-		500 & 1999 &  \\ \hline 
-		2000 & $\infty$ & luxury \\ \hline 
+		0 & 200 & budget \\ \hline 
+		201 & 400 &  \\ \hline 
+		401 & $\infty$ & luxury \\ \hline 
 	\end{tabular}
 \end{table}
+
+Bei den Distanzen sind kleine Werte spannend, welche angeben dass ein Objekt nahe am Skilift oder bei der Busstation liegt. Deshalb wurde definiert dass die Werte von 0 bis 499 Metern als nahe (engl. Close) markiert werden. Darüber liegende Werte werden ignoriert.
+
+Bei den Preisen hingegen ist es interessant, wenn ein Objekt besonders günstig oder teuer ist. Deshalb wurden zwei Intervalle definiert. Nämlich 0 bis 200 und 401 aufwärts. Alles dazwischen wird nicht weiter behandelt.
+
+Diese Datenreduktion wird vorgenommen, da dadurch die Informationen auch von der Apriori-Analyse verwendet werden kann. Diese zählt nur exakte Übereinstimmungen. Sprich zwei Objekte, welche CHF 1 auseinander liegen wären gleich unterschiedlich als wenn deren Unterschied CHF 1'000 beträge.
+
+Die Schwellwerte der diskretierungen wurden mit Interhome abgesprochen.
+
+\begin{itemize}
+%\item Das Datenformat wurde für die einfachere programmatische Handhabung von Windows Excel in das \gls{csv}-Format transferiert.
+\item Boolsche Werte ist entweder leer (gleichbedeutend mit "`0"') oder "`X"' (gleichbedeutend mit "`1"'). Die Werte werden geändert auf 0 und 1.
+\item Distanzen in den Zeilen AK (Distanz zum Wasser), AL (Distanz zum Skigebiet), AM (Distanz zum öffentlichen Verkehr), DZ (Distanz zum Zentrum), EA (Distanz bis zum Meer) und EB (Distanz bis zum See) werden diskretisiert. Dabei interessiert es Interhome nur, wenn die Nähe kleiner als 500 ist. Alles über oder gleich 500 wird nicht verwendet. Siehe \cref{fig:recherche:datenvorbereitung:1}.
+\item Der Preis wird normiert auf Wochenpreise. wurde diskretisiert. Spannend für die Interpretation sind nur werte welche kleiner als 500 sind oder über 2000. Siehe \cref{fig:recherche:datenvorbereitung:2}.
+\end{itemize}
+
+
+
+
 
 In den Tabellen \ref{fig:recherche:datenvorbereitung:3} und \ref{fig:recherche:datenvorbereitung:4} wird ein Beispiel gegeben. In der ersten Tabelle sind Buchungen vor der diskretisierung aufgeführt und in der zweiten danach. Distanzwerte von 500 oder mehr und Preise zwischen 499 und 2000 wurden entfernt. Dies ist zum Beispiel bei dem Wert "`Distanz zum Skilift"' der Buchung mit ID 3 geschehen.
 
@@ -232,7 +271,7 @@ Die verwendeten Werte aus \cref{fig:recherche:datenvorbereitung:1} und \cref{fig
 
 \subsection{Attributeinschränkung}
 \label{sec:recherche:attributeinschraenkung}
-Der Datenbestand besteht aus 127 Attributen/Spalten. Aus folgenden Gründen sollten die Attribute eingeschränkt werden:
+Der Datenbestand besteht aus 153 Attributen/Spalten. Aus folgenden Gründen sollten die Attribute eingeschränkt werden:
 \begin{itemize}
 \item Laufzeit der Algorithmen kann durch eine Attributreduktion verbessert werden.
 \item Es gibt Attribute welche andere Zusammenfassen. In der \cref{fig:recherche:attributeinschraenkung:1} ist die Zelle "`AW"' eine Aggregation von den darunterliegenden Feldern.

@@ -61,7 +61,8 @@
 %	> tar xzf redis-3.2.8.tar.gz
 %	> cd redis-3.2.8
 %	> make
-% 	> ~/programs/redis-3.2.8/src/redis-server
+% 	> ~/programs/redis-3.2.8/src/redis-server &
+% http://www.codeforge.com/article/214557
 
 
 % Getting bookinganalyzerimpl to run:
@@ -69,6 +70,15 @@
 % npm install
 % grunt
 % php composer.phar install
+
+% Remove duplicates:
+%			Find duplicates:
+%			> egrep -o '^[^@]+' u611a_10_normalized_geocoded.csv > text.csv 	// Get everything before first @
+%			> sort text.csv > text_sorted.csv									// Sort it
+%			> uniq -d text_sorted.csv > text2_duplicates.csv					// Remove duplicates
+% 	> tac u611a_10_normalized_geocoded.csv | sort -k1,1 -r -u -t@ > text5.csv
+%	> tac text5.csv > text6.csv
+%	Move last line of text6.csv to the beginning
 
 \section{Datenvorbereitung}
 \label{sec:proofofconcept:datenvorbereitung}
