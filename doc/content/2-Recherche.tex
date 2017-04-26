@@ -324,16 +324,23 @@ Der Algorithmus geht folgendermassen vor:
 
 \begin{lstlisting}
 unvisited $\gets D$
-foreach itemset $p \gets unvisited$ {
+inCluster $= \emptyset$
+foreach itemset $p \gets$ unvisited {
 	unvisited $\gets D - \{p\}$
 	if $|\mathit{ND}_{\epsilon}(p)| \geq minpts$ {
 		clusters[$p$] $\gets \{p\}$
+		inCluster = inCluster $\cup p$
 		candidates = $ND_{\epsilon}(p)$
-		foreach $q \in $ candidates
-			if $q \: \cap$ unvisited $\neq \emptyset$ {
+		foreach $q \in $ candidates {
+			// if q is unvisited.
+			if $q \: \cap$ unvisited $\neq \varnothing$ {
 				unvisited $\gets D - \{p\}$
 				clusters[$p$] $\gets$ clusters[$p$] $ \cap$ $\{q\}$
 				candidates $\gets$ candidates $\cup \: ND_{\epsilon}(q)$
+			}
+			// if q is not in a cluster yet.
+			if $q \: \cap$ inCluster $= \varnothing$ {
+				clusters[$p$] = cluster[$p$] $\cup q$
 			}
 		}
 	}
