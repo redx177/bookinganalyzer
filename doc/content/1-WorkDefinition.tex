@@ -65,13 +65,16 @@ In der \cref{fig:einleitung:organisationsstruktur:2} werden die Marken der versc
 
 \section{Ziel der Arbeit}
 \label{sec:einleitung:ziel}
-Das Ziel der Arbeit ist es, Interhome eine Plattform zur Verfügung zu stellen, damit neue Informationen aus den Buchungsdaten extrahiert werden können (Knowledge Discovery). Dafür wird entweder ein bestehendes Programm verwendet oder eine eigene Lösung entwickelt. Es soll möglich sein, zum Beispiel eine folgende Frage zu beantworten: „Was für Objekte werden im Winter am meisten in Zermatt gebucht?“. Eine mögliche Antwort wäre: „Objekte welche unter CHF500 kosten und maximal 200 Meter von einem Skilift entfernt sind“.
-Dies sollte Interhome ermöglichen, ihre Marketing Strategie zu verbessern und gezielter Objekte einzukaufen.
+Das Ziel der Arbeit ist es, Interhome bei Entscheidungen zum Thema Marketing oder Einkauf zu unterstützen. Bislang hat man sich auf das Bauchgefühl verlassen. Durch eine Anaylse von Buchungsdaten sollte den Entscheidungen von Interhome eine Grundlage gegeben werden. 
+
+Der Einkauf sollte in Erfahrung bringen können, was zum Beispiel von den Kunden in der Schweiz am meisten gebucht wird. Sie sollen eine Anfrage dazu stellen können in der Form von: "Was für Objekte werden von Franzosen am meisten gebucht?". Das Resultat könnte dann sein: "Objekte, in Italien und maximal 500 Meter vom Meer entfernt sind". Dadurch weiss der Einkauf, dass eventuell mehr Objekte in Italien eingekauft werden müssen, welche weniger als 500 Meter vom Meer entfernt sind.
+
+Das Marketing hingegen könnte eine solche Anfrage an die Analyse stellen: „Was für Objekte werden im Winter am meisten in Zermatt gebucht?“. Eine mögliche Antwort wäre: „Objekte welche unter CHF500 kosten und maximal 200 Meter von einem Skilift entfernt sind“. Solche Informationen können helfen, gezielter Werbung zu schalten. Auf der Webseite kann damit einem Benutzer, welcher in Zermatt wohnt und eine Ferienwohnung im Winter sucht gezielter Objekte angezeigt werden. Nämlich solche, welche maximal CHF500 kosten und 200 Meter vom Skilift entfernt sind.
 
 Um solche Fragen zu beantworten werden die Buchungsdaten von Interhome (Objekt, Zeitraum, Passagiere, etc.) verwendet und mit weiteren Daten (Geolocation, Wetterinformation) angereicht. 
 Auf dem Endprodukt soll ein Mitarbeiter von Interhome in der Lage sein, ein Abfrage zu generieren, welche aus einem oder mehreren Attribute besteht. Die Applikation analysiert daraufhin die Daten mit Techniken des Data Mining, um eine Liste von Attributen zurück zu liefern, welche für die in der Abfrage aufgeführten Attributen am meisten Buchungen generieren. Die Elemente in der Antwort sollten gewichtet sein um das Resultat besser zu interpretieren.
 
-Um dies besser zu veranschaulichen sollte hier ein Beispiel gemacht werden. Dazu ist in der \cref{fig:einleitung:ziel:1} eine Datenmenge aufgeführt. Die ersten 9 Spalten sind Rohdaten und das Wetter (letzte Spalte) muss zusätzlich angereichert werden.
+Um dies besser zu veranschaulichen sollte hier ein Beispiel gemacht werden. Dazu ist in der \cref{fig:einleitung:ziel:1} eine Datenmenge aufgeführt. Aufgeteilt sind die Spalten in Objekt- und Kundendaten. Dies hat keinen weiteren Einfluss auf diese Arbeit und sollte lediglich zum besseren Verständnis führen. Die ersten 9 Spalten sind Rohdaten und das Wetter (letzte Spalte) muss zusätzlich angereichert werden.
 
 \begin{table}[h] 
 	\caption{Beispielhafte angereicherte Buchungsdaten}
