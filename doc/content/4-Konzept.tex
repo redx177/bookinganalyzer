@@ -441,6 +441,23 @@ Der dritte Reiter führt zur Analyse mit den Clustering Algorithmen k-prototypes
 
 \section{Testcases}
 \label{sec:recherche:testcases}
+
+% data-apriori-3-entries--2-distances-1-binary.csv
+% 17 von 18:
+% - Distance water: close
+% - Distance see: close
+% - Pets allowed: yes
+%
+% data-apriori-3-entries-two-sets--2-distances--1-number-1-binary.csv
+% set 1, 8 von 18:
+% - Distance water: close
+% - Distance see: close
+% set 2, 9 von 18:
+% - Rooms: ??? (2?)
+% - Pets allowed: yes
+
+
+
 Da 
 Testfall 1 (TC1) wurde so gewählt dass eine Häufigkeitsanalyse die Attribute DISKI, DIPUBT, SCTV und SCBALCONY finden sollte.
 %ski, publictransport
@@ -454,7 +471,7 @@ Testfall 1 (TC1) wurde so gewählt dass eine Häufigkeitsanalyse die Attribute D
 		\rowcolor{tableheadcolor}
 		\multicolumn{2}{|l|}{\bfseries ID} & \multicolumn{23}{l|}{\bfseries TC1} \\ \hline
 		\rowcolor{tableheadcolor}
-		\bfseries \rotatebox{270}{DIWATER} & \bfseries \rotatebox{270}{DISKI} & \bfseries \rotatebox{270}{DIPUBT} & \bfseries \rotatebox{270}{DICENTER} & \bfseries \rotatebox{270}{DISEA} & \bfseries \rotatebox{270}{DILAKE} & \bfseries \rotatebox{270}{PRICES} & \bfseries \rotatebox{270}{QUAL} & \bfseries \rotatebox{270}{ROOMS} & \bfseries \rotatebox{270}{BEDROOMS} & \bfseries \rotatebox{270}{PETS} & \bfseries \rotatebox{270}{CAIRCOND} & \bfseries \rotatebox{270}{CPOOL} & \bfseries \rotatebox{270}{CBBQ} & \bfseries \rotatebox{270}{CSAUNA} & \bfseries \rotatebox{270}{CJACUZZI} & \bfseries \rotatebox{270}{CWASHMACHI} & \bfseries \rotatebox{270}{CPARKING} & \bfseries \rotatebox{270}{CDISHWASHE} & \bfseries \rotatebox{270}{CFIREPLACE} & \bfseries \rotatebox{270}{SCTV} & \bfseries \rotatebox{270}{SCBALCONY} & \bfseries \rotatebox{270}{SCNOSMOKE} & \bfseries \rotatebox{270}{INTERNET} & \bfseries \rotatebox{270}{id} \\
+		\bfseries \rotatebox{270}{DIWATER} & \bfseries \rotatebox{270}{DISKI} & \bfseries \rotatebox{270}{DIPUBT} & \bfseries \rotatebox{270}{DICENTER} & \bfseries \rotatebox{270}{DISEA} & \bfseries \rotatebox{270}{DILAKE} & \bfseries \rotatebox{270}{PRICES} & \bfseries \rotatebox{270}{QUAL} & \bfseries \rotatebox{270}{ROOMS} & \bfseries \rotatebox{270}{BEDROOMS } & \bfseries \rotatebox{270}{PETS} & \bfseries \rotatebox{270}{CAIRCOND} & \bfseries \rotatebox{270}{CPOOL} & \bfseries \rotatebox{270}{CBBQ} & \bfseries \rotatebox{270}{CSAUNA} & \bfseries \rotatebox{270}{CJACUZZI} & \bfseries \rotatebox{270}{CWASHMACHI} & \bfseries \rotatebox{270}{CPARKING} & \bfseries \rotatebox{270}{CDISHWASHE} & \bfseries \rotatebox{270}{CFIREPLACE} & \bfseries \rotatebox{270}{SCTV} & \bfseries \rotatebox{270}{SCBALCONY} & \bfseries \rotatebox{270}{SCNOSMOKE} & \bfseries \rotatebox{270}{INTERNET} & \bfseries \rotatebox{270}{id} \\
 		 & c & c &  &  &  & b & 3 & 4 & 3 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 1 & 0 & 1 & 1 & 1 & 0 & 1 & 1 \\
 		  & c & c &  &  &  & b & 4 & 4 & 3 & 0 & 0 & 1 & 0 & 1 & 0 & 1 & 1 & 1 & 0 & 1 & 1 & 1 & 0 & 30 \\
 		  & c & c &  &  &  &  & 3 & 4 & 3 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 1 & 0 & 1 & 1 & 1 & 0 & 1 & 46 \\
@@ -464,5 +481,29 @@ Testfall 1 (TC1) wurde so gewählt dass eine Häufigkeitsanalyse die Attribute D
 		 
 	\end{tabular}
 \end{sidewaystable}
+
+\begin{table}[htbp]
+	\centering
+	\caption{Caption blablabla}
+	\label{Label blablabla}
+	\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
+	\hline
+	\rowcolor{tableheadcolor}
+	\multicolumn{2}{|l|}{\bfseries ID} & \multicolumn{8}{l|}{\bfseries TC1} \\ \hline
+	
+	\rowcolor{tableheadcolor}
+	\bfseries \rotatebox{90}{DIWATER} & \bfseries \rotatebox{90}{DIPUBT} & \bfseries \rotatebox{90}{DISEA} & \bfseries \rotatebox{90}{weeklyprice} & \bfseries \rotatebox{90}{NREF} & \bfseries \rotatebox{90}{ROOMS} & \bfseries \rotatebox{90}{BEDROOMS} & \bfseries \rotatebox{90}{PETS} & \bfseries \rotatebox{90}{CAIRCOND} & \bfseries \rotatebox{90}{id} \\ \hline
+	
+ &  &  &  & ES9510.388.2 & 0.1052631579 & 0.1333333333 & 1 & 0 & 1 \\ \hline
+ &  &  &  & ES9510.388.3 & 0.1052631579 & 0.1333333333 & 1 & 0 & 2 \\ \hline
+ &  &  &  & ES9510.388.4 & 0.1052631579 & 0.2666666667 & 1 & 0 & 3 \\ \hline
+ &  &  &  & ES9510.388.5 & 0.1052631579 & 0.2666666667 & 1 & 0 & 4 \\ \hline
+ &  &  &  & ES9510.388.6 & 0.1052631579 & 0.3999999998 & 1 & 0 & 5 \\ \hline
+ &  &  &  & ES9510.388.7 & 0.1052631579 & 0.3999999998 & 1 & 0 & 6 \\ \hline
+ &  &  &  & ES9510.388.8 & 0.1052631579 & 0.5222222222 & 1 & 0 & 7 \\ \hline
+ &  &  &  & ES9510.388.9 & 0.1052631579 & 0.5222222222 & 1 & 0 & 8 \\ \hline
+ &  &  & budget & US3274.10.1 & 0.1052631579 & 0.6555555555 & 0 & 0 & 9 \\ \hline
+	\end{tabular}
+\end{table}
 
 
