@@ -181,4 +181,113 @@ Es gibt dabei folgende Datentypen:
 	\caption{Attributbeschreibung}
 \end{longtable} 
 
-											
+\chapter{Testdatenquellen}
+\label{app:testdatenquellen}
+
+%\num[round-mode=places,round-precision=7]{}
+\csvstyle{myTableStyle}{tabular=|c|c||c|c|c|c|c|c||c|c|,
+	separator=semicolon,
+	table head=\hline \rowcolor{tableheadcolor} \multicolumn{2}{|c||}{General} & \multicolumn{6}{c||}{Categorical} & \multicolumn{2}{c|}{Numerical} \\\hline
+	\rowcolor{tableheadcolor} \rotatebox{90}{id} & \rotatebox{90}{NREF} & \rotatebox{90}{DIWATER} & \rotatebox{90}{DIPUBT} & \rotatebox{90}{DIESEA} & \rotatebox{90}{weeklyprice} & \rotatebox{90}{PETS} & \rotatebox{90}{CAIRCOND} & \rotatebox{90}{ROOMS} & \rotatebox{90}{BEDROOMS} \\ ,
+	late after line=\\,
+	late after last line=\\\hline,
+	head to column names}
+
+\section{Apriori: 2 gleiche Distanzattribute}
+\label{app:testdatenquellen:1}
+
+\csvreader[myTableStyle]%
+{testcases/data-apriori-2-entries--2-distances.csv}
+{}
+{\id & \NREF & \DIWATER & \DIPUBT & \DISEA & \weeklyprice & \PETS & \CAIRCOND & \ROOMS & \BEDROOMS}
+
+\section{Apriori: 2 gleiche Binäreattribute}
+\label{app:testdatenquellen:2}
+
+\csvreader[myTableStyle]%
+{testcases/data-apriori-2-entries--2-binary-attributes.csv}
+{}
+{\id & \NREF & \DIWATER & \DIPUBT & \DISEA & \weeklyprice & \PETS & \CAIRCOND & \ROOMS & \BEDROOMS}
+
+\section{Apriori: 2 gleiche numerische Attribute}
+\label{app:testdatenquellen:3}
+
+\csvreader[myTableStyle]%
+{testcases/data-apriori-2-entries--2-numeric-attributes.csv}
+{}
+{\id & \NREF & \DIWATER & \DIPUBT & \DISEA & \weeklyprice & \PETS & \CAIRCOND & \ROOMS & \BEDROOMS}
+
+\section{Apriori: 1 numerisches und 1 Binärattribut}
+\label{app:testdatenquellen:4}
+
+\csvreader[myTableStyle]%
+{testcases/data-apriori-2-entries--1-numeric-1-binary-attribute.csv}
+{}
+{\id & \NREF & \DIWATER & \DIPUBT & \DISEA & \weeklyprice & \PETS & \CAIRCOND & \ROOMS & \BEDROOMS}
+
+\section{Apriori: 2 gleiche Distanzattribute mit einem Binärfilter}
+\label{app:testdatenquellen:5}
+
+\csvreader[myTableStyle]%
+{testcases/data-apriori-2-entries--binary-filter--2-distances.csv}
+{}
+{\id & \NREF & \DIWATER & \DIPUBT & \DISEA & \weeklyprice & \PETS & \CAIRCOND & \ROOMS & \BEDROOMS}
+
+\section{Apriori: 2 gleiche Distanzattribute mit einem Distanzfilter}
+\label{app:testdatenquellen:6}
+
+\csvreader[myTableStyle]%
+{testcases/data-apriori-2-entries--distance-filter--2-distances.csv}
+{}
+{\id & \NREF & \DIWATER & \DIPUBT & \DISEA & \weeklyprice & \PETS & \CAIRCOND & \ROOMS & \BEDROOMS}
+
+\section{Apriori: 2 gleiche Distanzattribute mit einem numerischen Filter}
+\label{app:testdatenquellen:7}
+
+\csvreader[myTableStyle]%
+{testcases/data-apriori-2-entries--number-filter--2-distances.csv}
+{}
+{\id & \NREF & \DIWATER & \DIPUBT & \DISEA & \weeklyprice & \PETS & \CAIRCOND & \ROOMS & \BEDROOMS}
+
+\section{Apriori: 2 gleiche Distanz- und 1 binäres Attribut}
+\label{app:testdatenquellen:8}
+
+\csvreader[myTableStyle]%
+{testcases/data-apriori-3-entries--2-distances-1-binary.csv}
+{}
+{\id & \NREF & \DIWATER & \DIPUBT & \DISEA & \weeklyprice & \PETS & \CAIRCOND & \ROOMS & \BEDROOMS}
+
+\section{Apriori: Zwei Menten mit einmal 2 Distanzen und einmal 1 numerischen und 1 Binärattritbut}
+\label{app:testdatenquellen:9}
+
+\csvreader[myTableStyle]%
+{testcases/data-apriori-3-entries-two-sets--2-distances--1-number-1-binary.csv}
+{}
+{\id & \NREF & \DIWATER & \DIPUBT & \DISEA & \weeklyprice & \PETS & \CAIRCOND & \ROOMS & \BEDROOMS}
+
+\section{Clusters: 2 Clusters mit jeweils 5 Elementen}
+\label{app:testdatenquellen:10}
+
+\csvreader[myTableStyle]%
+{testcases/data-cluster-2-entries--2-clusters--5-and-5--0-distance.csv}
+{}
+{\id & \NREF & \DIWATER & \DIPUBT & \DISEA & \weeklyprice & \PETS & \CAIRCOND & \ROOMS & \BEDROOMS}
+
+\section{Clusters: 1 Cluster mit 1 Element und 1 Cluster mit 9 Elementen}
+\label{app:testdatenquellen:11}
+
+\csvreader[myTableStyle]%
+{testcases/data-cluster-2-entries--2-clusters--9-and-1--0-distance.csv}
+{}
+{\id & \NREF & \DIWATER & \DIPUBT & \DISEA & \weeklyprice & \PETS & \CAIRCOND & \ROOMS & \BEDROOMS}
+
+\section{Clusters: 2 Cluster mit kleinen Unterschieden}
+\label{app:testdatenquellen:12}
+
+\csvreader[myTableStyle]%
+{testcases/data-cluster-minor-differences-2-entries--2-clusters--5-and-5--0-distance.csv}
+{}
+{\id & \NREF & \DIWATER & \DIPUBT & \DISEA & \weeklyprice & \PETS & \CAIRCOND & \ROOMS & \BEDROOMS}
+
+
+
