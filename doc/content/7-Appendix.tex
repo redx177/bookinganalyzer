@@ -188,12 +188,13 @@ Es gibt dabei folgende Datentypen:
 \csvstyle{myTableStyle}{tabular=|c|c||c|c|c|c|c|c||c|c|,
 	separator=semicolon,
 	table head=\hline \rowcolor{tableheadcolor} \multicolumn{2}{|c||}{General} & \multicolumn{6}{c||}{Categorical} & \multicolumn{2}{c|}{Numerical} \\\hline
-	\rowcolor{tableheadcolor} \rotatebox{90}{id} & \rotatebox{90}{NREF} & \rotatebox{90}{DIWATER} & \rotatebox{90}{DIPUBT} & \rotatebox{90}{DIESEA} & \rotatebox{90}{weeklyprice} & \rotatebox{90}{PETS} & \rotatebox{90}{CAIRCOND} & \rotatebox{90}{ROOMS} & \rotatebox{90}{BEDROOMS} \\ ,
+	\rowcolor{tableheadcolor} \rotatebox{90}{id} & \rotatebox{90}{NREF} & \rotatebox{90}{Distanz zum Wasser} & \rotatebox{90}{Distanz zum ÖV} & \rotatebox{90}{Distanz zum Meer} & \rotatebox{90}{Wochenpreis} & \rotatebox{90}{Haustiere erlaubt} & \rotatebox{90}{Aircondition vorhanden} & \rotatebox{90}{Anzahl Zimmer} & \rotatebox{90}{Anzahl Schlafzimmer} \\ ,
 	late after line=\\,
 	late after last line=\\\hline,
-	head to column names}
+	head to column names}
 
-\section{Apriori: 2 gleiche Distanzattribute}
+
+\section{TC1: 2 gleiche Distanzattribute}
 \label{app:testdatenquellen:1}
 
 \csvreader[myTableStyle]%
@@ -201,7 +202,7 @@ Es gibt dabei folgende Datentypen:
 {}
 {\id & \NREF & \DIWATER & \DIPUBT & \DISEA & \weeklyprice & \PETS & \CAIRCOND & \ROOMS & \BEDROOMS}
 
-\section{Apriori: 2 gleiche Binäreattribute}
+\section{TC2: 2 gleiche Binäreattribute}
 \label{app:testdatenquellen:2}
 
 \csvreader[myTableStyle]%
@@ -209,7 +210,7 @@ Es gibt dabei folgende Datentypen:
 {}
 {\id & \NREF & \DIWATER & \DIPUBT & \DISEA & \weeklyprice & \PETS & \CAIRCOND & \ROOMS & \BEDROOMS}
 
-\section{Apriori: 2 gleiche numerische Attribute}
+\section{TC3: 2 gleiche numerische Attribute}
 \label{app:testdatenquellen:3}
 
 \csvreader[myTableStyle]%
@@ -217,7 +218,7 @@ Es gibt dabei folgende Datentypen:
 {}
 {\id & \NREF & \DIWATER & \DIPUBT & \DISEA & \weeklyprice & \PETS & \CAIRCOND & \ROOMS & \BEDROOMS}
 
-\section{Apriori: 1 numerisches und 1 Binärattribut}
+\section{TC4: 1 numerisches und 1 Binärattribut}
 \label{app:testdatenquellen:4}
 
 \csvreader[myTableStyle]%
@@ -225,7 +226,7 @@ Es gibt dabei folgende Datentypen:
 {}
 {\id & \NREF & \DIWATER & \DIPUBT & \DISEA & \weeklyprice & \PETS & \CAIRCOND & \ROOMS & \BEDROOMS}
 
-\section{Apriori: 2 gleiche Distanzattribute mit einem Binärfilter}
+\section{TC5: 2 gleiche Distanzattribute mit einem Binärfilter}
 \label{app:testdatenquellen:5}
 
 \csvreader[myTableStyle]%
@@ -233,7 +234,7 @@ Es gibt dabei folgende Datentypen:
 {}
 {\id & \NREF & \DIWATER & \DIPUBT & \DISEA & \weeklyprice & \PETS & \CAIRCOND & \ROOMS & \BEDROOMS}
 
-\section{Apriori: 2 gleiche Distanzattribute mit einem Distanzfilter}
+\section{TC6: 2 gleiche Distanzattribute mit einem Distanzfilter}
 \label{app:testdatenquellen:6}
 
 \csvreader[myTableStyle]%
@@ -241,7 +242,7 @@ Es gibt dabei folgende Datentypen:
 {}
 {\id & \NREF & \DIWATER & \DIPUBT & \DISEA & \weeklyprice & \PETS & \CAIRCOND & \ROOMS & \BEDROOMS}
 
-\section{Apriori: 2 gleiche Distanzattribute mit einem numerischen Filter}
+\section{TC7: 2 gleiche Distanzattribute mit einem numerischen Filter}
 \label{app:testdatenquellen:7}
 
 \csvreader[myTableStyle]%
@@ -249,7 +250,7 @@ Es gibt dabei folgende Datentypen:
 {}
 {\id & \NREF & \DIWATER & \DIPUBT & \DISEA & \weeklyprice & \PETS & \CAIRCOND & \ROOMS & \BEDROOMS}
 
-\section{Apriori: 2 gleiche Distanz- und 1 binäres Attribut}
+\section{TC8: 2 gleiche Distanz- und 1 binäres Attribut}
 \label{app:testdatenquellen:8}
 
 \csvreader[myTableStyle]%
@@ -257,7 +258,7 @@ Es gibt dabei folgende Datentypen:
 {}
 {\id & \NREF & \DIWATER & \DIPUBT & \DISEA & \weeklyprice & \PETS & \CAIRCOND & \ROOMS & \BEDROOMS}
 
-\section{Apriori: Zwei Menten mit einmal 2 Distanzen und einmal 1 numerischen und 1 Binärattritbut}
+\section{TC9: Zwei Menten mit einmal 2 Distanzen und einmal 1 numerischen und 1 Binärattritbut}
 \label{app:testdatenquellen:9}
 
 \csvreader[myTableStyle]%
@@ -265,7 +266,7 @@ Es gibt dabei folgende Datentypen:
 {}
 {\id & \NREF & \DIWATER & \DIPUBT & \DISEA & \weeklyprice & \PETS & \CAIRCOND & \ROOMS & \BEDROOMS}
 
-\section{Clusters: 2 Clusters mit jeweils 5 Elementen}
+\section{TC10: 2 Clusters mit jeweils 5 Elementen}
 \label{app:testdatenquellen:10}
 
 \csvreader[myTableStyle]%
@@ -273,7 +274,7 @@ Es gibt dabei folgende Datentypen:
 {}
 {\id & \NREF & \DIWATER & \DIPUBT & \DISEA & \weeklyprice & \PETS & \CAIRCOND & \ROOMS & \BEDROOMS}
 
-\section{Clusters: 1 Cluster mit 1 Element und 1 Cluster mit 9 Elementen}
+\section{TC11: 1 Cluster mit 1 Element und 1 Cluster mit 9 Elementen}
 \label{app:testdatenquellen:11}
 
 \csvreader[myTableStyle]%
@@ -281,7 +282,7 @@ Es gibt dabei folgende Datentypen:
 {}
 {\id & \NREF & \DIWATER & \DIPUBT & \DISEA & \weeklyprice & \PETS & \CAIRCOND & \ROOMS & \BEDROOMS}
 
-\section{Clusters: 2 Cluster mit kleinen Unterschieden}
+\section{TC12: 2 Cluster mit kleinen Unterschieden}
 \label{app:testdatenquellen:12}
 
 \csvreader[myTableStyle]%

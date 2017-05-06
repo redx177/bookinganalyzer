@@ -456,13 +456,355 @@ Der dritte Reiter führt zur Analyse mit den Clustering Algorithmen k-prototypes
 % - Rooms: ??? (2?)
 % - Pets allowed: yes
 
-In diesem Abschnitt sind Testfälle definiert welche am Schluss der Entwicklung ausgewertet werden. Dadurch können die Erwartungen an das Programm mit der tatsächlichen Ausgabe des Proof of Concepts verglichen werden.
+In diesem Abschnitt sind Testfälle definiert welche am Schluss der Entwicklung ausgewertet werden. Dadurch können die Erwartungen an das Programm mit der tatsächlichen Ausgabe des Proof of Concepts verglichen werden. Dazu wurden Datenquellen erstellt, in welchen die zu findenden Mustern von vornherein bekannt sind. Sobald der Proof of Concept umgesetzt wurde können die Resultate mit den  nachfolgend vorgestellten Informationen verglichen werden. Dadurch wird die richtige Funktionsweise des Programms sichergestellt.
 
-Definiert werden zwei Arten von Tests. Zum einen sind eigens definierte Datenquellen erstellt worden. Diese bestehen 9 - 18 Einträge wodurch Muster, welche von den Algorithmen erkannt werden sollen, einfach ersichtlich sind. Dadurch kann die Richtigkeit des Programms evaluiert werden.
+Es sind 12 Testdatenquellen definiert worden, welche im \cref{app:testdatenquellen} aufgeführt sind.
+Sie bestehen aus 9 - 18 Einträge mit jeweils 10 Attributen. Die Felder "`id"' und "`NREF"' in den Quellen sind nur für das Verständnis vorhanden und tragen nicht zur Testauswertung bei. Die restlichen Attribute bestehen aus Distanzen ("`DIWATER"', "`DIPUBT"', "`DISEA"'), Preisen ("`weeklyprice"'), Binär- ("`PETS"', "`CAIRCOND"') und numerischen ("`ROOMS"', "`BEDROOMS"') Werten. Dadurch sind kategorische sowie numerische Attribute abgedeckt. 
 
-Zum zweiten wurden Erwartungen definiert, welche in den realen Daten aufgefunden werden sollen. Damit können die verschiedenen Parameter der Algorithmen korrekt eingestellt werden damit das Programm schlussendlich im produktiven Umfeld eingesetzt werden kann.
+Die \glspl{tc} 1 bis 9 überprüfen die Richtigkeit des Apriori Algorithmen. Sie stellen sicher, dass Distanz-, Preis-, binären- und numerischen Attribute richtig aufsummiert und durch den Apriori-Gen Vorgang zu weiteren Attributmengen kombiniert werden. Zusätzlich überprüfen sie ob die Einschränkung der Datenmenge durch den Benutzer korrekt funktionieren. \glspl{tc} 10 bis 12 kontrollieren ihrerseits die Cluster Algorithmen. 
 
-\subsection{Testdatenquellen}
-Es sind 12 Testdatenquellen definiert worden, welche im \cref{app:testdatenquellen} aufgeführt werden. Nachfolgend sind die erwarteten Ausgaben des Programms für die einzelnen Quellen dokumentiert.
+Für die nachfolgenden Erwartungen werden nachfolgende Parameter vorausgesetzt. Diese müssen nachher bei der Testausführung gesetzt werden. Stimmen die Resultate überein ist der Test erfolgreich. 
+\begin{itemize}
+	\item Apriori
+	\begin{itemize}
+		\item $minSup$: 3
+	\end{itemize}
+	
+	\item Clustering
+	\begin{itemize}
+		\item $\gamma$ (Gewicht zwischen numerischen und kategorischen Attributen): 1
+		\item k-prototype:
+		\begin{itemize}
+			\item $k$ (Anzahl an Clustern): 2
+		\end{itemize}
+		\item DBSCAN:
+		\begin{itemize}
+			\item $\epsilon$ (Radius): 1
+			\item $minpts$ (Minimum Anzahl Punkte im Radius (Prozentwert)): 0.1
+		\end{itemize}
+	\end{itemize}
+\end{itemize}
 
-\paragraph{}
+\paragraph{TC1, Datenquelle \cref{app:testdatenquellen:1}:} Überprüft ob 2 Distanzattribute korrekt aufsummiert und miteinander zu einer 2er Menge kombiniert werden. 
+
+Dateneinschränkung:
+\begin{itemize}
+	\item Keine
+\end{itemize}
+
+Erwartetes Resultat:
+\begin{itemize}
+	\item 1er-Attributmenge:
+	\begin{itemize}
+		\item Nahe am Wasser: 8
+		\item Nahe am Meer: 8
+	\end{itemize}
+	\item 2er-Attributmenge:
+	\begin{itemize}
+		\item Nahe am Wasser, Nahe am Meer: 8
+	\end{itemize}
+\end{itemize}
+
+\paragraph{TC2, Datenquelle \cref{app:testdatenquellen:2}:} Überprüft ob 2 Binärattribute korrekt aufsummiert und miteinander zu einer 2er Menge kombiniert werden. 
+
+Dateneinschränkung:
+\begin{itemize}
+	\item Keine
+\end{itemize}
+
+Erwartetes Resultat:
+\begin{itemize}
+	\item 1er-Attributmenge:
+	\begin{itemize}
+		\item Haustiere erlaubt: 8
+		\item Aircondition vorhanden: 8
+	\end{itemize}
+	\item 2er-Attributmenge:
+	\begin{itemize}
+		\item Haustiere erlaubt, Aircondition vorhanden: 8
+	\end{itemize}
+\end{itemize}
+
+\paragraph{TC3, Datenquelle \cref{app:testdatenquellen:3}:} Überprüft ob 2 numerische Attribute korrekt aufsummiert und miteinander zu einer 2er Menge kombiniert werden. 
+
+Dateneinschränkung:
+\begin{itemize}
+	\item Keine
+\end{itemize}
+
+Erwartetes Resultat:
+\begin{itemize}
+	\item 1er-Attributmenge:
+	\begin{itemize}
+		\item Anzahl Zimmer=3: 9
+		\item Anzahl Schlafzimmer=2: 9
+	\end{itemize}
+	\item 2er-Attributmenge:
+	\begin{itemize}
+		\item Anzahl Zimmer=3, Anzahl Schlafzimmer=2: 9
+	\end{itemize}
+\end{itemize}
+
+\paragraph{TC4, Datenquelle \cref{app:testdatenquellen:4}:} Überprüft ob 1 numerisches und ein Binärattribut korrekt aufsummiert und miteinander zu einer 2er Menge kombiniert werden.
+
+Dateneinschränkung:
+\begin{itemize}
+	\item Keine
+\end{itemize}
+
+Erwartetes Resultat:
+\begin{itemize}
+	\item 1er-Attributmenge:
+	\begin{itemize}
+		\item Haustiere erlaubt: 8
+		\item Anzahl Schlafzimmer=3: 9
+	\end{itemize}
+	\item 2er-Attributmenge:
+	\begin{itemize}
+		\item Haustiere erlaubt, Anzahl Schlafzimmer=3: 8
+	\end{itemize}
+\end{itemize}
+
+\paragraph{TC5, Datenquelle \cref{app:testdatenquellen:5}:} Überprüft ob 2 Distanzattribute korrekt aufsummiert und miteinander zu einer 2er Menge kombiniert werden unter der Anwendung einer Dateneinschränkung eines binären Attributes. 
+
+Dateneinschränkung:
+\begin{itemize}
+	\item Haustiere erlaubt
+\end{itemize}
+
+Erwartetes Resultat:
+\begin{itemize}
+	\item 1er-Attributmenge:
+	\begin{itemize}
+		\item Nahe am Wasser: 4
+		\item Nahe am Meer: 5
+	\end{itemize}
+	\item 2er-Attributmenge:
+	\begin{itemize}
+		\item Nahe am Wasser, Nahe am Meer: 4
+	\end{itemize}
+\end{itemize}
+
+\paragraph{TC6, Datenquelle \cref{app:testdatenquellen:6}:} Überprüft ob 2 Distanzattribute korrekt aufsummiert und miteinander zu einer 2er Menge kombiniert werden unter der Anwendung einer Dateneinschränkung eines Distanzattributes. 
+
+Dateneinschränkung:
+\begin{itemize}
+	\item Nahe am ÖV (öffentlicher Verkehr)
+\end{itemize}
+
+Erwartetes Resultat:
+\begin{itemize}
+	\item 1er-Attributmenge:
+	\begin{itemize}
+		\item Nahe am Wasser: 3
+		\item Nahe am Meer: 4
+	\end{itemize}
+	\item 2er-Attributmenge:
+	\begin{itemize}
+		\item Nahe am Wasser, Nahe am Meer: 3
+	\end{itemize}
+\end{itemize}
+
+\paragraph{TC7, Datenquelle \cref{app:testdatenquellen:7}:} Überprüft ob 2 Distanzattribute korrekt aufsummiert und miteinander zu einer 2er Menge kombiniert werden unter der Anwendung einer Dateneinschränkung eines numerischen Attributes. 
+
+Dateneinschränkung:
+\begin{itemize}
+	\item Anzahl Zimmer=3
+\end{itemize}
+
+Erwartetes Resultat:
+\begin{itemize}
+	\item 1er-Attributmenge:
+	\begin{itemize}
+		\item Nahe am Wasser: 5
+		\item Nahe am Meer: 3
+	\end{itemize}
+	\item 2er-Attributmenge:
+	\begin{itemize}
+		\item Nahe am Wasser, Nahe am Meer: 3
+	\end{itemize}
+\end{itemize}
+
+\paragraph{TC8, Datenquelle \cref{app:testdatenquellen:8}:} Überprüft ob 2 Distanzattribute und 1 binäres Attribut korrekt aufsummiert und miteinander zu einer 2er und 3er Menge kombiniert werden. 
+
+Dateneinschränkung:
+\begin{itemize}
+	\item Keine
+\end{itemize}
+
+Erwartetes Resultat:
+\begin{itemize}
+	\item 1er-Attributmenge:
+	\begin{itemize}
+		\item Nahe am Wasser: 14
+		\item Nahe am Meer: 13
+		\item Haustiere erlaubt: 12
+	\end{itemize}
+	\item 2er-Attributmenge:
+	\begin{itemize}
+		\item Nahe am Wasser, Nahe am Meer: 11
+		\item Nahe am Wasser, Haustiere erlaubt: 10
+		\item Nahe am Meer, Haustiere erlaubt: 9
+	\end{itemize}
+	\item 3er-Attributmenge:
+	\begin{itemize}
+		\item Nahe am Wasser, Nahe am Meer, Haustiere erlaubt: 8
+	\end{itemize}
+\end{itemize}
+
+\paragraph{TC9, Datenquelle \cref{app:testdatenquellen:9}:} Überprüft ob 2 Distanz-, 1 binäres- und 1 numerisches Attribut korrekt aufsummiert und miteinander zu 2er Mengen kombiniert werden. Die Kombinationen sind so gewählt dass keine 3er Menge erstellt werden kann.
+
+Dateneinschränkung:
+\begin{itemize}
+	\item Keine
+\end{itemize}
+
+Erwartetes Resultat:
+\begin{itemize}
+	\item 1er-Attributmenge:
+	\begin{itemize}
+		\item Nahe am Wasser: 8
+		\item Nahe am Meer: 8
+		\item Haustiere erlaubt: 9
+		\item Anzahl Zimmer=3: 9
+	\end{itemize}
+	\item 2er-Attributmenge:
+	\begin{itemize}
+		\item Nahe am Wasser, Nahe am Meer: 8
+		\item Haustiere erlaubt, Anzahl Zimmer=3: 9
+	\end{itemize}
+\end{itemize}
+
+\paragraph{TC10, Datenquelle \cref{app:testdatenquellen:10}:} Überprüft ob 2 Cluster gefunden werden mit jeweils 5 Buchungen. 
+
+Dateneinschränkung:
+\begin{itemize}
+	\item Keine
+\end{itemize}
+
+Erwartetes Resultat:
+\begin{itemize}
+	\item Noise Punkte: 0
+	\item Cluster 1:
+	\begin{itemize}
+		\item Fehler: 0
+		\item Grösse: 5
+			\item 1er-Attributmenge:
+			\begin{itemize}
+				\item Nahe am Wasser: 5
+				\item Nahe am Meer: 5
+				\item Anzahl Zimmer=3: 5
+				\item Anzahl Schlafzimmer=2: 5
+			\end{itemize}
+			\item 2er-Attributmenge:
+			\begin{itemize}
+				\item Nahe am Wasser, Nahe am Meer: 5
+				\item Nahe am Wasser, Anzahl Zimmer=3: 5
+				\item Nahe am Wasser, Anzahl Schlafzimmer=2: 5
+			
+				\item Nahe am Meer, Anzahl Zimmer=3: 5
+				\item Nahe am Meer, Anzahl Schlafzimmer=2: 5
+			
+				\item Anzahl Zimmer=3, Anzahl Schlafzimmer=2: 5
+			\end{itemize}
+			\item 3er-Attributmenge:
+			\begin{itemize}
+				\item Nahe am Wasser, Nahe am Meer, Anzahl Zimmer=3: 5
+				\item Nahe am Wasser, Nahe am Meer, Anzahl Schlafzimmer=2: 5
+				\item Nahe am Meer, Anzahl Schlafzimmer=3, Anzahl Schlafzimmer=2: 5
+			\end{itemize}
+			\item 4er-Attributmenge:
+			\begin{itemize}
+				\item Nahe am Wasser, Nahe am Meer, Anzahl Zimmer=3, Anzahl Schlafzimmer=2: 5
+			\end{itemize}
+	\end{itemize}
+	\item Cluster 2:
+	\begin{itemize}
+		\item Fehler: 0
+		\item Grösse: 4
+			\item 1er-Attributmenge:
+			\begin{itemize}
+				\item Wochenpreis=günstig: 4
+				\item Anzahl Zimmer=9: 4
+				\item Anzahl Schlafzimmer=9: 4
+			\end{itemize}
+			\item 2er-Attributmenge:
+			\begin{itemize}
+				\item Wochenpreis=günstig, Anzahl Zimmer=9: 4
+				\item Wochenpreis=günstig, Anzahl Schlafzimmer=9: 4
+			
+				\item Anzahl Zimmer=9, Anzahl Schlafzimmer=9: 4
+			\end{itemize}
+			\item 3er-Attributmenge:
+			\begin{itemize}
+				\item Wochenpreis=günstig, Anzahl Schlafzimmer=9, Anzahl Schlafzimmer=9: 4
+			\end{itemize}
+	\end{itemize}
+\end{itemize}
+
+Bei TC11 und TC12 unterscheiden sich die Resultate der k-prototype und DBSCAN Algorithmen. Deshalb werden die Resultate separat aufgeführt.
+
+\paragraph{TC11, Datenquelle \cref{app:testdatenquellen:11}:} Überprüft ob 1 Cluster gefunden wird mit 9 Buchungen. 
+
+Dateneinschränkung:
+\begin{itemize}
+	\item Keine
+\end{itemize}
+
+Erwartetes Resultat vom DBSCAN Algorithmus:
+\begin{itemize}
+	\item Noise Punkte: 1
+	\item Cluster 1:
+	\begin{itemize}
+		\item Fehler: 0
+		\item Grösse: 9
+			\item 1er-Attributmenge:
+			\begin{itemize}
+				\item Nahe am Wasser: 9
+				\item Nahe am Meer: 9
+				\item Anzahl Zimmer=3: 9
+				\item Anzahl Schlafzimmer=2: 9
+			\end{itemize}
+			\item 2er-Attributmenge:
+			\begin{itemize}
+				\item Nahe am Wasser, Nahe am Meer: 9
+				\item Nahe am Wasser, Anzahl Zimmer=3: 9
+				\item Nahe am Wasser, Anzahl Schlafzimmer=2: 9
+			
+				\item Nahe am Meer, Anzahl Zimmer=3: 9
+				\item Nahe am Meer, Anzahl Schlafzimmer=2: 9
+			
+				\item Anzahl Zimmer=3, Anzahl Schlafzimmer=2: 9
+			\end{itemize}
+			\item 3er-Attributmenge:
+			\begin{itemize}
+				\item Nahe am Wasser, Nahe am Meer, Anzahl Zimmer=3: 9
+				\item Nahe am Wasser, Nahe am Meer, Anzahl Schlafzimmer=2: 9
+				\item Nahe am Meer, Anzahl Schlafzimmer=3, Anzahl Schlafzimmer=2: 9
+			\end{itemize}
+			\item 4er-Attributmenge:
+			\begin{itemize}
+				\item Nahe am Wasser, Nahe am Meer, Anzahl Zimmer=3, Anzahl Schlafzimmer=2: 9
+			\end{itemize}
+	\end{itemize}
+\end{itemize}
+
+Erwartetes Resultat vom k-prototype Algorithmus:
+\begin{itemize}
+	\item Cluster 1:
+	\begin{itemize}
+		\item Fehler: 0
+		\item Grösse: 9
+		\item Das Resultat der Analyse dieses Clusters vom Apriori Algorithmus ist dasselbe wie jenes vom DBSCAN welches oben aufgeführt wurde. Zur Verbesserung der Übersicht wird das Resultat hier nicht noch einmal aufgeführt.
+	\end{itemize}
+
+	\item Cluster 2:
+	\begin{itemize}
+		\item Fehler: 0
+		\item Grösse: 1
+		\item Der Apriori Algorithmus findet keine häufigen Attribute, da $minsup$ auf 3 gesetzt ist und nur 1 Element in diesem Cluster vorhanden ist.
+	\end{itemize}
+\end{itemize}
+
+
+\paragraph{TC12, Datenquelle \cref{app:testdatenquellen:12}:}\todo{}
