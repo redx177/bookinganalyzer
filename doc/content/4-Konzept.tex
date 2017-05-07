@@ -171,6 +171,10 @@ Normiert werden die Spalten AC (Sterne Bewertung des Objektes), AD (Anzahl Zimme
 
 Der Preis in der Spalte E giltet für die gesamte Buchung. Dieser wird in einen Wochenpreis und pro Person normiert. Wenn eine Buchung CHF 2'000 kostet für 10 Tage für 2 Personen, so ergibt das "`CHF 1'400 / 10 Tage * 7 Tage / 2 Personen = CHF 490"'. Es wird keine Normierung auf einen Wert von 0-1 durchgeführt, da dieser Wert noch diskretiert wird (siehe nächsten Paragraphen).
 
+\paragraph{Datenerweiterung} Die Daten sollen durch weitere Felder ergänzt werden. Denn eine Fragestellung von Interhome ist es, eine Häufigkeitsanalyse in einem Gebiet durchzuführen\todo{cref}. Da im Datenstamm jedoch nur das Land des Objektes vorhanden ist, muss die Region und die Ortschaft erweitert werden. 
+
+Zusätzlich müssen für die Wetterdaten die genaue Geolocation des Benutzers vorhanden sein. Im Datenstamm ist die Adresse des Kunden gespeichert, mit welcher die Geolocation ermittelt werden kann.
+
 \paragraph{Diskretierung von Distanzen und des Wochenpreises} Die Zeilen AK (Distanz zum Wasser), AL (Distanz zum Skigebiet), AM (Distanz zum öffentlichen Verkehr), DZ (Distanz zum Zentrum), EA (Distanz bis zum Meer) und EB (Distanz bis zum See) sind numerische Werte, welche die Anzahl an Metern zu einem Punkt angeben. Die Werte dieser Spalten wird in folgenden Wert diskretiert. 
 
 \begin{table}[h] 

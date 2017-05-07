@@ -88,10 +88,22 @@
 % http://dollar.biz.uiowa.edu/~street/research/dmoc.pdf
 % http://www.jmlr.org/papers/volume3/guyon03a/guyon03a.pdf
 
-\subsection{RapidMiner Prozess für die Datenvorbereitung}
-\label{sec:konzept:rapidminer}
+Die Daten müssen für die Verwendung im Proof of Concept vorbereitet werden. Dazu wurden zwei Programme geschrieben um die Daten anzureichern. Die Datentransormationen wurden anschliessend gemäss \cref{sec:recherche:datenvorbereitung} mit dem Programm RapidMiner durchgeführt.
 
-Die Datenvorbereitung (data preprocessing) wird mit dem Programm RapidMiner durchgeführt.
+\subsection{Datenerweiterung}
+Die Programme für die Datenanreicherungen sind jeweils eine Kommandozeilen-Software welche hier vorgestellt werden.
+
+\subsubsection{Land, Region, Ortschaft}
+Es wurde ein Programm für die Anreicherung vom Land, der Region sowie der Ortschaft der Objekte erstellt. Es erwartet eine \gls{CSV} Datei mit einem Semikolon als Feldseparator, sowie das Feld "`NREF"' welches in jeder Zeile vorkommen muss und die ID des Objektes beinhaltet.
+
+Die Software verarbeitet Zeile für Zeile der Datei und fügt am Ende drei Felder mit den Namen "`country"', "`region"' und "`place"' an. Um die Daten zu erhalten wird der Such-Service von Interhome angesprochen, welcher die drei Informationen zurückliefert. Als Parameter des Services wird die `NREF"' des Objektes übergeben. 
+
+Es kann sein dass das Objekt bei Interhome nicht mehr vorhanden ist und der Service nichts zurück liefert. Deshalb gibt es nach der Ausführung des Programmes Buchungen welche keine Informationen für das Land, die Region und die Ortschaft besitzen.
+
+Im Programm wird ein Cache verwendet, welcher für jede "`NREF"' das Land, die Region und die Ortschaft zwischenspeichert. Wenn eine "`NREF"' zum zweiten mal angefragt werden soll, können die Daten aus dem Cache bezogen werden und es muss kein weiterer Service Aufruf durchgeführt werden. Für die 133'001 Buchungen mussten dank des Caches nur 78'342 Anfragen an den Service gestellt werden.
+
+\subsection{Datenerweiterung mit RapidMiner}
+
 Zuerst werden die Daten aus dem \gls{csv} File geladen. Anschliessend die Attribute gemäss \cref{fig:recherche:attributeinschraenkung:2} eingeschränkt sowie die Diskretisierung entsprechend \cref{fig:recherche:datenvorbereitung:1} und \ref{fig:recherche:datenvorbereitung:2} durchgeführt.
 
 \cref{fig:recherche:rapidminer:1} zeigt den Prozess im RapidMiner Studio. In \ref{fig:recherche:rapidminer:1:1} wird der Hauptprozess gezeigt. Zusätzlich sind die Operatoren "`Generate ID"' und "`Write CSV"' vorhanden. Ersterer generiert eine neue ID. Da im Schritt "`Select Attributes"' keine Kundenspezifischen Daten ausgewählt werden, sind die Informationen nacher voll anonymisiert und können auch veröffentlicht werden. Der letzte Schritt schreibt das Resultat in ein \gls{csv} File damit es nachher weiterverwendet werden kann.
