@@ -218,4 +218,70 @@ Die Struktur der Packages ist so ausgelegt, dass sie von oben nach unten fliesst
 \end{itemize}
 
 \section{Dependency Injection}
+Bei der Dependency Injection handelt es sich um ein \todo{add back in}%\gls{pattern}
+das zum Ziel hat, eine möglichst niedrige Kopplung zu erreichen. Dies bedeutet, dass eine Klasse so wenig Abhängigkeiten wie möglich zu anderen Komponenten aufweisen soll. Dadurch können einzelne Klassen einfacher ausgetauscht werden washt die Wartbarkeit des Systems erhöht sowie die Leserlichkeit des Codes fordert. Dies soll anhand eines Beispieles aufgezeigt werden.
 
+\begin{lstlisting}[language=php]
+var _x = $\textdollar$y
+\end{lstlisting}
+
+\begin{lstlisting}[language=php]
+class Car {
+	public $\textdollar$engine;
+	
+	public function __construct() {
+		$\textdollar$this->engine = new V6Engine();
+	}
+	
+	public function accelerate() {
+		$\textdollar$this->engine->accelerate();
+	}
+}
+\end{lstlisting}
+
+Im obigen Code wird eine Klasse Car erstellt in dessen Konstruktor ein V6 Motor instanziiert  wird. Der Code ist jetzt direkt gekoppelt mit der Klasse V6Engine. Wenn ein Auto mit einem V4Engine erstellt werden soll muss die Klasse entsprechend angepasst werden. 
+
+
+\begin{lstlisting}[language=php]
+class Car {
+	public $\textdollar$engine;
+	
+	public function __construct(Engine engine) {
+		$\textdollar$this->engine = engine;
+	}
+	
+	public function accelerate() {
+		$\textdollar$this->engine->accelerate();
+	}
+}
+\end{lstlisting}
+
+Hier wurde die Klasse so angepasst, dass der Konstruktor keinen Motor erstellt, sondern diesen über die Parameter übernimmt. So kann von aussen gesteuert werden, welchen Engine das Auto beinhaltet. 
+
+In der Arbeit werden alle Komponenten über Dependency Injection in Klassen hineingereicht. Die einzige Ausnahme sind die Models, weshalb sie auch möglichst wenig Logik beinhalten sollten (siehe \cref{sec:proofofconcept:packagestruktur} \nameref{sec:proofofconcept:packagestruktur}). Dies kann besonders gut mit den Iteratoren veranschaulicht werden. Die Klasse "`BookingDataIterator"' nimmt ein Interface "`DataIterator"' entgegen. Es gibt 5 Klassen welche dieses Interface implementieren wovon 3 hier erläutert werden:
+\begin{itemize}
+	\item LoadAllCsvDataIterator: Lädt alle Buchungsdaten aus einem File ins Memory und iteriert dann über die einzelnen Instanzen.
+	\item LoadIncrementalCsvDataIterator: Lädt eine Instanz nach der anderen aus dem File.
+	\item LoadRedisDataIterator: Lädt eine Instanz nach der anderen aus einer Redis Datenbank (In Memory Datenban)\todo{cref}
+\end{itemize}
+
+Es gibt demnach 3 verschiedene Möglichkeiten, wie auf die Daten zugegriffen werden kann. Mittels Dependency Injection kann nun von aussen bestimmt werden, wie der "`BookingDataIterator"' auf die Daten zugreift.
+
+Für das Dependency Injection \todo{add back in}%\gls{pattern}
+ wird das Framework PHP-DI verwendet (siehe \url{http://php-di.org/}). In der ersten geladenen Datei wird der gesamte Objektgraph aufgebaut. Dort wird bestimmt, welche Klasse in den "`BookingDataIterator"' übergeben wird. Ein Beispiel wird nachfolgend präsentiert:
+ 
+\begin{lstlisting}[language=php]
+$\textdollar$builder = new DI\ContainerBuilder();
+$\textdollar$builder->addDefinitions([
+    [...]
+    DataIterator::class => DI\object(LoadIncrementalCsvDataIterator::class),
+    [...]
+]);
+$\textdollar$container = $\textdollar$builder->build();
+$\textdollar$apriori = $\textdollar$container->get('AprioriAlgorithm');
+$\textdollar$apriori->run();
+\end{lstlisting}
+
+Zuerst wird ein "`ContainerBuilder"' erstellt. Auf diesem wird definiert, dass für das "`DataIterator"' Interface die Klasse "`LoadIncrementalCsvDataIterator"' verwendet werden soll. Danach wird auf Zeile 7 ein "`Container"' erstellt und anschliessend eine Instanz der Klasse "`AprioriAlgorithm"' angefordert. Der Container analysiert die Klasse und sieht dass ein "`DataIterator"' erwartet wird und reicht deshalb ein "`LoadIncrementalCsvDataIterator"' in den "`AprioriAlgorithm"' rein. Somit kann auf oberster Ebene gesteuert werden, welche Klassen wo übergeben werden.
+
+Als erfreulicher Nebeneffekt erleichtert dies die Entwicklung von UnitTests massiv (\todo{cref}).

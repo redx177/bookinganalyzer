@@ -65,14 +65,14 @@ In der \cref{fig:einleitung:organisationsstruktur:2} werden die Marken der versc
 
 \section{Ziel der Arbeit}
 \label{sec:einleitung:ziel}
-Das Ziel der Arbeit ist es, Interhome bei Entscheidungen zum Thema Marketing oder Einkauf zu unterstützen. Bislang hat man sich auf das Bauchgefühl verlassen. Durch eine Anaylse von Buchungsdaten sollte den Entscheidungen von Interhome eine Grundlage gegeben werden. 
+Das Ziel der Arbeit ist es, Interhome bei Entscheidungen zum Thema Marketing oder Einkauf zu unterstützen. Bislang hat man sich auf das Bauchgefühl verlassen. Durch eine Analyse von Buchungsdaten sollte den Entscheidungen von Interhome eine Grundlage gegeben werden. 
 
 Der Einkauf sollte in Erfahrung bringen können, was zum Beispiel von den Kunden in der Schweiz am meisten gebucht wird. Sie sollen eine Anfrage dazu stellen können in der Form von: "Was für Objekte werden von Schweizern am meisten gebucht?". Das Resultat könnte sein: "Objekte, in Italien und maximal 500 Meter vom Meer entfernt sind". Dadurch weiss der Einkauf, dass eventuell mehr Objekte in Italien eingekauft werden müssen, welche weniger als 500 Meter vom Meer entfernt sind.
 
 Das Marketing hingegen könnte eine solche Anfrage an die Analyse stellen: „Was für Objekte werden im Winter am meisten in Zermatt gebucht?“. Eine mögliche Antwort wäre: „Objekte welche unter CHF500 kosten und maximal 200 Meter von einem Skilift entfernt sind“. Solche Informationen können helfen, gezielter Werbung zu schalten. Auf der Webseite kann damit einem Benutzer, welcher eine Ferienwohnung in Zermatt im Winter sucht gezielter Objekte angezeigt werden. Nämlich solche, welche maximal CHF500 kosten und 200 Meter vom Skilift entfernt sind.
 
-Um solche Fragen zu beantworten werden die Buchungsdaten von Interhome (Objekt, Zeitraum, Passagiere, etc.) verwendet und mit weiteren Daten (Geolocation, Wetterinformation) angereicht. 
-Auf dem Endprodukt soll ein Mitarbeiter von Interhome in der Lage sein, ein Abfrage zu generieren, welche aus einem oder mehreren Attribute besteht. Die Applikation analysiert daraufhin die Daten mit Techniken des Data Mining, um eine Liste von Attributen zurück zu liefern, welche für die in der Abfrage aufgeführten Attributen am meisten Buchungen generieren. Die Elemente in der Antwort sollten gewichtet sein um das Resultat besser zu interpretieren.
+Um solche Fragen zu beantworten werden die Buchungsdaten von Interhome (Objekt, Zeitraum, Passagiere, etc.) verwendet und mit weiteren Daten (Geolocation, Wetterinformation) angereichert. 
+Auf dem Endprodukt soll ein Mitarbeiter von Interhome in der Lage sein, eine Abfrage zu generieren, welche aus einem oder mehreren Attributen besteht. Die Applikation analysiert daraufhin die Daten mit Techniken des Data Mining, um eine Liste von Attributen zurück zu liefern, welche für die in der Abfrage aufgeführten Attributen am meisten Buchungen generieren. Die Elemente in der Antwort sollten gewichtet sein um das Resultat besser zu interpretieren.
 
 Um dies besser zu veranschaulichen sollte hier ein Beispiel gemacht werden. Dazu ist in der \cref{fig:einleitung:ziel:1} eine Datenmenge aufgeführt. Aufgeteilt sind die Spalten in Objekt- und Kundendaten. Dies hat keinen weiteren Einfluss auf diese Arbeit und sollte lediglich zum besseren Verständnis führen. Die ersten 9 Spalten sind Rohdaten und das Wetter (letzte Spalte) muss zusätzlich angereichert werden.
 
@@ -102,7 +102,7 @@ Um dies besser zu veranschaulichen sollte hier ein Beispiel gemacht werden. Dazu
 	\end{tabular}
 \end{table}
 
-Als Beispiel möchte das Marketing wissen, was gebucht wird wenn es regnet. Die Anfrage  lautet "`Wetter = Regen"' was auf die Elemente mit den IDs 3, 4, 6 und 7 zutrifft. Das Resultat der Abfrage ist in \cref{fig:einleitung:ziel:2} aufgeführt. Dort sind nur noch Elemente vorhanden, welche im Attribut "`Wetter"' den Wert "`Regen"' 
+Als Beispiel möchte das Marketing wissen, was gebucht wird wenn es regnet. Die Anfrage lautet "`Wetter = Regen"' was auf die Elemente mit den IDs 3, 4, 6 und 7 zutrifft. Das Resultat der Abfrage ist in \cref{fig:einleitung:ziel:2} aufgeführt. Dort sind nur noch Elemente vorhanden, welche im Attribut "`Wetter"' den Wert "`Regen"' besitzen.
 
 \begin{table}[H] 
 	\caption{Resultat einer Anfrage}
