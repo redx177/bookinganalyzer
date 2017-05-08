@@ -91,10 +91,12 @@
 Die Daten müssen für die Verwendung im Proof of Concept vorbereitet werden. Dazu wurden zwei Programme geschrieben um die Daten anzureichern. Die Datentransormationen wurden anschliessend gemäss \cref{sec:recherche:datenvorbereitung} mit dem Programm RapidMiner durchgeführt.
 
 \subsection{Datenerweiterung}
+\label{sec:proofofconcept:datenvorbereitung:datenerweiterung}
 Die Programme für die Datenanreicherungen sind jeweils eine Kommandozeilen-Software welche hier vorgestellt werden.
 
 \subsubsection{Land, Region, Ortschaft}
-Es wurde ein Programm für die Anreicherung vom Land, der Region sowie der Ortschaft der Objekte erstellt. Es erwartet eine \gls{CSV} Datei mit einem Semikolon als Feldseparator, sowie das Feld "`NREF"' welches in jeder Zeile vorkommen muss und die ID des Objektes beinhaltet.
+\label{sec:proofofconcept:datenvorbereitung:datenerweiterung:landregionortschaft}
+Es wurde ein Programm für die Anreicherung vom Land, der Region sowie der Ortschaft der Objekte erstellt. Es erwartet eine \gls{csv} Datei mit einem @-Zeichen als Feldseparator, sowie das Feld "`NREF"' welches in jeder Zeile vorkommen muss und die ID des Objektes beinhaltet. Der Quellcode ist einsehbar in Github unter \url{https://github.com/soultemptation/bookinganalyzerdestinations}.
 
 Die Software verarbeitet Zeile für Zeile der Datei und fügt am Ende drei Felder mit den Namen "`country"', "`region"' und "`place"' an. Um die Daten zu erhalten wird der Such-Service von Interhome angesprochen, welcher die drei Informationen zurückliefert. Als Parameter des Services wird die `NREF"' des Objektes übergeben. 
 
@@ -102,15 +104,34 @@ Es kann sein dass das Objekt bei Interhome nicht mehr vorhanden ist und der Serv
 
 Im Programm wird ein Cache verwendet, welcher für jede "`NREF"' das Land, die Region und die Ortschaft zwischenspeichert. Wenn eine "`NREF"' zum zweiten mal angefragt werden soll, können die Daten aus dem Cache bezogen werden und es muss kein weiterer Service Aufruf durchgeführt werden. Für die 133'001 Buchungen mussten dank des Caches nur 78'342 Anfragen an den Service gestellt werden.
 
-\subsection{Datenerweiterung mit RapidMiner}
+\subsubsection{Geolocation}
+\label{sec:proofofconcept:datenvorbereitung:datenerweiterung:geolocation}
+Das Programm für die Anreicherung der Geolocation erwartet wie die im \cref{sec:proofofconcept:datenvorbereitung:datenerweiterung:landregionortschaft} vorgestellte Software eine \gls{csv} Datei, in welchem die Felder mit einem @-Zeichen getrennt sind, sowie die Attribute "`CUSTRAS"' (Strasse), "`CUCNTRY"' (Land), "`CUZIP"' (Postleitzahl) und "`CUORT"' (Ort). Unter \url{https://github.com/soultemptation/BookingAnalyzerGeocoding} ist der Quellcode abgelegt. 
 
-Zuerst werden die Daten aus dem \gls{csv} File geladen. Anschliessend die Attribute gemäss \cref{fig:recherche:attributeinschraenkung:2} eingeschränkt sowie die Diskretisierung entsprechend \cref{fig:recherche:datenvorbereitung:1} und \ref{fig:recherche:datenvorbereitung:2} durchgeführt.
+Um die Adresse in Geo-Koordinaten umzuwandeln wurde die "`Locations API"' von Bing Maps (Microsoft) verwendet (siehe \url{https://msdn.microsoft.com/en-us/library/ff701715.aspx}). Da der Service nicht kostenlos ist und 133'001 Geocoding-Anfragen gesendet werden mussten, wurde eine Lizenz benötigt welche an einen "`API Key"' gebunden ist. Es konnte eine Studenten-Lizenz erworben werden, welcher 10'000 Anfragen pro Tag erlaubt.
 
-\cref{fig:recherche:rapidminer:1} zeigt den Prozess im RapidMiner Studio. In \ref{fig:recherche:rapidminer:1:1} wird der Hauptprozess gezeigt. Zusätzlich sind die Operatoren "`Generate ID"' und "`Write CSV"' vorhanden. Ersterer generiert eine neue ID. Da im Schritt "`Select Attributes"' keine Kundenspezifischen Daten ausgewählt werden, sind die Informationen nacher voll anonymisiert und können auch veröffentlicht werden. Der letzte Schritt schreibt das Resultat in ein \gls{csv} File damit es nachher weiterverwendet werden kann.
+Das Programm geht jede Zeile der Datenquelle durch und sendet eine Anfrage an die "`Locations API"'. Übergeben wird die Adresse des Kunden sowie ein "`API Key"' für die Authentifizierung. Die Anfrage ist folgendermassen aufgebaut:
 
-\cref{fig:recherche:rapidminer:1:2} ist ein Unterprozess welcher die Diskretisierung des Preises und der Distanzen vornimmt. Im \cref{sec:recherche:datenvorbereitung} wird beschrieben dass nicht alle Bereich der zu diskretierenden Attribute verwendet werden soll (z.B. Distanzen >499 werden nicht berücksichtigt). Dies kann mit den "`Discretize"' Operatoren in RapidMiner nicht abgebildet werden. Deshalb werden alle Werte diskretiert und die zu ignorierenden nachher entfernt.
+\blockquote[]{http://dev.virtualearth.net/REST/v1/Locations?countryRegion=\textbf{\{Zweistelliger Ländercode\}}\&locality=\textbf{\{Stadt\}}\&postalCode=\textbf{\{Postleitzahl\}}\&addressLine=\textbf{\{Strasse und Hausnummer\}}\&includeNeighborhood=0\&maxResults=1\&key=\textbf{\{API Key\}}}
 
-\cref{fig:recherche:rapidminer:1:3} zeigt den Unterprozess für die Ersetzung von Attributwerten. Zuerst werden, wie im \cref{sec:recherche:datenbeschaffung} beschrieben, "`X"' Werte von kategorischen Feldern mit "`1"' ersetzt und leere mit "`0"'. Danach werden die nicht zu verwendenden diskretierten Werte der Preise und Distanzen entfernt.
+Um zum Beispiel die Geolocation der ZHAW Zürich anzufragen, kann folgender Request angesetzt werden:
+
+\blockquote[]{http://dev.virtualearth.net/REST/v1/Locations?countryRegion=\textbf{CH}\&locality=\textbf{Zurich} \&postalCode=\textbf{8021}\&addressLine=\textbf{Lagerstrasse 41}\&includeNeighborhood=0\&max Results=1\&key=\{API Key\}}
+
+Bing Maps liefert dafür die Koordinaten "`47.37766, 8.53259"' zurück. In der \cref{fig:proofofconcept:datenvorbereitung:datenerweiterung:geolocation:1} ist die Adresse auf einer Karte eingezeichnet.
+
+\begin{figure}[H]
+	\RawFloats
+	\centering
+	\includegraphics[width=1\textwidth]{images/bing-maps-result}
+	\caption{Resultat des Geocodings von Bing Maps.}
+	\label{fig:proofofconcept:datenvorbereitung:datenerweiterung:geolocation:1}
+\end{figure}
+
+\subsection{Datenvorbereitung mit RapidMiner}
+Im \cref{sec:recherche:datenvorbereitung} wurde beschrieben, wie die Daten vorbereitet werden sollen. Dieser Abschnitt zeigt auf wie das Program RapidMiner verwendet wurde um diese Vorgaben zu erfüllen. \cref{fig:recherche:rapidminer:1} zeigt den definierte Prozess auf.
+
+%Zuerst werden die Daten aus dem \gls{csv} File geladen. Anschliessend die Attribute gemäss \cref{fig:recherche:attributeinschraenkung:2} eingeschränkt sowie die Diskretisierung entsprechend \cref{fig:recherche:datenvorbereitung:1} und \ref{fig:recherche:datenvorbereitung:2} durchgeführt.
 
 \begin{figure}[htb]
 	\begin{subfigure}[t]{1\textwidth}
@@ -134,3 +155,9 @@ Zuerst werden die Daten aus dem \gls{csv} File geladen. Anschliessend die Attrib
 	\caption{RapidMiner Prozess für die Vorbereitung der Daten}
 	\label{fig:recherche:rapidminer:1}
 \end{figure}
+
+ In \ref{fig:recherche:rapidminer:1:1} wird der Hauptprozess gezeigt. Zusätzlich sind die Operatoren "`Generate ID"' und "`Write CSV"' vorhanden. Ersterer generiert eine neue ID. Da im Schritt "`Select Attributes"' keine Kundenspezifischen Daten ausgewählt werden, sind die Informationen nachher voll anonymisiert und können auch veröffentlicht werden. Der letzte Schritt schreibt das Resultat in ein \gls{csv} File damit es nachher weiterverwendet werden kann.
+
+\cref{fig:recherche:rapidminer:1:2} ist ein Unterprozess welcher die Diskretisierung des Preises und der Distanzen vornimmt. Im \cref{sec:recherche:datenvorbereitung} wird beschrieben dass nicht alle Bereich der zu diskretierenden Attribute verwendet werden soll (z.B. Distanzen >499 werden nicht berücksichtigt). Dies kann mit den "`Discretize"' Operatoren in RapidMiner nicht abgebildet werden. Deshalb werden alle Werte diskretiert und die zu ignorierenden nachher entfernt.
+
+\cref{fig:recherche:rapidminer:1:3} zeigt den Unterprozess für die Ersetzung von Attributwerten. Zuerst werden, wie im \cref{sec:recherche:datenbeschaffung} beschrieben, "`X"' Werte von kategorischen Feldern mit "`1"' ersetzt und leere mit "`0"'. Danach werden die nicht zu verwendenden diskretierten Werte der Preise und Distanzen entfernt.

@@ -150,12 +150,12 @@ Die Datenvorbereitung wandelt die Daten so um dass sie für das Data Mining mög
 
 \paragraph{Datennormierung von numerischen Werten} Die im \cref{sec:konzept:anwendungderalgorithmen:distanzmessung} vorgestellte Distanzmessung arbeitet mit der euklidischen Distanz für numerische Werte. Wenn ein Attribut $A_1$ einer Buchung den Wert 1'000 hat und das einer anderen Buchung 300, so ergibt sich eine Distanz von 700. Betrachtet man ein anderes Attribut $A_2$, welches den Wert 1 hat beziehungsweise 0.3, so ist die Distanz 0.7. Dadurch fällt $A_2$ in der gesamten Distanz zwischen den beiden Buchungen überhaupt nicht in Gewicht, da es um einen Faktor 1'000 kleiner ist. Deshalb werden numerische Attribute genormt, damit alle in den gleichen Wertebereich liegen.
 
-In dieser Arbeit gibt es drei numerische Attribute.
+In dieser Arbeit werden vier numerische Attribute verwendet.
 \begin{table}[H] 
-	\caption{Zu verwendende Attribute}
+	\caption{Numerishce Attribute}
 	\centering
 	\rowcolors{1}{tablebodycolor}{tablerowcolor}
-		\label{fig:recherche:attributeinschraenkung:2}
+	\label{fig:recherche:datenvorbereitung:5}
 	\begin{tabular}{ | c | c | c | l | } 
 		\hline 
 		\rowcolor{tableheadcolor}
@@ -306,7 +306,7 @@ In Absprache mit Interhome wurde entschieden, dass in einem ersten Schritt jene 
 	\caption{Zu verwendende Attribute}
 	\centering
 	\rowcolors{1}{tablebodycolor}{tablerowcolor}
-		\label{fig:recherche:attributeinschraenkung:2}
+	\label{fig:recherche:attributeinschraenkung:2}
 	\begin{tabular}{ | c | c | c | l | } 
 		\hline 
 		\rowcolor{tableheadcolor}
