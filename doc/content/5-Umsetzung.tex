@@ -156,12 +156,11 @@ Im \cref{sec:recherche:datenvorbereitung} wurde beschrieben, wie die Daten vorbe
 	\label{fig:recherche:rapidminer:1}
 \end{figure}
 
-%"`"'
- In \ref{fig:recherche:rapidminer:1} wird der Prozess gezeigt wie er im RapidMiner definiert wurde. Nachfolgend werden die einzelnen Schritte 
+ In \ref{fig:recherche:rapidminer:1:1} wird der Hauptprozess gezeigt wie er im RapidMiner definiert wurde. Nachfolgend werden die einzelnen Schritte 
  \begin{itemize}
  	\item Retrieve data: Lädt die Buchungen aus der Datenquelle damit diese bearbeitet werden können. 
  	\item Filter Exapmles: \todo{Filter Example}.
- 	\item Select Attribute: Entfernt alle Attribute welche nicht in der \cref{fig:recherche:attributeinschraenkung:2} aufgeführt werden.
+ 	\item Select Attribute: Entfernt alle Attribute welche nicht in der \cref{fig:recherche:attributeinschraenkung:2} ausfgewählführt werden, sind die Informationen nachher voll anonymisiert und können auch veröffentlicht werden. Der letzte Schritt schreibt das Resultat in ein \gls{csv} File damit es nachher weiterverwendet werden kann.
  	\item Generate ID: Generiert eine ID für die eindeutige Identifikation der Buchungen.
  	\item Normalize: Normiert nummerische Werte auf einen Interval $0 \leq x \leq 1$ (siehe \cref{sec:recherche:datenvorbereitung:normierung} \nameref{sec:recherche:datenvorbereitung:normierung}).
  	\item Weeklyprice: Berechnet den Wochenpreis einer Buchung (siehe \cref{sec:recherche:datenvorbereitung:normierung} \nameref{sec:recherche:datenvorbereitung:normierung}).
@@ -181,11 +180,10 @@ Im \cref{sec:recherche:datenvorbereitung} wurde beschrieben, wie die Daten vorbe
 
 \section{Kommunikationsablauf}
 \label{sec:proofofconcept:kommunikationsablauf}
-In \cref{fig:proofofconcept:kommunikationsablauf:1} wird der Kommunikationsablauf aufgezeigt, welcher zwischen dem Server und dem Browser des Benutzers stattfindet. Sobald der Benutzer eine Analyse startet wird eine Anfrage an den Server gestellt. Dieser erstellt einen Hintergrundprozess welcher die Analyse durchführt und gibt danach direkt eine Antwort an den User zurück. 
+In \cref{fig:proofofconcept:kommunikationsablauf:1} wird der Kommunikationsablauf aufgezeigt, welcher zwischen dem Server und dem Browser des Benutzers stattfindet. Sobald der Benutzer eine Analyse startet wird eine Anfrage an den Server gestellt. Dieshalb werden alle Werteer erstellt einen Hintergrundprozess welcher die Analyse durchführt und gibt danach diskretiert und die zu ignorierenden nachher entfernt.
+Der Hintergrundprozess führt die Analyse durch und schreibt periodisch einen Zwischenstand im \gls{html}-Format in eine Datei.
 
-Der Hintergrundprozess führt die Analyse durch und schreibt periodisch einen Zwischenstand im \gls{HTML}-Format in eine Datei.
-
-Sobald die Analyse vom Server angestossen wurde kann dieser eine Rückmeldung zum Benutzer senden mit der Nachricht, dass die Analyse gestartet wurde. Der Browser des User beginnt darauf hin, die \gls{HTML}-Datei auf dem Server nach dem Zwischenstand abzufragen bis die Analyse beendet ist.
+Sobald die Analyse vom Server angestossen wurde kann dieser eine Rückmeldung zum Benutzer senden mit der Nachricht, dass die Analyse gestartet wurde. Der Browser des User beginnt darauf hin, die \gls{html}-Datei auf dem Server nach dem Zwischenstand abzufragen bis die Analyse beendet ist.
 \begin{figure}[H]
 	\RawFloats
 	\centering
@@ -196,5 +194,23 @@ Sobald die Analyse vom Server angestossen wurde kann dieser eine Rückmeldung zu
 
 Eine Webanfrage hat normalerweise eine obere Laufzeitgrenze von 30 Sekunden. Bis dann muss der Server eine Antwort liefern, sonst wird dem Benutzer eine Fehlermeldung angezeigt und der Prozess auf dem Server gestoppt. Da die Analyse, je nach Datenmenge, einige Minuten bis Stunden dauern kann musste dafür eine Lösung gefunden werden. Dank des Hintergrundprozesses kann der Server rasch eine Antwort liefern, der Browser dem Benutzer eine Meldung anzeigen und die Analyse länger als 30 Sekunden laufen.
 
+\section{Package-Struktur}
+\label{sec:proofofconcept:packagestruktur}
+Ein Package gruppiert ähnliche Klassen und Interfaces zusammen. Man kann sich ein Package vorstellen wie ein Ordner auf dem Computer. Die Struktur dieser Gruppen sowie deren Verwendung untereinander wird in \cref{fig:proofofconcept:packagestruktur:1} aufgezeigt.
+\begin{figure}[H]
+	\RawFloats
+	\centering
+	\includegraphics[width=1\textwidth]{images/package-diagram}
+	\caption{Package-Struktur}
+	\label{fig:proofofconcept:packagestruktur:1}
+\end{figure}
 
+Die Struktur der Packages ist so ausgelegt, dass sie von oben nach unten fliesst. Sprich ein oberes Packet kann ein unteres verwenden, jedoch nicht umgekehrt. Einstiegspunkte für die Ausführung des Programmes sind die Klassen in den Packages Controllers und Services. Ersteres wird vom Benutzer verwendet wenn er eine Seite angezeigt haben möchte. Die Services sind für die Hintergrundprozesse verantwortlich und führen eine Analyse der verschiedenen Algorithmen durch. Nachfolgend werden die einzelnen Packages erklärt.
 
+\begin{itemize}
+	\item Business: Beinhaltet die Geschäftlogik, was in dieser Arbeit die Algorithmen umfasst sowie alles was mit den Models interagiert. Demnach die Algorithmen selber (im Unterpacket "`Algorithms"'), die Distanzmessung (Klasse DistanceMeasurement), den Datenzugriff (Klasse BookingDataIterator), etc.
+	\item Models: Klassen für die Datenhaltung welche möglichst wenig Logik beinhalten.
+	\item Utilities: Beinhalten Logik die nichts mit den Algorithmen zu tun hat und keine Models verwendet. Diese Klassen können für sich selber in einem anderen Projekt wiederverwendet werden.
+	\item Interfaces: Alle verwendeten Interfaces.
+	\item Tests: UnitTests\todo{cref}
+\end{itemize}
