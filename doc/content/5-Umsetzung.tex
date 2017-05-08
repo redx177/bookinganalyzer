@@ -156,8 +156,45 @@ Im \cref{sec:recherche:datenvorbereitung} wurde beschrieben, wie die Daten vorbe
 	\label{fig:recherche:rapidminer:1}
 \end{figure}
 
- In \ref{fig:recherche:rapidminer:1:1} wird der Hauptprozess gezeigt. Zusätzlich sind die Operatoren "`Generate ID"' und "`Write CSV"' vorhanden. Ersterer generiert eine neue ID. Da im Schritt "`Select Attributes"' keine Kundenspezifischen Daten ausgewählt werden, sind die Informationen nachher voll anonymisiert und können auch veröffentlicht werden. Der letzte Schritt schreibt das Resultat in ein \gls{csv} File damit es nachher weiterverwendet werden kann.
+%"`"'
+ In \ref{fig:recherche:rapidminer:1} wird der Prozess gezeigt wie er im RapidMiner definiert wurde. Nachfolgend werden die einzelnen Schritte 
+ \begin{itemize}
+ 	\item Retrieve data: Lädt die Buchungen aus der Datenquelle damit diese bearbeitet werden können. 
+ 	\item Filter Exapmles: \todo{Filter Example}.
+ 	\item Select Attribute: Entfernt alle Attribute welche nicht in der \cref{fig:recherche:attributeinschraenkung:2} aufgeführt werden.
+ 	\item Generate ID: Generiert eine ID für die eindeutige Identifikation der Buchungen.
+ 	\item Normalize: Normiert nummerische Werte auf einen Interval $0 \leq x \leq 1$ (siehe \cref{sec:recherche:datenvorbereitung:normierung} \nameref{sec:recherche:datenvorbereitung:normierung}).
+ 	\item Weeklyprice: Berechnet den Wochenpreis einer Buchung (siehe \cref{sec:recherche:datenvorbereitung:normierung} \nameref{sec:recherche:datenvorbereitung:normierung}).
+ 	\item Discretization: Ist ein Unterprozess welcher in \cref{fig:recherche:rapidminer:1:2} dargestellt ist.
+	 	\begin{itemize}
+	 		\item Discretize Price: Diskretiert die Preise gemäss \cref{fig:recherche:datenvorbereitung:2}. Die Preisspannen die nicht im Resultat verwendet werden sollen werden später im Schritt "`Replace Values"' entfernt.
+	 		\item Discretize Distance: Diskretiert die Distanzen gemäss \cref{fig:recherche:datenvorbereitung:1}. Distanzspannen die nicht im Resultat verwendet werden sollen werden später im Schritt "`Replace Values"' entfernt.
+	 	\end{itemize}
+ 	\item Replace Values: Ist ein Unterprozess welcher in \cref{fig:recherche:rapidminer:1:3} dargestellt ist.
+ 		\begin{itemize}
+			\item Replace X -> 1 und Replace empty -> 0: Wandelt boolsche Werte in 1 und 0 um (siehe \cref{sec:recherche:datenvorbereitung:boolschewerte} \nameref{sec:recherche:datenvorbereitung:boolschewerte}). 
+			\item Remove price ...: \todo{}
+ 		\end{itemize}
+ 	\item Remove Price: Entfernt den gesamt Preis der Buchung. Dieser muss beim Schritt "`Select Attribute"' hinzugefügt werden damit der Wochenpreis berechnet werden kann. Im Resultat wird das Attribut jedoch nicht mehr benötig.
+ 	\item Write CSV: Speichert das Resultat im \gls{csv} Format auf die Festplatte ab.
+ \end{itemize}
 
-\cref{fig:recherche:rapidminer:1:2} ist ein Unterprozess welcher die Diskretisierung des Preises und der Distanzen vornimmt. Im \cref{sec:recherche:datenvorbereitung} wird beschrieben dass nicht alle Bereich der zu diskretierenden Attribute verwendet werden soll (z.B. Distanzen >499 werden nicht berücksichtigt). Dies kann mit den "`Discretize"' Operatoren in RapidMiner nicht abgebildet werden. Deshalb werden alle Werte diskretiert und die zu ignorierenden nachher entfernt.
+\section{Kommunikationsablauf}
+\label{sec:proofofconcept:kommunikationsablauf}
+In \cref{fig:proofofconcept:kommunikationsablauf:1} wird der Kommunikationsablauf aufgezeigt, welcher zwischen dem Server und dem Browser des Benutzers stattfindet. Sobald der Benutzer eine Analyse startet wird eine Anfrage an den Server gestellt. Dieser erstellt einen Hintergrundprozess welcher die Analyse durchführt und gibt danach direkt eine Antwort an den User zurück. 
 
-\cref{fig:recherche:rapidminer:1:3} zeigt den Unterprozess für die Ersetzung von Attributwerten. Zuerst werden, wie im \cref{sec:recherche:datenbeschaffung} beschrieben, "`X"' Werte von kategorischen Feldern mit "`1"' ersetzt und leere mit "`0"'. Danach werden die nicht zu verwendenden diskretierten Werte der Preise und Distanzen entfernt.
+Der Hintergrundprozess führt die Analyse durch und schreibt periodisch einen Zwischenstand im \gls{HTML}-Format in eine Datei.
+
+Sobald die Analyse vom Server angestossen wurde kann dieser eine Rückmeldung zum Benutzer senden mit der Nachricht, dass die Analyse gestartet wurde. Der Browser des User beginnt darauf hin, die \gls{HTML}-Datei auf dem Server nach dem Zwischenstand abzufragen bis die Analyse beendet ist.
+\begin{figure}[H]
+	\RawFloats
+	\centering
+	\includegraphics[width=1\textwidth]{images/communication-flow}
+	\caption{Kommunikationsablauf}
+	\label{fig:proofofconcept:kommunikationsablauf:1}
+\end{figure}
+
+Eine Webanfrage hat normalerweise eine obere Laufzeitgrenze von 30 Sekunden. Bis dann muss der Server eine Antwort liefern, sonst wird dem Benutzer eine Fehlermeldung angezeigt und der Prozess auf dem Server gestoppt. Da die Analyse, je nach Datenmenge, einige Minuten bis Stunden dauern kann musste dafür eine Lösung gefunden werden. Dank des Hintergrundprozesses kann der Server rasch eine Antwort liefern, der Browser dem Benutzer eine Meldung anzeigen und die Analyse länger als 30 Sekunden laufen.
+
+
+

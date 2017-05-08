@@ -146,9 +146,12 @@ Die Daten liegen im Windows Excel Format vor. Es sind total 133'001 Datensätze 
 \label{sec:recherche:datenvorbereitung}
 Die Datenvorbereitung wandelt die Daten so um dass sie für das Data Mining möglichst effizient verwendet werden können. Dies umfasst die Bereinigung, Transformation sowie Reduktion von Informationen\footcite{feature_selection_2017-01-04}. Bei ersteren werden Messfehler im Datenbestand behoben, fehlende Felder ergänzt oder Duplikate entfernt. Die Transformation wandelt Werte um damit sie für die Berechnung besser geeignet sind. Zum Beispiel können Wertebereiche in Intervalle aufgeteilt werden. Bei letzteren werden Instanzen der Datengrundlage entfernt, wodurch die Berechnungszeit verkürzt wird, oder Attribute von allen Instanzen entfernt, da deren Entropie zu gering ist. Zum Beispiel ist es unspannend, wenn ein Attribut bei (fast) allen Instanzen gleich ist. 
 
-\paragraph{Boolsche Werte} In der Datenbasis sind boolsche Werte entweder leer oder "`X"'. Dies wird umgewandelt auf "`0"' oder "`1"'.
+\subsubsection{Boolsche Werte}  
+\label{sec:recherche:datenvorbereitung:boolschewerte}
+In der Datenbasis sind boolsche Werte entweder leer oder "`X"'. Dies wird umgewandelt auf "`0"' oder "`1"'.
 
-\paragraph{Datennormierung von numerischen Werten} Die im \cref{sec:konzept:anwendungderalgorithmen:distanzmessung} vorgestellte Distanzmessung arbeitet mit der euklidischen Distanz für numerische Werte. Wenn ein Attribut $A_1$ einer Buchung den Wert 1'000 hat und das einer anderen Buchung 300, so ergibt sich eine Distanz von 700. Betrachtet man ein anderes Attribut $A_2$, welches den Wert 1 hat beziehungsweise 0.3, so ist die Distanz 0.7. Dadurch fällt $A_2$ in der gesamten Distanz zwischen den beiden Buchungen überhaupt nicht in Gewicht, da es um einen Faktor 1'000 kleiner ist. Deshalb werden numerische Attribute genormt, damit alle in den gleichen Wertebereich liegen.
+\subsubsection{Datennormierung von numerischen Werten} 
+\label{sec:recherche:datenvorbereitung:normierung} \cref{sec:konzept:anwendungderalgorithmen:distanzmessung} vorgestellte Distanzmessung arbeitet mit der euklidischen Distanz für numerische Werte. Wenn ein Attribut $A_1$ einer Buchung den Wert 1'000 hat und das einer anderen Buchung 300, so ergibt sich eine Distanz von 700. Betrachtet man ein anderes Attribut $A_2$, welches den Wert 1 hat beziehungsweise 0.3, so ist die Distanz 0.7. Dadurch fällt $A_2$ in der gesamten Distanz zwischen den beiden Buchungen überhaupt nicht in Gewicht, da es um einen Faktor 1'000 kleiner ist. Deshalb werden numerische Attribute genormt, damit alle in den gleichen Wertebereich liegen.
 
 In dieser Arbeit werden vier numerische Attribute verwendet.
 \begin{table}[H] 
@@ -171,11 +174,13 @@ Normiert werden die Spalten AC (Sterne Bewertung des Objektes), AD (Anzahl Zimme
 
 Der Preis in der Spalte E giltet für die gesamte Buchung. Dieser wird in einen Wochenpreis und pro Person normiert. Wenn eine Buchung CHF 2'000 kostet für 10 Tage für 2 Personen, so ergibt das "`CHF 1'400 / 10 Tage * 7 Tage / 2 Personen = CHF 490"'. Es wird keine Normierung auf einen Wert von 0-1 durchgeführt, da dieser Wert noch diskretiert wird (siehe nächsten Paragraphen).
 
-\paragraph{Datenerweiterung} Die Daten sollen durch weitere Felder ergänzt werden. Denn eine Fragestellung von Interhome ist es, eine Häufigkeitsanalyse in einem Gebiet durchzuführen\todo{cref}. Da im Datenstamm jedoch nur das Land des Objektes vorhanden ist, muss die Region und die Ortschaft erweitert werden. 
+\subsubsection{Datenerweiterung} 
+Die Daten sollen durch weitere Felder ergänzt werden. Denn eine Fragestellung von Interhome ist es, eine Häufigkeitsanalyse in einem Gebiet durchzuführen\todo{cref}. Da im Datenstamm jedoch nur das Land des Objektes vorhanden ist, muss die Region und die Ortschaft erweitert werden. 
 
 Zusätzlich müssen für die Wetterdaten die genaue Geolocation des Benutzers vorhanden sein. Im Datenstamm ist die Adresse des Kunden gespeichert, mit welcher die Geolocation ermittelt werden kann.
 
-\paragraph{Diskretierung von Distanzen und des Wochenpreises} Die Zeilen AK (Distanz zum Wasser), AL (Distanz zum Skigebiet), AM (Distanz zum öffentlichen Verkehr), DZ (Distanz zum Zentrum), EA (Distanz bis zum Meer) und EB (Distanz bis zum See) sind numerische Werte, welche die Anzahl an Metern zu einem Punkt angeben. Die Werte dieser Spalten wird in folgenden Wert diskretiert. 
+\subsubsection{Diskretierung von Distanzen und des Wochenpreises} 
+Die Zeilen AK (Distanz zum Wasser), AL (Distanz zum Skigebiet), AM (Distanz zum öffentlichen Verkehr), DZ (Distanz zum Zentrum), EA (Distanz bis zum Meer) und EB (Distanz bis zum See) sind numerische Werte, welche die Anzahl an Metern zu einem Punkt angeben. Die Werte dieser Spalten wird in folgenden Wert diskretiert. 
 
 \begin{table}[h] 
 	\caption{Diskretisierungswerte für Distanzattribute}
@@ -221,10 +226,6 @@ Die Schwellwerte der diskretierungen wurden mit Interhome abgesprochen.
 \item Distanzen in den Zeilen AK (Distanz zum Wasser), AL (Distanz zum Skigebiet), AM (Distanz zum öffentlichen Verkehr), DZ (Distanz zum Zentrum), EA (Distanz bis zum Meer) und EB (Distanz bis zum See) werden diskretisiert. Dabei interessiert es Interhome nur, wenn die Nähe kleiner als 500 ist. Alles über oder gleich 500 wird nicht verwendet. Siehe \cref{fig:recherche:datenvorbereitung:1}.
 \item Der Preis wird normiert auf Wochenpreise. wurde diskretisiert. Spannend für die Interpretation sind nur werte welche kleiner als 500 sind oder über 2000. Siehe \cref{fig:recherche:datenvorbereitung:2}.
 \end{itemize}
-
-
-
-
 
 In den Tabellen \ref{fig:recherche:datenvorbereitung:3} und \ref{fig:recherche:datenvorbereitung:4} wird ein Beispiel gegeben. In der ersten Tabelle sind Buchungen vor der diskretisierung aufgeführt und in der zweiten danach. Distanzwerte von 500 oder mehr und Preise zwischen 499 und 2000 wurden entfernt. Dies ist zum Beispiel bei dem Wert "`Distanz zum Skilift"' der Buchung mit ID 3 geschehen.
 

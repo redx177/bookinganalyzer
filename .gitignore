@@ -21,7 +21,9 @@
 *.mtc
 *.mtc1
 *.out
+*.wrt
 *.synctex.gz
 *.run.xml
 *-blx.bib
+.tex
 bookinganalyzer.pdf
