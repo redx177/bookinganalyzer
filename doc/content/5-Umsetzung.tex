@@ -208,9 +208,14 @@ Ein Package gruppiert ähnliche Klassen und Interfaces zusammen. Man kann sich e
 Die Struktur der Packages ist so ausgelegt, dass sie von oben nach unten fliesst. Sprich ein oberes Packet kann ein unteres verwenden, jedoch nicht umgekehrt. Einstiegspunkte für die Ausführung des Programmes sind die Klassen in den Packages Controllers und Services. Ersteres wird vom Benutzer verwendet wenn er eine Seite angezeigt haben möchte. Die Services sind für die Hintergrundprozesse verantwortlich und führen eine Analyse der verschiedenen Algorithmen durch. Nachfolgend werden die einzelnen Packages erklärt.
 
 \begin{itemize}
-	\item Business: Beinhaltet die Geschäftlogik, was in dieser Arbeit die Algorithmen umfasst sowie alles was mit den Models interagiert. Demnach die Algorithmen selber (im Unterpacket "`Algorithms"'), die Distanzmessung (Klasse DistanceMeasurement), den Datenzugriff (Klasse BookingDataIterator), etc.
-	\item Models: Klassen für die Datenhaltung welche möglichst wenig Logik beinhalten.
+	\item Controllers: Nehmen die Anfragen eines Benutzers entgegen und verarbeiten diese. Dazu verwenden sie Klassen aus dem Business welches die Models zurückliefert welche schlussendlich dargestellt werden sollen.\todo{cref?}
+	\item Services: Führen die verschiedenen Analysen durch. Sie sind so ausgelegt dass sie als eigenständiger Prozess im Hintergrund ausgeführt werden können.\todo{cref}
+	\item Business: Beinhaltet die Geschäftlogik, was in dieser Arbeit die Algorithmen umfasst, sowie alles was mit den Models interagiert. Demnach die Algorithmen selber (im Unterpacket "`Algorithms"'), die Distanzmessung (Klasse DistanceMeasurement), den Datenzugriff (Klasse BookingDataIterator), etc.\todo{cref}
+	\item Models: Klassen für die Datenhaltung welche möglichst wenig Logik beinhalten.\todo{cref}
 	\item Utilities: Beinhalten Logik die nichts mit den Algorithmen zu tun hat und keine Models verwendet. Diese Klassen können für sich selber in einem anderen Projekt wiederverwendet werden.
 	\item Interfaces: Alle verwendeten Interfaces.
 	\item Tests: UnitTests\todo{cref}
 \end{itemize}
+
+\section{Dependency Injection}
+
