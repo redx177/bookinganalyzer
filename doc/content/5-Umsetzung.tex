@@ -183,16 +183,95 @@ Im \cref{sec:recherche:datenvorbereitung} wurde beschrieben, wie die Daten vorbe
 In \cref{fig:proofofconcept:kommunikationsablauf:1} wird der Kommunikationsablauf aufgezeigt, welcher zwischen dem Server und dem Browser des Benutzers stattfindet. Sobald der Benutzer eine Analyse startet wird eine Anfrage an den Server gestellt. Dieshalb werden alle Werteer erstellt einen Hintergrundprozess welcher die Analyse durchführt und gibt danach diskretiert und die zu ignorierenden nachher entfernt.
 Der Hintergrundprozess führt die Analyse durch und schreibt periodisch einen Zwischenstand im \gls{html}-Format in eine Datei.
 
+In \cref{fig:proofofconcept:kommunikationsablauf:1} wird der Kommunikationsablauf aufgezeigt, welcher zwischen dem Webserver und dem Browser des Benutzers stattfindet. Sobald der Benutzer eine Analyse startet wird eine Anfrage an den Server gestellt. Dieser erstellt einen Hintergrundprozess welcher die Analyse durchführt und gibt danach direkt eine Antwort an den User zurück. 
+
+Der Hintergrundprozess führt die Analyse durch und schreibt periodisch einen Zwischenstand im \gls{html}-Format in eine Datei.
+
 Sobald die Analyse vom Server angestossen wurde kann dieser eine Rückmeldung zum Benutzer senden mit der Nachricht, dass die Analyse gestartet wurde. Der Browser des User beginnt darauf hin, die \gls{html}-Datei auf dem Server nach dem Zwischenstand abzufragen bis die Analyse beendet ist.
 \begin{figure}[H]
 	\RawFloats
 	\centering
-	\includegraphics[width=1\textwidth]{images/communication-flow}
+	\includegraphics[width=1\textwidth]{images/diagram-communication-flow}
 	\caption{Kommunikationsablauf}
 	\label{fig:proofofconcept:kommunikationsablauf:1}
 \end{figure}
 
 Eine Webanfrage hat normalerweise eine obere Laufzeitgrenze von 30 Sekunden. Bis dann muss der Server eine Antwort liefern, sonst wird dem Benutzer eine Fehlermeldung angezeigt und der Prozess auf dem Server gestoppt. Da die Analyse, je nach Datenmenge, einige Minuten bis Stunden dauern kann musste dafür eine Lösung gefunden werden. Dank des Hintergrundprozesses kann der Server rasch eine Antwort liefern, der Browser dem Benutzer eine Meldung anzeigen und die Analyse länger als 30 Sekunden laufen.
+
+\section{Architektur}
+\label{sec:proofofconcept:architektur}
+Hier wird die Architektur des Programmes erläutert. Grundlegen wurde die Applikations nach dem \gls{mvc}-\gls{pattern} aufgebaut und um die Entkoppelung der einzelnen Module zu ermöglichen ein Dependency Injection Framework verwendet. Diese und weitere Punkte werden nachfolgend beschrieben.
+
+\subsection{MVC}
+\label{sec:proofofconcept:architektur:mvc}
+Mit dem \gls{mvc}-\gls{pattern} wird das Programm in die drei Komponenten Datenmodel (Model), Präsentation (View) und Programmsteuerung (Controller) unterteilt. Ein Controller nimmt die Anfrage vom Browser entgegen und kreiert ein Datenmodel mit Hilfe einer Geschäftslogik. Diese Logik gibt ein Datenmodel zurück welches die Programmsteuerung an die Präsentation übergibt welche sie darstellt.
+
+Das Datenmodel fungiert als Vertrag wie die Daten dargestellt werden müssen. Die Präsentation und die Geschäftslogik kann beliebig verändert und ausgetauscht werden, solange das Model sich nicht ändert. Dies fördert die Wa
+
+Die Abhängigkeiten zwischen dem Controller, dem Model und der Geschäftslogik (business logik) wird im \cref{sec:proofofconcept:packagestruktur} visualisiert.
+
+\section{Programmablauf}
+Im \cref{sec:proofofconcept:kommunikationsablauf} wurde der Ablauf zwischen dem Benutzer und dem Server illustriert. Hier werden die Abläufe auf dem Webserver sowie der Hintergrundprozesse erläutert.
+
+\subsection{Webserver}
+\label{sec:proofofconcept:architektur:webserver}
+Der Webserver nimmt einen Request des Users entgegen und verarbeitet diesen. Der Ablauf wird in \cref{fig:proofofconcept:architektur:webserver:1} visualisiert.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\textwidth]{images/diagram-sequence-controllers}
+	\caption{Sequenzdiagramm für den Ablauf einer "`Explore"'-Anfrage}
+	\label{fig:proofofconcept:architektur:webserver:1}
+\end{figure}
+
+Aufgerufen wird stets die Datei "`index.php"'. Diese Initialisiert zuerst den dependency injection Container (siehe \cref{sec:proofofconcept:dependency-injection} \nameref{sec:proofofconcept:dependency-injection}) und zwischenspeichert die Datenquelle für die vom Benutzer übergebenen Filterkriterien (siehe \cref{sec:proofofconcept:caching} \nameref{sec:proofofconcept:caching}).
+
+Danach wird der Controller aufgerufen welcher den Request des Benutzers behandelt (siehe \cref{sec:proofofconcept:architektur:mvc} \nameref{sec:proofofconcept:architektur:mvc}). Der Controller führt die Geschäftslogik aus (im obigen Beispiel ist dies die Klasse "`BookingsProvider"') und übergibt das Resultat an die View welche für die Darstellung der Daten zuständig ist. Der Rückgabewert wird dann dem Benutzer im Browser angezeigt.
+
+Dieser Ablauf ist gültig für die "`Explore"'-Ansicht, auf welcher der User die Buchungen einsehen kann. Wenn ein Algorithmus ausgeführt werden soll fällt die Geschäftslogik weg und es wird stattdessen ein Hintergrundprozess gestartet, welcher diese ausführt.
+
+\subsection{Hintergrundprozesse}
+\label{sec:proofofconcept:architektur:hintergrundprozesse}
+Die Hintergrundprozesse werden von den Controllern angestossen. Es wird ein Kommandozeilen-Befehl ausgeführt welcher im folgender Ansicht beispielhaft aufgezeigt wird.
+
+\blockquote[]{
+php /Services/Apriori/apriori.php ``stars=4,country=Switzerland'' > /Services/Apriori/wip/output.txt 2>\&1 \& echo \$! > /pidfile.txt
+}
+
+Zur erklärung dieses Befehles wird er aufgebrochen:
+\begin{itemize}
+	\item \textbf{php}: Es wird der Befehl "`PHP"' ausgeführt welcher ein PHP Programm startet.
+	\item \textbf{/Services/Apriori/apriori.php}: Das auszuführende PHP Programm. Hier die Apriori Analyse.
+	\item \textbf{``stars=4,country=Switzerland''}: Parameter die an das "`apriori.php"' Programm übergeben werden. In diesem Beispiel sind das die Filterkriterien des Benutzers.
+	\item \textbf{> /Services/Apriori/wip/output.txt}: Mit "`>"' wird die Standartausgabe des Programmes definiert. Jegliche Ausgabe des Programmes wird hiermit in die Datei "`output.txt"' geschrieben.
+	\item \textbf{2>\&1}: Mit "`2>"' wird gesagt wohin Fehlemeldungen geschrieben werden. \&1 gibt an dass es an den selben Ort wie die Standartausgabe gespeichert werden soll. Also auch ins "`output.txt"'.
+	\item \textbf{\&}: Durch das \& wird der Befehl im Hintergrund ausgeführt. Wenn dies nicht angegeben wird würde das Programm, welches den "`PHP"' Befehl gestartet hat warten, bis das "`apriori.php"' Programm fertig gearbeitet hat.
+	\item \textbf{echo \$! > /pidfile.txt}: "echo \$!" gibt die Prozessid des "`apriori.php"' Programmes aus. Mit "`> /pidfile.txt"' wird die Ausgabe (also die Prozessid) in die Datei "`pidfile.txt"' geschrieben.
+\end{itemize}
+
+Wenn der Befehl ausgeführt wird beginnt die Apriori Analyse. Der Ablauf wird in \cref{fig:proofofconcept:architektur:hintergrundprozesser:1} verbildlicht.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\textwidth]{images/diagram-sequence-apriori}
+	\caption{Sequenzdiagramm für die Initialisierung der Apriori-Analyse}
+	\label{fig:proofofconcept:architektur:hintergrundprozesser:1}
+\end{figure}
+
+%"`"'
+Der Anfang mit dem Erstellen des "`Container"' und dem Caching ist gleich wie in \cref{fig:proofofconcept:architektur:webserver:1}. Das "`apriori.php"' Programm ruft danach den Apriori-Algorithmus auf welcher sein Resultat periodisch in eine Datei schreibt (siehe \cref{sec:proofofconcept:kommunikationsablauf} \nameref{sec:proofofconcept:kommunikationsablauf}). 
+
+Der Ablauf der Clustering-Analysen ist identisch zu jenem des Apriori-Algorithmus, mit zwei Ausnahmen. Zum einen wird vor dem "`AprioriAlgorithm"' der "`KPrototypeAlgorithm"' ausgeführt wird, welcher ein "`KPrototypeResult"' zurück liefert. 
+Zum anderen wird dem "`AprioriAlgorithm"' das Resultat vom KPrototype als Parameter übergeben. Dadurch ist em dem "`KPrototypeAlgorithm"' möglich, nur die Elemente eines Clusters zu analysieren und nicht die gesamte Datenmenge.
+Abgebildet ist der Ablauf in \cref{fig:proofofconcept:architektur:hintergrundprozesser:2}. 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\textwidth]{images/diagram-sequence-kprototype}
+	\caption{Sequenzdiagramm für die Initialisierung der KPrototype-Analyse}
+	\label{fig:proofofconcept:architektur:hintergrundprozesser:2}
+\end{figure}
+
+\subsection{Webserver}
 
 \section{Package-Struktur}
 \label{sec:proofofconcept:packagestruktur}
@@ -200,7 +279,7 @@ Ein Package gruppiert ähnliche Klassen und Interfaces zusammen. Man kann sich e
 \begin{figure}[H]
 	\RawFloats
 	\centering
-	\includegraphics[width=1\textwidth]{images/package-diagram}
+	\includegraphics[width=1\textwidth]{images/diagram-package-diagram}
 	\caption{Package-Struktur}
 	\label{fig:proofofconcept:packagestruktur:1}
 \end{figure}
@@ -217,8 +296,9 @@ Die Struktur der Packages ist so ausgelegt, dass sie von oben nach unten fliesst
 	\item Tests: UnitTests\todo{cref}
 \end{itemize}
 
-\section{Dependency Injection}
-Bei der Dependency Injection handelt es sich um ein \todo{add back in}%\gls{pattern}
+\section{Dependency Injection mit PHP-DI}
+\label{sec:proofofconcept:dependency-injection}
+Bei der Dependency Injection handelt es sich um ein \gls{pattern}
 das zum Ziel hat, eine möglichst niedrige Kopplung zu erreichen. Dies bedeutet, dass eine Klasse so wenig Abhängigkeiten wie möglich zu anderen Komponenten aufweisen soll. Dadurch können einzelne Klassen einfacher ausgetauscht werden washt die Wartbarkeit des Systems erhöht sowie die Leserlichkeit des Codes fordert. Dies soll anhand eines Beispieles aufgezeigt werden.
 
 \begin{lstlisting}[language=php]
@@ -267,7 +347,7 @@ In der Arbeit werden alle Komponenten über Dependency Injection in Klassen hine
 
 Es gibt demnach 3 verschiedene Möglichkeiten, wie auf die Daten zugegriffen werden kann. Mittels Dependency Injection kann nun von aussen bestimmt werden, wie der "`BookingDataIterator"' auf die Daten zugreift.
 
-Für das Dependency Injection \todo{add back in}%\gls{pattern}
+Für das Dependency Injection \gls{pattern}
  wird das Framework PHP-DI verwendet (siehe \url{http://php-di.org/}). In der ersten geladenen Datei wird der gesamte Objektgraph aufgebaut. Dort wird bestimmt, welche Klasse in den "`BookingDataIterator"' übergeben wird. Ein Beispiel wird nachfolgend präsentiert:
  
 \begin{lstlisting}[language=php]
@@ -285,3 +365,6 @@ $\textdollar$apriori->run();
 Zuerst wird ein "`ContainerBuilder"' erstellt. Auf diesem wird definiert, dass für das "`DataIterator"' Interface die Klasse "`LoadIncrementalCsvDataIterator"' verwendet werden soll. Danach wird auf Zeile 7 ein "`Container"' erstellt und anschliessend eine Instanz der Klasse "`AprioriAlgorithm"' angefordert. Der Container analysiert die Klasse und sieht dass ein "`DataIterator"' erwartet wird und reicht deshalb ein "`LoadIncrementalCsvDataIterator"' in den "`AprioriAlgorithm"' rein. Somit kann auf oberster Ebene gesteuert werden, welche Klassen wo übergeben werden.
 
 Als erfreulicher Nebeneffekt erleichtert dies die Entwicklung von UnitTests massiv (\todo{cref}).
+
+\section{Caching}
+\label{sec:proofofconcept:caching}
