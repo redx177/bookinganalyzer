@@ -180,7 +180,7 @@ Im \cref{sec:recherche:datenvorbereitung} wurde beschrieben, wie die Daten vorbe
 
 \section{Architektur}
 \label{sec:proofofconcept:architektur}
-Hier wird die Architektur des Programmes erläutert. Grundlegen wurde die Applikations nach dem \gls{mvc}-\gls{pattern} aufgebaut und um die Entkoppelung der einzelnen Module zu ermöglichen ein Dependency Injection Framework verwendet. Diese und weitere Punkte werden nachfolgend beschrieben.
+Hier wird die Architektur des Programmes erläutert. Grundlegen wurde die Applikations nach dem \gls{mvc}-\gls{pattern} aufgebaut. Dies und die strukturierung des Codes werden hier vorgestellt.
 
 \subsection{MVC}
 \label{sec:proofofconcept:architektur:mvc}
@@ -189,9 +189,6 @@ Mit dem \gls{mvc}-\gls{pattern} wird das Programm in die drei Komponenten Datenm
 Das Datenmodel fungiert als Vertrag wie die Daten dargestellt werden müssen. Die Präsentation und die Geschäftslogik kann beliebig verändert und ausgetauscht werden, solange das Model sich nicht ändert. Dies fördert die Wa
 
 Die Abhängigkeiten zwischen dem Controller, dem Model und der Geschäftslogik (business logik) wird im \cref{sec:proofofconcept:packagestruktur} visualisiert.
-
-\section{Struktur}
-Um eine Übersicht über die Implementation zu geben werden in diesem Abschnitt zuerst die Packages visualisiert und danach die Klassen. Dies sollte helfen nachfolgende Erklärungen zu den Abläufen des Programms besser zu verstehen.
 
 \subsection{Package-Struktur}
 \label{sec:proofofconcept:packagestruktur}
@@ -215,6 +212,8 @@ Die Struktur der Packages ist so ausgelegt, dass sie von oben nach unten fliesst
 	\item Interfaces: Alle verwendeten Interfaces.
 	\item Tests: UnitTests\todo{cref}
 \end{itemize}
+
+\subsection{Klassenstruktur}
 
 \section{Kommunikationsablauf}
 \label{sec:proofofconcept:kommunikationsablauf}
@@ -308,6 +307,7 @@ Auf ein Sequenzdiagramm für den DBSCAN-Algorithmus wird hier verzichtet, denn d
 
 \section{Dependency Injection mit PHP-DI}
 \label{sec:proofofconcept:dependency-injection}
+% und um die Entkoppelung der einzelnen Module zu ermöglichen ein Dependency Injection Framework verwendet. Diese und weitere Punkte werden nachfolgend beschrieben.
 Bei der Dependency Injection handelt es sich um ein \gls{pattern}
 das zum Ziel hat, eine möglichst niedrige Kopplung zu erreichen. Dies bedeutet, dass eine Klasse so wenig Abhängigkeiten wie möglich zu anderen Komponenten aufweisen soll. Dadurch können einzelne Klassen einfacher ausgetauscht werden washt die Wartbarkeit des Systems erhöht sowie die Leserlichkeit des Codes fordert. Dies soll anhand eines Beispieles aufgezeigt werden.
 
