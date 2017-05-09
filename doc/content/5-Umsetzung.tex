@@ -178,6 +178,44 @@ Im \cref{sec:recherche:datenvorbereitung} wurde beschrieben, wie die Daten vorbe
  	\item Write CSV: Speichert das Resultat im \gls{csv} Format auf die Festplatte ab.
  \end{itemize}
 
+\section{Architektur}
+\label{sec:proofofconcept:architektur}
+Hier wird die Architektur des Programmes erläutert. Grundlegen wurde die Applikations nach dem \gls{mvc}-\gls{pattern} aufgebaut und um die Entkoppelung der einzelnen Module zu ermöglichen ein Dependency Injection Framework verwendet. Diese und weitere Punkte werden nachfolgend beschrieben.
+
+\subsection{MVC}
+\label{sec:proofofconcept:architektur:mvc}
+Mit dem \gls{mvc}-\gls{pattern} wird das Programm in die drei Komponenten Datenmodel (Model), Präsentation (View) und Programmsteuerung (Controller) unterteilt. Ein Controller nimmt die Anfrage vom Browser entgegen und kreiert ein Datenmodel mit Hilfe einer Geschäftslogik. Diese Logik gibt ein Datenmodel zurück welches die Programmsteuerung an die Präsentation übergibt welche sie darstellt.
+
+Das Datenmodel fungiert als Vertrag wie die Daten dargestellt werden müssen. Die Präsentation und die Geschäftslogik kann beliebig verändert und ausgetauscht werden, solange das Model sich nicht ändert. Dies fördert die Wa
+
+Die Abhängigkeiten zwischen dem Controller, dem Model und der Geschäftslogik (business logik) wird im \cref{sec:proofofconcept:packagestruktur} visualisiert.
+
+\section{Struktur}
+Um eine Übersicht über die Implementation zu geben werden in diesem Abschnitt zuerst die Packages visualisiert und danach die Klassen. Dies sollte helfen nachfolgende Erklärungen zu den Abläufen des Programms besser zu verstehen.
+
+\subsection{Package-Struktur}
+\label{sec:proofofconcept:packagestruktur}
+Ein Package gruppiert ähnliche Klassen und Interfaces zusammen. Man kann sich ein Package vorstellen wie ein Ordner auf dem Computer. Die Struktur dieser Gruppen sowie deren Verwendung untereinander wird in \cref{fig:proofofconcept:packagestruktur:1} aufgezeigt.
+\begin{figure}[H]
+	\RawFloats
+	\centering
+	\includegraphics[width=1\textwidth]{images/diagram-package-diagram}
+	\caption{Package-Struktur}
+	\label{fig:proofofconcept:packagestruktur:1}
+\end{figure}
+
+Die Struktur der Packages ist so ausgelegt, dass sie von oben nach unten fliesst. Sprich ein oberes Packet kann ein unteres verwenden, jedoch nicht umgekehrt. Einstiegspunkte für die Ausführung des Programmes sind die Klassen in den Packages Controllers und Services. Ersteres wird vom Benutzer verwendet wenn er eine Seite angezeigt haben möchte. Die Services sind für die Hintergrundprozesse verantwortlich und führen eine Analyse der verschiedenen Algorithmen durch. Nachfolgend werden die einzelnen Packages erklärt.
+
+\begin{itemize}
+	\item Controllers: Nehmen die Anfragen eines Benutzers entgegen und verarbeiten diese. Dazu verwenden sie Klassen aus dem Business welches die Models zurückliefert welche schlussendlich dargestellt werden sollen.\todo{cref?}
+	\item Services: Führen die verschiedenen Analysen durch. Sie sind so ausgelegt dass sie als eigenständiger Prozess im Hintergrund ausgeführt werden können.\todo{cref}
+	\item Business: Beinhaltet die Geschäftlogik, was in dieser Arbeit die Algorithmen umfasst, sowie alles was mit den Models interagiert. Demnach die Algorithmen selber (im Unterpacket "`Algorithms"'), die Distanzmessung (Klasse DistanceMeasurement), den Datenzugriff (Klasse BookingDataIterator), etc.\todo{cref}
+	\item Models: Klassen für die Datenhaltung welche möglichst wenig Logik beinhalten.\todo{cref}
+	\item Utilities: Beinhalten Logik die nichts mit den Algorithmen zu tun hat und keine Models verwendet. Diese Klassen können für sich selber in einem anderen Projekt wiederverwendet werden.
+	\item Interfaces: Alle verwendeten Interfaces.
+	\item Tests: UnitTests\todo{cref}
+\end{itemize}
+
 \section{Kommunikationsablauf}
 \label{sec:proofofconcept:kommunikationsablauf}
 In \cref{fig:proofofconcept:kommunikationsablauf:1} wird der Kommunikationsablauf aufgezeigt, welcher zwischen dem Server und dem Browser des Benutzers stattfindet. Sobald der Benutzer eine Analyse startet wird eine Anfrage an den Server gestellt. Dieshalb werden alle Werteer erstellt einen Hintergrundprozess welcher die Analyse durchführt und gibt danach diskretiert und die zu ignorierenden nachher entfernt.
@@ -197,18 +235,6 @@ Sobald die Analyse vom Server angestossen wurde kann dieser eine Rückmeldung zu
 \end{figure}
 
 Eine Webanfrage hat normalerweise eine obere Laufzeitgrenze von 30 Sekunden. Bis dann muss der Server eine Antwort liefern, sonst wird dem Benutzer eine Fehlermeldung angezeigt und der Prozess auf dem Server gestoppt. Da die Analyse, je nach Datenmenge, einige Minuten bis Stunden dauern kann musste dafür eine Lösung gefunden werden. Dank des Hintergrundprozesses kann der Server rasch eine Antwort liefern, der Browser dem Benutzer eine Meldung anzeigen und die Analyse länger als 30 Sekunden laufen.
-
-\section{Architektur}
-\label{sec:proofofconcept:architektur}
-Hier wird die Architektur des Programmes erläutert. Grundlegen wurde die Applikations nach dem \gls{mvc}-\gls{pattern} aufgebaut und um die Entkoppelung der einzelnen Module zu ermöglichen ein Dependency Injection Framework verwendet. Diese und weitere Punkte werden nachfolgend beschrieben.
-
-\subsection{MVC}
-\label{sec:proofofconcept:architektur:mvc}
-Mit dem \gls{mvc}-\gls{pattern} wird das Programm in die drei Komponenten Datenmodel (Model), Präsentation (View) und Programmsteuerung (Controller) unterteilt. Ein Controller nimmt die Anfrage vom Browser entgegen und kreiert ein Datenmodel mit Hilfe einer Geschäftslogik. Diese Logik gibt ein Datenmodel zurück welches die Programmsteuerung an die Präsentation übergibt welche sie darstellt.
-
-Das Datenmodel fungiert als Vertrag wie die Daten dargestellt werden müssen. Die Präsentation und die Geschäftslogik kann beliebig verändert und ausgetauscht werden, solange das Model sich nicht ändert. Dies fördert die Wa
-
-Die Abhängigkeiten zwischen dem Controller, dem Model und der Geschäftslogik (business logik) wird im \cref{sec:proofofconcept:packagestruktur} visualisiert.
 
 \section{Programmablauf}
 Im \cref{sec:proofofconcept:kommunikationsablauf} wurde der Ablauf zwischen dem Benutzer und dem Server illustriert. Hier werden die Abläufe auf dem Webserver sowie der Hintergrundprozesse erläutert.
@@ -232,7 +258,12 @@ Dieser Ablauf ist gültig für die "`Explore"'-Ansicht, auf welcher der User die
 
 \subsection{Hintergrundprozesse}
 \label{sec:proofofconcept:architektur:hintergrundprozesse}
-Die Hintergrundprozesse werden von den Controllern angestossen. Es wird ein Kommandozeilen-Befehl ausgeführt welcher im folgender Ansicht beispielhaft aufgezeigt wird.
+In diesem Abschnitt wird erklärt wie die Hintergrundprozesse angestossen werden sowie deren Abläufe beschrieben. Letzteres wird mit \gls{uml} Sequenzdiagrammen verbildlicht. Die Implementation der Algorithmen selber wird hier nicht genauer beschrieben. Zum einen sind diese im \cref{sec:recherche:algorithmen} bereits dokumentiert und wurden hier entsprechend umgesetzt. Zum anderen würde ein Sequenzdiagramm der Algorithmen zu gross ausfallen und würde deshalb nicht zum Verständnis beitragen können.
+
+Nötig sind die Hintergrundprozesse um die Laufzeit-Limite von Prozessen in einem Webserver zu umgehen. Weitere Informationen hierzu werden im \cref{sec:proofofconcept:kommunikationsablauf} gegeben.
+
+\subsubsection{Anstossen der Hintergrundprozessen}
+Die Hintergrundprozesse werden von den Controllern angestossen. Es wird ein Kommandozeilen-Befehl ausgeführt welcher im folgender Ansicht beispielhaft am Apriori-Algorithmus aufgezeigt wird.
 
 \blockquote[]{
 php /Services/Apriori/apriori.php ``stars=4,country=Switzerland'' > /Services/Apriori/wip/output.txt 2>\&1 \& echo \$! > /pidfile.txt
@@ -249,7 +280,8 @@ Zur erklärung dieses Befehles wird er aufgebrochen:
 	\item \textbf{echo \$! > /pidfile.txt}: "echo \$!" gibt die Prozessid des "`apriori.php"' Programmes aus. Mit "`> /pidfile.txt"' wird die Ausgabe (also die Prozessid) in die Datei "`pidfile.txt"' geschrieben.
 \end{itemize}
 
-Wenn der Befehl ausgeführt wird beginnt die Apriori Analyse. Der Ablauf wird in \cref{fig:proofofconcept:architektur:hintergrundprozesser:1} verbildlicht.
+\subsubsection{Ablauf des Apriori-Programmes}
+Der Ablauf der Apriori-Analyse wird in \cref{fig:proofofconcept:architektur:hintergrundprozesser:1} verbildlicht.
 
 \begin{figure}[H]
 	\centering
@@ -258,11 +290,12 @@ Wenn der Befehl ausgeführt wird beginnt die Apriori Analyse. Der Ablauf wird in
 	\label{fig:proofofconcept:architektur:hintergrundprozesser:1}
 \end{figure}
 
-%"`"'
-Der Anfang mit dem Erstellen des "`Container"' und dem Caching ist gleich wie in \cref{fig:proofofconcept:architektur:webserver:1}. Das "`apriori.php"' Programm ruft danach den Apriori-Algorithmus auf welcher sein Resultat periodisch in eine Datei schreibt (siehe \cref{sec:proofofconcept:kommunikationsablauf} \nameref{sec:proofofconcept:kommunikationsablauf}). 
+Der Anfang mit dem Erstellen des "`Container"' und dem Caching ist gleich wie in \cref{fig:proofofconcept:architektur:webserver:1}. Das "`apriori.php"' Programm ruft danach den Apriori-Algorithmus auf welcher sein Resultat periodisch in eine Datei schreibt (siehe \cref{sec:proofofconcept:kommunikationsablauf} \nameref{sec:proofofconcept:kommunikationsablauf}). Dies ermöglicht dem Algorithmus regelmässig einen Zwischenstand abzuspeichern welcher dem Benutzer angezeigt werden kann.
 
+\subsubsection{Ablauf der Clustering-Programmen}
 Der Ablauf der Clustering-Analysen ist identisch zu jenem des Apriori-Algorithmus, mit zwei Ausnahmen. Zum einen wird vor dem "`AprioriAlgorithm"' der "`KPrototypeAlgorithm"' ausgeführt wird, welcher ein "`KPrototypeResult"' zurück liefert. 
-Zum anderen wird dem "`AprioriAlgorithm"' das Resultat vom KPrototype als Parameter übergeben. Dadurch ist em dem "`KPrototypeAlgorithm"' möglich, nur die Elemente eines Clusters zu analysieren und nicht die gesamte Datenmenge.
+Zum anderen wird dem "`AprioriAlgorithm"' das Resultat vom KPrototype als Parameter übergeben. Dadurch ist em dem "`KPrototypeAlgorithm"' möglich, nur die Elemente eines Clusters zu analysieren und nicht die gesamte Datenmenge. 
+Es wurde bewusst entschieden, dass der "`AprioriAlgorithm"' aus der kprototype.php Datei hinaus aufgerufen wird. Dadurch kann zukünftig dieser Algorithmus einfach durch eine Alternative ausgetauscht werden.
 Abgebildet ist der Ablauf in \cref{fig:proofofconcept:architektur:hintergrundprozesser:2}. 
 \begin{figure}[H]
 	\centering
@@ -271,30 +304,7 @@ Abgebildet ist der Ablauf in \cref{fig:proofofconcept:architektur:hintergrundpro
 	\label{fig:proofofconcept:architektur:hintergrundprozesser:2}
 \end{figure}
 
-\subsection{Webserver}
-
-\section{Package-Struktur}
-\label{sec:proofofconcept:packagestruktur}
-Ein Package gruppiert ähnliche Klassen und Interfaces zusammen. Man kann sich ein Package vorstellen wie ein Ordner auf dem Computer. Die Struktur dieser Gruppen sowie deren Verwendung untereinander wird in \cref{fig:proofofconcept:packagestruktur:1} aufgezeigt.
-\begin{figure}[H]
-	\RawFloats
-	\centering
-	\includegraphics[width=1\textwidth]{images/diagram-package-diagram}
-	\caption{Package-Struktur}
-	\label{fig:proofofconcept:packagestruktur:1}
-\end{figure}
-
-Die Struktur der Packages ist so ausgelegt, dass sie von oben nach unten fliesst. Sprich ein oberes Packet kann ein unteres verwenden, jedoch nicht umgekehrt. Einstiegspunkte für die Ausführung des Programmes sind die Klassen in den Packages Controllers und Services. Ersteres wird vom Benutzer verwendet wenn er eine Seite angezeigt haben möchte. Die Services sind für die Hintergrundprozesse verantwortlich und führen eine Analyse der verschiedenen Algorithmen durch. Nachfolgend werden die einzelnen Packages erklärt.
-
-\begin{itemize}
-	\item Controllers: Nehmen die Anfragen eines Benutzers entgegen und verarbeiten diese. Dazu verwenden sie Klassen aus dem Business welches die Models zurückliefert welche schlussendlich dargestellt werden sollen.\todo{cref?}
-	\item Services: Führen die verschiedenen Analysen durch. Sie sind so ausgelegt dass sie als eigenständiger Prozess im Hintergrund ausgeführt werden können.\todo{cref}
-	\item Business: Beinhaltet die Geschäftlogik, was in dieser Arbeit die Algorithmen umfasst, sowie alles was mit den Models interagiert. Demnach die Algorithmen selber (im Unterpacket "`Algorithms"'), die Distanzmessung (Klasse DistanceMeasurement), den Datenzugriff (Klasse BookingDataIterator), etc.\todo{cref}
-	\item Models: Klassen für die Datenhaltung welche möglichst wenig Logik beinhalten.\todo{cref}
-	\item Utilities: Beinhalten Logik die nichts mit den Algorithmen zu tun hat und keine Models verwendet. Diese Klassen können für sich selber in einem anderen Projekt wiederverwendet werden.
-	\item Interfaces: Alle verwendeten Interfaces.
-	\item Tests: UnitTests\todo{cref}
-\end{itemize}
+Auf ein Sequenzdiagramm für den DBSCAN-Algorithmus wird hier verzichtet, denn die Visualisierung des DBSCAN-Ablaufs ist identisch wie jener vom KPrototype. Lediglich die Namen der aufgerufenen Klassen müssten angepasst werden.
 
 \section{Dependency Injection mit PHP-DI}
 \label{sec:proofofconcept:dependency-injection}
