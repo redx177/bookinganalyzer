@@ -159,7 +159,7 @@ Im \cref{sec:recherche:datenvorbereitung} wurde beschrieben, wie die Daten vorbe
  In \ref{fig:recherche:rapidminer:1:1} wird der Hauptprozess gezeigt wie er im RapidMiner definiert wurde. Nachfolgend werden die einzelnen Schritte 
  \begin{itemize}
  	\item Retrieve data: Lädt die Buchungen aus der Datenquelle damit diese bearbeitet werden können. 
- 	\item Filter Exapmles: \todo{Filter Example}.
+ 	\item Filter Exapmles: Entfernt alle Buchungen mit dem Status "`XX"' (siehe \cref{sec:recherche:datenvorbereitung:filtrieren} \nameref{sec:recherche:datenvorbereitung:filtrieren}).
  	\item Select Attribute: Entfernt alle Attribute welche nicht in der \cref{fig:recherche:attributeinschraenkung:2} ausfgewählführt werden, sind die Informationen nachher voll anonymisiert und können auch veröffentlicht werden. Der letzte Schritt schreibt das Resultat in ein \gls{csv} File damit es nachher weiterverwendet werden kann.
  	\item Generate ID: Generiert eine ID für die eindeutige Identifikation der Buchungen.
  	\item Normalize: Normiert nummerische Werte auf einen Interval $0 \leq x \leq 1$ (siehe \cref{sec:recherche:datenvorbereitung:normierung} \nameref{sec:recherche:datenvorbereitung:normierung}).
@@ -172,7 +172,8 @@ Im \cref{sec:recherche:datenvorbereitung} wurde beschrieben, wie die Daten vorbe
  	\item Replace Values: Ist ein Unterprozess welcher in \cref{fig:recherche:rapidminer:1:3} dargestellt ist.
  		\begin{itemize}
 			\item Replace X -> 1 und Replace empty -> 0: Wandelt boolsche Werte in 1 und 0 um (siehe \cref{sec:recherche:datenvorbereitung:boolschewerte} \nameref{sec:recherche:datenvorbereitung:boolschewerte}). 
-			\item Remove price ...: \todo{}
+			\item Remove price "normal": Bei der diskretierung des Preises sollen nur günstige und luxus Buchungen beachtet werden (siehe \cref{sec:recherche:datenvorbereitung:diskretierung} \nameref{sec:recherche:datenvorbereitung:diskretierung}). Mittlere Werte werden deshalb in diesem Schritt entfernt.
+			\item Remove distance 499<: Gleich wie für den Preis werden Distanzen mit einem grösseren Wert als 499 nicht verwendet und deshalb in diesem Schritt entfernt.
  		\end{itemize}
  	\item Remove Price: Entfernt den gesamt Preis der Buchung. Dieser muss beim Schritt "`Select Attribute"' hinzugefügt werden damit der Wochenpreis berechnet werden kann. Im Resultat wird das Attribut jedoch nicht mehr benötig.
  	\item Write CSV: Speichert das Resultat im \gls{csv} Format auf die Festplatte ab.
@@ -192,7 +193,7 @@ Die Abhängigkeiten zwischen dem Controller, dem Model und der Geschäftslogik (
 
 \subsection{Package-Struktur}
 \label{sec:proofofconcept:packagestruktur}
-Ein Package gruppiert ähnliche Klassen und Interfaces zusammen. Man kann sich ein Package vorstellen wie ein Ordner auf dem Computer. Die Struktur dieser Gruppen sowie deren Verwendung untereinander wird in \cref{fig:proofofconcept:packagestruktur:1} aufgezeigt.
+Ein Package gruppiert ähnliche Klassen und Interfaces zusammen. Man kann sich ein Package vorstellen wie ein Ordner auf dem Computer. Die Struktur dieser Gruppen sowie deren Verwendung untereinander wird in \cref{fig:proofofconcept:packagestruktur:1} mit einem \gls{uml} Package Diagram aufgezeigt.
 \begin{figure}[H]
 	\RawFloats
 	\centering
@@ -201,10 +202,10 @@ Ein Package gruppiert ähnliche Klassen und Interfaces zusammen. Man kann sich e
 	\label{fig:proofofconcept:packagestruktur:1}
 \end{figure}
 
-Die Struktur der Packages ist so ausgelegt, dass sie von oben nach unten fliesst. Sprich ein oberes Packet kann ein unteres verwenden, jedoch nicht umgekehrt. Einstiegspunkte für die Ausführung des Programmes sind die Klassen in den Packages Controllers und Services. Ersteres wird vom Benutzer verwendet wenn er eine Seite angezeigt haben möchte. Die Services sind für die Hintergrundprozesse verantwortlich und führen eine Analyse der verschiedenen Algorithmen durch. Nachfolgend werden die einzelnen Packages erklärt.
+Die Struktur der Packages ist so ausgelegt, dass die Abhängigkeiten von oben nach unten fliessen. Sprich ein oberes Packet kann ein unteres verwenden, jedoch nicht umgekehrt. Einstiegspunkte für die Ausführung des Programmes sind die Klassen in den Packages Controllers und Services. Ersteres wird vom Benutzer verwendet wenn er eine Seite angezeigt haben möchte. Die Services sind für die Hintergrundprozesse verantwortlich und führen eine Analyse der verschiedenen Algorithmen durch (siehe \cref{sec:proofofconcept:architektur:services} \nameref{sec:proofofconcept:architektur:services}). Nachfolgend werden die einzelnen Packages erklärt.
 
 \begin{itemize}
-	\item Controllers: Nehmen die Anfragen eines Benutzers entgegen und verarbeiten diese. Dazu verwenden sie Klassen aus dem Business welches die Models zurückliefert welche schlussendlich dargestellt werden sollen.\todo{cref?}
+	\item Controllers: Nehmen die Anfragen eines Benutzers entgegen und verarbeiten diese. Dazu verwenden sie Klassen aus dem Business welches ein Datenmodel zurückliefert. Dieses Model werden anschliessend vom Controller an die View übergeben welche die Ausgabe für den Browser generiert (siehe \cref{sec:proofofconcept:architektur:mvc} \nameref{sec:proofofconcept:architektur:mvc}).
 	\item Services: Führen die verschiedenen Analysen durch. Sie sind so ausgelegt dass sie als eigenständiger Prozess im Hintergrund ausgeführt werden können.\todo{cref}
 	\item Business: Beinhaltet die Geschäftlogik, was in dieser Arbeit die Algorithmen umfasst, sowie alles was mit den Models interagiert. Demnach die Algorithmen selber (im Unterpacket "`Algorithms"'), die Distanzmessung (Klasse DistanceMeasurement), den Datenzugriff (Klasse BookingDataIterator), etc.\todo{cref}
 	\item Models: Klassen für die Datenhaltung welche möglichst wenig Logik beinhalten.\todo{cref}
@@ -214,6 +215,31 @@ Die Struktur der Packages ist so ausgelegt, dass sie von oben nach unten fliesst
 \end{itemize}
 
 \subsection{Klassenstruktur}
+\label{sec:proofofconcept:klassenstruktur}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\textwidth]{images/diagram-class-Controller}
+	\caption{}
+	\label{fig:proofofconcept:klassenstruktur:1}
+\end{figure}
+\begin{sidewaysfigure}[H]
+	\centering
+	\includegraphics[width=1\textwidth]{images/diagram-class-AprioriAlgorithm}
+	\caption{}
+	\label{fig:proofofconcept:klassenstruktur:2}
+\end{sidewaysfigure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\textwidth]{images/diagram-class-DBScanAlgorithm}
+	\caption{}
+	\label{fig:proofofconcept:klassenstruktur:3}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\textwidth]{images/diagram-class-KPrototypeAlgorithm}
+	\caption{}
+	\label{fig:proofofconcept:klassenstruktur:4}
+\end{figure}
 
 \section{Kommunikationsablauf}
 \label{sec:proofofconcept:kommunikationsablauf}
@@ -251,18 +277,19 @@ Der Webserver nimmt einen Request des Users entgegen und verarbeitet diesen. Der
 
 Aufgerufen wird stets die Datei "`index.php"'. Diese Initialisiert zuerst den dependency injection Container (siehe \cref{sec:proofofconcept:dependency-injection} \nameref{sec:proofofconcept:dependency-injection}) und zwischenspeichert die Datenquelle für die vom Benutzer übergebenen Filterkriterien (siehe \cref{sec:proofofconcept:caching} \nameref{sec:proofofconcept:caching}).
 
-Danach wird der Controller aufgerufen welcher den Request des Benutzers behandelt (siehe \cref{sec:proofofconcept:architektur:mvc} \nameref{sec:proofofconcept:architektur:mvc}). Der Controller führt die Geschäftslogik aus (im obigen Beispiel ist dies die Klasse "`BookingsProvider"') und übergibt das Resultat an die View welche für die Darstellung der Daten zuständig ist. Der Rückgabewert wird dann dem Benutzer im Browser angezeigt.
+Danach wird der Controller aufgerufen welcher den Request des Benutzers behandelt (siehe \cref{sec:proofofconcept:architektur:mvc} \nameref{sec:proofofconcept:architektur:mvc}). Der Controller führt die Geschäftslogik aus (im obigen Beispiel ist dies die Klasse "`BookingsProvider"') und übergibt das Resultat an die View welche für die Darstellung der Daten zuständig ist. Der Rückgabewert wird dem Benutzer im Browser angezeigt.
 
 Dieser Ablauf ist gültig für die "`Explore"'-Ansicht, auf welcher der User die Buchungen einsehen kann. Wenn ein Algorithmus ausgeführt werden soll fällt die Geschäftslogik weg und es wird stattdessen ein Hintergrundprozess gestartet, welcher diese ausführt.
 
-\subsection{Hintergrundprozesse}
-\label{sec:proofofconcept:architektur:hintergrundprozesse}
-In diesem Abschnitt wird erklärt wie die Hintergrundprozesse angestossen werden sowie deren Abläufe beschrieben. Letzteres wird mit \gls{uml} Sequenzdiagrammen verbildlicht. Die Implementation der Algorithmen selber wird hier nicht genauer beschrieben. Zum einen sind diese im \cref{sec:recherche:algorithmen} bereits dokumentiert und wurden hier entsprechend umgesetzt. Zum anderen würde ein Sequenzdiagramm der Algorithmen zu gross ausfallen und würde deshalb nicht zum Verständnis beitragen können.
+\subsection{Services}
+\label{sec:proofofconcept:architektur:services}
+Services sind Hintergrundprozesse welche die Implementation der Algorithmen ausführen. Diese sind nötig um die Laufzeitlimite von Prozessen in einem Webserver zu umgehen. Weitere Informationen hierzu werden im \cref{sec:proofofconcept:kommunikationsablauf} gegeben.
 
-Nötig sind die Hintergrundprozesse um die Laufzeit-Limite von Prozessen in einem Webserver zu umgehen. Weitere Informationen hierzu werden im \cref{sec:proofofconcept:kommunikationsablauf} gegeben.
+Dieser Abschnitt erklärt die Abläufe der Services und wie sie angestossen werden. Für die Darstellung werden \gls{uml} Sequenzdiagramme verwendet. Die Implementation der Algorithmen selber wird hier nicht genauer beschrieben. Zum einen sind diese im \cref{sec:recherche:algorithmen} bereits dokumentiert und wurden hier entsprechend umgesetzt. Zum anderen würde ein Sequenzdiagramm der Algorithmen zu gross ausfallen und deshalb nicht zum Verständnis beitragen können.
 
-\subsubsection{Anstossen der Hintergrundprozessen}
-Die Hintergrundprozesse werden von den Controllern angestossen. Es wird ein Kommandozeilen-Befehl ausgeführt welcher im folgender Ansicht beispielhaft am Apriori-Algorithmus aufgezeigt wird.
+
+\subsubsection{Anstossen der Services}
+Die Services werden von den Controllern angestossen. Es wird ein Kommandozeilen-Befehl ausgeführt welcher im folgender Ansicht beispielhaft am Apriori-Algorithmus aufgezeigt wird.
 
 \blockquote[]{
 php /Services/Apriori/apriori.php ``stars=4,country=Switzerland'' > /Services/Apriori/wip/output.txt 2>\&1 \& echo \$! > /pidfile.txt
