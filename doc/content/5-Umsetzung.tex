@@ -221,6 +221,7 @@ Um den Aufbau der Lösung zu erklären werden in diesem Abschnitt die Klassen so
 Einige Klassen sind grün eingefärbt und stellen den Ausgangspunkte dar, von welchen die Erklärungen beginnen. Rot hinterlegt sind jene Klassen die von einer externen Bibliothek bereitgestellt werden.
 
 \subsubsection{Models}
+\label{sec:proofofconcept:klassenstruktur:models}
 Die Models sind Datencontainer mit möglichst wenig Logik. 
 
 \paragraph{Filter \& Felder} In \cref{fig:proofofconcept:klassenstruktur:5} werden die Filter und Felder gezeigt. Felder (Field) werden von den Algorithmen verwendet (z.B. Distanzmessung bei beim Clustering oder Häufigkeitszählung beim Apriori) sowie von den Filtern. Letztere werden benutzt um die Datenbasis einzuschränken. Es gibt verschiedene Arten von Feldern, welche direkt im Klassendiagram abgebildet sind. Dies wären zum Beispiel Fliesskommazahlen (FloatField), Ganzzahlen (IntegerField), Texten (String), etc. Welche Felder in der Datenbasis auf welchen Feldtypen im Code zugeordnet werden ist in der Konfiguration des Programmes definiert.\todo{cref konfiguration}
@@ -267,6 +268,7 @@ Ein "`Histograms"' besitzt ein oder mehrere "`Histogram"' welches wiederum ein o
 
 
 \subsubsection{Controllers}
+\label{sec:proofofconcept:klassenstruktur:controllers}
 Die erste Abbildung \cref{fig:proofofconcept:klassenstruktur:1} zeigt die Controllers. 
 \begin{itemize}
 	 \item Controller: Das "`Controller"' Interface gibt eine "`run"' Methode vor welche den Inhalt zurück liefern welcher an den Browser zurückgesendet wird. Verwendet werden die Klassen für die Behandlung der einzelnen Internetseiten die dem Benutzer angezeigt werden können. Es gibt 4 Klassen welches dieses Interface implementieren.
@@ -288,6 +290,7 @@ Die erste Abbildung \cref{fig:proofofconcept:klassenstruktur:1} zeigt die Contro
 \end{itemize}
 
 \subsubsection{Algorithmen}
+\label{sec:proofofconcept:klassenstruktur:algorithmen}
 \cref{fig:proofofconcept:klassenstruktur:2} zeigt den Service für den Apriori Algorithmus.
 \begin{itemize}
 	\item AprioriAlgorithm: Führt den Apriori Algorithmus aus. Abhängig was der Klasse übergeben wird analysiert sie die gesamten Datenbasis, eine durch Filter eingeschränkten Untermenge, oder das Resultat eines Clusterings. Gesteuert wird dies über den "`DataIterator"' und den "`AprioriProgress"' welche nachfolgend beschrieben werden.
@@ -298,9 +301,9 @@ Die erste Abbildung \cref{fig:proofofconcept:klassenstruktur:1} zeigt die Contro
 	\end{itemize}
 	\item BookingDataIterator: Diese Klasse implementiert das Iterator-\gls{pattern}. Sie ermöglicht es Buchung für Buchung eine Datenquelle zu durchlaufen. Intern wird ein "`DataIterator"' verwendet um auf die Quelle der Daten zuzugreifen. Dieser liefert ein unstrukturiertes Array zurück, welches der "`BookingDataIterator"' in eine Buchung umwandelt.
 		\begin{itemize}
-			\item Iterator \& DataIterator: Von PHP wird für die Implementierung des Iterator-\gls{pattern} ein Iterator Interface zur Verfügung gestellt. Das "`DataIterator"' Interface erweitert jenes von PHP um eine Methode "`skip"', mit welcher eine Anzahl an Zeilen in der Datenquelle übersprungen werden kann (wird vom "`ExploreController"' verwendet), sowie eine Funktion "`count"', welche die gesamte Anzahl an Resultaten zurück gibt. Es gibt 4 Iteratoren, welche das "`DataIterator"' Interface implementieren.\todo{cref cache}
+			\item Iterator \& DataIterator: Von \gls{php} wird für die Implementierung des Iterator-\gls{pattern} ein Iterator Interface zur Verfügung gestellt. Das "`DataIterator"' Interface erweitert jenes von \gls{php} um eine Methode "`skip"', mit welcher eine Anzahl an Zeilen in der Datenquelle übersprungen werden kann (wird vom "`ExploreController"' verwendet), sowie eine Funktion "`count"', welche die gesamte Anzahl an Resultaten zurück gibt. Es gibt 4 Iteratoren, welche das "`DataIterator"' Interface implementieren.\todo{cref cache}
 				\begin{itemize}
-					\item LoadRedisDataIterator \& Redis: Der "`LoadRedisDataIterator"' lädt die Daten aus einer Redis InMemory Datenbank. Verwendet wird dazu die "`Redis"' Klasse aus der \gls{pecl}.\todo{cref redis}
+					\item LoadRedisDataIterator \& Redis: Der "`LoadRedisDataIterator"' lädt die Daten aus einer Redis InMemory Datenbank. Verwendet wird dazu die "`Redis"' Klasse aus der \gls{pecl} (siehe \cref{sec:proofofconcept:externebibliotheken:redis} \nameref{sec:proofofconcept:externebibliotheken:redis} für Details zu Redis).
 					\item LoadIncrementalCSVDataIterator: Lädt die Daten aus einer \gls{csv}-Datei. Jede Zeile wird einzeln aus dem File gelesen.\todo{cref performance}
 					\item LoadAllCSVDataIterator: Lädt die Daten aus einer \gls{csv}-Datei. Zu Beginn werden alle Zeilen ins Memory des Programmes geladen, aus welchem Zeile für Zeile zurückgegeben wird.\todo{cref performance}
 					\item LoadClusterDataIterator: Der Klasse muss ein Cluster übergeben werden, über welchen iteriert wird. Verwendet wird der "`LoadClusterDataIterator"' für die Apriori-Analyse nachdem ein Clustering durchgeführt wurde.
@@ -352,7 +355,7 @@ object(DataTypeCluster) {
 \begin{itemize}
 	\item KPrototypeAlgorithm: Führt den KPrototype Algorithmus aus. 
 	\item ClusteringProgress \& KPrototypeClusteringProgress: Der ClusteringProgress ist der selbe wie in \cref{fig:proofofconcept:klassenstruktur:3}. Die abgeleitete Klasse "`KPrototypeClusteringProgress"' liefert, gleich wie "`DBScanClusteringProgress"' die View sowie die Konfiguration. 
-	\item Random, Randomizer, Redis \& BookingBuilder: Der KPrototype Algorithmus wählt die initialen Clusterzentren zufällig. Dafür werden diese 4 Klassen benötigt. Random und Randomizer erlauben es eine Zufällige Buchung auszuwählen. Die Redis InMemory Datenbank liefert die Rohdaten der Buchung und der "`BookingBuilder"' wandelt sie in eine Klasse "`Booking"' um.
+	\item Random, Randomizer, Redis \& BookingBuilder: Der KPrototype Algorithmus wählt die initialen Clusterzentren zufällig. Dafür werden diese 4 Klassen benötigt. Random und Randomizer erlauben es eine Zufällige Buchung auszuwählen. Die Redis InMemory Datenbank liefert die Rohdaten der Buchung und der "`BookingBuilder"' wandelt sie in eine Klasse "`Booking"' um (siehe \cref{sec:proofofconcept:externebibliotheken:redis} \nameref{sec:proofofconcept:externebibliotheken:redis} für Details zu Redis).
 \end{itemize}
 
 \section{Kommunikationsablauf}
@@ -389,7 +392,7 @@ Der Webserver nimmt einen Request des Users entgegen und verarbeitet diesen. Der
 	\label{fig:proofofconcept:architektur:webserver:1}
 \end{figure}
 
-Aufgerufen wird stets die Datei "`index.php"'. Diese Initialisiert zuerst den dependency injection Container (siehe \cref{sec:proofofconcept:dependency-injection} \nameref{sec:proofofconcept:dependency-injection}) und zwischenspeichert die Datenquelle für die vom Benutzer übergebenen Filterkriterien (siehe \cref{sec:proofofconcept:caching} \nameref{sec:proofofconcept:caching}).
+Aufgerufen wird stets die Datei "`index.php"'. Diese Initialisiert zuerst den dependency injection Container (siehe \cref{sec:proofofconcept:dependency-injection} \nameref{sec:proofofconcept:dependency-injection}) und zwischenspeichert die Datenquelle für die vom Benutzer übergebenen Filterkriterien (siehe \cref{sec:proofofconcept:performance:caching} \nameref{sec:proofofconcept:performance:caching}).
 
 Danach wird der Controller aufgerufen welcher den Request des Benutzers behandelt (siehe \cref{sec:proofofconcept:architektur:mvc} \nameref{sec:proofofconcept:architektur:mvc}). Der Controller führt die Geschäftslogik aus (im obigen Beispiel ist dies die Klasse "`BookingsProvider"') und übergibt das Resultat an die View welche für die Darstellung der Daten zuständig ist. Der Rückgabewert wird dem Benutzer im Browser angezeigt.
 
@@ -411,12 +414,12 @@ php /Services/Apriori/apriori.php ``stars=4,country=Switzerland'' > /Services/Ap
 
 Zur erklärung dieses Befehles wird er aufgebrochen:
 \begin{itemize}
-	\item \textbf{php}: Es wird der Befehl "`PHP"' ausgeführt welcher ein PHP Programm startet.
-	\item \textbf{/Services/Apriori/apriori.php}: Das auszuführende PHP Programm. Hier die Apriori Analyse.
+	\item \textbf{php}: Es wird der Befehl "`php"' ausgeführt welcher ein \gls{php} Programm startet.
+	\item \textbf{/Services/Apriori/apriori.php}: Das auszuführende \gls{php} Programm. Hier die Apriori Analyse.
 	\item \textbf{``stars=4,country=Switzerland''}: Parameter die an das "`apriori.php"' Programm übergeben werden. In diesem Beispiel sind das die Filterkriterien des Benutzers.
 	\item \textbf{> /Services/Apriori/wip/output.txt}: Mit "`>"' wird die Standartausgabe des Programmes definiert. Jegliche Ausgabe des Programmes wird hiermit in die Datei "`output.txt"' geschrieben.
 	\item \textbf{2>\&1}: Mit "`2>"' wird gesagt wohin Fehlemeldungen geschrieben werden. \&1 gibt an dass es an den selben Ort wie die Standartausgabe gespeichert werden soll. Also auch ins "`output.txt"'.
-	\item \textbf{\&}: Durch das \& wird der Befehl im Hintergrund ausgeführt. Wenn dies nicht angegeben wird würde das Programm, welches den "`PHP"' Befehl gestartet hat warten, bis das "`apriori.php"' Programm fertig gearbeitet hat.
+	\item \textbf{\&}: Durch das \& wird der Befehl im Hintergrund ausgeführt. Wenn dies nicht angegeben wird würde das Programm, welches den "`php"' Befehl gestartet hat warten, bis das "`apriori.php"' Programm fertig gearbeitet hat.
 	\item \textbf{echo \$! > /pidfile.txt}: "echo \$!" gibt die Prozessid des "`apriori.php"' Programmes aus. Mit "`> /pidfile.txt"' wird die Ausgabe (also die Prozessid) in die Datei "`pidfile.txt"' geschrieben.
 \end{itemize}
 
@@ -446,8 +449,33 @@ Abgebildet ist der Ablauf in \cref{fig:proofofconcept:architektur:hintergrundpro
 
 Auf ein Sequenzdiagramm für den DBSCAN-Algorithmus wird hier verzichtet, denn die Visualisierung des DBSCAN-Ablaufs ist identisch wie jener vom KPrototype. Lediglich die Namen der aufgerufenen Klassen müssten angepasst werden.
 
+
+\section{Performance}
+Da die Geschwindigkeit kritisch ist wenn man mit einer grossen Datenmenge arbeitet, wurde ein Caching eingesetzt sowie mehrere Varianten für das Laden der Daten evaluiert.
+
+\subsection{Caching}
+\label{sec:proofofconcept:performance:caching}
+
+\subsection{Datenzugriff}
+Das Laden der Daten ist kritisch für die Geschwindigkeit des Gesamtsystemes. Im speziellen für die Clustering Algorithmen, da dort mehrfach über die gesamte Datenbasis iteriert werden muss. Deshalb wurden verschiedene Möglichkeiten in Betracht gezogen.
+
+Da die Datenbasis im \gls{csv}-Format vorliegt wurden zwei Varianten für den Datenzugriff eruiert. Mit \gls{php} kann entweder Zeile für Zeile aus einer Datei gelesen werden, oder alles zusammen.  Bei der ersten Version wird eine Zeile erst geladen, wenn diese angefragt wird. Bei der zweiten werden alle Einträge aus der Datei in den Arbeitsspeicher gelesen und zur Laufzeit darüber iteriert.
+
+Mit der Redis InMemory Datenbank gibt es eine dritte Möglichkeit wie auf die Daten zugegriffen werden kann (siehe \cref{sec:proofofconcept:externebibliotheken:redis} \nameref{sec:proofofconcept:externebibliotheken:redis}). Hierzu müssen die Daten zuerst in die Redis Datenbank importiert werden und danach können auf diese zugegriffen werden.
+
+Für die drei Herangehensweisen wurde jeweils ein Iteratoren erstellt (siehe \cref{sec:proofofconcept:klassenstruktur:algorithmen} \nameref{sec:proofofconcept:klassenstruktur:algorithmen}) um die Geschwindigkeit zu vergleichen. Dazu wurde die Apriori Analyse auf allen Daten fünf mal ausgeführt und der Durchschnitt genommen.
+
+\begin{itemize}
+	\item Version 1, Zeile für Zeile laden: 9.82 Sekunden
+	\item Version 2, Alles in den Zwischenspeicher laden: 10.62 Sekunden
+	\item Version 3, Daten aus Redis laden: 23.10 Sekunden
+\end{itemize}
+
+Die Variante mit dem Laden Zeile für Zeile ist mit der durchschnittlichen Zeit von 9.82 am schnellsten. 
+
 \section{Externe Bibliotheken}
-Dieser Abschnitt erläutert welche externe Bibliotheken verwendet wurden.
+\label{sec:proofofconcept:externebibliotheken}
+Dieser Abschnitt erläutert welche externe Bibliotheken eingesetzt wurden.
 
 \subsection{Dependency Injection mit PHP-DI}
 \label{sec:proofofconcept:dependency-injection}
@@ -539,7 +567,7 @@ Für die JavaScript Entwicklung wurde JQuery eingesetzt (\url{https://jquery.com
 Das Styling einer Webseite wird üblicherweise mit \gls{css} gemacht. Es gibt jedoch Erweiterungen dazu wie LESS oder SASS. In diesem Projekt wurde LESS eingesetzt (\url{http://lesscss.org/}). Dieses muss jedoch in \gls{css} umgewandelt werden wozu Grunt verwendet wurde. (\url{https://gruntjs.com/}).
 
 \subsection{Templating mit Twig}
-\gls{html} Templates werden benutzt um die Logik des Programmes von der Darstellung zu trennen (siehe \cref{sec:proofofconcept:architektur:mvc} \nameref{sec:proofofconcept:architektur:mvc}). Dazu wurde die PHP Template Bibliothek Twig eingesetzt (\url{https://twig.sensiolabs.org/}).
+\gls{html} Templates werden benutzt um die Logik des Programmes von der Darstellung zu trennen (siehe \cref{sec:proofofconcept:architektur:mvc} \nameref{sec:proofofconcept:architektur:mvc}). Dazu wurde die \gls{php} Template Bibliothek Twig eingesetzt (\url{https://twig.sensiolabs.org/}).
 
 \subsection{UnitTests mit PHPUnit}
 UnitTests wurden mit PHPUnit umgesetzt (\url{https://phpunit.de/}).
@@ -551,12 +579,12 @@ Ein Package Manager verwaltet die Abhängigkeiten von externen Bibliotheken welc
 Eine Versionsverwaltung wird verwendet um Änderungen an Dateien aufzuzeichnen. Eingesetzt wurde das verteilte System Git (\url{https://git-scm.com/}) für die Kontrolle des Quellcodes des Programmes, der Hilfsprogramme für die Datenvorbereitung sowie dieser Dokumentation. Es empfiehlt sich zusätzlich einen zentralen Server einzusetzen, da der gesamte Code sonst nur auf dem Rechner des Entwicklers gespeichert ist. Dazu wurde GitHub benutzt (\url{https://github.com/}). Dies erlaubt es über Git eine Kopie auf dem Server von GitHub anzulegen. Das sichert einem gegen Datenverlust ab und erlaubt es auf verschieden Computern an dem selben Projekt zu arbeiten.
 
 \subsection{InMemory Datenbank mit Redis}
+\label{sec:proofofconcept:externebibliotheken:redis}
 Normalerweise speichert eine Datenbank die Daten auf die Festplatte ab. Eine alternative Herangehensweise ist es, die Informationen im Kurzzeitspeicher zu behalten. Wenn dies eine Datenbank macht spricht man von InMemory. Eine solche wurde in der Arbeit mit Redis verwendet (\url{https://redis.io/})
 
 
-\section{Caching}
-\label{sec:proofofconcept:caching}
 
 \section{UnitTests}
 
-\section{Redis}
+
+
