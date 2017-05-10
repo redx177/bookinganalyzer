@@ -183,6 +183,7 @@ Im \cref{sec:recherche:datenvorbereitung} wurde beschrieben, wie die Daten vorbe
 \label{sec:proofofconcept:architektur}
 Hier wird die Architektur des Programmes erläutert. Grundlegen wurde die Applikations nach dem \gls{mvc}-\gls{pattern} aufgebaut. Dies und die strukturierung des Codes werden hier vorgestellt.
 
+
 \subsection{MVC}
 \label{sec:proofofconcept:architektur:mvc}
 Mit dem \gls{mvc}-\gls{pattern} wird das Programm in die drei Komponenten Datenmodel (Model), Präsentation (View) und Programmsteuerung (Controller) unterteilt. Ein Controller nimmt die Anfrage vom Browser entgegen und kreiert ein Datenmodel mit Hilfe einer Geschäftslogik. Diese Logik gibt ein Datenmodel zurück welches die Programmsteuerung an die Präsentation übergibt welche sie darstellt.
@@ -216,30 +217,144 @@ Die Struktur der Packages ist so ausgelegt, dass die Abhängigkeiten von oben na
 
 \subsection{Klassenstruktur}
 \label{sec:proofofconcept:klassenstruktur}
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=1\textwidth]{images/diagram-class-Controller}
-	\caption{}
-	\label{fig:proofofconcept:klassenstruktur:1}
-\end{figure}
-\begin{sidewaysfigure}[H]
-	\centering
-	\includegraphics[width=1\textwidth]{images/diagram-class-AprioriAlgorithm}
-	\caption{}
-	\label{fig:proofofconcept:klassenstruktur:2}
-\end{sidewaysfigure}
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=1\textwidth]{images/diagram-class-DBScanAlgorithm}
-	\caption{}
-	\label{fig:proofofconcept:klassenstruktur:3}
-\end{figure}
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=1\textwidth]{images/diagram-class-KPrototypeAlgorithm}
-	\caption{}
-	\label{fig:proofofconcept:klassenstruktur:4}
-\end{figure}
+Um den Aufbau der Lösung zu erklären werden in diesem Abschnitt die Klassen sowie deren Abhängigkeiten gezeigt. Verwendet werden \gls{uml} Klassendiagramme für die Darstellung. Diese wurden jedoch in den \cref{app:klassendiagram} verschoben da sie wegen ihrer Grösse die Übersichtlichkeit erschweren.
+
+Einige Klassen sind grün eingefärbt und stellen den Ausgangspunkte dar, von welchen die Erklärungen beginnen. Rot hinterlegt sind jene Klassen die von einer externen Bibliothek bereitgestellt werden.
+
+\subsubsection{Models}
+Die Models sind Datencontainer mit möglichst wenig Logik. 
+
+\paragraph{Filter \& Felder} In \cref{fig:proofofconcept:klassenstruktur:5} werden die Filter und Felder gezeigt. Felder (Field) werden von den Algorithmen verwendet (z.B. Distanzmessung bei beim Clustering oder Häufigkeitszählung beim Apriori) sowie von den Filtern. Letztere werden benutzt um die Datenbasis einzuschränken. Es gibt verschiedene Arten von Feldern, welche direkt im Klassendiagram abgebildet sind. Dies wären zum Beispiel Fliesskommazahlen (FloatField), Ganzzahlen (IntegerField), Texten (String), etc. Welche Felder in der Datenbasis auf welchen Feldtypen im Code zugeordnet werden ist in der Konfiguration des Programmes definiert.\todo{cref konfiguration}
+
+\paragraph{Resultat des Apriori-Algorithmus} In \cref{fig:proofofconcept:klassenstruktur:6} werden die Histogramme abgebildet, welche üblicherweise zur Darstellung von Häufigkeitsverteilung verwendet wird. In dieser Arbeit werden sie für die Repräsentation des Resultates eines Apriori Algorithmuses benutzt. 
+Ein "`Histograms"' besitzt ein oder mehrere "`Histogram"' welches wiederum ein oder mehrere "`HistogramBins"' enthält. "`Histograms"' beinhaltet sämtliche Attributmengen und stehen somit für das gesamte Resultat der Anaylse. Ein "`Histogram"' repräsentiert eine Iteration des Apriori Algorithmus (z.B. alle häufigen 2-Attributmengen). Schlussendlich enthält ein "`HistogramBin"' eine Attributkombination mit der Häufigkeit, wie oft sie in der Datenmenge vorkommt. Um dies an einem Beispiel zu zeigen wird eine "`Histograms"' hier gezeigt:
+\begin{itemize}
+\item \textbf{\#1 Histograms}:
+	\begin{itemize}
+		\item \textbf{\#1 Histogram}:
+			\begin{itemize}
+				\item \textbf{\#1 HistogramBin}: ((Distanz zum See = 200), 200/350 Buchungen)
+				\item \textbf{\#2 HistogramBin}: ((Land = Schweiz), 150/350 Buchungen)
+				\item \textbf{\#3 HistogramBin}: ((Jazzuci vorhanden = Ja), 75/350 Buchungen)
+			\end{itemize}  
+		\item \#2 Histogram:
+			\begin{itemize}
+				\item \textbf{\#1 HistogramBin}: ((Distanz zum See = 200, Land = Schweiz), 130/350 Buchungen)
+				\item \textbf{\#2 HistogramBin}: ((Land = Schweiz, Jazzuci vorhanden = Ja), 70/350 Buchungen)
+			\end{itemize}  
+		\item \#3 Histogram:
+			\begin{itemize}
+				\item \textbf{\#1 HistogramBin}: ((Distanz zum See = 200, Land = Schweiz, Jazzuci vorhanden = Ja), 50/350 Buchungen)
+			\end{itemize}  
+	\end{itemize}  
+\end{itemize}  
+
+
+\paragraph{Resultat der Clustering-Algorithmen} Das Model für die Resultate der Clustering Algorithmen wird in \cref{fig:proofofconcept:klassenstruktur:7} gezeigt. Gemeinsamkeiten der beiden Algorithmen sind in den Interfaces "`ClusteringResult"' und "`Cluster"' zu finden. Deren Unterschiede sind jeweils in den entsprechenden Implementationen definiert. Die einzelnen Klassen werden nachfolgend beschrieben.
+\begin{itemize}
+	\item ClusterinResult: Definiert das ein Resultat vom DBScan und vom KProtoype ein oder mehrere Cluster besitzen muss.
+	\begin{itemize}  
+		\item DBScanResult: Das Resultat einer DBScan Analyse. Zusätzlich zu den Clustern selber besitzt die Klasse Noise-Punkte, welche keinem Cluster zugewiesen werden können (siehe \cref{sec:recherche:algorithmen:dbscan} \nameref{sec:recherche:algorithmen:dbscan}).
+		\item KPrototypeResult: Das Resultat einer KPrototype Analyse. Neben den Clustern beinhaltet die Klasse die Gesamtkosten des Clusterings.
+	\end{itemize}  
+	\item Cluster: Ein Cluster besteht bei beiden Algorithmen aus einem oder mehreren Punkten.
+		\begin{itemize}  
+			\item DBScanCluster \& ClusterPoint: Der "`DBScanCluster"' besitzt nur die einzelnen Datenpunkte "`ClusterPoint"'. Diese beinhalten die ID der Buchung welche sie darstellen.
+			\item KPrototypeCluster \& DistanceClusterPoint: Die Cluster beim KPrototypeCluster besitzen ein Zentrum, welches auf der Klasse "`KPrototypeCluster"' abgelegt ist. Jeder Datenpunkt in diesem Cluster ist vom Typ "`DistanceClusterPoint"' welcher neben der ID der Buchung welche er repräsentiert noch die Distanz bis zum Zentrum des Clusters beinhalten.
+		\end{itemize}  
+\end{itemize}  
+
+%Grundelement ist das Interface "`ClusteringResult"', welches von "`DBScanResult"' und "`KPrototypeResult"' implementiert werden. Beide Klassen besitzen mehrere "`Cluster"'. Das "`DBScanResult"' besitzt jedoch noch Noise-Punkte und das "`KPrototypeResult"' der Gesamtfehler eines Clusters zu dessen Zentrum. 
+
+
+\subsubsection{Controllers}
+Die erste Abbildung \cref{fig:proofofconcept:klassenstruktur:1} zeigt die Controllers. 
+\begin{itemize}
+	 \item Controller: Das "`Controller"' Interface gibt eine "`run"' Methode vor welche den Inhalt zurück liefern welcher an den Browser zurückgesendet wird. Verwendet werden die Klassen für die Behandlung der einzelnen Internetseiten die dem Benutzer angezeigt werden können. Es gibt 4 Klassen welches dieses Interface implementieren.
+	 \begin{itemize}
+		\item ExplorerController: Ist für die Darstellung der Seite "`Einsehen der Stammdaten"' verantwortlich, welche in \cref{fig:konzept:mockups:stammdaten} abgebildet ist.
+			\begin{itemize}
+				\item BookingsProvider: Um die Buchungen zu laden wird der "`BookingsProvider"' verwendet. Dieser hat eine "`getSubset"' Methode mit welcher man sich die aktuelle Seite zurückgeben lassen kann. Er übernimmt nur die Aufgabe für die Unterteilung der Buchungen auf Seiten. Das Laden der Buchungen wird vom "`BookingDataIterator"' erledigt.
+				\item BookingDataIterator: Wird in \cref{fig:proofofconcept:klassenstruktur:2} erläutert.
+				\item UrlGenerator: Der URLGenerator wird benötigt um die Links zwischen den Seiten (Buchungslisten) zu erzeugen.
+			\end{itemize}
+		\item AttributanalysisController \& AttributanalysisWithGroupingController: Diese beiden Controller sind für die Darstellung von \cref{fig:konzept:mockups:apriori} und \cref{fig:konzept:mockups:clustering} verantwortlich und stossen die Services für die Analysen an (siehe \cref{sec:proofofconcept:architektur:services} \nameref{sec:proofofconcept:architektur:services}). 
+		\item SettingsController: Zeigt ein Formular mit welchem die Einstellungen des Programmes angepasst werden können.
+		\item Twig\_Environment: Dies ist die View (siehe \cref{sec:proofofconcept:architektur:mvc} \nameref{sec:proofofconcept:architektur:mvc}) welche das \gls{html} generiert, welches an den Browser gesendet wird für die Darstellung. Verwendet wird diese Klasse von allen Controllern.
+		\item FiltersProvider: Liefert die Filter welche für den Aufbau des Formulares für die Einschränkung des Datenbestandes benötigt wird.
+			\begin{itemize}
+				\item DataTypeClusterer: Wird in \cref{fig:proofofconcept:klassenstruktur:2} erläutert.
+			\end{itemize}
+	 \end{itemize}
+\end{itemize}
+
+\subsubsection{Algorithmen}
+\cref{fig:proofofconcept:klassenstruktur:2} zeigt den Service für den Apriori Algorithmus.
+\begin{itemize}
+	\item AprioriAlgorithm: Führt den Apriori Algorithmus aus. Abhängig was der Klasse übergeben wird analysiert sie die gesamten Datenbasis, eine durch Filter eingeschränkten Untermenge, oder das Resultat eines Clusterings. Gesteuert wird dies über den "`DataIterator"' und den "`AprioriProgress"' welche nachfolgend beschrieben werden.
+	\item AprioriProgress: Speichert das Resultat der Apriori Analyse. 
+	\begin{itemize}
+		\item AprioriProgressToFile: Speichert das Resultat der Apriori Analyse in ein File ab. Diese Klasse wird verwendet wenn der Algorithmus auf der gesamten Datenbasis (oder auf einer durch Filter eingeschränkten Untermenge) durchgeführt wird. 
+		\item AprioriProgressForCluster: Wenn der Apriori Algorithmus das Resultat eines Clusterings analysiert kann diese Klasse verwendet werden. Sie speichert das gesamte Ergebnis ab. Sprich es müssen alle Cluster sowie deren jeweiligen Resultate des Apriori-Algorithmus übergeben werden.
+	\end{itemize}
+	\item BookingDataIterator: Diese Klasse implementiert das Iterator-\gls{pattern}. Sie ermöglicht es Buchung für Buchung eine Datenquelle zu durchlaufen. Intern wird ein "`DataIterator"' verwendet um auf die Quelle der Daten zuzugreifen. Dieser liefert ein unstrukturiertes Array zurück, welches der "`BookingDataIterator"' in eine Buchung umwandelt.
+		\begin{itemize}
+			\item Iterator \& DataIterator: Von PHP wird für die Implementierung des Iterator-\gls{pattern} ein Iterator Interface zur Verfügung gestellt. Das "`DataIterator"' Interface erweitert jenes von PHP um eine Methode "`skip"', mit welcher eine Anzahl an Zeilen in der Datenquelle übersprungen werden kann (wird vom "`ExploreController"' verwendet), sowie eine Funktion "`count"', welche die gesamte Anzahl an Resultaten zurück gibt. Es gibt 4 Iteratoren, welche das "`DataIterator"' Interface implementieren.\todo{cref cache}
+				\begin{itemize}
+					\item LoadRedisDataIterator \& Redis: Der "`LoadRedisDataIterator"' lädt die Daten aus einer Redis InMemory Datenbank. Verwendet wird dazu die "`Redis"' Klasse aus der \gls{pecl}.\todo{cref redis}
+					\item LoadIncrementalCSVDataIterator: Lädt die Daten aus einer \gls{csv}-Datei. Jede Zeile wird einzeln aus dem File gelesen.\todo{cref performance}
+					\item LoadAllCSVDataIterator: Lädt die Daten aus einer \gls{csv}-Datei. Zu Beginn werden alle Zeilen ins Memory des Programmes geladen, aus welchem Zeile für Zeile zurückgegeben wird.\todo{cref performance}
+					\item LoadClusterDataIterator: Der Klasse muss ein Cluster übergeben werden, über welchen iteriert wird. Verwendet wird der "`LoadClusterDataIterator"' für die Apriori-Analyse nachdem ein Clustering durchgeführt wurde.
+				\end{itemize}
+			\item DataTypeClusterer: Er übernimmt ein Array an Feldern mit untypisierten Daten aus einer Datenquelle oder den Filtern, typisiert diese und gruppiert sie. Beispiel an Daten die an den "`DataTypeClusterer"' übergeben werden:
+			\begin{lstlisting}[language=php]
+var $\textdollar$rawData = array(
+	'distanceToPublicTransport' => 400
+	'distanceToSea' => 200
+	'country' => 'Switzerland'
+)
+			\end{lstlisting}
+			Dabei handelt es sich um ein Array mit 3 Feldern. Der DataTypeClusterer wandelt die 2 Distanzfelder in Objekte vom Typen "`DistanceField"' um und gruppiert sie zusammen unter "`distanceFields"'. Das Land (country) wird in ein "`StringField"' Ojekt umgewandelt und unter "`stringFields"' gruppiert. Das Resultat sieht das etwas vereinfacht so aus:
+			\begin{lstlisting}[language=php]
+object(DataTypeCluster) {
+	"distanceFields": array(
+		object(DistanceField) {
+			"name" => string("distanceToPublicTransport")
+			"value" => int(400)
+		},
+		object(DistanceField) {
+			"name" => string("distanceToPublicTransport")
+			"value" => int(400)
+		},
+	),
+	"stringFields": array(
+		object(StringField) {
+			"name" => string("country")
+			"value" => string("Switzerland")
+		}
+	)
+}
+			\end{lstlisting}
+			\item BookingBuilder: Erstellt ein Objekt "`Booking"' mit hilfe eines "`DataTypeClusterer"' aus einem unstrukturierem Array.
+		\end{itemize}
+\end{itemize}
+
+\cref{fig:proofofconcept:klassenstruktur:3} zeigt den Service für den DBScan Algorithmus. Die Klasse "`BookingDataIterator"' wurde bereits im \cref{fig:proofofconcept:klassenstruktur:2} erläutert und wurde deshalb nicht mehr detailliert abgebildet.
+\begin{itemize}
+	\item DBScanAlgorithm: Führt den DBScan Algorithmus aus. 
+	\item ClusteringProgress \& DBScanClusteringProgress: Eine abstrakte Klasse welche das Resultat eines Clusterings in ein File abspeichert. Kann für den DBScan und den KPrototype verwendet werden. Die abgeleitete Klasse "`DBScanClusteringProgress"' wird lediglich benötigt um die richtige View zu laden und die korrekte Konfiguration bereitzustellen.
+	\begin{itemize}
+		\item Runtime: Verfolgt die Laufzeit des Algorithmus seit der Service gestartet wurde. 
+	\end{itemize}
+	\item DistanceMeasurement: Implementation der Distanzmessung aus der \cref{eq:recherche:clusteranalysis:2}.
+\end{itemize}
+
+\cref{fig:proofofconcept:klassenstruktur:4} zeigt den Service für den KPrototype Algorithmus. Die Klassen "`BookingDataIterator"' und "`DistanceMeasurement"' wurden bereits dokumentiert und werden hier nicht mehr erläutert.
+\begin{itemize}
+	\item KPrototypeAlgorithm: Führt den KPrototype Algorithmus aus. 
+	\item ClusteringProgress \& KPrototypeClusteringProgress: Der ClusteringProgress ist der selbe wie in \cref{fig:proofofconcept:klassenstruktur:3}. Die abgeleitete Klasse "`KPrototypeClusteringProgress"' liefert, gleich wie "`DBScanClusteringProgress"' die View sowie die Konfiguration. 
+	\item Random, Randomizer, Redis \& BookingBuilder: Der KPrototype Algorithmus wählt die initialen Clusterzentren zufällig. Dafür werden diese 4 Klassen benötigt. Random und Randomizer erlauben es eine Zufällige Buchung auszuwählen. Die Redis InMemory Datenbank liefert die Rohdaten der Buchung und der "`BookingBuilder"' wandelt sie in eine Klasse "`Booking"' um.
+\end{itemize}
 
 \section{Kommunikationsablauf}
 \label{sec:proofofconcept:kommunikationsablauf}
@@ -332,7 +447,10 @@ Abgebildet ist der Ablauf in \cref{fig:proofofconcept:architektur:hintergrundpro
 
 Auf ein Sequenzdiagramm für den DBSCAN-Algorithmus wird hier verzichtet, denn die Visualisierung des DBSCAN-Ablaufs ist identisch wie jener vom KPrototype. Lediglich die Namen der aufgerufenen Klassen müssten angepasst werden.
 
-\section{Dependency Injection mit PHP-DI}
+\section{Externe Bibliotheken}
+Dieser Abschnitt erläutert welche externe Bibliotheken verwendet wurden.
+
+\subsection{Dependency Injection mit PHP-DI}
 \label{sec:proofofconcept:dependency-injection}
 % und um die Entkoppelung der einzelnen Module zu ermöglichen ein Dependency Injection Framework verwendet. Diese und weitere Punkte werden nachfolgend beschrieben.
 Bei der Dependency Injection handelt es sich um ein \gls{pattern}
@@ -403,5 +521,43 @@ Zuerst wird ein "`ContainerBuilder"' erstellt. Auf diesem wird definiert, dass f
 
 Als erfreulicher Nebeneffekt erleichtert dies die Entwicklung von UnitTests massiv (\todo{cref}).
 
+\subsection{Frontend mit Twitter Bootstrap}
+Für das Design des Webseite wurde Twitter Bootstrap (url{http://getbootstrap.com/})verwendet. Es bietet viele Komponenten welche man für die Entwicklung einer Webseite verwendet kann. Dies erleichtert die Umsetzung, da man sich keine Gedanken darüber machen muss wie die Seite aufgebaut oder gestaltet wird. 
+
+Eingesetzt wurde folgende Komponenten:
+\begin{itemize}
+	\item Navigation: Die Navigation welche auf jeder Seite zuoberst dargestellt wird (\url{http://getbootstrap.com/components/#navbar}).
+	\item Formulare: Die Formulare für die Einschränkung des Datenbestandes (\url{http://getbootstrap.com/css/#forms}).
+	\item Tabellen: Für die Auflistung der Buchungen für das einsehen der Stammdaten sowie den Resultaten der Apriori Analyse. (\url{http://getbootstrap.com/css/#tables}).
+	\item Pagination: Die Paginierung beim einsehen der Stammdaten (\url{http://getbootstrap.com/components/#pagination})
+	\item Glyphicons: Die Icons für die Preise und das Häkchen der binären Attribute (\url{http://getbootstrap.com/components/#glyphicons}).
+\end{itemize}
+
+\subsection{JavaScript Framework mit JQuery}
+Für die JavaScript Entwicklung wurde JQuery eingesetzt (\url{https://jquery.com/}). Verwendet wurde die Bibliothek für die Abfrage des Zwischenstandes einer Analyse vom Server. Für die Textvervollständigung bei der Eingabe der Destination wurde zusätzlich noch die JQuery Erweiterung "`Autocomplete"' eingesetzt (\url{https://jqueryui.com/autocomplete/}).
+
+\subsection{Less mit Grunt}
+Das Styling einer Webseite wird üblicherweise mit \gls{css} gemacht. Es gibt jedoch Erweiterungen dazu wie LESS oder SASS. In diesem Projekt wurde LESS eingesetzt (\url{http://lesscss.org/}). Dieses muss jedoch in \gls{css} umgewandelt werden wozu Grunt verwendet wurde. (\url{https://gruntjs.com/}).
+
+\subsection{Templating mit Twig}
+\gls{html} Templates werden benutzt um die Logik des Programmes von der Darstellung zu trennen (siehe \cref{sec:proofofconcept:architektur:mvc} \nameref{sec:proofofconcept:architektur:mvc}). Dazu wurde die PHP Template Bibliothek Twig eingesetzt (\url{https://twig.sensiolabs.org/}).
+
+\subsection{UnitTests mit PHPUnit}
+UnitTests wurden mit PHPUnit umgesetzt (\url{https://phpunit.de/}).
+
+\subsection{Package Managing mit Composer}
+Ein Package Manager verwaltet die Abhängigkeiten von externen Bibliotheken welche in einem Projekt benutzt werden. Bei der Implementation des Programmes wurde ein solcher Package Manager verwendet um Bibliotheken wie Twig, PHPUnit und PHP-DI zu verwalten. Eingesetzt wurde Composer (\url{https://getcomposer.org/}).
+
+\subsection{Versionsverwaltung mit Git und GitHub}
+Eine Versionsverwaltung wird verwendet um Änderungen an Dateien aufzuzeichnen. Eingesetzt wurde das verteilte System Git (\url{https://git-scm.com/}) für die Kontrolle des Quellcodes des Programmes, der Hilfsprogramme für die Datenvorbereitung sowie dieser Dokumentation. Es empfiehlt sich zusätzlich einen zentralen Server einzusetzen, da der gesamte Code sonst nur auf dem Rechner des Entwicklers gespeichert ist. Dazu wurde GitHub benutzt (\url{https://github.com/}). Dies erlaubt es über Git eine Kopie auf dem Server von GitHub anzulegen. Das sichert einem gegen Datenverlust ab und erlaubt es auf verschieden Computern an dem selben Projekt zu arbeiten.
+
+\subsection{InMemory Datenbank mit Redis}
+Normalerweise speichert eine Datenbank die Daten auf die Festplatte ab. Eine alternative Herangehensweise ist es, die Informationen im Kurzzeitspeicher zu behalten. Wenn dies eine Datenbank macht spricht man von InMemory. Eine solche wurde in der Arbeit mit Redis verwendet (\url{https://redis.io/})
+
+
 \section{Caching}
 \label{sec:proofofconcept:caching}
+
+\section{UnitTests}
+
+\section{Redis}
