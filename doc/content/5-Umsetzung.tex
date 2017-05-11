@@ -181,15 +181,16 @@ Im \cref{sec:recherche:datenvorbereitung} wurde beschrieben, wie die Daten vorbe
 
 \section{Architektur}
 \label{sec:proofofconcept:architektur}
-Hier wird die Architektur des Programmes erläutert. Grundlegen wurde die Applikations nach dem \gls{mvc}-\gls{pattern} aufgebaut. Dies und die strukturierung des Codes werden hier vorgestellt.
+Hier wird die Architektur des Programmes erläutert. Grundlegen wurde die Applikation nach dem \gls{mvc}-\gls{pattern} aufgebaut. Dies und die Strukturierung des Codes werden hier vorgestellt.
 
 \subsection{MVC}
 \label{sec:proofofconcept:architektur:mvc}
-Mit dem \gls{mvc}-\gls{pattern} wird das Programm in die drei Komponenten Datenmodel (Model), Präsentation (View) und Programmsteuerung (Controller) unterteilt. Ein Controller nimmt die Anfrage vom Browser entgegen und kreiert ein Datenmodel mit Hilfe einer Geschäftslogik. Diese Logik gibt ein Datenmodel zurück welches die Programmsteuerung an die Präsentation übergibt welche sie darstellt.
+Mit dem \gls{mvc}-\gls{pattern} wird das Programm in die drei Komponenten Modell (Model), Präsentation (View) und Programmsteuerung (Controller) unterteilt. Ein Controller nimmt die Anfrage vom Browser entgegen und kreiert ein Datenmodel mit Hilfe einer Geschäftslogik. Diese Logik gibt ein Datenmodel zurück welches die Programmsteuerung an die Präsentation übergibt welche sie darstellt.
 
-Das Datenmodel fungiert als Vertrag wie die Daten dargestellt werden müssen. Die Präsentation und die Geschäftslogik kann beliebig verändert und ausgetauscht werden, solange das Model sich nicht ändert. Dies fördert die Wa
+Aufgabaut ist das Programm nach dem \gls{mvc}-\gls{pattern}, welches den Code in drei Komponenten Modell (Model), Präsentation (View) und Programmsteuerung (Controller) unterteilt. Das Modell ist zuständig für die Geschäftslogik und die Bereitstellung der Daten. Für die Anzeigelogik wird die View verwendet. Sie definiert der Aufbau der Webseite wie sie dem Benutzer angezeigt wird. Der Controller schlussendlich bringt die anderen beiden Komponenten zusammen. Er nimmt die Anfrage des Users entgegen und definiert welche Geschäftslogik eingesetzt wird. Die Rückgabe gibt er schlussendlich an die Präsentation weiter für die Anzeige.
 
-Die Abhängigkeiten zwischen dem Controller, dem Model und der Geschäftslogik (business logik) wird im \cref{sec:proofofconcept:packagestruktur} visualisiert.
+%"`"'
+Im Programm welches für die Arbeit umgesetzt wurde ist die Programmsteuerung im Package "`Controllers"' definiert (siehe \cref{sec:proofofconcept:packagestruktur} \nameref{sec:proofofconcept:packagestruktur}). Für die Präsentation wurde die externe Bibliothek Twig verwendet (siehe \cref{sec:proofofconcept:externebibliotheken:twig} \nameref{sec:proofofconcept:externebibliotheken:twig}). Alle anderen Klassen und Packages gehören demnach ins Modell. Im \cref{sec:proofofconcept:packagestruktur} wird der Aufbau genauer erläutert.
 
 \subsection{Package-Struktur}
 \label{sec:proofofconcept:packagestruktur}
@@ -355,14 +356,14 @@ object(DataTypeCluster) {
 \begin{itemize}
 	\item KPrototypeAlgorithm: Führt den KPrototype Algorithmus aus. 
 	\item ClusteringProgress \& KPrototypeClusteringProgress: Der ClusteringProgress ist der selbe wie in \cref{fig:proofofconcept:klassenstruktur:3}. Die abgeleitete Klasse "`KPrototypeClusteringProgress"' liefert, gleich wie "`DBScanClusteringProgress"' die View sowie die Konfiguration. 
-	\item Random, Randomizer, Redis \& BookingBuilder: Der KPrototype Algorithmus wählt die initialen Clusterzentren zufällig. Dafür werden diese 4 Klassen benötigt. Random und Randomizer erlauben es eine Zufällige Buchung auszuwählen. Die Redis InMemory Datenbank liefert die Rohdaten der Buchung und der "`BookingBuilder"' wandelt sie in eine Klasse "`Booking"' um (siehe \cref{sec:proofofconcept:externebibliotheken:redis} \nameref{sec:proofofconcept:externebibliotheken:redis} für Details zu Redis).
+	\item Random, Randomizer, Redis \& BookingBuilder: Der KPrototype Algorithmus wählt die initialen Clusterzentren zufällig. Dafür werden diese 4 Klassen benötigt. Random und Randomizer erlauben es zufällg eine Buchungs-Id auszuwählen. Die Redis InMemory Datenbank liefert die Rohdaten der Buchung und der "`BookingBuilder"' wandelt sie in eine Klasse "`Booking"' um (siehe \cref{sec:proofofconcept:externebibliotheken:redis} \nameref{sec:proofofconcept:externebibliotheken:redis} für Details zu Redis).
 \end{itemize}
 
-\section{Kommunikationsablauf}
-\label{sec:proofofconcept:kommunikationsablauf}
-In \cref{fig:proofofconcept:kommunikationsablauf:1} wird der Kommunikationsablauf aufgezeigt, welcher zwischen dem Server und dem Browser des Benutzers stattfindet. Sobald der Benutzer eine Analyse startet wird eine Anfrage an den Server gestellt. Dieshalb werden alle Werteer erstellt einen Hintergrundprozess welcher die Analyse durchführt und gibt danach diskretiert und die zu ignorierenden nachher entfernt.
-Der Hintergrundprozess führt die Analyse durch und schreibt periodisch einen Zwischenstand im \gls{html}-Format in eine Datei.
+\section{Abläufe}
+Zuerst wird der Kommunikationsablauf zwischen dem Benutzer, dem Server und der Hintergrundprozesse erläutert. Der \cref{sec:proofofconcept:kommunikationsablauf} geht dann auf die einzelnen Punkte im Kommunikationsablauf genauer ein und erläutert diese mit der Unterstützung von \gls{uml}-Sequenzdiagrammen.
 
+\subsection{Kommunikationsablauf}
+\label{sec:proofofconcept:kommunikationsablauf}
 In \cref{fig:proofofconcept:kommunikationsablauf:1} wird der Kommunikationsablauf aufgezeigt, welcher zwischen dem Webserver und dem Browser des Benutzers stattfindet. Sobald der Benutzer eine Analyse startet wird eine Anfrage an den Server gestellt. Dieser erstellt einen Hintergrundprozess welcher die Analyse durchführt und gibt danach direkt eine Antwort an den User zurück. 
 
 Der Hintergrundprozess führt die Analyse durch und schreibt periodisch einen Zwischenstand im \gls{html}-Format in eine Datei.
@@ -378,10 +379,10 @@ Sobald die Analyse vom Server angestossen wurde kann dieser eine Rückmeldung zu
 
 Eine Webanfrage hat normalerweise eine obere Laufzeitgrenze von 30 Sekunden. Bis dann muss der Server eine Antwort liefern, sonst wird dem Benutzer eine Fehlermeldung angezeigt und der Prozess auf dem Server gestoppt. Da die Analyse, je nach Datenmenge, einige Minuten bis Stunden dauern kann musste dafür eine Lösung gefunden werden. Dank des Hintergrundprozesses kann der Server rasch eine Antwort liefern, der Browser dem Benutzer eine Meldung anzeigen und die Analyse länger als 30 Sekunden laufen.
 
-\section{Programmablauf}
+\subsection{Programmablauf}
 Im \cref{sec:proofofconcept:kommunikationsablauf} wurde der Ablauf zwischen dem Benutzer und dem Server illustriert. Hier werden die Abläufe auf dem Webserver sowie der Hintergrundprozesse erläutert.
 
-\subsection{Webserver}
+\subsubsection{Webserver}
 \label{sec:proofofconcept:architektur:webserver}
 Der Webserver nimmt einen Request des Users entgegen und verarbeitet diesen. Der Ablauf wird in \cref{fig:proofofconcept:architektur:webserver:1} visualisiert.
 
@@ -398,14 +399,14 @@ Danach wird der Controller aufgerufen welcher den Request des Benutzers behandel
 
 Dieser Ablauf ist gültig für die "`Explore"'-Ansicht, auf welcher der User die Buchungen einsehen kann. Wenn ein Algorithmus ausgeführt werden soll fällt die Geschäftslogik weg und es wird stattdessen ein Hintergrundprozess gestartet, welcher diese ausführt.
 
-\subsection{Services}
+\subsubsection{Services}
 \label{sec:proofofconcept:architektur:services}
 Services sind Hintergrundprozesse welche die Implementation der Algorithmen ausführen. Diese sind nötig um die Laufzeitlimite von Prozessen in einem Webserver zu umgehen. Weitere Informationen hierzu werden im \cref{sec:proofofconcept:kommunikationsablauf} gegeben.
 
 Dieser Abschnitt erklärt die Abläufe der Services und wie sie angestossen werden. Für die Darstellung werden \gls{uml} Sequenzdiagramme verwendet. Die Implementation der Algorithmen selber wird hier nicht genauer beschrieben. Zum einen sind diese im \cref{sec:recherche:algorithmen} bereits dokumentiert und wurden hier entsprechend umgesetzt. Zum anderen würde ein Sequenzdiagramm der Algorithmen zu gross ausfallen und deshalb nicht zum Verständnis beitragen können.
 
 
-\subsubsection{Anstossen der Services}
+\paragraph{Anstossen der Services}
 Die Services werden von den Controllern angestossen. Es wird ein Kommandozeilen-Befehl ausgeführt welcher im folgender Ansicht beispielhaft am Apriori-Algorithmus aufgezeigt wird.
 
 \blockquote[]{
@@ -423,7 +424,7 @@ Zur erklärung dieses Befehles wird er aufgebrochen:
 	\item \textbf{echo \$! > /pidfile.txt}: "echo \$!" gibt die Prozessid des "`apriori.php"' Programmes aus. Mit "`> /pidfile.txt"' wird die Ausgabe (also die Prozessid) in die Datei "`pidfile.txt"' geschrieben.
 \end{itemize}
 
-\subsubsection{Ablauf des Apriori-Programmes}
+\paragraph{Ablauf des Apriori-Programmes}
 Der Ablauf der Apriori-Analyse wird in \cref{fig:proofofconcept:architektur:hintergrundprozesser:1} verbildlicht.
 
 \begin{figure}[H]
@@ -435,7 +436,7 @@ Der Ablauf der Apriori-Analyse wird in \cref{fig:proofofconcept:architektur:hint
 
 Der Anfang mit dem Erstellen des "`Container"' und dem Caching ist gleich wie in \cref{fig:proofofconcept:architektur:webserver:1}. Das "`apriori.php"' Programm ruft danach den Apriori-Algorithmus auf welcher sein Resultat periodisch in eine Datei schreibt (siehe \cref{sec:proofofconcept:kommunikationsablauf} \nameref{sec:proofofconcept:kommunikationsablauf}). Dies ermöglicht dem Algorithmus regelmässig einen Zwischenstand abzuspeichern welcher dem Benutzer angezeigt werden kann.
 
-\subsubsection{Ablauf der Clustering-Programmen}
+\paragraph{Ablauf der Clustering-Programmen}
 Der Ablauf der Clustering-Analysen ist identisch zu jenem des Apriori-Algorithmus, mit zwei Ausnahmen. Zum einen wird vor dem "`AprioriAlgorithm"' der "`KPrototypeAlgorithm"' ausgeführt wird, welcher ein "`KPrototypeResult"' zurück liefert. 
 Zum anderen wird dem "`AprioriAlgorithm"' das Resultat vom KPrototype als Parameter übergeben. Dadurch ist em dem "`KPrototypeAlgorithm"' möglich, nur die Elemente eines Clusters zu analysieren und nicht die gesamte Datenmenge. 
 Es wurde bewusst entschieden, dass der "`AprioriAlgorithm"' aus der kprototype.php Datei hinaus aufgerufen wird. Dadurch kann zukünftig dieser Algorithmus einfach durch eine Alternative ausgetauscht werden.
@@ -457,11 +458,12 @@ Da die Geschwindigkeit kritisch ist wenn man mit einer grossen Datenmenge arbeit
 \label{sec:proofofconcept:performance:caching}
 
 \subsection{Datenzugriff}
+\label{sec:proofofconcept:performance:datenzugriff}
 Das Laden der Daten ist kritisch für die Geschwindigkeit des Gesamtsystemes. Im speziellen für die Clustering Algorithmen, da dort mehrfach über die gesamte Datenbasis iteriert werden muss. Deshalb wurden verschiedene Möglichkeiten in Betracht gezogen.
 
 Da die Datenbasis im \gls{csv}-Format vorliegt wurden zwei Varianten für den Datenzugriff eruiert. Mit \gls{php} kann entweder Zeile für Zeile aus einer Datei gelesen werden, oder alles zusammen.  Bei der ersten Version wird eine Zeile erst geladen, wenn diese angefragt wird. Bei der zweiten werden alle Einträge aus der Datei in den Arbeitsspeicher gelesen und zur Laufzeit darüber iteriert.
 
-Mit der Redis InMemory Datenbank gibt es eine dritte Möglichkeit wie auf die Daten zugegriffen werden kann (siehe \cref{sec:proofofconcept:externebibliotheken:redis} \nameref{sec:proofofconcept:externebibliotheken:redis}). Hierzu müssen die Daten zuerst in die Redis Datenbank importiert werden und danach können auf diese zugegriffen werden.
+Mit der Redis InMemory Datenbank gibt es eine dritte Möglichkeit wie auf die Daten zugegriffen werden kann (siehe \cref{sec:proofofconcept:externebibliotheken:redis} \nameref{sec:proofofconcept:externebibliotheken:redis}). Hierzu müssen die Daten zuerst in die Redis Datenbank importiert werden und können dann bei der Analyse nur noch abgefragt werden. Dazu wurde ein Hilfsprogramm erstellt welches die Daten aus dem \gls{csv}-File ausliest nach Redis importiert. Der Quellcode kann unter \url{https://github.com/soultemptation/bookinganalyzerimpl/blob/master/Services/FillRedis/fillredis.php} eingesehen werden.
 
 Für die drei Herangehensweisen wurde jeweils ein Iteratoren erstellt (siehe \cref{sec:proofofconcept:klassenstruktur:algorithmen} \nameref{sec:proofofconcept:klassenstruktur:algorithmen}) um die Geschwindigkeit zu vergleichen. Dazu wurde die Apriori Analyse auf allen Daten fünf mal ausgeführt und der Durchschnitt genommen.
 
@@ -471,7 +473,7 @@ Für die drei Herangehensweisen wurde jeweils ein Iteratoren erstellt (siehe \cr
 	\item Version 3, Daten aus Redis laden: 23.10 Sekunden
 \end{itemize}
 
-Die Variante mit dem Laden Zeile für Zeile ist mit der durchschnittlichen Zeit von 9.82 am schnellsten. 
+Die Variante mit dem Laden Zeile für Zeile ist mit der durchschnittlichen Zeit von 9.82 am schnellsten. Dies ist überraschend, da zu erwarten war dass auf die Daten schneller zugegriffen werden kann wenn sie im Zwischenspeicher gelagert werden. Vor allem das Resultat mit Redis war verblüffend, da sie doppelt so lange dauert, obwohl die Daten vorher schon in der Datenbank vorhanden sein müssen.
 
 \section{Externe Bibliotheken}
 \label{sec:proofofconcept:externebibliotheken}
@@ -567,6 +569,7 @@ Für die JavaScript Entwicklung wurde JQuery eingesetzt (\url{https://jquery.com
 Das Styling einer Webseite wird üblicherweise mit \gls{css} gemacht. Es gibt jedoch Erweiterungen dazu wie LESS oder SASS. In diesem Projekt wurde LESS eingesetzt (\url{http://lesscss.org/}). Dieses muss jedoch in \gls{css} umgewandelt werden wozu Grunt verwendet wurde. (\url{https://gruntjs.com/}).
 
 \subsection{Templating mit Twig}
+\label{sec:proofofconcept:externebibliotheken:twig}
 \gls{html} Templates werden benutzt um die Logik des Programmes von der Darstellung zu trennen (siehe \cref{sec:proofofconcept:architektur:mvc} \nameref{sec:proofofconcept:architektur:mvc}). Dazu wurde die \gls{php} Template Bibliothek Twig eingesetzt (\url{https://twig.sensiolabs.org/}).
 
 \subsection{UnitTests mit PHPUnit}
@@ -580,8 +583,13 @@ Eine Versionsverwaltung wird verwendet um Änderungen an Dateien aufzuzeichnen. 
 
 \subsection{InMemory Datenbank mit Redis}
 \label{sec:proofofconcept:externebibliotheken:redis}
-Normalerweise speichert eine Datenbank die Daten auf die Festplatte ab. Eine alternative Herangehensweise ist es, die Informationen im Kurzzeitspeicher zu behalten. Wenn dies eine Datenbank macht spricht man von InMemory. Eine solche wurde in der Arbeit mit Redis verwendet (\url{https://redis.io/})
+Normalerweise speichert eine Datenbank die Daten auf die Festplatte ab. Eine alternative Herangehensweise ist es, die Informationen im Kurzzeitspeicher zu behalten. Wenn dies eine Datenbank macht spricht man von einer InMemory Datenbank. Eine solche wurde in der Arbeit mit Redis verwendet (\url{https://redis.io/}).
 
+Vor der Ausführung des Programmes muss Redis gestartet und mit Daten befüllt werden, wozu ein Hilfsprogramm erstellt wurde (Code unter \url{https://github.com/soultemptation/bookinganalyzerimpl/blob/master/Services/FillRedis/fillredis.php}). Danach können die Analysen gestartet werden welche die Daten aus Redis auslesen. 
+
+Wird die Datenbank gestoppt speichert sie die Daten auf die Festplatte ab und lädt  sie von dort wenn Redis wieder gestartet wird. Dadurch müssen die Informationen nach dem Neustart nicht nochmals importiert werden.
+
+Eingesetzt wurde Redis für den Zugriff auf die Daten mittels Iteratoren (siehe \cref{sec:proofofconcept:performance:datenzugriff} \nameref{sec:proofofconcept:performance:datenzugriff}). Diese eignen sich wenn alle Elemente der Datenbasis gelesen werden müssen, was bei der Ausführung der Algorithmen nötig ist. Die KPrototype Analyse benötigt zu beginn jedoch zufällig ausgewählte Clusterzentren. Mit Iteratoren wäre der Zugriff langsam. Wenn z.B. das Element auf Zeile 2'000 benötigt würde, müssten zuerst die vorherigen 1'999 Einträge gelesen werden. Redis hingegen unterstützt den Zugriff über einen Identifikator, womit direkt auf eine Buchung zugegriffen werden kann. Aus diesem Grund verwendet der KPrototype Algorithmus eine Redis Datenbank.
 
 
 \section{UnitTests}
