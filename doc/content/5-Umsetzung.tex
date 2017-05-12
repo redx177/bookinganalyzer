@@ -181,16 +181,94 @@ Im \cref{sec:recherche:datenvorbereitung} wurde beschrieben, wie die Daten vorbe
 
 \section{Architektur}
 \label{sec:proofofconcept:architektur}
-Hier wird die Architektur des Programmes erläutert. Grundlegen wurde die Applikation nach dem \gls{mvc}-\gls{pattern} aufgebaut. Dies und die Strukturierung des Codes werden hier vorgestellt.
+Zuerst werden in diesem Abschnitt die wesentlichen Punkte aufgeführt, welche im \cref{sec:konzept} definiert wurden und Einfluss auf die Architektur genommen haben, und wie sie den Aufbau mitbestimmt haben. 
+Anschliessend wird anhand eines \gls{uml}-Paketdiagrammes die Architektur visualisiert.
 
-\subsection{MVC}
-\label{sec:proofofconcept:architektur:mvc}
-Mit dem \gls{mvc}-\gls{pattern} wird das Programm in die drei Komponenten Modell (Model), Präsentation (View) und Programmsteuerung (Controller) unterteilt. Ein Controller nimmt die Anfrage vom Browser entgegen und kreiert ein Datenmodel mit Hilfe einer Geschäftslogik. Diese Logik gibt ein Datenmodel zurück welches die Programmsteuerung an die Präsentation übergibt welche sie darstellt.
+\subsection{Anforderungen aus dem Konzept}
+\label{sec:proofofconcept:architektur:anforderungen}
+Nachfolgend sind die Punkte aus dem \cref{sec:konzept} aufgeführt welche den grundsätzlichen Aufbau der Umsetzung bestimmen.
 
-Aufgabaut ist das Programm nach dem \gls{mvc}-\gls{pattern}, welches den Code in drei Komponenten Modell (Model), Präsentation (View) und Programmsteuerung (Controller) unterteilt. Das Modell ist zuständig für die Geschäftslogik und die Bereitstellung der Daten. Für die Anzeigelogik wird die View verwendet. Sie definiert der Aufbau der Webseite wie sie dem Benutzer angezeigt wird. Der Controller schlussendlich bringt die anderen beiden Komponenten zusammen. Er nimmt die Anfrage des Users entgegen und definiert welche Geschäftslogik eingesetzt wird. Die Rückgabe gibt er schlussendlich an die Präsentation weiter für die Anzeige.
+\begin{itemize}
+	\item Ansichten: Es gibt vier Ansichten welche der Benutzer aufrufen kann.  Stammdaten einsehen, Attributanalyse durchführen, Attributanalyse mit Gruppierung durchführen und Einstellungen anpassen.
+	\item Datentypen der Stammdaten: Die Datenbasis besteht aus Daten welche verschiedene Datentypen annehmen können.
+	\item Algorithmen: Es gibt drei Algorithmen welche auf die Datenbasis angewendet werden können: Apriori, KPrototype und DBScan.
+	\item Filtrierung: Vor jeder Analyse kann die Datenbasis durch filter eingeschränkt werden.
+\end{itemize}
 
-%"`"'
-Im Programm welches für die Arbeit umgesetzt wurde ist die Programmsteuerung im Package "`Controllers"' definiert (siehe \cref{sec:proofofconcept:packagestruktur} \nameref{sec:proofofconcept:packagestruktur}). Für die Präsentation wurde die externe Bibliothek Twig verwendet (siehe \cref{sec:proofofconcept:externebibliotheken:twig} \nameref{sec:proofofconcept:externebibliotheken:twig}). Alle anderen Klassen und Packages gehören demnach ins Modell. Im \cref{sec:proofofconcept:packagestruktur} wird der Aufbau genauer erläutert.
+\subsubsection{Ansichten}
+\label{sec:proofofconcept:architektur:anforderungen:ansichten}
+Für die Darstellung der vier Ansichten wird eine Lösung angestrebt, welche die Ansicht von der Applikationslogik trennt. Dazu wird eine Templating Bibliothek für die Darstellung verwendet mit welcher die Ansichten generiert werden können. 
+
+Es wurden drei Bibliotheken evaluiert welche für die Erstellung der Ansichten verwendet werden können. Diese werden in den Kategorien Syntax, Funktionalität und Dokumention bewertet. Den ersten Punkt objektiv zu bewerten ist relativ schwierig. Es wurde versucht im Vergleich zu den anderen Kandidaten ein Urteil zu fällen wie verständlich die Templates zu lesen sind. Bei der Funktionalität wir der Funktionsumfang der einzelnen Bibliotheken miteinander verglichen. Die Dokumentation schlussendlich bewertet wie verständlich die Dokumentation zu lesen ist und wie tief sie reicht. Die Bewertungsskala reicht von 1 bis 9. 1-3 ist schlecht und beduetet dass der Punkt eine echtes Hindernis darstellt. 4-6 ist im Mittelfeld. Mit solch einer Benotung kann die Bibliothek eingesetzt werden, auch wenn Verbesserungen in dem Bereich erwünscht sind. 7-9 steht dafür, dass die Library in dem Bereich sehr gut ist im Vergleich mit den Konkurrenten
+\begin{table}[H] 
+	\caption{Vergleich verschiedener Templating Bibliotheken}
+	\centering
+	\rowcolors{1}{tablebodycolor}{tablerowcolor}
+	\label{fig:proofofconcept:architektur:anforderungen:ansichten:1}
+	\begin{tabular}{ | c | c | c | c | c | } 
+		\hline 		
+		\rowcolor{tableheadcolor}
+		\bfseries Name & \bfseries Syntax & \bfseries Funktionalität & \bfseries Dokumentation & \bfseries Durchschnitt \\ \hline 
+		
+		Blade & \cellcolor{red!25}3 & \cellcolor{green!25}9 & \cellcolor{green!25}7 & \cellcolor{yellow!25}6.3\\ \hline 
+		Mustache & \cellcolor{yellow!25}7 & \cellcolor{red!25}1 & \cellcolor{green!25}9 & \cellcolor{yellow!25}5.7\\ \hline 
+		Twig & \cellcolor{green!25}6 & \cellcolor{green!25}9 & \cellcolor{green!25}9 & \cellcolor{green!25}8 \\ \hline 
+	\end{tabular}
+\end{table}
+
+Blade (\url{https://laravel.com/docs/5.4/blade}) bietet eine herausragende Funktionalität an. Es werden die üblichen Befehle für die Ausgabe von Variablen, die Iteration über Listen und die IF/ELSE abfragen unterstützt. Zusätzlich können Grundgerüste erstellt werden welche später von einem anderen Template mit Daten befüllt werden. Dadurch kann in einer Datei der Grundaufbau der Seite definiert werden welche Bereiche definiert, welche später mit Inhalt befüllt werden. Dies fördert den modularen Aufbau massiv. Die Syntax jedoch ist sehr unleserlich. Die Verwendung von `Sections"' (siehe \url{https://laravel.com/docs/5.4/blade}) ist ein zentraler Bestandteil der Bibliothek aber die Verwendung ist schwer leserlich. Die Dokumentation schlussendlich ist sehr übersichtlich, jedoch sind einige detaillierteren Funktionalitäten ausgelassen worden.
+
+Mustache (\url{https://mustache.github.io}) ist eine Library welche in über 30 Programmiersprachen portiert wurde. Deshalb ist die Dokumentation dazu auch sehr detailliert und gut verständlich. An Funktionalität bietet Mustache jedoch nur die Ausgabe von Variablen, eine Funktion zum Iterieren und eine Überprüfung ob ein Wert "`null"' ist. Da sind die beiden Kontrahenten um einiges stärker. Die Syntax ist leserlich und einfach verständlich, unter anderem auch weil die Funktionalität sehr eingeschränkt ist.
+
+Twig (\url{https://twig.sensiolabs.org}) wurde inspieriert von Jinja, einer Templating Engine für die Programmiersprache Python. Die Syntax ist gut verständlich und sehr ähnlich zu jener von Mustache. Da jedoch die Funktionalität um einiges umfangreicher ausfällt wird auch die Verständlichkeit etwas beeinträchtigt. Wie gesagt die ist Funktionalität besser als bei Mustache, genauer gesagt ist sie hervorragend. Vergleichbar mit jener von Blade weshalb sie beide eine 9 erhalten. Im vergleich mit den anderen Kandidaten ist die Dokumentation am umfangreichsten und generell sehr verständlich.
+
+Fazit: Eingesetzt wird Twig, weil es eine herausragende Dokumentation und Funktionsumfang bietet, welche über einige Schwächen beim Syntax hinwegzutäuschen vermag. Mehr zur Umsetzung der Ansichten mit Twig kann im \cref{sec:proofofconcept:externebibliotheken:twig} nachgelesen werden.
+
+\subsubsection{Datentypen der Stammdaten}
+\label{sec:proofofconcept:architektur:anforderungen:datentypen}
+Bislang wurde von numerischen und kategorischen Attributen gesprochen. Dies ist ausreichend für die Definition der Algorithmen. Bei der Programmierung werden jedoch weitere Datentypen benötigt.
+
+\begin{table}[H] 
+	\caption{Datenbestand vor der Anwendung der Filterkriterien}
+	\centering
+	\rowcolors{1}{tablebodycolor}{tablerowcolor}
+	\label{fig:proofofconcept:architektur:anforderungen:datetypen:1}
+	\begin{tabular}{ | c | c | c | c | } 
+		\hline 		
+		\rowcolor{tableheadcolor}
+		\bfseries Datentyp & Beschreibung & Wertebereich/Genauigkeit  \\ \hline 
+		
+		Integer & Numerische Werte & $-2^{63}-1$ bis $+2^{63}-1$ \\ \hline 
+		String & Texte & $2^{31}-1$ bytes (2GB) \\ \hline 
+		Float & Fliesskomma Zahlen & $1.11^{-16}$ \\ \hline 
+		Boolean & Wahr oder falsch & true/false \\ \hline  
+		Distance & Objekt vom Typ Distance & Close/[leer] \\ \hline 
+		Price & Objekt vom Typ Price & Luxury/Budget \\ \hline 		
+	\end{tabular}
+\end{table}
+
+Die Algorithmen behandelt Integer und Float als numerische-, und Boolean, Distance und Price als kategorische Attribute. Das Programm benötigt jedoch eine Unterscheidung dieser Typen da sie in verschiedene Datentypen abgelegt werden müssen. Zusätzlich werden noch Texte benötigt, welche zwar nicht analysiert, jedoch für die Filtrierung notwendig sind.
+
+In der Umsetzung sind die Datentypen im Package "`Models"' abgelegt. Siehe \cref{sec:proofofconcept:packagestruktur} \nameref{sec:proofofconcept:packagestruktur} für eine Übersicht oder \cref{sec:proofofconcept:klassenstruktur:models} \nameref{sec:proofofconcept:klassenstruktur:models} für eine detaillierte Aufstellung.
+
+\subsubsection{Algorithmen}
+\label{sec:proofofconcept:architektur:anforderungen:algorithmen}
+Den grössten Einfluss auf die Architektur haben die Algorithmen. Eine Webanfrage hat normalerweise eine obere Laufzeitgrenze von 30 Sekunden. Bis dann muss der Server eine Antwort liefern, sonst wird dem Benutzer eine Fehlermeldung angezeigt und der Prozess auf dem Server gestoppt. Da die Analyse, je nach Datenmenge, einige Minuten bis Stunden dauern kann musste dafür eine Lösung gefunden werden. 
+
+Umgangen wurde diese Problematik durch den Einsatz von Hintergrundprozessen. Wenn der User auf einer Ansicht die Filter ausfüllt und den Analyseprozess startet wird ein Prozess auf dem Server gestartet und dem Benutzer eine Seite angezeigt mit der Info, dass die Analyse gestartet wurde. Der Prozess läuft dann im Hintergrund weiter und sendet dem Benutzer regelmässige Aktualisierungen über den Vorgang der Analyse. Mehr dazu im \cref{sec:proofofconcept:kommunikationsablauf} \nameref{sec:proofofconcept:kommunikationsablauf}.
+
+\subsubsection{Filtrierung}
+\label{sec:proofofconcept:architektur:anforderungen:filtrierung}
+
+
+%\subsection{MVC}
+%\label{sec:proofofconcept:architektur:mvc}
+%Mit dem \gls{mvc}-\gls{pattern} wird das Programm in die drei Komponenten Modell (Model), Präsentation (View) und Programmsteuerung (Controller) unterteilt. Ein Controller nimmt die Anfrage vom Browser entgegen und kreiert ein Datenmodel mit Hilfe einer Geschäftslogik. Diese Logik gibt ein Datenmodel zurück welches die Programmsteuerung an die Präsentation übergibt welche sie darstellt.
+%
+%Aufgabaut ist das Programm nach dem \gls{mvc}-\gls{pattern}, welches den Code in drei Komponenten Modell (Model), Präsentation (View) und Programmsteuerung (Controller) unterteilt. Das Modell ist zuständig für die Geschäftslogik und die Bereitstellung der Daten. Für die Anzeigelogik wird die View verwendet. Sie definiert der Aufbau der Webseite wie sie dem Benutzer angezeigt wird. Der Controller schlussendlich bringt die anderen beiden Komponenten zusammen. Er nimmt die Anfrage des Users entgegen und definiert welche Geschäftslogik eingesetzt wird. Die Rückgabe gibt er schlussendlich an die Präsentation weiter für die Anzeige.
+%
+
+%Im Programm welches für die Arbeit umgesetzt wurde ist die Programmsteuerung im Package "`Controllers"' definiert (siehe \cref{sec:proofofconcept:packagestruktur} \nameref{sec:proofofconcept:packagestruktur}). Für die Präsentation wurde die externe Bibliothek Twig verwendet (siehe \cref{sec:proofofconcept:externebibliotheken:twig} \nameref{sec:proofofconcept:externebibliotheken:twig}). Alle anderen Klassen und Packages gehören demnach ins Modell. Im \cref{sec:proofofconcept:packagestruktur} wird der Aufbau genauer erläutert.
 
 \subsection{Package-Struktur}
 \label{sec:proofofconcept:packagestruktur}
@@ -217,7 +295,7 @@ Die Struktur der Packages ist so ausgelegt, dass die Abhängigkeiten von oben na
 
 \subsection{Klassenstruktur}
 \label{sec:proofofconcept:klassenstruktur}
-Um den Aufbau der Lösung zu erklären werden in diesem Abschnitt die Klassen sowie deren Abhängigkeiten gezeigt. Verwendet werden \gls{uml} Klassendiagramme für die Darstellung. Diese wurden jedoch in den \cref{app:klassendiagram} verschoben da sie wegen ihrer Grösse die Übersichtlichkeit erschweren.
+Um den Aufbau der Lösung zu erklären werden die in diesem Abschnitt die Klassen sowie deren Abhängigkeiten gezeigt. Verwendet werden \gls{uml} Klassendiagramme für die Darstellung. Diese wurden jedoch in den \cref{app:klassendiagram} verschoben da sie wegen ihrer Grösse die Übersichtlichkeit erschweren.
 
 Einige Klassen sind grün eingefärbt und stellen den Ausgangspunkte dar, von welchen die Erklärungen beginnen. Rot hinterlegt sind jene Klassen die von einer externen Bibliothek bereitgestellt werden.
 
@@ -364,7 +442,7 @@ Zuerst wird der Kommunikationsablauf zwischen dem Benutzer, dem Server und der H
 
 \subsection{Kommunikationsablauf}
 \label{sec:proofofconcept:kommunikationsablauf}
-In \cref{fig:proofofconcept:kommunikationsablauf:1} wird der Kommunikationsablauf aufgezeigt, welcher zwischen dem Webserver und dem Browser des Benutzers stattfindet. Sobald der Benutzer eine Analyse startet wird eine Anfrage an den Server gestellt. Dieser erstellt einen Hintergrundprozess welcher die Analyse durchführt und gibt danach direkt eine Antwort an den User zurück. 
+In \cref{fig:proofofconcept:kommunikationsablauf:1} wird der Kommunikationsablauf aufgezeigt, welcher zwischen dem Webserver und dem Browser des Benutzers stattfindet. Massgeblich beeinflusst wurde der Ablauf durch die Algorithmen (siehe \cref{sec:proofofconcept:architektur:anforderungen:algorithmen} \nameref{sec:proofofconcept:architektur:anforderungen:algorithmen}). Sobald der Benutzer eine Analyse startet wird eine Anfrage an den Server gestellt. Dieser erstellt einen Hintergrundprozess welcher die Analyse durchführt und gibt danach direkt eine Antwort an den User zurück. 
 
 Der Hintergrundprozess führt die Analyse durch und schreibt periodisch einen Zwischenstand im \gls{html}-Format in eine Datei.
 
@@ -377,7 +455,7 @@ Sobald die Analyse vom Server angestossen wurde kann dieser eine Rückmeldung zu
 	\label{fig:proofofconcept:kommunikationsablauf:1}
 \end{figure}
 
-Eine Webanfrage hat normalerweise eine obere Laufzeitgrenze von 30 Sekunden. Bis dann muss der Server eine Antwort liefern, sonst wird dem Benutzer eine Fehlermeldung angezeigt und der Prozess auf dem Server gestoppt. Da die Analyse, je nach Datenmenge, einige Minuten bis Stunden dauern kann musste dafür eine Lösung gefunden werden. Dank des Hintergrundprozesses kann der Server rasch eine Antwort liefern, der Browser dem Benutzer eine Meldung anzeigen und die Analyse länger als 30 Sekunden laufen.
+
 
 \subsection{Programmablauf}
 Im \cref{sec:proofofconcept:kommunikationsablauf} wurde der Ablauf zwischen dem Benutzer und dem Server illustriert. Hier werden die Abläufe auf dem Webserver sowie der Hintergrundprozesse erläutert.
@@ -395,7 +473,7 @@ Der Webserver nimmt einen Request des Users entgegen und verarbeitet diesen. Der
 
 Aufgerufen wird stets die Datei "`index.php"'. Diese Initialisiert zuerst den dependency injection Container (siehe \cref{sec:proofofconcept:dependency-injection} \nameref{sec:proofofconcept:dependency-injection}) und zwischenspeichert die Datenquelle für die vom Benutzer übergebenen Filterkriterien (siehe \cref{sec:proofofconcept:performance:caching} \nameref{sec:proofofconcept:performance:caching}).
 
-Danach wird der Controller aufgerufen welcher den Request des Benutzers behandelt (siehe \cref{sec:proofofconcept:architektur:mvc} \nameref{sec:proofofconcept:architektur:mvc}). Der Controller führt die Geschäftslogik aus (im obigen Beispiel ist dies die Klasse "`BookingsProvider"') und übergibt das Resultat an die View welche für die Darstellung der Daten zuständig ist. Der Rückgabewert wird dem Benutzer im Browser angezeigt.
+Danach wird der Controller aufgerufen welcher den Request des Benutzers behandelt. Der Controller führt die Geschäftslogik aus (im obigen Beispiel ist dies die Klasse "`BookingsProvider"') und übergibt das Resultat an die View welche für die Darstellung der Daten zuständig ist. Der Rückgabewert wird dem Benutzer im Browser angezeigt.
 
 Dieser Ablauf ist gültig für die "`Explore"'-Ansicht, auf welcher der User die Buchungen einsehen kann. Wenn ein Algorithmus ausgeführt werden soll fällt die Geschäftslogik weg und es wird stattdessen ein Hintergrundprozess gestartet, welcher diese ausführt.
 
@@ -436,7 +514,7 @@ Der Ablauf der Apriori-Analyse wird in \cref{fig:proofofconcept:architektur:hint
 
 Der Anfang mit dem Erstellen des "`Container"' und dem Caching ist gleich wie in \cref{fig:proofofconcept:architektur:webserver:1}. Das "`apriori.php"' Programm ruft danach den Apriori-Algorithmus auf welcher sein Resultat periodisch in eine Datei schreibt (siehe \cref{sec:proofofconcept:kommunikationsablauf} \nameref{sec:proofofconcept:kommunikationsablauf}). Dies ermöglicht dem Algorithmus regelmässig einen Zwischenstand abzuspeichern welcher dem Benutzer angezeigt werden kann.
 
-\paragraph{Ablauf der Clustering-Programmen}
+\paragraph{Ablauf des Clustering-Programmes}
 Der Ablauf der Clustering-Analysen ist identisch zu jenem des Apriori-Algorithmus, mit zwei Ausnahmen. Zum einen wird vor dem "`AprioriAlgorithm"' der "`KPrototypeAlgorithm"' ausgeführt wird, welcher ein "`KPrototypeResult"' zurück liefert. 
 Zum anderen wird dem "`AprioriAlgorithm"' das Resultat vom KPrototype als Parameter übergeben. Dadurch ist em dem "`KPrototypeAlgorithm"' möglich, nur die Elemente eines Clusters zu analysieren und nicht die gesamte Datenmenge. 
 Es wurde bewusst entschieden, dass der "`AprioriAlgorithm"' aus der kprototype.php Datei hinaus aufgerufen wird. Dadurch kann zukünftig dieser Algorithmus einfach durch eine Alternative ausgetauscht werden.
@@ -572,6 +650,24 @@ Das Styling einer Webseite wird üblicherweise mit \gls{css} gemacht. Es gibt je
 \subsection{Templating mit Twig}
 \label{sec:proofofconcept:externebibliotheken:twig}
 \gls{html} Templates werden benutzt um die Logik des Programmes von der Darstellung zu trennen (siehe \cref{sec:proofofconcept:architektur:mvc} \nameref{sec:proofofconcept:architektur:mvc}). Dazu wurde die \gls{php} Template Bibliothek Twig eingesetzt (\url{https://twig.sensiolabs.org/}).
+
+%"`"'
+In der Umsetzung sind die Templates von Twig im Ordner "`Templates"' hinterlegt. Nachfolgend werden die Templates kurz erklärt.
+\begin{itemize}
+	\item base.twig: Beinhaltet das Grundgerüst der Webseite. Es bietet Platzhalter, welche durch andere Templates befüllt werden können (dazu mehr unter \url{https://twig.sensiolabs.org/doc/2.x/tags/block.html}).
+	\item head.twig: Gibt den Kopfbereich der \gls{html}-Datei aus, welche zusätzliche Daten zur Webseite beinhaltet, die nicht zur Darstellung benötigt werden. Zum Beispiel den Namen der Seite, wer die Seite erstellt hat, welche Bildschirmgrössen unterstützt werden, etc.
+	\item footer.twig: Gibt den Fussbereich der Seite aus. 
+	\item navigation.twig: Gibt die Navigation aus, mit welcher zwischen den einzelnen Ansichten gewechselt werden kann.
+	\item explore.twig: Stellt die Ansicht für das einsehen der Stammdaten zusammen. 
+	\item attributanalysis.twig \& attributanalysisWithGrouping.twig: Diese Templates stellen die Grundgerüste für die Attributanalyse und die Attributanalyse mit Groupierung dar. Sie beinhalten die Filter sowie einen Platzhalter welcher durch die Services befüllt werden kann.
+	\item settings.twig: Stellt die Ansicht für das anpassen der Einstellungen dar. 
+	\item filters.twig: Gibt das Formular für die Filtrierung der Stammdaten aus.
+	\item bookingListing.twig: Gibt die Stammdaten als Tabelle aus. Verwendet wird dies für das einsehen der Stammdaten.
+	\item apriori.twig: Das Resultat oder der Zwischenstand der Apriori kann mit dem apriori.twig Template erstellt werden.
+	\item kprototypeClusters: Gibt das Resultat oder den Zwischenstand des KPrototype Clusterings aus.
+	\item dbscanClusters: Gibt das Resultat oder den Zwischenstand des DBScan Clusters aus.
+	\item histogramsAsTable.twig: Dies gibt die Resultate des Apriori Algorithmus als Tabelle aus. 
+\end{itemize}
 
 \subsection{UnitTests mit PHPUnit}
 \label{sec:proofofconcept:externebibliotheken:phpunit}
