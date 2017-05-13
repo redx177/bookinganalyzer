@@ -35,7 +35,7 @@ In der \cref{fig:anfoderungsanalyse:anwendungsfaelle:1} werden die Anwendungsfä
 	\RawFloats
 	\centering
 	\includegraphics[width=0.7\textwidth]{images/usecase}
-	\caption{density-reachable vs density-connected}
+	\caption{Anwendungsfälle}
 	\label{fig:anfoderungsanalyse:anwendungsfaelle:1}
 \end{figure}
 
@@ -45,7 +45,7 @@ In der \cref{fig:anfoderungsanalyse:anwendungsfaelle:1} werden die Anwendungsfä
 
 \paragraph{Analyse durchführen} Es sollte möglich sein, einen oder mehrere Algorithmen auf die Daten anzuwenden und so eine Analyse durchzuführen. Die Daten sollen initial eingeschränkt werden können um nur eine Untermenge zu analysieren.
 
-\paragraph{Änderungswünsche anbringen} Wenn die Daten oder die Algorithmen nicht korrekt sind kann dies über Änderungswünsche eingebracht werden. Diese können die Einschränkung der Daten sowie die Analyse betreffen. Sie müssen bewertet und wenn möglich umgesetzt werden.
+\paragraph{Algorithmen konfigurieren} Der Benutzer soll die Möglichkeit besitzen, die Algorithmen zu konfigurieren. Deshalb soll eine Ansicht erstellt werden auf welcher vordefinierte Einstellungen angepasst werden können.
 
 \subsection{Ablauf}
 \label{sec:anforderungsanalyse:ablauf}
@@ -164,7 +164,7 @@ Nachfolgend werden die funktionale Anforderungen an das Programm gestellt.
 	\caption{FA6: Mixed data types}
 	\centering
 	\rowcolors{1}{tablebodycolor}{tablerowcolor}
-	\label{fig:anforderungsanalyse:nichtfunktionaleanforderung:fa6}
+	\label{fig:anforderungsanalyse:funktionaleanforderung:fa6}
 	\begin{tabular}{ | l | L{10cm} | } 
 		\hline 
 		\rowcolor{tableheadcolor}
@@ -180,13 +180,47 @@ Nachfolgend werden die funktionale Anforderungen an das Programm gestellt.
 	\caption{FA7: Selbständigkeit}
 	\centering
 	\rowcolors{1}{tablebodycolor}{tablerowcolor}
-	\label{fig:anforderungsanalyse:nichtfunktionaleanforderung:fa7}
+	\label{fig:anforderungsanalyse:funktionaleanforderung:fa7}
 	\begin{tabular}{ | l | L{10cm} | } 
 		\hline 
 		\rowcolor{tableheadcolor}
 		\multicolumn{2}{|l|}{\bfseries ID: FA7} \\ \hline 
 		Titel & Selbständigkeit \\ \hline 
-		Beschreibung & Die Analyse der Attribute sollte selbständig Muster erkennen können. Es wird keine vorherige Eingabe vom Benutzer benötigt. Siehe \gls{unsupervisedlearning} im Glossar. \\ \hline 
+		Beschreibung & Die Analyse der Attribute sollte selbständig Muster erkennen können. Es wird keine vorherige Eingabe vom Benutzer benötigt (ausser der Einschränkung der Daten). Siehe \gls{unsupervisedlearning} im Glossar. \\ \hline 
+		Abhängigkeit & \\ \hline 
+		Status & Offen \\ \hline 
+	\end{tabular}
+\end{table}
+
+\begin{table}[H] 
+	\caption{FA8: Algorithmen konfigurieren}
+	\centering
+	\rowcolors{1}{tablebodycolor}{tablerowcolor}
+	\label{fig:anforderungsanalyse:nichtfunktionaleanforderung:fa8}
+	\begin{tabular}{ | l | L{10cm} | } 
+		\hline 
+		\rowcolor{tableheadcolor}
+		\multicolumn{2}{|l|}{\bfseries ID: FA8} \\ \hline 
+		Titel & Algorithmen konfigurieren \\ \hline 
+		Beschreibung & Der Benutzer soll die Möglichkeit besitzen, die Algorithmen zu konfigurieren. Deshalb sollen alle Parameter welche von den Algorithmen vorausgesetzt werden (siehe \cref{sec:recherche:algorithmen} \nameref{sec:recherche:algorithmen}) sowie das Gewicht zwischen numerischen und kategorischen Attributen der Distanzmessung (siehe \cref{sec:konzept:anwendungderalgorithmen:distanzmessung} \nameref{sec:konzept:anwendungderalgorithmen:distanzmessung}) angepasst werden können.
+		Dies sind: 
+		\begin{itemize}
+			\item Apriori:
+			\begin{itemize}
+				\item Mindestsupport $minsup$
+			\end{itemize}
+			\item KPrototype:
+			\begin{itemize}
+				\item Anzahl Clusters $k$
+			\end{itemize}
+			\item DBScan:
+			\begin{itemize}
+				\item Radius $\epsilon$
+				\item Minimum Anzahl an Instanzen $minpts$
+			\end{itemize}
+			\item Gewicht zwischen numerischen und kategorischen Attributen $\gamma$
+		\end{itemize}
+		 \\ \hline 
 		Abhängigkeit & \\ \hline 
 		Status & Offen \\ \hline 
 	\end{tabular}

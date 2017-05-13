@@ -17,7 +17,7 @@ Mittels Association rule learning (siehe \cref{sec:recherche:dataminingtechniken
 
 \subsubsection{Classification}
 \label{sec:konzept:disziplinauswahl:classification}
-Bei der Classification handelt es sich um ein \gls{supervisedlearning} (siehe \cref{sec:recherche:dataminingtechniken:disziplinen:classification} \nameref{sec:recherche:dataminingtechniken:disziplinen:classification}). Deshalb sind vorab Klassen zu definieren welche den Objekten zugewiesen werden. Diese Informationen sind jedoch noch nicht vorhanden, weshalb in der Anforderung \nameref{fig:anforderungsanalyse:nichtfunktionaleanforderung:fa7} ein \gls{unsupervisedlearning} Algorithmus vorausgesetzt wurde. Deshalb eignet sich die Classification für diese Aufgabenstellung nicht.
+Bei der Classification handelt es sich um ein \gls{supervisedlearning} (siehe \cref{sec:recherche:dataminingtechniken:disziplinen:classification} \nameref{sec:recherche:dataminingtechniken:disziplinen:classification}). Deshalb sind vorab Klassen zu definieren welche den Objekten zugewiesen werden. Diese Informationen sind jedoch noch nicht vorhanden, weshalb in der Anforderung \nameref{fig:anforderungsanalyse:funktionaleanforderung:fa7} ein \gls{unsupervisedlearning} Algorithmus vorausgesetzt wurde. Deshalb eignet sich die Classification für diese Aufgabenstellung nicht.
 
 \subsubsection{Lineare Regression}
 \label{sec:konzept:disziplinauswahl:regression}
@@ -94,7 +94,7 @@ d(I_i, I_j) = \sum_{k=1}^{m} (A^n_{ik} - A^n_{jk})^2 + \gamma \sum_{k=1}^{m} \de
 \end{equation}
 
 $A^n_{ik}$ und $A^c_{ik}$ stehen für die numerischen ($A^n$) beziehungsweise kategorischen ($A^c$) Attribute $k$ der Instanz $i$. 
-$\gamma$ ist das Gewicht mit welcher die numerischen und kategorischen Daten verglichen werden.
+$\gamma$ ist das Gewicht mit welcher die numerischen und kategorischen Attribute verglichen werden.
 $\delta$ ist definiert als:
 
 \begin{equation} \label{eq:recherche:clusteranalysis:3}
@@ -449,6 +449,16 @@ Der dritte Reiter führt zur Analyse mit den Clustering Algorithmen k-prototypes
 	\label{fig:konzept:mockups:clustering}
 \end{figure}
 
+Der letzte Mockup zeigt die Ansicht in welcher die Einstellungen des Programmes angepasst werden können. Dabei handelt es sich um ein Formular in welchem jedes Feld eine Einstellungsmöglichkeit darstellt. Zu jedem Wert wird es eine Beschreibung geben damit der Benutzer verstehen kann worum es sich bei dieser Einstellung handelt.
+
+\begin{figure}[H]
+	\RawFloats
+	\centering
+	\includegraphics[width=1\textwidth]{images/wireframe-settings}
+	\caption{Mockup für die Konfiguration der Algorithmen (FA8)}
+	\label{fig:konzept:mockups:settings}
+\end{figure}
+
 \section{Testfälle}
 \label{sec:recherche:testcases}
 
@@ -497,105 +507,155 @@ Für die nachfolgenden Erwartungen werden nachfolgende Parameter vorausgesetzt. 
 
 \paragraph{TC1, Datenquelle \cref{app:testdatenquellen:1}:} Überprüft ob 2 Distanzattribute korrekt aufsummiert und miteinander zu einer 2er Menge kombiniert werden. 
 
-Dateneinschränkung:
-\begin{itemize}
-	\item Keine
-\end{itemize}
-
-Erwartetes Resultat:
-\begin{itemize}
-	\item 1er-Attributmenge:
-	\begin{itemize}
-		\item Nahe am Wasser: 8
-		\item Nahe am Meer: 8
-	\end{itemize}
-	\item 2er-Attributmenge:
-	\begin{itemize}
-		\item Nahe am Wasser, Nahe am Meer: 8
-	\end{itemize}
-\end{itemize}
+\begin{table}[H] 
+	\caption{TC1}
+	\centering
+	%\rowcolors{1}{tablebodycolor}{tablerowcolor}
+	\label{fig:recherche:testcases:1}
+	\begin{tabular}{ | l | l | l | } 
+		\hline 
+		\rowcolor{tableheadcolor}
+		\multicolumn{3}{|l|}{\bfseries ID: TC1} \\ \hline 
+		Datebquelle & \multicolumn{2}{|l|}{\cref{app:testdatenquellen:1}} \\ \hline 
+		Dateneinschränkung & \multicolumn{2}{|l|}{Keine} \\ \hline 
+		
+		\rowcolor{tableheadcolor}
+		\multicolumn{3}{|l|}{\bfseries Erwartetes Resultat} \\ \hline 
+		& Attributmenge & Anzahl \\ \hline 
+		
+		1er-Attributmenge & \tabitem Nahe am Wasser & 8 \\ \cline{2-3} 
+		& \tabitem Nahe am Meer & 8 \\ \hline 
+		
+		2er-Attributmenge & \tabitem Nahe am Wasser & 8 \\
+		& \tabitem Nahe am Meer & \\ \hline
+	\end{tabular}
+\end{table}
 
 \paragraph{TC2, Datenquelle \cref{app:testdatenquellen:2}:} Überprüft ob 2 Binärattribute korrekt aufsummiert und miteinander zu einer 2er Menge kombiniert werden. 
 
-Dateneinschränkung:
-\begin{itemize}
-	\item Keine
-\end{itemize}
-
-Erwartetes Resultat:
-\begin{itemize}
-	\item 1er-Attributmenge:
-	\begin{itemize}
-		\item Haustiere erlaubt: 8
-		\item Aircondition vorhanden: 8
-	\end{itemize}
-	\item 2er-Attributmenge:
-	\begin{itemize}
-		\item Haustiere erlaubt, Aircondition vorhanden: 8
-	\end{itemize}
-\end{itemize}
+\begin{table}[H] 
+	\caption{TC2}
+	\centering
+	\label{fig:recherche:testcases:2}
+	\begin{tabular}{ | l | l | l | } 
+		\hline 
+		\rowcolor{tableheadcolor}
+		\multicolumn{3}{|l|}{\bfseries ID: TC2} \\ \hline 
+		Datebquelle & \multicolumn{2}{|l|}{\cref{app:testdatenquellen:2}} \\ \hline 
+		Dateneinschränkung & \multicolumn{2}{|l|}{Keine} \\ \hline 
+		
+		\rowcolor{tableheadcolor}
+		\multicolumn{3}{|l|}{\bfseries Erwartetes Resultat} \\ \hline 
+		& Attributmenge & Anzahl \\ \hline 
+		
+		1er-Attributmenge & \tabitem Haustiere erlaubt & 8 \\ \cline{2-3} 
+		& \tabitem Aircondition vorhanden & 8 \\ \hline 
+		
+		2er-Attributmenge & \tabitem Haustiere erlaubt & 8 \\
+		& \tabitem Aircondition vorhanden & \\ \hline
+	\end{tabular}
+\end{table}
 
 \paragraph{TC3, Datenquelle \cref{app:testdatenquellen:3}:} Überprüft ob 2 numerische Attribute korrekt aufsummiert und miteinander zu einer 2er Menge kombiniert werden. 
 
-Dateneinschränkung:
-\begin{itemize}
-	\item Keine
-\end{itemize}
 
-Erwartetes Resultat:
-\begin{itemize}
-	\item 1er-Attributmenge:
-	\begin{itemize}
-		\item Anzahl Zimmer=3: 9
-		\item Anzahl Schlafzimmer=2: 9
-	\end{itemize}
-	\item 2er-Attributmenge:
-	\begin{itemize}
-		\item Anzahl Zimmer=3, Anzahl Schlafzimmer=2: 9
-	\end{itemize}
-\end{itemize}
+\begin{table}[H] 
+	\caption{TC3}
+	\centering
+	\label{fig:recherche:testcases:3}
+	\begin{tabular}{ | l | l | l | } 
+		\hline 
+		\rowcolor{tableheadcolor}
+		\multicolumn{3}{|l|}{\bfseries ID: TC3} \\ \hline 
+		Datebquelle & \multicolumn{2}{|l|}{\cref{app:testdatenquellen:3}} \\ \hline 
+		Dateneinschränkung & \multicolumn{2}{|l|}{Keine} \\ \hline 
+		
+		\rowcolor{tableheadcolor}
+		\multicolumn{3}{|l|}{\bfseries Erwartetes Resultat} \\ \hline 
+		& Attributmenge & Anzahl \\ \hline 
+		
+		1er-Attributmenge & \tabitem Anzahl Zimmer=3 & 9 \\ \cline{2-3} 
+		& \tabitem Anzahl Schlafzimmer=2 & 9 \\ \hline 
+		
+		2er-Attributmenge & \tabitem Anzahl Zimmer=3 & 9 \\
+		& \tabitem Anzahl Schlafzimmer=2 & \\ \hline
+	\end{tabular}
+\end{table}
 
 \paragraph{TC4, Datenquelle \cref{app:testdatenquellen:4}:} Überprüft ob 1 numerisches und ein Binärattribut korrekt aufsummiert und miteinander zu einer 2er Menge kombiniert werden.
 
-Dateneinschränkung:
-\begin{itemize}
-	\item Keine
-\end{itemize}
-
-Erwartetes Resultat:
-\begin{itemize}
-	\item 1er-Attributmenge:
-	\begin{itemize}
-		\item Haustiere erlaubt: 8
-		\item Anzahl Schlafzimmer=3: 9
-	\end{itemize}
-	\item 2er-Attributmenge:
-	\begin{itemize}
-		\item Haustiere erlaubt, Anzahl Schlafzimmer=3: 8
-	\end{itemize}
-\end{itemize}
+\begin{table}[H] 
+	\caption{TC4}
+	\centering
+	\label{fig:recherche:testcases:4}
+	\begin{tabular}{ | l | l | l | } 
+		\hline 
+		\rowcolor{tableheadcolor}
+		\multicolumn{3}{|l|}{\bfseries ID: TC4} \\ \hline 
+		Datebquelle & \multicolumn{2}{|l|}{\cref{app:testdatenquellen:4}} \\ \hline 
+		Dateneinschränkung & \multicolumn{2}{|l|}{Keine} \\ \hline 
+		
+		\rowcolor{tableheadcolor}
+		\multicolumn{3}{|l|}{\bfseries Erwartetes Resultat} \\ \hline 
+		& Attributmenge & Anzahl \\ \hline 
+		
+		1er-Attributmenge & \tabitem Haustiere erlaubt & 8 \\ \cline{2-3} 
+		& \tabitem Anzahl Schlafzimmer=3 & 9 \\ \hline 
+		
+		2er-Attributmenge & \tabitem Haustiere erlaubt & 8 \\
+		& \tabitem Anzahl Schlafzimmer=3 & \\ \hline
+	\end{tabular}
+\end{table}
 
 \paragraph{TC5, Datenquelle \cref{app:testdatenquellen:5}:} Überprüft ob 2 Distanzattribute korrekt aufsummiert und miteinander zu einer 2er Menge kombiniert werden unter der Anwendung einer Dateneinschränkung eines binären Attributes. 
 
-Dateneinschränkung:
-\begin{itemize}
-	\item Haustiere erlaubt
-\end{itemize}
-
-Erwartetes Resultat:
-\begin{itemize}
-	\item 1er-Attributmenge:
-	\begin{itemize}
-		\item Nahe am Wasser: 4
-		\item Nahe am Meer: 5
-	\end{itemize}
-	\item 2er-Attributmenge:
-	\begin{itemize}
-		\item Nahe am Wasser, Nahe am Meer: 4
-	\end{itemize}
-\end{itemize}
+\begin{table}[H] 
+	\caption{TC5}
+	\centering
+	\label{fig:recherche:testcases:5}
+	\begin{tabular}{ | l | l | l | } 
+		\hline 
+		\rowcolor{tableheadcolor}
+		\multicolumn{3}{|l|}{\bfseries ID: TC5} \\ \hline 
+		Datebquelle & \multicolumn{2}{|l|}{\cref{app:testdatenquellen:5}} \\ \hline 
+		Dateneinschränkung & \multicolumn{2}{|l|}{Haustiere erlaubt} \\ \hline 
+		
+		\rowcolor{tableheadcolor}
+		\multicolumn{3}{|l|}{\bfseries Erwartetes Resultat} \\ \hline 
+		& Attributmenge & Anzahl \\ \hline 
+		
+		1er-Attributmenge & \tabitem Nahe am Wasser & 4 \\ \cline{2-3} 
+		& \tabitem Nahe am Meer & 5 \\ \hline 
+		
+		2er-Attributmenge & \tabitem Nahe am Wasser & 4 \\
+		& \tabitem Nahe am Meer & \\ \hline
+	\end{tabular}
+\end{table}
 
 \paragraph{TC6, Datenquelle \cref{app:testdatenquellen:6}:} Überprüft ob 2 Distanzattribute korrekt aufsummiert und miteinander zu einer 2er Menge kombiniert werden unter der Anwendung einer Dateneinschränkung eines Distanzattributes. 
+
+\begin{table}[H] 
+	\caption{TC6}
+	\centering
+	\label{fig:recherche:testcases:6}
+	\begin{tabular}{ | l | l | l | } 
+		\hline 
+		\rowcolor{tableheadcolor}
+		\multicolumn{3}{|l|}{\bfseries ID: TC6} \\ \hline 
+		Datebquelle & \multicolumn{2}{|l|}{\cref{app:testdatenquellen:6}} \\ \hline 
+		Dateneinschränkung & \multicolumn{2}{|l|}{Nahe am ÖV (öffentlicher Verkehr)} \\ \hline 
+		
+		\rowcolor{tableheadcolor}
+		\multicolumn{3}{|l|}{\bfseries Erwartetes Resultat} \\ \hline 
+		& Attributmenge & Anzahl \\ \hline 
+		
+		1er-Attributmenge & \tabitem Nahe am Wasser & 3 \\ \cline{2-3} 
+		& \tabitem Nahe am Meer & 4 \\ \hline 
+		
+		2er-Attributmenge & \tabitem Nahe am Wasser & 3 \\
+		& \tabitem Nahe am Meer & \\ \hline
+	\end{tabular}
+\end{table}
 
 Dateneinschränkung:
 \begin{itemize}
@@ -617,205 +677,259 @@ Erwartetes Resultat:
 
 \paragraph{TC7, Datenquelle \cref{app:testdatenquellen:7}:} Überprüft ob 2 Distanzattribute korrekt aufsummiert und miteinander zu einer 2er Menge kombiniert werden unter der Anwendung einer Dateneinschränkung eines numerischen Attributes. 
 
-Dateneinschränkung:
-\begin{itemize}
-	\item Anzahl Zimmer=3
-\end{itemize}
-
-Erwartetes Resultat:
-\begin{itemize}
-	\item 1er-Attributmenge:
-	\begin{itemize}
-		\item Nahe am Wasser: 5
-		\item Nahe am Meer: 3
-	\end{itemize}
-	\item 2er-Attributmenge:
-	\begin{itemize}
-		\item Nahe am Wasser, Nahe am Meer: 3
-	\end{itemize}
-\end{itemize}
+\begin{table}[H] 
+	\caption{TC7}
+	\centering
+	\label{fig:recherche:testcases:7}
+	\begin{tabular}{ | l | l | l | } 
+		\hline 
+		\rowcolor{tableheadcolor}
+		\multicolumn{3}{|l|}{\bfseries ID: TC7} \\ \hline 
+		Datebquelle & \multicolumn{2}{|l|}{\cref{app:testdatenquellen:7}} \\ \hline 
+		Dateneinschränkung & \multicolumn{2}{|l|}{Anzahl Zimmer=3} \\ \hline 
+		
+		\rowcolor{tableheadcolor}
+		\multicolumn{3}{|l|}{\bfseries Erwartetes Resultat} \\ \hline 
+		& Attributmenge & Anzahl \\ \hline 
+		
+		1er-Attributmenge & \tabitem Nahe am Wasser & 5 \\ \cline{2-3} 
+		& \tabitem Nahe am Meer & 3 \\ \hline 
+		
+		2er-Attributmenge & \tabitem Nahe am Wasser & 3 \\
+		& \tabitem Nahe am Meer & \\ \hline
+	\end{tabular}
+\end{table}
 
 \paragraph{TC8, Datenquelle \cref{app:testdatenquellen:8}:} Überprüft ob 2 Distanzattribute und 1 binäres Attribut korrekt aufsummiert und miteinander zu einer 2er und 3er Menge kombiniert werden. 
 
-Dateneinschränkung:
-\begin{itemize}
-	\item Keine
-\end{itemize}
-
-Erwartetes Resultat:
-\begin{itemize}
-	\item 1er-Attributmenge:
-	\begin{itemize}
-		\item Nahe am Wasser: 14
-		\item Nahe am Meer: 13
-		\item Haustiere erlaubt: 12
-	\end{itemize}
-	\item 2er-Attributmenge:
-	\begin{itemize}
-		\item Nahe am Wasser, Nahe am Meer: 11
-		\item Nahe am Wasser, Haustiere erlaubt: 10
-		\item Nahe am Meer, Haustiere erlaubt: 9
-	\end{itemize}
-	\item 3er-Attributmenge:
-	\begin{itemize}
-		\item Nahe am Wasser, Nahe am Meer, Haustiere erlaubt: 8
-	\end{itemize}
-\end{itemize}
+\begin{table}[H] 
+	\caption{TC8}
+	\centering
+	\label{fig:recherche:testcases:8}
+	\begin{tabular}{ | l | l | l | } 
+		\hline 
+		\rowcolor{tableheadcolor}
+		\multicolumn{3}{|l|}{\bfseries ID: TC8} \\ \hline 
+		Datebquelle & \multicolumn{2}{|l|}{\cref{app:testdatenquellen:8}} \\ \hline 
+		Dateneinschränkung & \multicolumn{2}{|l|}{Keine} \\ \hline 
+		
+		\rowcolor{tableheadcolor}
+		\multicolumn{3}{|l|}{\bfseries Erwartetes Resultat} \\ \hline 
+		& Attributmenge & Anzahl \\ \hline 
+		
+		1er-Attributmenge & \tabitem Nahe am Wasser & 14 \\ \cline{2-3} 
+		& \tabitem Nahe am Meer & 13 \\ \cline{2-3} 
+		& \tabitem Haustiere erlaubt & 12 \\ \hline 
+		
+		2er-Attributmenge & \tabitem Nahe am Wasser & 11 \\
+		& \tabitem Nahe am Meer & \\ \cline{2-3} 
+		& \tabitem Nahe am Wasser & 10 \\
+		& \tabitem Haustiere erlaubt & \\ \cline{2-3} 
+		& \tabitem Nahe am Meer & 9 \\
+		& \tabitem Haustiere erlaubt & \\ \hline
+		
+		3er-Attributmenge & \tabitem Nahe am Wasser & 8 \\
+		& \tabitem Nahe am Meer & \\ 
+		& \tabitem Haustiere erlaubt & \\ \hline
+	\end{tabular}
+\end{table}
 
 \paragraph{TC9, Datenquelle \cref{app:testdatenquellen:9}:} Überprüft ob 2 Distanz-, 1 binäres- und 1 numerisches Attribut korrekt aufsummiert und miteinander zu 2er Mengen kombiniert werden. Die Kombinationen sind so gewählt dass keine 3er Menge erstellt werden kann.
 
-Dateneinschränkung:
-\begin{itemize}
-	\item Keine
-\end{itemize}
+\begin{table}[H] 
+	\caption{TC9}
+	\centering
+	\label{fig:recherche:testcases:9}
+	\begin{tabular}{ | l | l | l | } 
+		\hline 
+		\rowcolor{tableheadcolor}
+		\multicolumn{3}{|l|}{\bfseries ID: TC9} \\ \hline 
+		Datebquelle & \multicolumn{2}{|l|}{\cref{app:testdatenquellen:9}} \\ \hline 
+		Dateneinschränkung & \multicolumn{2}{|l|}{Keine} \\ \hline 
+		
+		\rowcolor{tableheadcolor}
+		\multicolumn{3}{|l|}{\bfseries Erwartetes Resultat} \\ \hline 
+		& Attributmenge & Anzahl \\ \hline 
+		
+		1er-Attributmenge & \tabitem Nahe am Wasser & 8 \\ \cline{2-3} 
+		& \tabitem Nahe am Meer & 8 \\ \cline{2-3} 
+		& \tabitem Haustiere erlaubt & 9 \\ \cline{2-3} 
+		& \tabitem Anzahl Zimmer=3 & 9 \\ \hline
+		
+		2er-Attributmenge & \tabitem Nahe am Wasser & 8 \\
+		& \tabitem Nahe am Meer & \\ \cline{2-3} 
+		& \tabitem Haustiere erlaubt & 9 \\
+		& \tabitem Anzahl Zimmer=3 & \\ \hline
+	\end{tabular}
+\end{table}
 
-Erwartetes Resultat:
-\begin{itemize}
-	\item 1er-Attributmenge:
-	\begin{itemize}
-		\item Nahe am Wasser: 8
-		\item Nahe am Meer: 8
-		\item Haustiere erlaubt: 9
-		\item Anzahl Zimmer=3: 9
-	\end{itemize}
-	\item 2er-Attributmenge:
-	\begin{itemize}
-		\item Nahe am Wasser, Nahe am Meer: 8
-		\item Haustiere erlaubt, Anzahl Zimmer=3: 9
-	\end{itemize}
-\end{itemize}
+\paragraph{TC10, Datenquelle \cref{app:testdatenquellen:10}:} TC10 bis TC12 testen die Clustering Algorithmen. Deshalb werden die erwarteten Resultate zusätzlich noch nach Cluster unterteilt, welche zusätzlich den Fehler der Gruppierung angeben sowie die Anzahl der Buchungen.
 
-\paragraph{TC10, Datenquelle \cref{app:testdatenquellen:10}:} Überprüft ob 2 Cluster gefunden werden mit jeweils 5 Buchungen. 
+TC10 Überprüft ob 2 Cluster gefunden werden. Der erste besitzt 5 Buchungen, der zweite deren 4. 
 
-Dateneinschränkung:
-\begin{itemize}
-	\item Keine
-\end{itemize}
+\begin{longtable}{ | l | l | l | l |} 	
+	\hline 
+	\rowcolor{tableheadcolor}
+	\multicolumn{4}{|l|}{\bfseries ID: TC10} \\ \hline 
+	Datebquelle & \multicolumn{3}{|l|}{\cref{app:testdatenquellen:10}} \\ \hline 
+	Dateneinschränkung & \multicolumn{3}{|l|}{Keine} \\ \hline 
+	
+	\rowcolor{tableheadcolor}
+	\multicolumn{4}{|l|}{\bfseries Erwartetes Resultat} \\ \hline 
+	Noise Punkte & \multicolumn{3}{|l|}{0} \\ \hline 
 
-Erwartetes Resultat:
-\begin{itemize}
-	\item Noise Punkte: 0
-	\item Cluster 1:
-	\begin{itemize}
-		\item Fehler: 0
-		\item Grösse: 5
-			\item 1er-Attributmenge:
-			\begin{itemize}
-				\item Nahe am Wasser: 5
-				\item Nahe am Meer: 5
-				\item Anzahl Zimmer=3: 5
-				\item Anzahl Schlafzimmer=2: 5
-			\end{itemize}
-			\item 2er-Attributmenge:
-			\begin{itemize}
-				\item Nahe am Wasser, Nahe am Meer: 5
-				\item Nahe am Wasser, Anzahl Zimmer=3: 5
-				\item Nahe am Wasser, Anzahl Schlafzimmer=2: 5
-			
-				\item Nahe am Meer, Anzahl Zimmer=3: 5
-				\item Nahe am Meer, Anzahl Schlafzimmer=2: 5
-			
-				\item Anzahl Zimmer=3, Anzahl Schlafzimmer=2: 5
-			\end{itemize}
-			\item 3er-Attributmenge:
-			\begin{itemize}
-				\item Nahe am Wasser, Nahe am Meer, Anzahl Zimmer=3: 5
-				\item Nahe am Wasser, Nahe am Meer, Anzahl Schlafzimmer=2: 5
-				\item Nahe am Meer, Anzahl Schlafzimmer=3, Anzahl Schlafzimmer=2: 5
-			\end{itemize}
-			\item 4er-Attributmenge:
-			\begin{itemize}
-				\item Nahe am Wasser, Nahe am Meer, Anzahl Zimmer=3, Anzahl Schlafzimmer=2: 5
-			\end{itemize}
-	\end{itemize}
-	\item Cluster 2:
-	\begin{itemize}
-		\item Fehler: 0
-		\item Grösse: 4
-			\item 1er-Attributmenge:
-			\begin{itemize}
-				\item Wochenpreis=günstig: 4
-				\item Anzahl Zimmer=9: 4
-				\item Anzahl Schlafzimmer=9: 4
-			\end{itemize}
-			\item 2er-Attributmenge:
-			\begin{itemize}
-				\item Wochenpreis=günstig, Anzahl Zimmer=9: 4
-				\item Wochenpreis=günstig, Anzahl Schlafzimmer=9: 4
-			
-				\item Anzahl Zimmer=9, Anzahl Schlafzimmer=9: 4
-			\end{itemize}
-			\item 3er-Attributmenge:
-			\begin{itemize}
-				\item Wochenpreis=günstig, Anzahl Schlafzimmer=9, Anzahl Schlafzimmer=9: 4
-			\end{itemize}
-	\end{itemize}
-\end{itemize}
+% ----------------------------------------------		
+	\multicolumn{4}{|l|}{\textbf{Cluster 1}} \\ \cline{2-4} 
+	& Fehler & \multicolumn{2}{|l|}{0} \\ \cline{2-4} 
+	& Grösse & \multicolumn{2}{|l|}{5} \\ \cline{2-4} 
+	&& Attributmenge & Anzahl \\ \cline{2-4} 
+	
+	& 1er-Attributmenge & \tabitem Nahe am Wasser & 5 \\ \cline{3-4} 
+	& & \tabitem Nahe am Meer & 5 \\ \cline{3-4} 
+	& & \tabitem Anzahl Zimmer=3 & 5 \\ \cline{3-4} 
+	& & \tabitem Anzahl Schlafzimmer=2 & 5 \\ \cline{2-4} 
+	
+	& 2er-Attributmenge & \tabitem Nahe am Wasser & 5 \\
+	& & \tabitem Nahe am Meer & \\ \cline{3-4} 
+	& & \tabitem Nahe am Wasser & 5 \\
+	& & \tabitem Anzahl Zimmer=3 & \\ \cline{3-4} 
+	& & \tabitem Nahe am Wasser & 5 \\
+	& & \tabitem Anzahl Schlafzimmer=2 & \\ \cline{3-4} 
+	
+	& & \tabitem Nahe am Meer & 5 \\
+	& & \tabitem Anzahl Zimmer=3 & \\ \cline{3-4} 
+	& & \tabitem Nahe am Meer & 5 \\
+	& & \tabitem Anzahl Schlafzimmer=2 & \\ \cline{3-4} 
 
-Bei TC11 und TC12 unterscheiden sich die Resultate der k-prototype und DBSCAN Algorithmen. Deshalb werden die Resultate separat aufgeführt.
+	& & \tabitem Anzahl Zimmer=3 & 5 \\
+	& & \tabitem Anzahl Schlafzimmer=2 & \\ \cline{2-4} 
 
-\paragraph{TC11, Datenquelle \cref{app:testdatenquellen:11}:} Überprüft ob 1 Cluster gefunden wird mit 9 Buchungen. 
+	& 3er-Attributmenge & \tabitem Nahe am Wasser & 5 \\
+	& & \tabitem Nahe am Meer & \\ 
+	& & \tabitem Anzahl Zimmer=3 & \\ \cline{3-4} 
+	& & \tabitem Nahe am Wasser & 5 \\
+	& & \tabitem Nahe am Meer & \\ 
+	& & \tabitem Anzahl Schlafzimmer=2 & \\ \cline{3-4}
+	& & \tabitem Nahe am Meer & 5 \\
+	& & \tabitem Anzahl Zimmer=3 & \\ 
+	& & \tabitem Anzahl Schlafzimmer=2 & \\ \cline{2-4}
 
-Dateneinschränkung:
-\begin{itemize}
-	\item Keine
-\end{itemize}
+	& 4er-Attributmenge & \tabitem Nahe am Wasser & 5 \\
+	& & \tabitem Nahe am Meer & \\ 
+	& & \tabitem Anzahl Zimmer=3 & \\ 
+	& & \tabitem Anzahl Schlafzimmer=2 & \\ \hline
+
+% ----------------------------------------------
+	\multicolumn{4}{|l|}{\textbf{Cluster 2}} \\ \cline{2-4} 
+	& Fehler & \multicolumn{2}{|l|}{0} \\ \cline{2-4} 
+	& Grösse & \multicolumn{2}{|l|}{4} \\ \cline{2-4} 
+	& & Attributmenge & Anzahl \\ \cline{2-4} 
+	
+	& 1er-Attributmenge & \tabitem Wochenpreis=günstig & 4 \\ \cline{3-4}
+	& & \tabitem Anzahl Zimmer=9 & 4 \\ \cline{3-4}
+	& & \tabitem Anzahl Schlafzimmer=9 & 4 \\ \cline{2-4} 
+	
+	& 2er-Attributmenge & \tabitem Wochenpreis=günstig & 4 \\
+	& & \tabitem Anzahl Zimmer=9 & \\ \cline{3-4}
+	& & \tabitem Wochenpreis=günstig & 4 \\
+	& & \tabitem Anzahl Schlafzimmer=9 & \\ \cline{3-4} 
+	& & \tabitem Anzahl Zimmer=9 & 4 \\
+	& & \tabitem Anzahl Schlafzimmer=9 & \\ \cline{2-4}
+
+	& 3er-Attributmenge & \tabitem Wochenpreis=günstig & 4 \\
+	& & \tabitem Anzahl Zimmer=9 & \\ 
+	& & \tabitem Anzahl Schlafzimmer=9 & \\ \hline
+	
+	\caption{TC10}
+	\centering
+	\label{fig:recherche:testcases:10}
+\end{longtable}
+
+
+\paragraph{TC11, Datenquelle \cref{app:testdatenquellen:11}:} Bei TC11 und TC12 unterscheiden sich die Resultate der k-prototype und DBSCAN Algorithmen. Deshalb werden die Resultate separat in TC11-1 und TC11-2 aufgeführt.
+TC 11 Überprüft ob 1 Cluster gefunden wird mit 9 Buchungen und 1 Noise Punkt. 
 
 Erwartetes Resultat vom DBSCAN Algorithmus:
-\begin{itemize}
-	\item Noise Punkte: 1
-	\item Cluster 1:
-	\begin{itemize}
-		\item Fehler: 0
-		\item Grösse: 9
-			\item 1er-Attributmenge:
-			\begin{itemize}
-				\item Nahe am Wasser: 9
-				\item Nahe am Meer: 9
-				\item Anzahl Zimmer=3: 9
-				\item Anzahl Schlafzimmer=2: 9
-			\end{itemize}
-			\item 2er-Attributmenge:
-			\begin{itemize}
-				\item Nahe am Wasser, Nahe am Meer: 9
-				\item Nahe am Wasser, Anzahl Zimmer=3: 9
-				\item Nahe am Wasser, Anzahl Schlafzimmer=2: 9
-			
-				\item Nahe am Meer, Anzahl Zimmer=3: 9
-				\item Nahe am Meer, Anzahl Schlafzimmer=2: 9
-			
-				\item Anzahl Zimmer=3, Anzahl Schlafzimmer=2: 9
-			\end{itemize}
-			\item 3er-Attributmenge:
-			\begin{itemize}
-				\item Nahe am Wasser, Nahe am Meer, Anzahl Zimmer=3: 9
-				\item Nahe am Wasser, Nahe am Meer, Anzahl Schlafzimmer=2: 9
-				\item Nahe am Meer, Anzahl Schlafzimmer=3, Anzahl Schlafzimmer=2: 9
-			\end{itemize}
-			\item 4er-Attributmenge:
-			\begin{itemize}
-				\item Nahe am Wasser, Nahe am Meer, Anzahl Zimmer=3, Anzahl Schlafzimmer=2: 9
-			\end{itemize}
-	\end{itemize}
-\end{itemize}
+\begin{longtable}{ | l | l | l | l |} 	
+	\hline 
+	\rowcolor{tableheadcolor}
+	\multicolumn{4}{|l|}{\bfseries ID: TC11-1 DBSCAN} \\ \hline 
+	Datebquelle & \multicolumn{3}{|l|}{\cref{app:testdatenquellen:11}} \\ \hline 
+	Dateneinschränkung & \multicolumn{3}{|l|}{Keine} \\ \hline 
+	
+	\rowcolor{tableheadcolor}
+	\multicolumn{4}{|l|}{\bfseries Erwartetes Resultat} \\ \hline 
+	Noise Punkte & \multicolumn{3}{|l|}{1} \\ \hline 
+
+% ----------------------------------------------		
+	\multicolumn{4}{|l|}{\textbf{Cluster 1}} \\ \cline{2-4} 
+	& Grösse & \multicolumn{2}{|l|}{9} \\ \cline{2-4} 
+	&& Attributmenge & Anzahl \\ \cline{2-4} 
+	
+	& 1er-Attributmenge & \tabitem Nahe am Wasser & 9 \\ \cline{3-4} 
+	& & \tabitem Nahe am Meer & 9 \\ \cline{3-4} 
+	& & \tabitem Anzahl Zimmer=3 & 9 \\ \cline{3-4} 
+	& & \tabitem Anzahl Schlafzimmer=2 & 9 \\ \cline{2-4} 
+	
+	& 2er-Attributmenge & \tabitem Nahe am Wasser & 9 \\
+	& & \tabitem Nahe am Meer & \\ \cline{3-4} 
+	& & \tabitem Nahe am Wasser & 9 \\
+	& & \tabitem Anzahl Zimmer=3 & \\ \cline{3-4} 
+	& & \tabitem Nahe am Wasser & 9 \\
+	& & \tabitem Anzahl Schlafzimmer=2 & \\ \cline{3-4} 
+	
+	& & \tabitem Nahe am Meer & 9 \\
+	& & \tabitem Anzahl Zimmer=3 & \\ \cline{3-4} 
+	& & \tabitem Nahe am Meer & 9 \\
+	& & \tabitem Anzahl Schlafzimmer=2 & \\ \cline{3-4} 
+
+	& & \tabitem Anzahl Zimmer=3 & 9 \\
+	& & \tabitem Anzahl Schlafzimmer=2 & \\ \cline{2-4} 
+
+	& 3er-Attributmenge & \tabitem Nahe am Wasser & 9 \\
+	& & \tabitem Nahe am Meer & \\ 
+	& & \tabitem Anzahl Zimmer=3 & \\ \cline{3-4} 
+	& & \tabitem Nahe am Wasser & 9 \\
+	& & \tabitem Nahe am Meer & \\ 
+	& & \tabitem Anzahl Schlafzimmer=2 & \\ \cline{3-4}
+	& & \tabitem Nahe am Meer & 9 \\
+	& & \tabitem Anzahl Zimmer=3 & \\ 
+	& & \tabitem Anzahl Schlafzimmer=2 & \\ \cline{2-4}
+
+	& 4er-Attributmenge & \tabitem Nahe am Wasser & 9 \\
+	& & \tabitem Nahe am Meer & \\ 
+	& & \tabitem Anzahl Zimmer=3 & \\ 
+	& & \tabitem Anzahl Schlafzimmer=2 & \\ \hline
+
+	\caption{TC11-1: Erwartetes Resultat vom DBSCAN Algorithmus}
+	\centering
+	\label{fig:recherche:testcases:11:1}
+\end{longtable}
 
 Erwartetes Resultat vom k-prototype Algorithmus:
-\begin{itemize}
-	\item Cluster 1:
-	\begin{itemize}
-		\item Fehler: 0
-		\item Grösse: 9
-		\item Das Resultat der Analyse dieses Clusters vom Apriori Algorithmus ist dasselbe wie jenes vom DBSCAN welches oben aufgeführt wurde. Zur Verbesserung der Übersicht wird das Resultat hier nicht noch einmal aufgeführt.
-	\end{itemize}
+\begin{longtable}{ | l | l | l | l |} 	
+	\hline 
+	\rowcolor{tableheadcolor}
+	\multicolumn{4}{|l|}{\bfseries ID: TC11-2 KPrototype} \\ \hline 
+	Datebquelle & \multicolumn{3}{|l|}{\cref{app:testdatenquellen:11}} \\ \hline 
+	Dateneinschränkung & \multicolumn{3}{|l|}{Keine} \\ \hline 
+	
+	\rowcolor{tableheadcolor}
+	\multicolumn{4}{|l|}{\bfseries Erwartetes Resultat} \\ \hline 
 
-	\item Cluster 2:
-	\begin{itemize}
-		\item Fehler: 0
-		\item Grösse: 1
-		\item Der Apriori Algorithmus findet keine häufigen Attribute, da $minsup$ auf 3 gesetzt ist und nur 1 Element in diesem Cluster vorhanden ist.
-	\end{itemize}
-\end{itemize}
+	\multicolumn{4}{|l|}{\textbf{Cluster 1}} \\ \cline{2-4} 
+	& Fehler & \multicolumn{2}{|l|}{0} \\ \cline{2-4} 
+	& Grösse & \multicolumn{2}{|l|}{9} \\ \cline{2-4} 
+	& \multicolumn{3}{|L{7.5cm}|}{Das Resultat der Analyse dieses Clusters vom Apriori Algorithmus ist dasselbe wie jenes vom DBSCAN welches oben aufgeführt wurde. Zur Verbesserung der Übersicht wird das Resultat hier nicht noch einmal aufgeführt.} \\ \hline
 
+	\multicolumn{4}{|l|}{\textbf{Cluster 2}} \\ \cline{2-4} 
+	& Fehler & \multicolumn{2}{|l|}{0} \\ \cline{2-4} 
+	& Grösse & \multicolumn{2}{|l|}{1} \\ \cline{2-4} 
+	& \multicolumn{3}{|L{7.5cm}|}{Der Apriori Algorithmus findet keine häufigen Attribute, da $minsup$ auf 3 gesetzt ist und nur 1 Element in diesem Cluster vorhanden ist.} \\ \hline
+	\caption{TC11-2: Erwartetes Resultat vom KPrototype Algorithmus}
+	\centering
+	\label{fig:recherche:testcases:11:2}
+\end{longtable}
 
 \paragraph{TC12, Datenquelle \cref{app:testdatenquellen:12}:}\todo{}
 
