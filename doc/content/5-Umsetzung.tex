@@ -259,7 +259,9 @@ Umgangen wurde diese Problematik durch den Einsatz von Hintergrundprozessen. Wen
 
 \subsubsection{Filtrierung}
 \label{sec:proofofconcept:architektur:anforderungen:filtrierung}
+Um die Analyse durch Algorithmen auf einer Untermenge der Daten durchzuführen (siehe FA3 in \cref{fig:anforderungsanalyse:funktionaleanforderung:fa3}) soll der User die Möglichkeit erhalten durch Einschränkung der Daten diese zu filtrieren. 
 
+Deshalb wird in jeder Ansicht (ausser beim anpassen der Einstellungen) ein Formular angezeigt mit welcher die Daten eingeschränkt werden können. In der Umsetzung wurde ein Model erstellt welches die Filter für die verschiedenen Attribute abbildet (siehe \cref{sec:proofofconcept:klassenstruktur:models} \nameref{sec:proofofconcept:klassenstruktur:models}) und ein Twig Template um das Formular darzustellen (siehe \cref{sec:proofofconcept:externebibliotheken:twig} \nameref{sec:proofofconcept:externebibliotheken:twig}). Schlussendlich muss beim Zugriff der Daten die Filters beachtet werden. Es dürfen nur diejenigen Buchungen geliefert werden welche allen Kriterien zutreffen. Die Datenmengen auf die die Filter angewendet wurden werden gecached um den Zugriff zu beschleunigen (siehe \cref{sec:proofofconcept:performance:caching} \nameref{sec:proofofconcept:performance:caching}).
 
 %\subsection{MVC}
 %\label{sec:proofofconcept:architektur:mvc}
@@ -458,6 +460,7 @@ Sobald die Analyse vom Server angestossen wurde kann dieser eine Rückmeldung zu
 
 
 \subsection{Programmablauf}
+\label{sec:proofofconcept:programmablauf}
 Im \cref{sec:proofofconcept:kommunikationsablauf} wurde der Ablauf zwischen dem Benutzer und dem Server illustriert. Hier werden die Abläufe auf dem Webserver sowie der Hintergrundprozesse erläutert.
 
 \subsubsection{Webserver}
@@ -532,9 +535,6 @@ Auf ein Sequenzdiagramm für den DBSCAN-Algorithmus wird hier verzichtet, denn d
 \section{Performance}
 Da die Geschwindigkeit kritisch ist wenn man mit einer grossen Datenmenge arbeitet, wurde ein Caching eingesetzt sowie mehrere Varianten für das Laden der Daten evaluiert.
 
-\subsection{Caching}
-\label{sec:proofofconcept:performance:caching}
-
 \subsection{Datenzugriff}
 \label{sec:proofofconcept:performance:datenzugriff}
 Das Laden der Daten ist kritisch für die Geschwindigkeit des Gesamtsystemes. Im speziellen für die Clustering Algorithmen, da dort mehrfach über die gesamte Datenbasis iteriert werden muss. Deshalb wurden verschiedene Möglichkeiten in Betracht gezogen.
@@ -552,6 +552,21 @@ Für die drei Herangehensweisen wurde jeweils ein Iteratoren erstellt (siehe \cr
 \end{itemize}
 
 Die Variante mit dem Laden Zeile für Zeile ist mit der durchschnittlichen Zeit von 9.82 am schnellsten. Dies ist überraschend, da zu erwarten war dass auf die Daten schneller zugegriffen werden kann wenn sie im Zwischenspeicher gelagert werden. Vor allem das Resultat mit Redis war verblüffend, da sie doppelt so lange dauert, obwohl die Daten vorher schon in der Datenbank vorhanden sein müssen.
+
+\subsection{Caching}
+\label{sec:proofofconcept:performance:caching}
+Im \cref{sec:proofofconcept:performance:datenzugriff} wurde die Wichtigkeit des Datenzugriff erläutert. Dieser kann durch ein Caching (Zwischenspeichern der Daten) nochmals beschleunigt werden. 
+
+Um dies zu zeigen wurde ein Test gemacht mit der Ansicht, in welcher die Daten eingesehen werden können. Es sollen alle Buchungen von Objekten mit einer 1 Sterne-Bewertung angezeigt werden. Mit einem Caching dauert es durchschnittlich 0.31 Sekunden um die letzten 30 Instanzen anzuzeigen (wenn der Cache vorgewärmt ist, mehr dazu weiter unten). Ohne Caching hingegen benötigt das Programm durchschnittlich 10.24 Sekunden. Dies ist eine Verbesserung um das 33-fache.
+
+Dieses Beispiel ist ein Extremfall, da es nur 1'548 Buchungen von 1 Sterne Objekten in der gesamten Datenbasis gibt. Je mehr Buchungen ausfiltriert werden, desto bessere Ergebnisse liefert das Caching.
+
+Wenn die ersten 30 Buchungen in der Buchungen-Einsehen Ansicht angezeigt werden, wird eine Cache-Datei geschrieben welche nur jene Instanzen enthalten, die auf die filterkriterien zupassen. Dazu wird die gesamte Datenbasis durchlaufen und die Kriterien auf jede Buchung anzuwenden. Sobald dies geschehen ist gilt der Cache für diese Kriterien als "`vorgewärmt"'. 
+Dieses aufwärmen dauert durchschnittlich 10 Sekunden. Dies ist die Zeit welche die Anfrage im Beispiel oben ohne Caching benötigt hat. 
+
+Der Vorteil des Cachings ist es, dass Filterkriterien für eine Anfrage nur einmal angewendet werden müssen. Im Beispiel oben müsste ohne Caching alle 111'442 Buchungen durchlaufen und die Kriterien angewendet werden, um die letzten 30 der 1'548 Buchungen anzuzeigen. Durch den Zwischenspeicher kann dass Programm direkt zu den letzten 30 Instanzen iterieren und diese anzeigen. Deshalb liefert das Caching bessere Ergebnisse, wenn mehr Daten durch das Filtrieren wegfallen.
+
+Das Caching übernimmt die Klasse "`DataCache"' (siehe \cref{sec:proofofconcept:packagestruktur} \nameref{sec:proofofconcept:packagestruktur}). Wie der Cache in den Programmablauf eingebunden wird ist in den Squenzdiagrammen im \cref{sec:proofofconcept:programmablauf} \nameref{sec:proofofconcept:programmablauf} beschrieben.
 
 \section{Externe Bibliotheken}
 \label{sec:proofofconcept:externebibliotheken}
