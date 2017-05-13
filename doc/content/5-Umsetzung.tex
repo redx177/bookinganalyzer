@@ -533,7 +533,7 @@ Auf ein Sequenzdiagramm für den DBSCAN-Algorithmus wird hier verzichtet, denn d
 
 
 \section{Performance}
-Da die Geschwindigkeit kritisch ist wenn man mit einer grossen Datenmenge arbeitet, wurde ein Caching eingesetzt sowie mehrere Varianten für das Laden der Daten evaluiert.
+Da die Geschwindigkeit kritisch ist wenn man mit einer grossen Datenmenge arbeitet, wurde ein Caching eingesetzt sowie mehrere Varianten für das Laden der Daten evaluiert. Diese Themen werden nachfolgend beschrieben.
 
 \subsection{Datenzugriff}
 \label{sec:proofofconcept:performance:datenzugriff}
@@ -559,9 +559,9 @@ Im \cref{sec:proofofconcept:performance:datenzugriff} wurde die Wichtigkeit des 
 
 Um dies zu zeigen wurde ein Test gemacht mit der Ansicht, in welcher die Daten eingesehen werden können. Es sollen alle Buchungen von Objekten mit einer 1 Sterne-Bewertung angezeigt werden. Mit einem Caching dauert es durchschnittlich 0.31 Sekunden um die letzten 30 Instanzen anzuzeigen (wenn der Cache vorgewärmt ist, mehr dazu weiter unten). Ohne Caching hingegen benötigt das Programm durchschnittlich 10.24 Sekunden. Dies ist eine Verbesserung um das 33-fache.
 
-Dieses Beispiel ist ein Extremfall, da es nur 1'548 Buchungen von 1 Sterne Objekten in der gesamten Datenbasis gibt. Je mehr Buchungen ausfiltriert werden, desto bessere Ergebnisse liefert das Caching.
+Dieses Beispiel ist ein Extremfall, da es nur 1'548 Buchungen von 1 Sterne Objekten in der gesamten Datenbasis gibt. Je mehr Buchungen herausfiltert werden, desto bessere Ergebnisse liefert das Caching.
 
-Wenn die ersten 30 Buchungen in der Buchungen-Einsehen Ansicht angezeigt werden, wird eine Cache-Datei geschrieben welche nur jene Instanzen enthalten, die auf die filterkriterien zupassen. Dazu wird die gesamte Datenbasis durchlaufen und die Kriterien auf jede Buchung anzuwenden. Sobald dies geschehen ist gilt der Cache für diese Kriterien als "`vorgewärmt"'. 
+Wenn die ersten 30 Buchungen in der Buchungen-Einsehen Ansicht angezeigt werden, wird eine Cache-Datei geschrieben welche nur jene Instanzen enthalten, die auf die filterkriterien passen. Dazu wird die gesamte Datenbasis durchlaufen und die Kriterien auf jede Buchung anzuwenden. Sobald dies geschehen ist gilt der Cache für diese Kriterien als "`vorgewärmt"'. 
 Dieses aufwärmen dauert durchschnittlich 10 Sekunden. Dies ist die Zeit welche die Anfrage im Beispiel oben ohne Caching benötigt hat. 
 
 Der Vorteil des Cachings ist es, dass Filterkriterien für eine Anfrage nur einmal angewendet werden müssen. Im Beispiel oben müsste ohne Caching alle 111'442 Buchungen durchlaufen und die Kriterien angewendet werden, um die letzten 30 der 1'548 Buchungen anzuzeigen. Durch den Zwischenspeicher kann dass Programm direkt zu den letzten 30 Instanzen iterieren und diese anzeigen. Deshalb liefert das Caching bessere Ergebnisse, wenn mehr Daten durch das Filtrieren wegfallen.
