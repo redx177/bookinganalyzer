@@ -74,6 +74,7 @@ Das Marketing hingegen könnte eine solche Anfrage an die Analyse stellen: „Wa
 Um solche Fragen zu beantworten werden die Buchungsdaten von Interhome (Objekt, Zeitraum, Passagiere, etc.) verwendet und mit weiteren Daten (Geolocation, Wetterinformation) angereichert. 
 Auf dem Endprodukt soll ein Mitarbeiter von Interhome in der Lage sein, eine Abfrage zu generieren, welche aus einem oder mehreren Attributen besteht. Die Applikation analysiert daraufhin die Daten mit Techniken des Data Mining, um eine Liste von Attributen zurück zu liefern, welche für die in der Abfrage aufgeführten Attributen am meisten Buchungen generieren. Die Elemente in der Antwort sollten gewichtet sein um das Resultat besser zu interpretieren.
 
+\subsection{Beispiel}
 Um dies besser zu veranschaulichen sollte hier ein Beispiel gemacht werden. Dazu ist in der \cref{fig:einleitung:ziel:1} eine Datenmenge aufgeführt. Aufgeteilt sind die Spalten in Objekt- und Kundendaten. Dies hat keinen weiteren Einfluss auf diese Arbeit und sollte lediglich zum besseren Verständnis führen. Die ersten 9 Spalten sind Rohdaten und das Wetter (letzte Spalte) muss zusätzlich angereichert werden.
 
 \begin{table}[H] 
@@ -132,6 +133,13 @@ Als Beispiel möchte das Marketing wissen, was gebucht wird wenn es regnet. Die 
 Diese Daten können nun Analysiert werden. Dabei werden jene Attribute gesucht, welche am häufigsten vorkommen. 
 Das Resultat der Datenanalyse ist in diesem Fall "`Objekt Ortschaft = Saint-Tropez, Distanz zum Meer < 200 in 4/7 Buchungen"' (Buchungen mit den IDs 3, 4, 7, 99). Oder in Worten: "`In 57\% der selektieren Buchungen wurden Objekte in Saint-Tropez gebucht, welche maximal 200 Meter vom Meer entfernt sind."'. Sprich wenn es regnet, buchen viele Kunden in Saint-Tropez ein Objekt welches nahe am Meer liegt.
 
+\subsection{Hypothesen}
+In Zusammenarbeit mit der Interhome wurden einige Hypothesen aufgestellt, welche durch diese Arbeit belegt oder widerlegt werden sollen. 
+
+\paragraph{Hypothese 1} In Schweizer Skiregionen werden die meisten Objekte gebucht weil die Gäste Skifahren gehen. Dazu müssen sie direkt am Skigebiet wohnen oder einen Anschluss dazu haben. Deshalb sollte diese Arbeit zeigen können, dass Objekte welche in Schweizer Skiregionen gebucht werden entweder nahe am Skilift liegen oder nahe am öffentlichen Verkehr.
+
+\paragraph{Hypothese 2}
+\todo{}
 
 \section{Abgrenzung}
 \label{sec:einleitung:abgrenzung}
