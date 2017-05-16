@@ -479,7 +479,7 @@ Der letzte Mockup zeigt die Ansicht in welcher die Einstellungen des Programmes 
 % - Rooms: ??? (2?)
 % - Pets allowed: yes
 
-In diesem Abschnitt sind Testfälle definiert welche am Schluss der Entwicklung ausgewertet werden. Dadurch können die Erwartungen an das Programm mit der tatsächlichen Ausgabe des Proof of Concepts verglichen werden. Dazu wurden Datenquellen erstellt, in welchen die zu findenden Mustern von vornherein bekannt sind. Sobald der Proof of Concept umgesetzt wurde können die Resultate mit den  nachfolgend vorgestellten Informationen verglichen werden. Dadurch wird die richtige Funktionsweise des Programms sichergestellt.
+In diesem Abschnitt sind Testfälle definiert welche am Schluss der Entwicklung ausgewertet werden (siehe \cref{sec:testingfazit:testing:testcases} \nameref{sec:testingfazit:testing:testcases}). Dadurch können die Erwartungen an das Programm mit der tatsächlichen Ausgabe des Proof of Concepts verglichen werden. Dazu wurden Datenquellen erstellt, in welchen die zu findenden Mustern von vornherein bekannt sind. Sobald der Proof of Concept umgesetzt wurde können die Resultate mit den  nachfolgend vorgestellten Informationen verglichen werden. Dadurch wird die richtige Funktionsweise des Programms sichergestellt.
 
 Es sind 12 Testdatenquellen definiert worden, welche im \cref{app:testdatenquellen} aufgeführt sind.
 Sie bestehen aus 9 - 18 Einträge mit jeweils 10 Attributen. Die Felder "`id"' und "`NREF"' in den Quellen sind nur für das Verständnis vorhanden und tragen nicht zur Testauswertung bei. Die restlichen Attribute bestehen aus Distanzen ("`DIWATER"', "`DIPUBT"', "`DISEA"'), Preisen ("`weeklyprice"'), Binär- ("`PETS"', "`CAIRCOND"') und numerischen ("`ROOMS"', "`BEDROOMS"') Werten. Dadurch sind kategorische sowie numerische Attribute abgedeckt. 
@@ -511,7 +511,7 @@ Für die nachfolgenden Erwartungen werden nachfolgende Parameter vorausgesetzt. 
 \paragraph{TC1, Datenquelle \cref{app:testdatenquellen:1}:} Überprüft ob 2 Distanzattribute korrekt aufsummiert und miteinander zu einer 2er Menge kombiniert werden. 
 
 \begin{table}[H] 
-	\caption{TC1}
+	\caption{TC1 Definition}
 	\centering
 	%\rowcolors{1}{tablebodycolor}{tablerowcolor}
 	\label{fig:recherche:testcases:1}
@@ -537,7 +537,7 @@ Für die nachfolgenden Erwartungen werden nachfolgende Parameter vorausgesetzt. 
 \paragraph{TC2, Datenquelle \cref{app:testdatenquellen:2}:} Überprüft ob 2 Binärattribute korrekt aufsummiert und miteinander zu einer 2er Menge kombiniert werden. 
 
 \begin{table}[H] 
-	\caption{TC2}
+	\caption{TC2 Definition}
 	\centering
 	\label{fig:recherche:testcases:2}
 	\begin{tabular}{ | l | l | l | } 
@@ -563,7 +563,7 @@ Für die nachfolgenden Erwartungen werden nachfolgende Parameter vorausgesetzt. 
 
 
 \begin{table}[H] 
-	\caption{TC3}
+	\caption{TC3 Definition}
 	\centering
 	\label{fig:recherche:testcases:3}
 	\begin{tabular}{ | l | l | l | } 
@@ -588,7 +588,7 @@ Für die nachfolgenden Erwartungen werden nachfolgende Parameter vorausgesetzt. 
 \paragraph{TC4, Datenquelle \cref{app:testdatenquellen:4}:} Überprüft ob 1 numerisches und ein Binärattribut korrekt aufsummiert und miteinander zu einer 2er Menge kombiniert werden.
 
 \begin{table}[H] 
-	\caption{TC4}
+	\caption{TC4 Definition}
 	\centering
 	\label{fig:recherche:testcases:4}
 	\begin{tabular}{ | l | l | l | } 
@@ -613,7 +613,7 @@ Für die nachfolgenden Erwartungen werden nachfolgende Parameter vorausgesetzt. 
 \paragraph{TC5, Datenquelle \cref{app:testdatenquellen:5}:} Überprüft ob 2 Distanzattribute korrekt aufsummiert und miteinander zu einer 2er Menge kombiniert werden unter der Anwendung einer Dateneinschränkung eines binären Attributes. 
 
 \begin{table}[H] 
-	\caption{TC5}
+	\caption{TC5 Definition}
 	\centering
 	\label{fig:recherche:testcases:5}
 	\begin{tabular}{ | l | l | l | } 
@@ -638,7 +638,7 @@ Für die nachfolgenden Erwartungen werden nachfolgende Parameter vorausgesetzt. 
 \paragraph{TC6, Datenquelle \cref{app:testdatenquellen:6}:} Überprüft ob 2 Distanzattribute korrekt aufsummiert und miteinander zu einer 2er Menge kombiniert werden unter der Anwendung einer Dateneinschränkung eines Distanzattributes. 
 
 \begin{table}[H] 
-	\caption{TC6}
+	\caption{TC6 Definition}
 	\centering
 	\label{fig:recherche:testcases:6}
 	\begin{tabular}{ | l | l | l | } 
@@ -660,28 +660,10 @@ Für die nachfolgenden Erwartungen werden nachfolgende Parameter vorausgesetzt. 
 	\end{tabular}
 \end{table}
 
-Dateneinschränkung:
-\begin{itemize}
-	\item Nahe am ÖV (öffentlicher Verkehr)
-\end{itemize}
-
-Erwartetes Resultat:
-\begin{itemize}
-	\item 1er-Attributmenge:
-	\begin{itemize}
-		\item Nahe am Wasser: 3
-		\item Nahe am Meer: 4
-	\end{itemize}
-	\item 2er-Attributmenge:
-	\begin{itemize}
-		\item Nahe am Wasser, Nahe am Meer: 3
-	\end{itemize}
-\end{itemize}
-
 \paragraph{TC7, Datenquelle \cref{app:testdatenquellen:7}:} Überprüft ob 2 Distanzattribute korrekt aufsummiert und miteinander zu einer 2er Menge kombiniert werden unter der Anwendung einer Dateneinschränkung eines numerischen Attributes. 
 
 \begin{table}[H] 
-	\caption{TC7}
+	\caption{TC7 Definition}
 	\centering
 	\label{fig:recherche:testcases:7}
 	\begin{tabular}{ | l | l | l | } 
@@ -706,7 +688,7 @@ Erwartetes Resultat:
 \paragraph{TC8, Datenquelle \cref{app:testdatenquellen:8}:} Überprüft ob 2 Distanzattribute und 1 binäres Attribut korrekt aufsummiert und miteinander zu einer 2er und 3er Menge kombiniert werden. 
 
 \begin{table}[H] 
-	\caption{TC8}
+	\caption{TC8 Definition}
 	\centering
 	\label{fig:recherche:testcases:8}
 	\begin{tabular}{ | l | l | l | } 
@@ -740,7 +722,7 @@ Erwartetes Resultat:
 \paragraph{TC9, Datenquelle \cref{app:testdatenquellen:9}:} Überprüft ob 2 Distanz-, 1 binäres- und 1 numerisches Attribut korrekt aufsummiert und miteinander zu 2er Mengen kombiniert werden. Die Kombinationen sind so gewählt dass keine 3er Menge erstellt werden kann.
 
 \begin{table}[H] 
-	\caption{TC9}
+	\caption{TC9 Definition}
 	\centering
 	\label{fig:recherche:testcases:9}
 	\begin{tabular}{ | l | l | l | } 
@@ -843,7 +825,7 @@ TC10 Überprüft ob 2 Cluster gefunden werden. Der erste besitzt 5 Buchungen, de
 	& & \tabitem Anzahl Zimmer=9 & \\ 
 	& & \tabitem Anzahl Schlafzimmer=9 & \\ \hline
 	
-	\caption{TC10}
+	\caption{TC10 Definition}
 	\centering
 	\label{fig:recherche:testcases:10}
 \end{longtable}
@@ -904,7 +886,7 @@ Erwartetes Resultat vom DBSCAN Algorithmus:
 	& & \tabitem Anzahl Zimmer=3 & \\ 
 	& & \tabitem Anzahl Schlafzimmer=2 & \\ \hline
 
-	\caption{TC11-1: Erwartetes Resultat vom DBSCAN Algorithmus}
+	\caption{TC11-1 Definition: Erwartetes Resultat vom DBSCAN Algorithmus}
 	\centering
 	\label{fig:recherche:testcases:11:1}
 \end{longtable}
@@ -929,7 +911,7 @@ Erwartetes Resultat vom k-prototype Algorithmus:
 	& Fehler & \multicolumn{2}{|l|}{0} \\ \cline{2-4} 
 	& Grösse & \multicolumn{2}{|l|}{1} \\ \cline{2-4} 
 	& \multicolumn{3}{|L{7.5cm}|}{Der Apriori Algorithmus findet keine häufigen Attribute, da $minsup$ auf 3 gesetzt ist und nur 1 Element in diesem Cluster vorhanden ist.} \\ \hline
-	\caption{TC11-2: Erwartetes Resultat vom KPrototype Algorithmus}
+	\caption{TC11-2 Definition: Erwartetes Resultat vom KPrototype Algorithmus}
 	\centering
 	\label{fig:recherche:testcases:11:2}
 \end{longtable}

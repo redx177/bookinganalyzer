@@ -1,6 +1,663 @@
 
 \chapter{Testing \& Fazit}
 \label{sec:testingfazit}
+\todo{intro}
+
+\section{Testing}
+\label{sec:testingfazit:testing}
+Nachfolgend werden die Richtigkeit des Programmes mit Hilfe der Testfälle aus \cref{sec:recherche:testcases} \nameref{sec:recherche:testcases} sowie der Hypothesen in \cref{sec:einleitung:ziel:hypothesen} \nameref{sec:einleitung:ziel:hypothesen} überprüft.
+
+\subsection{Testfälle}
+\label{sec:testingfazit:testing:testcases}
+Hier wird die Korrektheit der Algorithmen überprüft. Also ob diese richtig Implementiert wurden. Dazu wurde im \cref{sec:recherche:testcases} Testfälle definiert inklusive der Einstellungen des Programmes.
+
+Hier werden die Testfälle nochmals aufgeführt und mit den tatsächlichen Ausgaben des Proof of Concepts verglichen. Schlussendlich gibt es eine Zusammenfassung ob die Tests erfolgreich waren oder nicht.
+
+\begin{table}[H] 
+	\caption{TC1 Auswertung}
+	\centering
+	%\rowcolors{1}{tablebodycolor}{tablerowcolor}
+	\label{fig:testingfazit:testing:testcases:1}
+	\begin{tabular}{ | l | l | l | } 
+		\hline 
+		\rowcolor{tableheadcolor}
+		\multicolumn{3}{|l|}{\bfseries ID: TC1} \\ \hline 
+		Datebquelle & \multicolumn{2}{|l|}{\cref{app:testdatenquellen:1}} \\ \hline 
+		Dateneinschränkung & \multicolumn{2}{|l|}{Keine} \\ \hline 
+		
+		\rowcolor{tableheadcolor}
+		\multicolumn{3}{|l|}{\bfseries Erwartetes Resultat} \\ \hline 
+		& Attributmenge & Anzahl \\ \hline 
+		
+		1er-Attributmenge & \tabitem Nahe am Wasser & 8 \\ \cline{2-3} 
+		& \tabitem Nahe am Meer & 8 \\ \hline 
+		
+		2er-Attributmenge & \tabitem Nahe am Wasser & 8 \\
+		& \tabitem Nahe am Meer & \\ \hline
+
+		\rowcolor{tableheadcolor}
+		\multicolumn{3}{|l|}{\bfseries Tatsächliches Resultat} \\ \hline 
+		& Attributmenge & Anzahl \\ \hline 
+		
+		1er-Attributmenge & \tabitem Nahe am Wasser & 8 \\ \cline{2-3} 
+		& \tabitem Nahe am Meer & 8 \\ \hline 
+		
+		2er-Attributmenge & \tabitem Nahe am Wasser & 8 \\
+		& \tabitem Nahe am Meer & \\ \hline
+		
+		\rowcolor{tableheadcolor}
+		\multicolumn{3}{|l|}{\bfseries Testergebnis} \\ \hline 
+		\multicolumn{3}{|l|}{\cellcolor{green!25}} \\ \hline 
+	\end{tabular}
+\end{table}
+\begin{table}[H] 
+	\caption{TC2 Auswertung}
+	\centering
+	\label{fig:testingfazit:testing:testcases:2}
+	\begin{tabular}{ | l | l | l | } 
+		\hline 
+		\rowcolor{tableheadcolor}
+		\multicolumn{3}{|l|}{\bfseries ID: TC2} \\ \hline 
+		Datebquelle & \multicolumn{2}{|l|}{\cref{app:testdatenquellen:2}} \\ \hline 
+		Dateneinschränkung & \multicolumn{2}{|l|}{Keine} \\ \hline 
+		
+		\rowcolor{tableheadcolor}
+		\multicolumn{3}{|l|}{\bfseries Erwartetes Resultat} \\ \hline 
+		& Attributmenge & Anzahl \\ \hline 
+		
+		1er-Attributmenge & \tabitem Haustiere erlaubt & 8 \\ \cline{2-3} 
+		& \tabitem Aircondition vorhanden & 8 \\ \hline 
+		
+		2er-Attributmenge & \tabitem Haustiere erlaubt & 8 \\
+		& \tabitem Aircondition vorhanden & \\ \hline
+		
+		\rowcolor{tableheadcolor}
+		\multicolumn{3}{|l|}{\bfseries Tatsächliches Resultat} \\ \hline 
+		& Attributmenge & Anzahl \\ \hline 
+		
+		1er-Attributmenge & \tabitem Haustiere erlaubt & 8 \\ \cline{2-3} 
+		& \tabitem Aircondition vorhanden & 8 \\ \hline 
+		
+		2er-Attributmenge & \tabitem Haustiere erlaubt & 8 \\
+		& \tabitem Aircondition vorhanden & \\ \hline
+		
+		\rowcolor{tableheadcolor}
+		\multicolumn{3}{|l|}{\bfseries Testergebnis} \\ \hline 
+		\multicolumn{3}{|l|}{\cellcolor{green!25}} \\ \hline 
+	\end{tabular}
+\end{table}
+\begin{table}[H] 
+	\caption{TC3 Auswertung}
+	\centering
+	\label{fig:testingfazit:testing:testcases:3}
+	\begin{tabular}{ | l | l | l | } 
+		\hline 
+		\rowcolor{tableheadcolor}
+		\multicolumn{3}{|l|}{\bfseries ID: TC3} \\ \hline 
+		Datebquelle & \multicolumn{2}{|l|}{\cref{app:testdatenquellen:3}} \\ \hline 
+		Dateneinschränkung & \multicolumn{2}{|l|}{Keine} \\ \hline 
+		
+		\rowcolor{tableheadcolor}
+		\multicolumn{3}{|l|}{\bfseries Erwartetes Resultat} \\ \hline 
+		& Attributmenge & Anzahl \\ \hline 
+		
+		1er-Attributmenge & \tabitem Anzahl Zimmer=3 & 9 \\ \cline{2-3} 
+		& \tabitem Anzahl Schlafzimmer=2 & 9 \\ \hline 
+		
+		2er-Attributmenge & \tabitem Anzahl Zimmer=3 & 9 \\
+		& \tabitem Anzahl Schlafzimmer=2 & \\ \hline
+		
+		\rowcolor{tableheadcolor}
+		\multicolumn{3}{|l|}{\bfseries Tatsächliches Resultat} \\ \hline 
+		& Attributmenge & Anzahl \\ \hline 
+		
+		1er-Attributmenge & \tabitem Anzahl Zimmer=3 & 9 \\ \cline{2-3} 
+		& \tabitem Anzahl Schlafzimmer=2 & 9 \\ \hline 
+		
+		2er-Attributmenge & \tabitem Anzahl Zimmer=3 & 9 \\
+		& \tabitem Anzahl Schlafzimmer=2 & \\ \hline
+		
+		\rowcolor{tableheadcolor}
+		\multicolumn{3}{|l|}{\bfseries Testergebnis} \\ \hline 
+		\multicolumn{3}{|l|}{\cellcolor{green!25}} \\ \hline 
+	\end{tabular}
+\end{table}
+\begin{table}[H] 
+	\caption{TC4 Auswertung}
+	\centering
+	\label{fig:testingfazit:testing:testcases:4}
+	\begin{tabular}{ | l | l | l | } 
+		\hline 
+		\rowcolor{tableheadcolor}
+		\multicolumn{3}{|l|}{\bfseries ID: TC4} \\ \hline 
+		Datebquelle & \multicolumn{2}{|l|}{\cref{app:testdatenquellen:4}} \\ \hline 
+		Dateneinschränkung & \multicolumn{2}{|l|}{Keine} \\ \hline 
+		
+		\rowcolor{tableheadcolor}
+		\multicolumn{3}{|l|}{\bfseries Erwartetes Resultat} \\ \hline 
+		& Attributmenge & Anzahl \\ \hline 
+		
+		1er-Attributmenge & \tabitem Haustiere erlaubt & 8 \\ \cline{2-3} 
+		& \tabitem Anzahl Schlafzimmer=3 & 9 \\ \hline 
+		
+		2er-Attributmenge & \tabitem Haustiere erlaubt & 8 \\
+		& \tabitem Anzahl Schlafzimmer=3 & \\ \hline
+		
+		\rowcolor{tableheadcolor}
+		\multicolumn{3}{|l|}{\bfseries Tatsächliches Resultat} \\ \hline 
+		& Attributmenge & Anzahl \\ \hline 
+		
+		1er-Attributmenge & \tabitem Haustiere erlaubt & 8 \\ \cline{2-3} 
+		& \tabitem Anzahl Schlafzimmer=3 & 9 \\ \hline 
+		
+		2er-Attributmenge & \tabitem Haustiere erlaubt & 8 \\
+		& \tabitem Anzahl Schlafzimmer=3 & \\ \hline
+		
+		\rowcolor{tableheadcolor}
+		\multicolumn{3}{|l|}{\bfseries Testergebnis} \\ \hline 
+		\multicolumn{3}{|l|}{\cellcolor{green!25}} \\ \hline 
+	\end{tabular}
+\end{table}
+\begin{table}[H] 
+	\caption{TC5 Auswertung}
+	\centering
+	\label{fig:testingfazit:testing:testcases:5}
+	\begin{tabular}{ | l | l | l | } 
+		\hline 
+		\rowcolor{tableheadcolor}
+		\multicolumn{3}{|l|}{\bfseries ID: TC5} \\ \hline 
+		Datebquelle & \multicolumn{2}{|l|}{\cref{app:testdatenquellen:5}} \\ \hline 
+		Dateneinschränkung & \multicolumn{2}{|l|}{Haustiere erlaubt} \\ \hline 
+		
+		\rowcolor{tableheadcolor}
+		\multicolumn{3}{|l|}{\bfseries Erwartetes Resultat} \\ \hline 
+		& Attributmenge & Anzahl \\ \hline 
+		
+		1er-Attributmenge & \tabitem Nahe am Wasser & 4 \\ \cline{2-3} 
+		& \tabitem Nahe am Meer & 5 \\ \hline 
+		
+		2er-Attributmenge & \tabitem Nahe am Wasser & 4 \\
+		& \tabitem Nahe am Meer & \\ \hline
+		
+		\rowcolor{tableheadcolor}
+		\multicolumn{3}{|l|}{\bfseries Tatsächliches Resultat} \\ \hline 
+		& Attributmenge & Anzahl \\ \hline 
+		
+		1er-Attributmenge & \tabitem Nahe am Wasser & 4 \\ \cline{2-3} 
+		& \tabitem Nahe am Meer & 5 \\ \hline 
+		
+		2er-Attributmenge & \tabitem Nahe am Wasser & 4 \\
+		& \tabitem Nahe am Meer & \\ \hline
+		
+		\rowcolor{tableheadcolor}
+		\multicolumn{3}{|l|}{\bfseries Testergebnis} \\ \hline 
+		\multicolumn{3}{|l|}{\cellcolor{green!25}} \\ \hline 
+	\end{tabular}
+\end{table}
+\begin{table}[H] 
+	\caption{TC6 Auswertung}
+	\centering
+	\label{fig:testingfazit:testing:testcases:6}
+	\begin{tabular}{ | l | l | l | } 
+		\hline 
+		\rowcolor{tableheadcolor}
+		\multicolumn{3}{|l|}{\bfseries ID: TC6} \\ \hline 
+		Datebquelle & \multicolumn{2}{|l|}{\cref{app:testdatenquellen:6}} \\ \hline 
+		Dateneinschränkung & \multicolumn{2}{|l|}{Nahe am ÖV (öffentlicher Verkehr)} \\ \hline 
+		
+		\rowcolor{tableheadcolor}
+		\multicolumn{3}{|l|}{\bfseries Erwartetes Resultat} \\ \hline 
+		& Attributmenge & Anzahl \\ \hline 
+		
+		1er-Attributmenge & \tabitem Nahe am Wasser & 3 \\ \cline{2-3} 
+		& \tabitem Nahe am Meer & 4 \\ \hline 
+		
+		2er-Attributmenge & \tabitem Nahe am Wasser & 3 \\
+		& \tabitem Nahe am Meer & \\ \hline
+		
+		\rowcolor{tableheadcolor}
+		\multicolumn{3}{|l|}{\bfseries Tatsächliches Resultat} \\ \hline 
+		& Attributmenge & Anzahl \\ \hline 
+		
+		1er-Attributmenge & \tabitem Nahe am Wasser & 3 \\ \cline{2-3} 
+		& \tabitem Nahe am Meer & 4 \\ \hline 
+		
+		2er-Attributmenge & \tabitem Nahe am Wasser & 3 \\
+		& \tabitem Nahe am Meer & \\ \hline
+		
+		\rowcolor{tableheadcolor}
+		\multicolumn{3}{|l|}{\bfseries Testergebnis} \\ \hline 
+		\multicolumn{3}{|l|}{\cellcolor{green!25}} \\ \hline 
+	\end{tabular}
+\end{table}
+\begin{table}[H] 
+	\caption{TC7 Auswertung}
+	\centering
+	\label{fig:testingfazit:testing:testcases:7}
+	\begin{tabular}{ | l | l | l | } 
+		\hline 
+		\rowcolor{tableheadcolor}
+		\multicolumn{3}{|l|}{\bfseries ID: TC7} \\ \hline 
+		Datebquelle & \multicolumn{2}{|l|}{\cref{app:testdatenquellen:7}} \\ \hline 
+		Dateneinschränkung & \multicolumn{2}{|l|}{Anzahl Zimmer=3} \\ \hline 
+		
+		\rowcolor{tableheadcolor}
+		\multicolumn{3}{|l|}{\bfseries Erwartetes Resultat} \\ \hline 
+		& Attributmenge & Anzahl \\ \hline 
+		
+		1er-Attributmenge & \tabitem Nahe am Wasser & 5 \\ \cline{2-3} 
+		& \tabitem Nahe am Meer & 3 \\ \hline 
+		
+		2er-Attributmenge & \tabitem Nahe am Wasser & 3 \\
+		& \tabitem Nahe am Meer & \\ \hline
+		
+		\rowcolor{tableheadcolor}
+		\multicolumn{3}{|l|}{\bfseries Tatsächliches Resultat} \\ \hline 
+		& Attributmenge & Anzahl \\ \hline 
+		
+		1er-Attributmenge & \tabitem Nahe am Wasser & 5 \\ \cline{2-3} 
+		& \tabitem Nahe am Meer & 3 \\ \hline 
+		
+		2er-Attributmenge & \tabitem Nahe am Wasser & 3 \\
+		& \tabitem Nahe am Meer & \\ \hline
+		
+		\rowcolor{tableheadcolor}
+		\multicolumn{3}{|l|}{\bfseries Testergebnis} \\ \hline 
+		\multicolumn{3}{|l|}{\cellcolor{green!25}} \\ \hline 
+	\end{tabular}
+\end{table}
+\begin{table}[H] 
+	\caption{TC8 Auswertung}
+	\centering
+	\label{fig:testingfazit:testing:testcases:8}
+	\begin{tabular}{ | l | l | l | } 
+		\hline 
+		\rowcolor{tableheadcolor}
+		\multicolumn{3}{|l|}{\bfseries ID: TC8} \\ \hline 
+		Datebquelle & \multicolumn{2}{|l|}{\cref{app:testdatenquellen:8}} \\ \hline 
+		Dateneinschränkung & \multicolumn{2}{|l|}{Keine} \\ \hline 
+		
+		\rowcolor{tableheadcolor}
+		\multicolumn{3}{|l|}{\bfseries Erwartetes Resultat} \\ \hline 
+		& Attributmenge & Anzahl \\ \hline 
+		
+		1er-Attributmenge & \tabitem Nahe am Wasser & 14 \\ \cline{2-3} 
+		& \tabitem Nahe am Meer & 13 \\ \cline{2-3} 
+		& \tabitem Haustiere erlaubt & 12 \\ \hline 
+		
+		2er-Attributmenge & \tabitem Nahe am Wasser & 11 \\
+		& \tabitem Nahe am Meer & \\ \cline{2-3} 
+		& \tabitem Nahe am Wasser & 10 \\
+		& \tabitem Haustiere erlaubt & \\ \cline{2-3} 
+		& \tabitem Nahe am Meer & 9 \\
+		& \tabitem Haustiere erlaubt & \\ \hline
+		
+		3er-Attributmenge & \tabitem Nahe am Wasser & 8 \\
+		& \tabitem Nahe am Meer & \\ 
+		& \tabitem Haustiere erlaubt & \\ \hline
+		
+		\rowcolor{tableheadcolor}
+		\multicolumn{3}{|l|}{\bfseries Tatsächliches Resultat} \\ \hline 
+		& Attributmenge & Anzahl \\ \hline 
+		
+		1er-Attributmenge & \tabitem Nahe am Wasser & 14 \\ \cline{2-3} 
+		& \tabitem Nahe am Meer & 13 \\ \cline{2-3} 
+		& \tabitem Haustiere erlaubt & 12 \\ \hline 
+		
+		2er-Attributmenge & \tabitem Nahe am Wasser & 11 \\
+		& \tabitem Nahe am Meer & \\ \cline{2-3} 
+		& \tabitem Nahe am Wasser & 10 \\
+		& \tabitem Haustiere erlaubt & \\ \cline{2-3} 
+		& \tabitem Nahe am Meer & 9 \\
+		& \tabitem Haustiere erlaubt & \\ \hline
+		
+		3er-Attributmenge & \tabitem Nahe am Wasser & 8 \\
+		& \tabitem Nahe am Meer & \\ 
+		& \tabitem Haustiere erlaubt & \\ \hline
+		
+		\rowcolor{tableheadcolor}
+		\multicolumn{3}{|l|}{\bfseries Testergebnis} \\ \hline 
+		\multicolumn{3}{|l|}{\cellcolor{green!25}} \\ \hline 
+	\end{tabular}
+\end{table}
+\begin{table}[H] 
+	\caption{TC9 Auswertung}
+	\centering
+	\label{fig:testingfazit:testing:testcases:9}
+	\begin{tabular}{ | l | l | l | } 
+		\hline 
+		\rowcolor{tableheadcolor}
+		\multicolumn{3}{|l|}{\bfseries ID: TC9} \\ \hline 
+		Datebquelle & \multicolumn{2}{|l|}{\cref{app:testdatenquellen:9}} \\ \hline 
+		Dateneinschränkung & \multicolumn{2}{|l|}{Keine} \\ \hline 
+		
+		\rowcolor{tableheadcolor}
+		\multicolumn{3}{|l|}{\bfseries Erwartetes Resultat} \\ \hline 
+		& Attributmenge & Anzahl \\ \hline 
+		
+		1er-Attributmenge & \tabitem Nahe am Wasser & 8 \\ \cline{2-3} 
+		& \tabitem Nahe am Meer & 8 \\ \cline{2-3} 
+		& \tabitem Haustiere erlaubt & 9 \\ \cline{2-3} 
+		& \tabitem Anzahl Zimmer=3 & 9 \\ \hline
+		
+		2er-Attributmenge & \tabitem Nahe am Wasser & 8 \\
+		& \tabitem Nahe am Meer & \\ \cline{2-3} 
+		& \tabitem Haustiere erlaubt & 9 \\
+		& \tabitem Anzahl Zimmer=3 & \\ \hline
+		
+		\rowcolor{tableheadcolor}
+		\multicolumn{3}{|l|}{\bfseries Tatsächliches Resultat} \\ \hline 
+		& Attributmenge & Anzahl \\ \hline 
+		
+		1er-Attributmenge & \tabitem Nahe am Wasser & 8 \\ \cline{2-3} 
+		& \tabitem Nahe am Meer & 8 \\ \cline{2-3} 
+		& \tabitem Haustiere erlaubt & 9 \\ \cline{2-3} 
+		& \tabitem Anzahl Zimmer=3 & 9 \\ \hline
+		
+		2er-Attributmenge & \tabitem Nahe am Wasser & 8 \\
+		& \tabitem Nahe am Meer & \\ \cline{2-3} 
+		& \tabitem Haustiere erlaubt & 9 \\
+		& \tabitem Anzahl Zimmer=3 & \\ \hline
+		
+		\rowcolor{tableheadcolor}
+		\multicolumn{3}{|l|}{\bfseries Testergebnis} \\ \hline 
+		\multicolumn{3}{|l|}{\cellcolor{green!25}} \\ \hline 
+	\end{tabular}
+\end{table}
+\begin{longtable}{ | l | l | l | l |} 	
+	\hline 
+	\rowcolor{tableheadcolor}
+	\multicolumn{4}{|l|}{\bfseries ID: TC10} \\ \hline 
+	Datebquelle & \multicolumn{3}{|l|}{\cref{app:testdatenquellen:10}} \\ \hline 
+	Dateneinschränkung & \multicolumn{3}{|l|}{Keine} \\ \hline 
+	
+	\rowcolor{tableheadcolor}
+	\multicolumn{4}{|l|}{\bfseries Erwartetes Resultat} \\ \hline 
+	Noise Punkte & \multicolumn{3}{|l|}{0} \\ \hline 
+	
+	% ----------------------------------------------		
+	\multicolumn{4}{|l|}{\textbf{Cluster 1}} \\ \cline{2-4} 
+	& Fehler & \multicolumn{2}{|l|}{0} \\ \cline{2-4} 
+	& Grösse & \multicolumn{2}{|l|}{5} \\ \cline{2-4} 
+	&& Attributmenge & Anzahl \\ \cline{2-4} 
+	
+	& 1er-Attributmenge & \tabitem Nahe am Wasser & 5 \\ \cline{3-4} 
+	& & \tabitem Nahe am Meer & 5 \\ \cline{3-4} 
+	& & \tabitem Anzahl Zimmer=3 & 5 \\ \cline{3-4} 
+	& & \tabitem Anzahl Schlafzimmer=2 & 5 \\ \cline{2-4} 
+	
+	& 2er-Attributmenge & \tabitem Nahe am Wasser & 5 \\
+	& & \tabitem Nahe am Meer & \\ \cline{3-4} 
+	& & \tabitem Nahe am Wasser & 5 \\
+	& & \tabitem Anzahl Zimmer=3 & \\ \cline{3-4} 
+	& & \tabitem Nahe am Wasser & 5 \\
+	& & \tabitem Anzahl Schlafzimmer=2 & \\ \cline{3-4} 
+	
+	& & \tabitem Nahe am Meer & 5 \\
+	& & \tabitem Anzahl Zimmer=3 & \\ \cline{3-4} 
+	& & \tabitem Nahe am Meer & 5 \\
+	& & \tabitem Anzahl Schlafzimmer=2 & \\ \cline{3-4} 
+	
+	& & \tabitem Anzahl Zimmer=3 & 5 \\
+	& & \tabitem Anzahl Schlafzimmer=2 & \\ \cline{2-4} 
+	
+	& 3er-Attributmenge & \tabitem Nahe am Wasser & 5 \\
+	& & \tabitem Nahe am Meer & \\ 
+	& & \tabitem Anzahl Zimmer=3 & \\ \cline{3-4} 
+	& & \tabitem Nahe am Wasser & 5 \\
+	& & \tabitem Nahe am Meer & \\ 
+	& & \tabitem Anzahl Schlafzimmer=2 & \\ \cline{3-4}
+	& & \tabitem Nahe am Meer & 5 \\
+	& & \tabitem Anzahl Zimmer=3 & \\ 
+	& & \tabitem Anzahl Schlafzimmer=2 & \\ \cline{2-4}
+	
+	& 4er-Attributmenge & \tabitem Nahe am Wasser & 5 \\
+	& & \tabitem Nahe am Meer & \\ 
+	& & \tabitem Anzahl Zimmer=3 & \\ 
+	& & \tabitem Anzahl Schlafzimmer=2 & \\ \hline
+	
+	% ----------------------------------------------
+	\multicolumn{4}{|l|}{\textbf{Cluster 2}} \\ \cline{2-4} 
+	& Fehler & \multicolumn{2}{|l|}{0} \\ \cline{2-4} 
+	& Grösse & \multicolumn{2}{|l|}{4} \\ \cline{2-4} 
+	& & Attributmenge & Anzahl \\ \cline{2-4} 
+	
+	& 1er-Attributmenge & \tabitem Wochenpreis=günstig & 4 \\ \cline{3-4}
+	& & \tabitem Anzahl Zimmer=9 & 4 \\ \cline{3-4}
+	& & \tabitem Anzahl Schlafzimmer=9 & 4 \\ \cline{2-4} 
+	
+	& 2er-Attributmenge & \tabitem Wochenpreis=günstig & 4 \\
+	& & \tabitem Anzahl Zimmer=9 & \\ \cline{3-4}
+	& & \tabitem Wochenpreis=günstig & 4 \\
+	& & \tabitem Anzahl Schlafzimmer=9 & \\ \cline{3-4} 
+	& & \tabitem Anzahl Zimmer=9 & 4 \\
+	& & \tabitem Anzahl Schlafzimmer=9 & \\ \cline{2-4}
+	
+	& 3er-Attributmenge & \tabitem Wochenpreis=günstig & 4 \\
+	& & \tabitem Anzahl Zimmer=9 & \\ 
+	& & \tabitem Anzahl Schlafzimmer=9 & \\ \hline
+	
+	\rowcolor{tableheadcolor}
+	\multicolumn{4}{|l|}{\bfseries Tatsächliches Resultat} \\ \hline 
+	Noise Punkte & \multicolumn{3}{|l|}{0} \\ \hline 
+	
+	% ----------------------------------------------		
+	\multicolumn{4}{|l|}{\textbf{Cluster 1}} \\ \cline{2-4} 
+	& Fehler & \multicolumn{2}{|l|}{0} \\ \cline{2-4} 
+	& Grösse & \multicolumn{2}{|l|}{5} \\ \cline{2-4} 
+	&& Attributmenge & Anzahl \\ \cline{2-4} 
+	
+	& 1er-Attributmenge & \tabitem Nahe am Wasser & 5 \\ \cline{3-4} 
+	& & \tabitem Nahe am Meer & 5 \\ \cline{3-4} 
+	& & \tabitem Anzahl Zimmer=3 & 5 \\ \cline{3-4} 
+	& & \tabitem Anzahl Schlafzimmer=2 & 5 \\ \cline{2-4} 
+	
+	& 2er-Attributmenge & \tabitem Nahe am Wasser & 5 \\
+	& & \tabitem Nahe am Meer & \\ \cline{3-4} 
+	& & \tabitem Nahe am Wasser & 5 \\
+	& & \tabitem Anzahl Zimmer=3 & \\ \cline{3-4} 
+	& & \tabitem Nahe am Wasser & 5 \\
+	& & \tabitem Anzahl Schlafzimmer=2 & \\ \cline{3-4} 
+	
+	& & \tabitem Nahe am Meer & 5 \\
+	& & \tabitem Anzahl Zimmer=3 & \\ \cline{3-4} 
+	& & \tabitem Nahe am Meer & 5 \\
+	& & \tabitem Anzahl Schlafzimmer=2 & \\ \cline{3-4} 
+	
+	& & \tabitem Anzahl Zimmer=3 & 5 \\
+	& & \tabitem Anzahl Schlafzimmer=2 & \\ \cline{2-4} 
+	
+	& 3er-Attributmenge & \tabitem Nahe am Wasser & 5 \\
+	& & \tabitem Nahe am Meer & \\ 
+	& & \tabitem Anzahl Zimmer=3 & \\ \cline{3-4} 
+	& & \tabitem Nahe am Wasser & 5 \\
+	& & \tabitem Nahe am Meer & \\ 
+	& & \tabitem Anzahl Schlafzimmer=2 & \\ \cline{3-4}
+	& & \tabitem Nahe am Meer & 5 \\
+	& & \tabitem Anzahl Zimmer=3 & \\ 
+	& & \tabitem Anzahl Schlafzimmer=2 & \\ \cline{2-4}
+	
+	& 4er-Attributmenge & \tabitem Nahe am Wasser & 5 \\
+	& & \tabitem Nahe am Meer & \\ 
+	& & \tabitem Anzahl Zimmer=3 & \\ 
+	& & \tabitem Anzahl Schlafzimmer=2 & \\ \hline
+	
+	% ----------------------------------------------
+	\multicolumn{4}{|l|}{\textbf{Cluster 2}} \\ \cline{2-4} 
+	& Fehler & \multicolumn{2}{|l|}{0} \\ \cline{2-4} 
+	& Grösse & \multicolumn{2}{|l|}{4} \\ \cline{2-4} 
+	& & Attributmenge & Anzahl \\ \cline{2-4} 
+	
+	& 1er-Attributmenge & \tabitem Wochenpreis=günstig & 4 \\ \cline{3-4}
+	& & \tabitem Anzahl Zimmer=9 & 4 \\ \cline{3-4}
+	& & \tabitem Anzahl Schlafzimmer=9 & 4 \\ \cline{2-4} 
+	
+	& 2er-Attributmenge & \tabitem Wochenpreis=günstig & 4 \\
+	& & \tabitem Anzahl Zimmer=9 & \\ \cline{3-4}
+	& & \tabitem Wochenpreis=günstig & 4 \\
+	& & \tabitem Anzahl Schlafzimmer=9 & \\ \cline{3-4} 
+	& & \tabitem Anzahl Zimmer=9 & 4 \\
+	& & \tabitem Anzahl Schlafzimmer=9 & \\ \cline{2-4}
+	
+	& 3er-Attributmenge & \tabitem Wochenpreis=günstig & 4 \\
+	& & \tabitem Anzahl Zimmer=9 & \\ 
+	& & \tabitem Anzahl Schlafzimmer=9 & \\ \hline
+	
+	\rowcolor{tableheadcolor}
+	\multicolumn{4}{|l|}{\bfseries Testergebnis} \\ \hline 
+	\multicolumn{4}{|l|}{\cellcolor{green!25}} \\ \hline 
+	
+	\caption{TC10 Auswertung}
+	\centering
+	\label{fig:testingfazit:testing:testcases:10}
+\end{longtable}
+\begin{longtable}{ | l | l | l | l |} 	
+	\hline 
+	\rowcolor{tableheadcolor}
+	\multicolumn{4}{|l|}{\bfseries ID: TC11-1 DBSCAN} \\ \hline 
+	Datebquelle & \multicolumn{3}{|l|}{\cref{app:testdatenquellen:11}} \\ \hline 
+	Dateneinschränkung & \multicolumn{3}{|l|}{Keine} \\ \hline 
+	
+	\rowcolor{tableheadcolor}
+	\multicolumn{4}{|l|}{\bfseries Erwartetes Resultat} \\ \hline 
+	Noise Punkte & \multicolumn{3}{|l|}{1} \\ \hline 
+	
+	% ----------------------------------------------		
+	\multicolumn{4}{|l|}{\textbf{Cluster 1}} \\ \cline{2-4} 
+	& Grösse & \multicolumn{2}{|l|}{9} \\ \cline{2-4} 
+	&& Attributmenge & Anzahl \\ \cline{2-4} 
+	
+	& 1er-Attributmenge & \tabitem Nahe am Wasser & 9 \\ \cline{3-4} 
+	& & \tabitem Nahe am Meer & 9 \\ \cline{3-4} 
+	& & \tabitem Anzahl Zimmer=3 & 9 \\ \cline{3-4} 
+	& & \tabitem Anzahl Schlafzimmer=2 & 9 \\ \cline{2-4} 
+	
+	& 2er-Attributmenge & \tabitem Nahe am Wasser & 9 \\
+	& & \tabitem Nahe am Meer & \\ \cline{3-4} 
+	& & \tabitem Nahe am Wasser & 9 \\
+	& & \tabitem Anzahl Zimmer=3 & \\ \cline{3-4} 
+	& & \tabitem Nahe am Wasser & 9 \\
+	& & \tabitem Anzahl Schlafzimmer=2 & \\ \cline{3-4} 
+	
+	& & \tabitem Nahe am Meer & 9 \\
+	& & \tabitem Anzahl Zimmer=3 & \\ \cline{3-4} 
+	& & \tabitem Nahe am Meer & 9 \\
+	& & \tabitem Anzahl Schlafzimmer=2 & \\ \cline{3-4} 
+	
+	& & \tabitem Anzahl Zimmer=3 & 9 \\
+	& & \tabitem Anzahl Schlafzimmer=2 & \\ \cline{2-4} 
+	
+	& 3er-Attributmenge & \tabitem Nahe am Wasser & 9 \\
+	& & \tabitem Nahe am Meer & \\ 
+	& & \tabitem Anzahl Zimmer=3 & \\ \cline{3-4} 
+	& & \tabitem Nahe am Wasser & 9 \\
+	& & \tabitem Nahe am Meer & \\ 
+	& & \tabitem Anzahl Schlafzimmer=2 & \\ \cline{3-4}
+	& & \tabitem Nahe am Meer & 9 \\
+	& & \tabitem Anzahl Zimmer=3 & \\ 
+	& & \tabitem Anzahl Schlafzimmer=2 & \\ \cline{2-4}
+	
+	& 4er-Attributmenge & \tabitem Nahe am Wasser & 9 \\
+	& & \tabitem Nahe am Meer & \\ 
+	& & \tabitem Anzahl Zimmer=3 & \\ 
+	& & \tabitem Anzahl Schlafzimmer=2 & \\ \hline
+	
+	\rowcolor{tableheadcolor}
+	\multicolumn{4}{|l|}{\bfseries Tatsächliches Resultat} \\ \hline 
+	Noise Punkte & \multicolumn{3}{|l|}{1} \\ \hline 
+	
+	% ----------------------------------------------		
+	\multicolumn{4}{|l|}{\textbf{Cluster 1}} \\ \cline{2-4} 
+	& Grösse & \multicolumn{2}{|l|}{9} \\ \cline{2-4} 
+	&& Attributmenge & Anzahl \\ \cline{2-4} 
+	
+	& 1er-Attributmenge & \tabitem Nahe am Wasser & 9 \\ \cline{3-4} 
+	& & \tabitem Nahe am Meer & 9 \\ \cline{3-4} 
+	& & \tabitem Anzahl Zimmer=3 & 9 \\ \cline{3-4} 
+	& & \tabitem Anzahl Schlafzimmer=2 & 9 \\ \cline{2-4} 
+	
+	& 2er-Attributmenge & \tabitem Nahe am Wasser & 9 \\
+	& & \tabitem Nahe am Meer & \\ \cline{3-4} 
+	& & \tabitem Nahe am Wasser & 9 \\
+	& & \tabitem Anzahl Zimmer=3 & \\ \cline{3-4} 
+	& & \tabitem Nahe am Wasser & 9 \\
+	& & \tabitem Anzahl Schlafzimmer=2 & \\ \cline{3-4} 
+	
+	& & \tabitem Nahe am Meer & 9 \\
+	& & \tabitem Anzahl Zimmer=3 & \\ \cline{3-4} 
+	& & \tabitem Nahe am Meer & 9 \\
+	& & \tabitem Anzahl Schlafzimmer=2 & \\ \cline{3-4} 
+	
+	& & \tabitem Anzahl Zimmer=3 & 9 \\
+	& & \tabitem Anzahl Schlafzimmer=2 & \\ \cline{2-4} 
+	
+	& 3er-Attributmenge & \tabitem Nahe am Wasser & 9 \\
+	& & \tabitem Nahe am Meer & \\ 
+	& & \tabitem Anzahl Zimmer=3 & \\ \cline{3-4} 
+	& & \tabitem Nahe am Wasser & 9 \\
+	& & \tabitem Nahe am Meer & \\ 
+	& & \tabitem Anzahl Schlafzimmer=2 & \\ \cline{3-4}
+	& & \tabitem Nahe am Meer & 9 \\
+	& & \tabitem Anzahl Zimmer=3 & \\ 
+	& & \tabitem Anzahl Schlafzimmer=2 & \\ \cline{2-4}
+	
+	& 4er-Attributmenge & \tabitem Nahe am Wasser & 9 \\
+	& & \tabitem Nahe am Meer & \\ 
+	& & \tabitem Anzahl Zimmer=3 & \\ 
+	& & \tabitem Anzahl Schlafzimmer=2 & \\ \hline
+	
+	\rowcolor{tableheadcolor}
+	\multicolumn{4}{|l|}{\bfseries Testergebnis} \\ \hline 
+	\multicolumn{4}{|l|}{\cellcolor{green!25}} \\ \hline 
+	
+	\caption{TC11-1 Auswertung: Erwartetes Resultat vom DBSCAN Algorithmus}
+	\centering
+	\label{fig:testingfazit:testing:testcases:11:1}
+\end{longtable}
+\begin{longtable}{ | l | l | l | l |} 	
+	\hline 
+	\rowcolor{tableheadcolor}
+	\multicolumn{4}{|l|}{\bfseries ID: TC11-2 KPrototype} \\ \hline 
+	Datebquelle & \multicolumn{3}{|l|}{\cref{app:testdatenquellen:11}} \\ \hline 
+	Dateneinschränkung & \multicolumn{3}{|l|}{Keine} \\ \hline 
+	
+	\rowcolor{tableheadcolor}
+	\multicolumn{4}{|l|}{\bfseries Erwartetes Resultat} \\ \hline 
+	
+	\multicolumn{4}{|l|}{\textbf{Cluster 1}} \\ \cline{2-4} 
+	& Fehler & \multicolumn{2}{|l|}{0} \\ \cline{2-4} 
+	& Grösse & \multicolumn{2}{|l|}{9} \\ \cline{2-4} 
+	& \multicolumn{3}{|L{7.5cm}|}{Das Resultat der Analyse dieses Clusters vom Apriori Algorithmus ist dasselbe wie jenes vom DBSCAN welches oben aufgeführt wurde. Zur Verbesserung der Übersicht wird das Resultat hier nicht noch einmal aufgeführt.} \\ \hline
+	
+	\multicolumn{4}{|l|}{\textbf{Cluster 2}} \\ \cline{2-4} 
+	& Fehler & \multicolumn{2}{|l|}{0} \\ \cline{2-4} 
+	& Grösse & \multicolumn{2}{|l|}{1} \\ \cline{2-4} 
+	& \multicolumn{3}{|L{7.5cm}|}{Der Apriori Algorithmus findet keine häufigen Attribute, da $minsup$ auf 3 gesetzt ist und nur 1 Element in diesem Cluster vorhanden ist.} \\ \hline
+	
+	
+	\rowcolor{tableheadcolor}
+	\multicolumn{4}{|l|}{\bfseries Tatsächliches Resultat} \\ \hline 
+	
+	\multicolumn{4}{|l|}{\textbf{Cluster 1}} \\ \cline{2-4} 
+	& Fehler & \multicolumn{2}{|l|}{0} \\ \cline{2-4} 
+	& Grösse & \multicolumn{2}{|l|}{9} \\ \cline{2-4} 
+	& \multicolumn{3}{|L{7.5cm}|}{Das Resultat der Analyse dieses Clusters vom Apriori Algorithmus ist dasselbe wie jenes vom DBSCAN welches oben aufgeführt wurde. Zur Verbesserung der Übersicht wird das Resultat hier nicht noch einmal aufgeführt.} \\ \hline
+	
+	\multicolumn{4}{|l|}{\textbf{Cluster 2}} \\ \cline{2-4} 
+	& Fehler & \multicolumn{2}{|l|}{0} \\ \cline{2-4} 
+	& Grösse & \multicolumn{2}{|l|}{1} \\ \cline{2-4} 
+	& \multicolumn{3}{|L{7.5cm}|}{Der Apriori Algorithmus findet keine häufigen Attribute, da $minsup$ auf 3 gesetzt ist und nur 1 Element in diesem Cluster vorhanden ist.} \\ \hline
+	
+	\rowcolor{tableheadcolor}
+	\multicolumn{4}{|l|}{\bfseries Testergebnis} \\ \hline 
+	\multicolumn{4}{|l|}{\cellcolor{green!25}} \\ \hline 
+	
+	\caption{TC11-2 Auswertung: Erwartetes Resultat vom KPrototype Algorithmus}
+	\centering
+	\label{fig:testingfazit:testing:testcases:11:2}
+\end{longtable}
+
+\section{Fazit}
 
 \section{Mögliche Erweiterungen/Verbesserungen}
 Diskretiesierungsschritte \cref{sec:recherche:datenvorbereitung} nach Häufigkeitsanalyse.
