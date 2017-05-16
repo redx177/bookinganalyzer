@@ -143,6 +143,8 @@ Leider gibt es nur sehr grundlegendes Wissen über bestehende Muster der Buchung
 \paragraph{Hypothese 3} Schweizer Kunden buchen meistens Objekte in der Schweiz.
 \paragraph{Hypothese 4} Bei Destinationen mit Meer Anschluss werden öfters Objekte mit mehreren Schlafzimmern gebucht, da Familien eher Strandurlaub betreiben als Städtereisen.
 \paragraph{Hypothese 5} In Schweizer Skiregionen werden die meisten Objekte gebucht weil die Gäste Skifahren gehen. Dazu müssen sie direkt am Skigebiet wohnen oder einen Anschluss dazu haben. Deshalb sollte diese Arbeit zeigen können, dass Objekte welche in Schweizer Skiregionen gebucht werden entweder nahe am Skilift liegen oder nahe am öffentlichen Verkehr.
+\paragraph{Hypothese 6} Zu kalten Jahreszeiten wird von Schweizern mehr Regionen am Meer gebucht als im Sommer.
+\paragraph{Hypothese 7} Anfang des Jahres werden teurere Objekte gebucht als im Oktober, da der dreizente Monatslohn eingetroffen ist.
 
 %No filters:
 %	Customer Country=ch						23338 - 20.94
@@ -166,7 +168,7 @@ Leider gibt es nur sehr grundlegendes Wissen über bestehende Muster der Buchung
 %	Object Place=grindelwald				1442 - 1.29
 %	Object Place=ascona						1215 - 1.09
 %
-%Customer, distances and location
+%Filter Customer (distances and location)
 %	IT: Weekly price=1 			953 - 50.48 
 %		Close to pubt=1 		722 - 38.24 
 %		Close to water=1 		472 - 25.00
@@ -179,7 +181,7 @@ Leider gibt es nur sehr grundlegendes Wissen über bestehende Muster der Buchung
 %		Weekly price=2				7274 - 31.17
 %		Close to center=1			6015 - 25.77
 %		
-%Customer, location
+%Filter Customer (location)
 %	CH: Object Country=switzerland	11492 - 49.24
 %		Object Country=france		1714 - 7.34
 %		Object Country=italy		1632 - 6.99
@@ -200,7 +202,7 @@ Leider gibt es nur sehr grundlegendes Wissen über bestehende Muster der Buchung
 %	IT:	Object Region=cote d'azur		176 - 9.32
 %		Object Region=valais			97 - 5.14
 %	
-%Object, distances and location
+%Filter Object (distances and location)
 %	Zermatt: 
 %				Close to pubt=1				1090 - 71.15
 %				Close to ski=1				1024 - 66.84
@@ -219,7 +221,7 @@ Leider gibt es nur sehr grundlegendes Wissen über bestehende Muster der Buchung
 %				Close to center=1			134 - 55.37
 %				Customer Country=ch			125 - 51.65
 %
-%Object, location				
+%Filter Object (location)				
 %	Wallis: 	Customer Country=ch			4999 - 49.71
 %				Customer Country=nl			987 - 9.82
 %				Customer Country=fr			868 - 8.63
@@ -232,7 +234,7 @@ Leider gibt es nur sehr grundlegendes Wissen über bestehende Muster der Buchung
 %				Object Place=ovronnaz		956 - 9.51
 %				Object Place=leukerbad		704 - 7.00
 %				Object Place=siviez-nendaz	636 - 6.32
-%Object, rooms/bedrooms
+%Filter Object (rooms/bedrooms)
 %	Zermatt: 	Bedrooms=1			877 - 57.25
 %				Bedrooms=2			372 - 24.28
 %				Bedrooms=3			163 - 10.64
@@ -280,6 +282,68 @@ Leider gibt es nur sehr grundlegendes Wissen über bestehende Muster der Buchung
 %Family? -->			Pax=6,Bedrooms=3		18 - 3.93
 %					Bedrooms=4,Pax=5		17 - 3.71
 %Jugi? -->			Bedrooms=1,Pax=4		17 - 3.71
+%
+% Winter mehr Strandbuchungen?
+%Filter Customer=CH, Month (Object Region)
+%	Juli (1892):			
+%					Object Region=valais			363 - 19.19%
+%					Object Region=ticino			209 - 11.05%
+%					Object Place=nendaz				103 - 5.44%
+%					...
+%					Object Region=cote d'azur		76 - 4.02%
+%					Object Region=costa blanca		39 - 2.06%
+%					Object Place=leukerbad			36 - 1.90%
+%					Object Region=tuscany coast		33 - 1.74%
+%	Januar (2924):		
+%					Object Region=valais			648 - 22.16%
+%					Object Region=ticino			254 - 8.69%
+%					Object Place=nendaz				167 - 5.71%
+%					...
+%					Object Region=cote d'azur		68 - 2.33%
+%					Object Place=leukerbad			57 - 1.95%
+%					Object Region=costa blanca		56 - 1.92%
+%					Object Region=tuscany coast		43 - 1.47%
+%	Dez/Jan/Feb (6718):	
+%					Object Region=valais			1525 - 22.70%
+%					Object Region=ticino			615 - 9.15%
+%					Object Place=nendaz				374 - 5.57%
+%					...
+%					Object Region=cote d'azur		185 - 2.75%
+%					Object Region=costa blanca		135 - 2.01%
+%					Object Place=leukerbad			116 - 1.73%
+%					Object Region=tuscany coast		106 - 1.58%
+%	Jul/Aug/Sep (6090):	
+%					Object Region=valais			1362 - 22.36%
+%					Object Region=ticino			619 - 10.16%
+%					Object Place=nendaz				433 - 7.11%
+%					...
+%					Object Region=cote d'azur		196 - 3.22%
+%					Object Place=leukerbad			160 - 2.63%
+%					Object Region=costa blanca		122 - 2.00%
+%					Object Region=tuscany coast		119 - 1.95%
+%
+% Teurere Buchungen anfang Jahr?
+%Month (price) (worldwide!!)
+%	Januar (14041):	
+%					Weekly price=1					4741 - 33.77%
+%					Weekly price=2					3933 - 28.01%	
+%	Februar (11328):
+%					Weekly price=1					3988 - 35.20%
+%					Weekly price=2					3253 - 28.72%
+%	Dezember (6860):
+%					Weekly price=1					2311 - 33.69%
+%					Weekly price=2					1921 - 28.00%
+%	Juni (8969):
+%					Weekly price=1					2785 - 31.05%
+%					Weekly price=2					2731 - 30.45%
+%	November (6697):
+%					Weekly price=1					2115 - 31.58%
+%					Weekly price=2					2033 - 30.36%
+	
+					
+					
+					
+
 
 
 \section{Abgrenzung}

@@ -214,9 +214,9 @@ Ebenfalls wird der Wochenpreise in nachfolgende Intervalle unterteilt.
 		\hline 
 		\rowcolor{tableheadcolor}
 		\bfseries Min & \bfseries Max & \bfseries Wert \\ \hline 
-		0 & 200 & budget \\ \hline 
-		201 & 400 &  \\ \hline 
-		401 & $\infty$ & luxury \\ \hline 
+		0 & 2000 & budget \\ \hline 
+		2001 & 7999 &  \\ \hline 
+		8000 & $\infty$ & luxury \\ \hline 
 	\end{tabular}
 \end{table}
 
@@ -224,16 +224,14 @@ Bei den Distanzen sind kleine Werte spannend, welche angeben dass ein Objekt nah
 
 Bei den Preisen hingegen ist es interessant, wenn ein Objekt besonders günstig oder teuer ist. Deshalb wurden zwei Intervalle definiert. Nämlich 0 bis 200 und 401 aufwärts. Alles dazwischen wird nicht weiter behandelt.
 
-Diese Datenreduktion wird vorgenommen, da dadurch die Informationen auch von der Apriori-Analyse verwendet werden kann. Diese zählt nur exakte Übereinstimmungen. Sprich zwei Objekte, welche CHF 1 auseinander liegen wären gleich unterschiedlich als wenn deren Unterschied CHF 1'000 beträge.
+Diese Datenreduktion wird vorgenommen, da dadurch die Informationen auch von der Apriori-Analyse verwendet werden kann. Dieser zählt nur exakte Übereinstimmungen. Die Grenzwerte der diskretierungen wurden mit Interhome abgesprochen, da diese bereits intern entsprechend verwendet werden.
 
-Die Schwellwerte der diskretierungen wurden mit Interhome abgesprochen.
-
-\begin{itemize}
-%\item Das Datenformat wurde für die einfachere programmatische Handhabung von Windows Excel in das \gls{csv}-Format transferiert.
-\item Boolsche Werte ist entweder leer (gleichbedeutend mit "`0"') oder "`X"' (gleichbedeutend mit "`1"'). Die Werte werden geändert auf 0 und 1.
-\item Distanzen in den Zeilen AK (Distanz zum Wasser), AL (Distanz zum Skigebiet), AM (Distanz zum öffentlichen Verkehr), DZ (Distanz zum Zentrum), EA (Distanz bis zum Meer) und EB (Distanz bis zum See) werden diskretisiert. Dabei interessiert es Interhome nur, wenn die Nähe kleiner als 500 ist. Alles über oder gleich 500 wird nicht verwendet. Siehe \cref{fig:recherche:datenvorbereitung:1}.
-\item Der Preis wird normiert auf Wochenpreise. wurde diskretisiert. Spannend für die Interpretation sind nur werte welche kleiner als 500 sind oder über 2000. Siehe \cref{fig:recherche:datenvorbereitung:2}.
-\end{itemize}
+%\begin{itemize}
+%%\item Das Datenformat wurde für die einfachere programmatische Handhabung von Windows Excel in das \gls{csv}-Format transferiert.
+%\item Boolsche Werte ist entweder leer (gleichbedeutend mit "`0"') oder "`X"' (gleichbedeutend mit "`1"'). Die Werte werden geändert auf 0 und 1.
+%\item Distanzen in den Zeilen AK (Distanz zum Wasser), AL (Distanz zum Skigebiet), AM (Distanz zum öffentlichen Verkehr), DZ (Distanz zum Zentrum), EA (Distanz bis zum Meer) und EB (Distanz bis zum See) werden diskretisiert. Dabei interessiert es Interhome nur, wenn die Nähe kleiner als 500 ist. Alles über oder gleich 500 wird nicht verwendet. Siehe \cref{fig:recherche:datenvorbereitung:1}.
+%\item Der Preis wird normiert auf Wochenpreise. wurde diskretisiert. Spannend für die Interpretation sind nur werte welche kleiner als 500 sind oder über 2000. Siehe \cref{fig:recherche:datenvorbereitung:2}.
+%\end{itemize}
 
 In den Tabellen \ref{fig:recherche:datenvorbereitung:3} und \ref{fig:recherche:datenvorbereitung:4} wird ein Beispiel gegeben. In der ersten Tabelle sind Buchungen vor der diskretisierung aufgeführt und in der zweiten danach. Distanzwerte von 500 oder mehr und Preise zwischen 499 und 2000 wurden entfernt. Dies ist zum Beispiel bei dem Wert "`Distanz zum Skilift"' der Buchung mit ID 3 geschehen.
 
@@ -245,7 +243,7 @@ In den Tabellen \ref{fig:recherche:datenvorbereitung:3} und \ref{fig:recherche:d
 	\begin{tabular}{ | c | c | c | c | c | c | c | c | } 
 		\hline 		
 		\rowcolor{tableheadcolor}
-		\bfseries \rotatebox{90}{ID} & \bfseries \rotatebox{90}{Ortschaft} & \bfseries \rotatebox{90}{Preis (CHF)} & \bfseries \rotatebox{90}{Tiere erlaubt} & \bfseries \rotatebox{90}{Grill vorhanden} & \bfseries \rotatebox{90}{Balkon vorhanden} & \bfseries \rotatebox{90}{Distanz zum Meer (m)} & \bfseries \rotatebox{90}{Distanz zum Skilift (m)} \\ \hline 
+		\bfseries \rotatebox{90}{ID} & \bfseries \rotatebox{90}{Ortschaft} & \bfseries \rotatebox{90}{Wochenpreis (CHF)} & \bfseries \rotatebox{90}{Tiere erlaubt} & \bfseries \rotatebox{90}{Grill vorhanden} & \bfseries \rotatebox{90}{Balkon vorhanden} & \bfseries \rotatebox{90}{Distanz zum Meer (m)} & \bfseries \rotatebox{90}{Distanz zum Skilift (m)} \\ \hline 
 		
 		1 & Zermatt & 230 & \checkmark &  &  &  & 150 \\ \hline 
 		2 & Cannes & 450 & & \checkmark & \checkmark & 260 & \\ \hline 
