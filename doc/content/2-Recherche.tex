@@ -40,7 +40,7 @@ Im Falle einer Warenkorbanalyse ein Beispiel einer Regel: "`Samstags wenn ein Ku
 \label{sec:recherche:dataminingtechniken:disziplinen:classification}
 Das Ziel der Classification (Klassifikation) ist es, eine Instanz einer Klasse zuzuweisen. Dies könnte die Kreditwürdigkeit eines Kunden sein. Die Klassen sind dabei vordefiniert, wodurch es um ein \gls{supervisedlearning} handelt.
 
-Es gibt verschiedene Techniken für die Zuweisung einer Instanz zu einer Klasse. Es können Entscheidungsregeln, Bayes-Klassifikatoren, neurale Netze und weitere verwendet werden\todo{cite}. Entscheidungsregeln können als Bäume dargestellt werden und sind visuell einfach verständlich.
+Es gibt verschiedene Techniken für die Zuweisung einer Instanz zu einer Klasse. Es können Entscheidungsregeln, Bayes-Klassifikatoren, neuronale Netze und weitere verwendet werden\footcite{comparision_classification_algorithms}. Entscheidungsregeln können als Bäume dargestellt werden und sind visuell einfach verständlich.
 
 \begin{figure}[H]
 	\centering
@@ -102,7 +102,7 @@ Eingesetzt wird die Clusteranalyse zum Beispiel für die Erkennung von Kundengru
 \label{sec:recherche:dataminingtechniken:disziplinen:collaborativefiltering}
 Beim Collaborative Filtering werden Verhaltensmuster von Benutzern analysiert um daraus Empfehlungen für andere Kunden zu generieren. Am Beispiel einer Videotheke sind die einzelnen Instanzen die Filme, und die Empfehlungen die Bewertungen der Filme durch die Kunden. 
 
-In der \cref{fig:recherche:dataminingtechniken:disziplinen:collaborativefiltering} sind in den Zeilen Filme (Instanzen) aufgeführt und in den Spalten die Kunden. Ein Feld stellt eine Bewertungen eines Kunden dar. "`+"' steht für eine positive und "`-"' für eine negative Bewertung. Leere Felder bedeutet dass der Kunde diesen Film nicht bewertet hat. Mittels kollaborativen Filtern kann nun vorhergesagt werden, ob ein Benutzer die gelb hinterlegte Instanz positiv oder negativ bewertet\todo{cite} 
+In der \cref{fig:recherche:dataminingtechniken:disziplinen:collaborativefiltering} sind in den Zeilen Filme (Instanzen) aufgeführt und in den Spalten die Kunden. Ein Feld stellt eine Bewertungen eines Kunden dar. "`+"' steht für eine positive und "`-"' für eine negative Bewertung. Leere Felder bedeutet dass der Kunde diesen Film nicht bewertet hat. Mittels kollaborativen Filtern kann nun vorhergesagt werden, ob ein Benutzer die gelb hinterlegte Instanz positiv oder negativ bewertet\footcite{collaborative_filtering}.
 \begin{table}[H] 
 	\caption{Beispiel von Collaborative Filtering einer Videotheke}
 	\centering
@@ -126,7 +126,7 @@ In der \cref{fig:recherche:dataminingtechniken:disziplinen:collaborativefilterin
 
 \section{Algorithmen}
 \label{sec:recherche:algorithmen}
-Hier werden drei Algorithmen aus den Problembeschreibungen im \cref{sec:recherche:dataminingtechniken:disziplinen} \nameref{sec:recherche:dataminingtechniken:disziplinen} beschrieben. Die Auswahl dieser Vorgehensweisen wird im Konzept erläutert\todo{cref}.
+Hier werden drei Algorithmen aus den Problembeschreibungen im \cref{sec:recherche:dataminingtechniken:disziplinen} \nameref{sec:recherche:dataminingtechniken:disziplinen} beschrieben. Die Auswahl dieser Vorgehensweisen wird im Konzept erläutert (siehe \cref{sec:konzept:disziplin-und-algorithmen} \nameref{sec:konzept:disziplin-und-algorithmen}).
 
 \subsection{Association rule learning: Apriori}
 \label{sec:recherche:apriori}
