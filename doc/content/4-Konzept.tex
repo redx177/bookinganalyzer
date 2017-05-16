@@ -4,49 +4,52 @@ Im Konzept wird beschrieben, wie die Problemstellung, welch im \cref{sec:einleit
 
 \section{Selektion der Disziplinen und Algorithmenen}
 \label{sec:konzept:disziplin-und-algorithmen}
-Im \cref{sec:recherche} wurden Disziplinen und Algorithmen erläutert. In diesem Abschnitt wird erläutert wie diese Auswahl getroffen wurde auf Basis der Anforderungen aus \cref{sec:anforderungsanalyse}.
+Im \cref{sec:recherche} wurden Disziplinen und Algorithmen erläutert. In diesem Abschnitt wird erklärt wie diese Auswahl getroffen wurde auf Basis der Anforderungen aus \cref{sec:anforderungsanalyse}.
 
 \subsection{Einschränkung der Data Mining Disziplinen}
 \label{sec:konzept:disziplinauswahl}
 Ziel dieser Arbeit ist es, Attribute von Objekten zu eruieren, welche in einer Gruppe von Buchungen oft vorkommen (siehe \cref{sec:einleitung:ziel} \nameref{sec:einleitung:ziel}). Nachfolgend wird anhand dieser Aufgabenstellungen entschieden, welche Disziplinen im Data Mining (siehe \cref{sec:recherche:dataminingtechniken:disziplinen} \nameref{sec:recherche:dataminingtechniken:disziplinen}) sich dazu eignen. Als Grundlage der Entscheidung gelten die gestellten Anforderungen welche in der Anforderungsanalyse definiert wurden (siehe \cref{sec:anforderungsanalyse:funktionaleanforderung} \nameref{sec:anforderungsanalyse:funktionaleanforderung}).
 
+
 \subsubsection{Association rule learning}
 \label{sec:konzept:disziplinauswahl:association}
-Mittels Association rule learning (siehe \cref{sec:recherche:dataminingtechniken:disziplinen:association} \nameref{sec:recherche:dataminingtechniken:disziplinen:association}) lassen sich aus allen selektierten Buchungen die Häufigkeiten von Attributkombinationen herausfinden. Dadurch kann die Fragestellung beantwortet werden (siehe \cref{sec:einletung:ziel} \nameref{sec:einletung:ziel}).
+Mittels Association rule learning (siehe \cref{sec:recherche:dataminingtechniken:disziplinen:association} \nameref{sec:recherche:dataminingtechniken:disziplinen:association}) lassen sich aus allen selektierten Buchungen die Häufigkeiten von Attributkombinationen herausfinden. Dadurch können FA1, FA2, FA3 sowie FA4 erfüllt werden.
 
 
 \subsubsection{Classification}
 \label{sec:konzept:disziplinauswahl:classification}
-Bei der Classification handelt es sich um ein \gls{supervisedlearning} (siehe \cref{sec:recherche:dataminingtechniken:disziplinen:classification} \nameref{sec:recherche:dataminingtechniken:disziplinen:classification}). Deshalb sind vorab Klassen zu definieren welche den Objekten zugewiesen werden. Diese Informationen sind jedoch noch nicht vorhanden, weshalb in der Anforderung \nameref{fig:anforderungsanalyse:funktionaleanforderung:fa7} ein \gls{unsupervisedlearning} Algorithmus vorausgesetzt wurde. Deshalb eignet sich die Classification für diese Aufgabenstellung nicht.
+Bei der Classification handelt es sich um ein \gls{supervisedlearning} (siehe \cref{sec:recherche:dataminingtechniken:disziplinen:classification} \nameref{sec:recherche:dataminingtechniken:disziplinen:classification}). Deshalb sind vorab Klassen zu definieren welche den Objekten zugewiesen werden. Diese Informationen sind jedoch noch nicht vorhanden, weshalb in der Anforderung FA7 ein \gls{unsupervisedlearning} Algorithmus vorausgesetzt wurde. Deshalb eignet sich die Classification für diese Aufgabenstellung nicht.
 
 \subsubsection{Lineare Regression}
 \label{sec:konzept:disziplinauswahl:regression}
-Linere Regression Algorithmen suchen eine Formel, damit man von einer abhängiger Variable auf unabhängige Grössen schliessen kann (siehe \cref{sec:recherche:dataminingtechniken:disziplinen:regression} \nameref{sec:recherche:dataminingtechniken:disziplinen:regression}). Damit kann man bei den Interhome Daten für neue Buchungen Attribute voraussagen. zum Beispiel wenn man die Kreditwürdigkeit von Kunden überprüfen möchte auf Basis von alten Buchungen.
-
-Diese Algorithmen eignen sich jedoch nicht für diese Arbeit, da weder Attribute noch Gruppen von Buchungen zurückgeliefert werden (siehe  \nameref{fig:anforderungsanalyse:funktionaleanforderung:fa1}).
+Linere Regression Algorithmen suchen eine Formel, damit man von einer abhängiger Variable auf unabhängige Grössen schliessen kann (siehe \cref{sec:recherche:dataminingtechniken:disziplinen:regression} \nameref{sec:recherche:dataminingtechniken:disziplinen:regression}). Dadurch können Attribute vorhergesagt werden. Zum Beispiel wenn man die Kreditwürdigkeit von Kunden überprüfen möchte auf Basis von bestehenden Buchungen. Oder am Beispiel von Interhome ob ein Kunde eher ein Objekt in Italien oder in der Schweiz buchen wird. Obwohl das sicherlich auch interessant ist, eignet sich dieser Algorithmus nicht um die funktionalen Anforderungen zu erfüllen.
 
 \subsubsection{Cluster analysis}
 \label{sec:konzept:disziplinauswahl:clusteranalysis}
-Das Resultat einer Cluster analysis sind Gruppen (Clusters) von Buchungen, die untereinander ähnlich, und zu allen anderen Gruppen möglichst unähnlich sind (siehe \cref{sec:recherche:dataminingtechniken:disziplinen:clusteranalysis} \nameref{sec:recherche:dataminingtechniken:disziplinen:clusteranalysis}). Da die Instanzen innerhalb des Clusters ähnlich zueinander sind, ist zu erwarten dass eine Häufigkeitszählung der Attribute innerhalb der Clusters aufzeigt, welche Eigenschaften besonders oft miteinander gebucht werden. Deshalb wird zuerst ein Clustering durchgeführt und anschliessend der Apriori Algorithmus auf jedem Cluster ausgeführt. 
+Das Resultat einer Cluster analysis sind Gruppen (Clusters) von Buchungen, die untereinander ähnlich, und zu allen anderen Gruppen möglichst unähnlich sind (siehe \cref{sec:recherche:dataminingtechniken:disziplinen:clusteranalysis} \nameref{sec:recherche:dataminingtechniken:disziplinen:clusteranalysis}). Zum Beispiel können bei den Interhome Gruppen von Kunden ermittelt werden, welche ähnliche Kaufverhalten aufweisen. 
 
-Dies erweitert die Resultate des \nameref{sec:konzept:disziplinauswahl:association} (siehe \cref{sec:konzept:disziplinauswahl:association}) um die Möglichkeit, die Attributmenge in verschiedene Untergruppen aufzuteilen.
+Obwohl das Clustering keine funktionale Anforderung beantwortet, ist der Ansatz trotzdem interessant. Da die Instanzen innerhalb des Clusters ähnlich zueinander sind ist zu erwarten, dass eine Häufigkeitszählung der Attribute innerhalb des Clusters ähnliche Eigenschaften aufweisen. Diese sollten von der Apriori Analyse gefunden werden. 
+
+Dies könnte hilfreich sein, wenn über die gesamte zu analysierende Datenmenge die Attributverteilung sehr gleichmässig ist und das Association rule learning keine interessanten Kenntnisse liefert. Das schliesst nicht aus, das es zwei Gruppen gibt, welche für sich selber betrachtet sehr eindeutige Attributverteilungen besitzen, die sich aber gegenseitig aufheben. Zum Beispiel könnte es in Malta viele junge Besucher geben, welche kleine und günstige Ferienhäuser buchen um dort Parties zu feiern. Gleichzeitig gibt es viele Familien die dort hingehen und ausserhalb der Feierzone Strandferien machen. Über alles betrachtet könnte es sein, dass sich die beiden Gruppen aufheben, aber jede für sich selber betrachtet interessante Muster beinhalten aufweisen würde.
+
+Deshalb wird ein versucht gewagt mittels der Cluster analysis zuerst eine Gruppierung der Buchungen durchzuführen, mit einem anschliessenden Association rule learning.
 
 \subsubsection{Collaborative Filtering}
 \label{sec:konzept:disziplinauswahl:collaborativefiltering}
-Collaborative Filtering werden für recommender systems eingesetzt um dem Benutzer Instanzen vorzuschlagen die er auch mögen könnte. Grundlage für diese Entscheidungen sind seine bisherigen Interaktionen mit dem System verglichen mit denen von anderen Benutzern. Dadurch könnte bei den Interhome Daten Objekte vorgeschlagen werden die der Kunde auch mögen könnte. Es werden jedoch keine Attribute oder Instanzgruppen gebildet, womit die Anforderung \nameref{fig:anforderungsanalyse:funktionaleanforderung:fa1} nicht erfüllt ist.
+Collaborative Filtering werden für recommender systems eingesetzt um dem Benutzer Instanzen vorzuschlagen, die er auch mögen könnte. Grundlage für diese Entscheidungen sind seine bisherigen Interaktionen mit dem System, verglichen mit denen von anderen Benutzern. Dadurch könnte bei den Interhome Daten Objekte vorgeschlagen werden die der Kunde auch mögen könnte. Es werden jedoch keine Attribute vorgeschlagen, womit keine funktionalen Anforderungen erfüllt wird.
 
 \subsection{Algorithmenauswahl}
 \label{sec:konzept:algorithmenauswahl}
-Im \cref{sec:konzept:disziplinauswahl} wurden die Disziplinen auf Association rule learning und Cluster analysis eingeschränkt und im \cref{sec:recherche:algorithmen} die einzusetzenden Algorithmen beschrieben. Nachfolgend wird beschrieben wieso jene Abläufe ausgewählt wurden.
+Im \cref{sec:konzept:disziplinauswahl} wurden die Disziplinen auf Association rule learning und Cluster analysis eingeschränkt und im \cref{sec:recherche:algorithmen} die einzusetzenden Algorithmen beschrieben. Nachfolgend wird aufgezeigt, wieso jene Techniken gewählt wurden.
 
 \subsubsection{Association rule learning: Apriori}
 \label{sec:konzept:algorithmenauswahl:apriori}
-Das Association rule learning besteht aus zwei Schritten. Zuerst werden mittels des Apriori Algorithmus häufige Attributkombinationen gesucht und anschliessend Regeln aufgestellt um Korrelationen zwischen gemeinsam auftretenden Eigenschaften aufzuzeigen.
-Der zweite Schritt wird nicht durchgeführt, da die Regeln des Association rule learning für die Aufgabenstellung dieser Arbeit nicht benötigt werden.
+Das Association rule learning besteht aus zwei Schritten. Zuerst werden mittels des Apriori Algorithmus häufige Attributkombinationen gesucht und anschliessend Regeln aufgestellt, um Korrelationen zwischen gemeinsam auftretenden Eigenschaften aufzuzeigen.
+In dieser Arbeit wird nur der Apriori Algorithmus implementiert. Dieser erlaubt es FA1, FA2, FA3 und FA4 zu beantworten. Der zweite Schritt wird nicht durchgeführt, da die Regeln des Association rule learning für die Aufgabenstellung dieser Arbeit nicht benötigt werden.
 
 Es gibt Alternativen zum Apriori Algorithmus. Dies sind zum Beispiel der AprioriTid oder AprioriHybrid. Diese generieren die identischen Resultate und unterscheiden sich nur in der Laufzeit. Der AprioriTid kann zu beginn der Häufigkeitszählung bessere Leistung aufzeigen, ist jedoch langsamer gegen dessen Ende. Der AprioriHybrid verwendet zu Beginn der Apriori, und am Schluss den AprioriTid\footcite{association_rule_learning_2017-01-05}. 
 
-Es ist noch unklar, welcher Algorithmus die besseren Laufzeiten aufweist. Zum Schluss oder nach der Arbeit kann in einer Vertiefung der AprioriTid oder der AprioriHybrid eingesetzt werden um die Leistungen der Algorithmen zu vergleichen. Im ersten Schritt wird der Apriori benutzt um zu analysieren ob die Resultate brauchbare Informationen liefern.
+Es ist noch unklar, welcher Algorithmus die besseren Laufzeiten aufweist. Zum Schluss oder nach der Arbeit kann in einer Vertiefung der AprioriTid oder der AprioriHybrid eingesetzt werden um die Leistungen der Algorithmen zu vergleichen. Im ersten Schritt wird der Apriori benutzt um zu analysieren, ob die Resultate brauchbare Informationen liefern.
 
 \subsubsection{Clustering}
 \label{sec:konzept:algorithmenauswahl:clustering}

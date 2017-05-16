@@ -78,14 +78,14 @@ Nachfolgend werden die funktionale Anforderungen an das Programm gestellt.
 		Titel & Häufigkeitsanalyse der Attribute \\ \hline 
 		Beschreibung & Das Programm muss für die Gewinnung neues Wissens aus der bisherigen Buchungen von Interhome gestaltet werden. Dazu sollen Algorithmen eingesetzt werden welche folgende beispielhaften Fragestellungen beantworten können:
 		\begin{enumerate}
-		\item Welche Attribute werden im Winter wenn schneit in der Schweiz gebucht?
-		\item Welche Häuser im Tessin mit Sicht auf einen See werden am meisten gebucht?
+		\item Welche Attribute werden im Winter wenn es schneit in der Schweiz gebucht?
+		\item Welche Destination wird am meisten gebucht von Kunden im Tessin?
 		\end{enumerate}
 		
 		Als Antwort sollte der Algorithmus eine Liste von Attributen zurückliefern. Auf die obigen Beispiele könnte dies folgendes sein:
 		\begin{enumerate}
 		\item Objekte in Süditalien mit einem Pool.
-		\item Luxushäuser mit einem Grill und 3 Zimmern.
+		\item Objekte in Zermatt und mindestens 3 Schlafzimmern.
 		\end{enumerate} \\ \hline 
 		Abhängigkeit & \\ \hline 
 		Status & Offen \\ \hline 
@@ -231,28 +231,28 @@ Nachfolgend werden die funktionale Anforderungen an das Programm gestellt.
 \label{sec:anforderungsanalyse:nichtfunktionaleanforderung}
 Nachfolgend sind die nicht funktionale Anforderungen an das Programm spezifiziert. Diese gehen nicht auf die Funktionalität der Applikation ein, sondern auf die Komplexität, Performanz, etc.
 
+%\begin{table}[H] 
+%	\caption{NFA1: Geschwindigkeit}
+%	\centering
+%	\rowcolors{1}{tablebodycolor}{tablerowcolor}
+%	\label{fig:anforderungsanalyse:nichtfunktionaleanforderung:nfa1}
+%	\begin{tabular}{ | l | L{10cm} | } 
+%		\hline 
+%		\rowcolor{tableheadcolor}
+%		\multicolumn{2}{|l|}{\bfseries ID: NFA1} \\ \hline 
+%		Titel & Geschwindigkeit \\ \hline 
+%		Beschreibung & Da das Programm explorativ verwendet werden soll, muss das Programm eine zügige Antwortszeit aufweisen. Deshalb soll die Attributanalyse innerhalb von 30 Sekunden Resultate liefern können. Die Algorithmen sollten daher maximal ein super-lineares Wachstum ($\mathcal{O}(n\,log\,n)$) aufweisen. \\ \hline 
+%		Abhängigkeit & \\ \hline 
+%		Status & Offen \\ \hline 
+%	\end{tabular}
+%\end{table}
+%\todo{apriori O(n log n)?}
+
 \begin{table}[H] 
-	\caption{NFA1: Geschwindigkeit}
+	\caption{NFA1: Komplexität}
 	\centering
 	\rowcolors{1}{tablebodycolor}{tablerowcolor}
 	\label{fig:anforderungsanalyse:nichtfunktionaleanforderung:nfa1}
-	\begin{tabular}{ | l | L{10cm} | } 
-		\hline 
-		\rowcolor{tableheadcolor}
-		\multicolumn{2}{|l|}{\bfseries ID: NFA1} \\ \hline 
-		Titel & Geschwindigkeit \\ \hline 
-		Beschreibung & Da das Programm explorativ verwendet werden soll, muss das Programm eine zügige Antwortszeit aufweisen. Deshalb soll die Attributanalyse innerhalb von 30 Sekunden Resultate liefern können. Die Algorithmen sollten daher maximal ein super-lineares Wachstum ($\mathcal{O}(n\,log\,n)$) aufweisen. \\ \hline 
-		Abhängigkeit & \\ \hline 
-		Status & Offen \\ \hline 
-	\end{tabular}
-\end{table}
-\todo{apriori O(n log n)?}
-
-\begin{table}[H] 
-	\caption{NFA2: Komplexität}
-	\centering
-	\rowcolors{1}{tablebodycolor}{tablerowcolor}
-	\label{fig:anforderungsanalyse:nichtfunktionaleanforderung:nfa2}
 	\begin{tabular}{ | l | L{10cm} | } 
 		\hline 
 		\rowcolor{tableheadcolor}
@@ -265,10 +265,10 @@ Nachfolgend sind die nicht funktionale Anforderungen an das Programm spezifizier
 \end{table}
 
 \begin{table}[H] 
-	\caption{NFA3: Modularität}
+	\caption{NFA2: Modularität}
 	\centering
 	\rowcolors{1}{tablebodycolor}{tablerowcolor}
-	\label{fig:anforderungsanalyse:nichtfunktionaleanforderung:nfa3}
+	\label{fig:anforderungsanalyse:nichtfunktionaleanforderung:nfa2}
 	\begin{tabular}{ | l | L{10cm} | } 
 		\hline 
 		\rowcolor{tableheadcolor}
@@ -281,10 +281,10 @@ Nachfolgend sind die nicht funktionale Anforderungen an das Programm spezifizier
 \end{table}
 
 \begin{table}[H] 
-	\caption{NFA4: Erweiterbarkeit der Daten}
+	\caption{NFA3: Erweiterbarkeit der Daten}
 	\centering
 	\rowcolors{1}{tablebodycolor}{tablerowcolor}
-	\label{fig:anforderungsanalyse:nichtfunktionaleanforderung:nfa4}
+	\label{fig:anforderungsanalyse:nichtfunktionaleanforderung:nfa3}
 	\begin{tabular}{ | l | L{10cm} | } 
 		\hline 
 		\rowcolor{tableheadcolor}
@@ -297,10 +297,10 @@ Nachfolgend sind die nicht funktionale Anforderungen an das Programm spezifizier
 \end{table}
  
  \begin{table}[H] 
-	\caption{NFA5: Kosten}
+	\caption{NFA4: Kosten}
 	\centering
 	\rowcolors{1}{tablebodycolor}{tablerowcolor}
-	\label{fig:anforderungsanalyse:nichtfunktionaleanforderung:nfa5}
+	\label{fig:anforderungsanalyse:nichtfunktionaleanforderung:nfa4}
 	\begin{tabular}{ | l | L{10cm} | } 
 		\hline 
 		\rowcolor{tableheadcolor}
