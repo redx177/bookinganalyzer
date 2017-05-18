@@ -5,13 +5,43 @@
 
 \section{Testing}
 \label{sec:testingfazit:testing}
-Nachfolgend werden die Richtigkeit des Programmes mit Hilfe der Testfälle aus \cref{sec:recherche:testcases} \nameref{sec:recherche:testcases} sowie der Hypothesen in \cref{sec:einleitung:ziel:hypothesen} \nameref{sec:einleitung:ziel:hypothesen} überprüft.
+Nachfolgend werden die Richtigkeit des Programmes mit Hilfe der Testfälle aus \cref{sec:recherche:testcases} \nameref{sec:recherche:testcases} sowie der Hypothesen in \cref{sec:einleitung:ziel:hypothesen} \nameref{sec:einleitung:ziel:hypothesen} überprüft. Dabei werden die erwarteten Resultate mit den tatsächlichen Ausgaben des Programmes verglichen.
 
 \subsection{Testfälle}
 \label{sec:testingfazit:testing:testcases}
-Hier wird die Korrektheit der Algorithmen überprüft. Also ob diese richtig Implementiert wurden. Dazu wurde im \cref{sec:recherche:testcases} Testfälle definiert inklusive der Einstellungen des Programmes.
+Dieser Abschnitt überprüft die Korrektheit der Algorithmen, also ob diese richtig Implementiert wurden. Dazu wurde im \cref{sec:recherche:testcases} Testfälle definiert inklusive der Einstellungen des Programmes.
 
-Hier werden die Testfälle nochmals aufgeführt und mit den tatsächlichen Ausgaben des Proof of Concepts verglichen. Schlussendlich gibt es eine Zusammenfassung ob die Tests erfolgreich waren oder nicht.
+Hier werden die Testfälle nochmals aufgeführt und mit den tatsächlichen Ausgaben des Proof of Concepts verglichen. Zum Ende jedes Tests ist das Ergebnis aufgeführt. \colorbox{green!25}{Grün} heisst das erwartete- stimmt mit dem tatsächlichen Resultat überein. Wenn dies nicht der Fall ist, dann ist das Ergebnis \colorbox{red!25}{rot}.
+
+Alle Test sind erfolgreich. In \cref{fig:testingfazit:testing:testcases:uebersicht} wird eine Übersicht gegeben. In \cref{fig:testingfazit:testing:testcases:1} bis \cref{fig:testingfazit:testing:testcases:12:2} sind anschliessend alle Auswertung der Testfälle aufgeführt. Nach jeder Tabelle ist zusätzlich noch ein Bild vorhanden welches die Ausgabe des Programmes aufzeigt.
+
+\begin{table}[H] 
+	\caption{TC1 Auswertung}
+	\centering
+	%\rowcolors{1}{tablebodycolor}{tablerowcolor}
+	\label{fig:testingfazit:testing:testcases:uebersicht}
+	\begin{tabular}{ | l | l | l | l | l | } 
+		\hline 
+		\rowcolor{tableheadcolor}
+		\bfseries ID & \bfseries Definition & \bfseries Auswertung & \bfseries Datenquelle & \bfseries Testergebniss\\ \hline 
+		
+		TC 1 & \cref{fig:recherche:testcases:1} & \cref{fig:testingfazit:testing:testcases:1} & \cref{app:testdatenquellen:1} & \cellcolor{green!25} \\ \hline 
+		TC2 & \cref{fig:recherche:testcases:2} & \cref{fig:testingfazit:testing:testcases:2} & \cref{app:testdatenquellen:2} & \cellcolor{green!25} \\ \hline 
+		TC3 & \cref{fig:recherche:testcases:3} & \cref{fig:testingfazit:testing:testcases:3} & \cref{app:testdatenquellen:3} & \cellcolor{green!25} \\ \hline 
+		TC4 & \cref{fig:recherche:testcases:4} & \cref{fig:testingfazit:testing:testcases:4} & \cref{app:testdatenquellen:4} & \cellcolor{green!25} \\ \hline 
+		TC5 & \cref{fig:recherche:testcases:5} & \cref{fig:testingfazit:testing:testcases:5} & \cref{app:testdatenquellen:5} & \cellcolor{green!25} \\ \hline 
+		TC6 & \cref{fig:recherche:testcases:6} & \cref{fig:testingfazit:testing:testcases:6} & \cref{app:testdatenquellen:6} & \cellcolor{green!25} \\ \hline 
+		TC7 & \cref{fig:recherche:testcases:7} & \cref{fig:testingfazit:testing:testcases:7} & \cref{app:testdatenquellen:7} & \cellcolor{green!25} \\ \hline 
+		TC8 & \cref{fig:recherche:testcases:8} & \cref{fig:testingfazit:testing:testcases:8} & \cref{app:testdatenquellen:8} & \cellcolor{green!25} \\ \hline 
+		TC9 & \cref{fig:recherche:testcases:9} & \cref{fig:testingfazit:testing:testcases:9} & \cref{app:testdatenquellen:9} & \cellcolor{green!25} \\ \hline 
+		TC10 & \cref{fig:recherche:testcases:10} & \cref{fig:testingfazit:testing:testcases:10} & \cref{app:testdatenquellen:10} & \cellcolor{green!25} \\ \hline 
+		TC11-1 & \cref{fig:recherche:testcases:11:1} & \cref{fig:testingfazit:testing:testcases:11:1} & \cref{app:testdatenquellen:11} & \cellcolor{green!25} \\ \hline 
+		TC11-2 & \cref{fig:recherche:testcases:11:2} & \cref{fig:testingfazit:testing:testcases:11:2} & \cref{app:testdatenquellen:11} & \cellcolor{green!25} \\ \hline 
+		TC12-1 & \cref{fig:recherche:testcases:12:1} & \cref{fig:testingfazit:testing:testcases:12:1} & \cref{app:testdatenquellen:12} & \cellcolor{green!25} \\ \hline 
+		TC12-2 & \cref{fig:recherche:testcases:12:2} & \cref{fig:testingfazit:testing:testcases:12:2} & \cref{app:testdatenquellen:12} & \cellcolor{green!25} \\ \hline 
+	\end{tabular}
+\end{table}
+
 
 \begin{table}[H] 
 	\caption{TC1 Auswertung}
@@ -983,6 +1013,20 @@ Hier werden die Testfälle nochmals aufgeführt und mit den tatsächlichen Ausga
 	\caption{TC12-2 - Ausgabe des Programmes - Resultat des k-prototype Algorithmus}
 	\label{fig:testingfazit:testing:testcases:12-2}
 \end{figure}
+
+\subsection{Hypothesen}
+\label{sec:testingfazit:testing:hypothesen}
+Im \cref{sec:einleitung:ziel:hypothesen} \nameref{sec:einleitung:ziel:hypothesen} sind Hypothesen aufgestellt worden welche auf ihre Richtigkeit geprüft wurden. Nachfolgend wird das Resultat vorgestellt.
+
+%"`"'
+\paragraph{Hypothese 1: "`Die meisten Kunden von Interhome kommen aus der Schweiz oder Frankreich"'} Durch eine Einschränkung der analysierten Attribute des Apriori Algorithmus auf das Herkunftsland des Kunden wurde diese Hypothese bestätigt. 20.94\% aller Buchungen wurden von Schweizer getätigt und 18.58\% von Franzosen. 
+\paragraph{Hypothese 2: "`Die meisten Buchungen werden für die Schweiz und für Frankreich getätigt"'} Das Resultat des Apriori Algorithmus wurde für die Auswertung dieser Hypothese eingeschränkt, so dass nur der Standort des Objektes analysiert wird. Als Filter wurde gesetzt dass die Buchung aus der Schweiz stammen muss. Dadurch konnte die Hypothese bestätigt werden. 19.92\% aller Buchungen wurde für Objekte in der Schweiz getätigt, und 13.97\% für deren aus Frankreich.
+\paragraph{Hypothese 3: "`Schweizer Kunden buchen meistens Objekte in der Schweiz."'} Eingeschränkt wurden die Attribute hier auf den Standort des Objektes. Zusätzlich wurde ein Filter gesetzt auf die Herkunft des Kunden. Als Resultat gab das Programm aus, dass 49.24\% aller Schweizer ein Objekt in der Schweiz buchen. Abgeschlagen auf dem zweiten Platz rangiert Frankreich mit 7.34\% und danach Italien mit 6.99\%. Es ist generell gültig, dass meistens ein Ferienhaus im eigenen Land gebucht wird. Jedoch ist es nirgends so extrem wie in der Schweiz. Franzosen buchen mit 32.20\% am meisten Objekte in Frankreich und mit 16.50\% in Spanien. Italiener buchen zu 18.01\% Objekte in Italien und 17.11\% in Spanien.
+\paragraph{Hypothese 4: "`Destinationen mit Meer Anschluss werden öfters Objekte mit mehreren Schlafzimmern gebucht"'} 
+\paragraph{Hypothese 5: "`Schweizer Buchungen in Skiregionen sind nahe am Skilift oder am öffentlichem Verkehr"'} 
+\paragraph{Hypothese 6: "`Zu kalten Jahreszeiten wird von Schweizern mehr Regionen am Meer gebucht als im Sommer."'} 
+\paragraph{Hypothese 7: "`Anfang des Jahres werden teurere Objekte gebucht als im Oktober, da der dreizente Monatslohn eingetroffen ist."'} 
+
 
 \section{Fazit}
 
