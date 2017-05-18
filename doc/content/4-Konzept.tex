@@ -482,13 +482,13 @@ In diesem Abschnitt sind Testfälle definiert welche am Schluss der Entwicklung 
 Es sind 12 Testdatenquellen definiert worden, welche im \cref{app:testdatenquellen} aufgeführt sind.
 Sie bestehen aus 9 - 18 Einträge mit jeweils 10 Attributen. Die Felder "`id"' und "`NREF"' in den Quellen sind nur für das Verständnis vorhanden und tragen nicht zur Testauswertung bei. Die restlichen Attribute bestehen aus Distanzen ("`DIWATER"', "`DIPUBT"', "`DISEA"'), Preisen ("`weeklyprice"'), Binär- ("`PETS"', "`CAIRCOND"') und numerischen ("`ROOMS"', "`BEDROOMS"') Werten. Dadurch sind kategorische sowie numerische Attribute abgedeckt. 
 
-Die \glspl{tc} 1 bis 9 überprüfen die Richtigkeit des Apriori Algorithmen. Sie stellen sicher, dass Distanz-, Preis-, binären- und numerischen Attribute richtig aufsummiert und durch den Apriori-Gen Vorgang zu weiteren Attributmengen kombiniert werden. Zusätzlich überprüfen sie ob die Einschränkung der Datenmenge durch den Benutzer korrekt funktionieren. \glspl{tc} 10 bis 12 kontrollieren ihrerseits die Cluster Algorithmen. 
+Die \glspl{tc} 1 bis 9 überprüfen die Richtigkeit des Apriori Algorithmus. Sie stellen sicher, dass Distanz-, Preis-, binären- und numerischen Attribute richtig aufsummiert und durch den Apriori-Gen Vorgang zu weiteren Attributmengen kombiniert werden. Zusätzlich überprüfen sie ob die Einschränkung der Datenmenge durch den Benutzer korrekt funktionieren. \glspl{tc} 10 bis 12 kontrollieren ihrerseits die Cluster Algorithmen. 
 
 Für die nachfolgenden Erwartungen werden nachfolgende Parameter vorausgesetzt. Diese müssen nachher bei der Testausführung gesetzt werden. Stimmen die Resultate überein ist der Test erfolgreich. 
 \begin{itemize}
 	\item Apriori
 	\begin{itemize}
-		\item $minSup$: 3
+		\item $minSup$: 0.2 (oder 20\%)
 	\end{itemize}
 	
 	\item Clustering
@@ -500,7 +500,7 @@ Für die nachfolgenden Erwartungen werden nachfolgende Parameter vorausgesetzt. 
 		\end{itemize}
 		\item DBSCAN:
 		\begin{itemize}
-			\item $\epsilon$ (Radius): 1
+			\item $\epsilon$ (Radius): 2
 			\item $minpts$ (Minimum Anzahl Punkte im Radius (Prozentwert)): 0.1
 		\end{itemize}
 	\end{itemize}
@@ -628,7 +628,7 @@ Für die nachfolgenden Erwartungen werden nachfolgende Parameter vorausgesetzt. 
 		1er-Attributmenge & \tabitem Nahe am Wasser & 4 \\ \cline{2-3} 
 		& \tabitem Nahe am Meer & 5 \\ \hline 
 		
-		2er-Attributmenge & \tabitem Nahe am Wasser & 4 \\
+		2er-Attributmenge & \tabitem Nahe am Wasser & 3 \\
 		& \tabitem Nahe am Meer & \\ \hline
 	\end{tabular}
 \end{table}
@@ -675,10 +675,10 @@ Für die nachfolgenden Erwartungen werden nachfolgende Parameter vorausgesetzt. 
 		\multicolumn{3}{|l|}{\bfseries Erwartetes Resultat} \\ \hline 
 		& Attributmenge & Anzahl \\ \hline 
 		
-		1er-Attributmenge & \tabitem Nahe am Wasser & 5 \\ \cline{2-3} 
-		& \tabitem Nahe am Meer & 3 \\ \hline 
+		1er-Attributmenge & \tabitem Nahe am Wasser & 6 \\ \cline{2-3} 
+		& \tabitem Nahe am Meer & 4 \\ \hline 
 		
-		2er-Attributmenge & \tabitem Nahe am Wasser & 3 \\
+		2er-Attributmenge & \tabitem Nahe am Wasser & 4 \\
 		& \tabitem Nahe am Meer & \\ \hline
 	\end{tabular}
 \end{table}
@@ -737,7 +737,7 @@ Für die nachfolgenden Erwartungen werden nachfolgende Parameter vorausgesetzt. 
 		1er-Attributmenge & \tabitem Nahe am Wasser & 8 \\ \cline{2-3} 
 		& \tabitem Nahe am Meer & 8 \\ \cline{2-3} 
 		& \tabitem Haustiere erlaubt & 9 \\ \cline{2-3} 
-		& \tabitem Anzahl Zimmer=3 & 9 \\ \hline
+		& \tabitem Anzahl Zimmer=3 & 11 \\ \hline
 		
 		2er-Attributmenge & \tabitem Nahe am Wasser & 8 \\
 		& \tabitem Nahe am Meer & \\ \cline{2-3} 
@@ -748,7 +748,7 @@ Für die nachfolgenden Erwartungen werden nachfolgende Parameter vorausgesetzt. 
 
 \paragraph{TC10, Datenquelle \cref{app:testdatenquellen:10}:} TC10 bis TC12 testen die Clustering Algorithmen. Deshalb werden die erwarteten Resultate zusätzlich noch nach Cluster unterteilt, welche zusätzlich den Fehler der Gruppierung angeben sowie die Anzahl der Buchungen.
 
-TC10 Überprüft ob 2 Cluster gefunden werden. Der erste besitzt 5 Buchungen, der zweite deren 4. 
+TC10 Überprüft ob 2 Cluster gefunden werden. Der erste besitzt 5 Buchungen, der zweite deren 4. Ziel des Testfalles ist es zu überprüfen, ob die Clusters korrekt erstellt werden und ob der Apriori-Algorithmus richtig auf die Gruppen angewendet wird.
 
 \begin{longtable}{ | l | l | l | l |} 	
 	\hline 
@@ -795,6 +795,9 @@ TC10 Überprüft ob 2 Cluster gefunden werden. Der erste besitzt 5 Buchungen, de
 	& & \tabitem Anzahl Schlafzimmer=2 & \\ \cline{3-4}
 	& & \tabitem Nahe am Meer & 5 \\
 	& & \tabitem Anzahl Zimmer=3 & \\ 
+	& & \tabitem Anzahl Schlafzimmer=2 & \\ \cline{3-4}
+	& & \tabitem Nahe am Wasser & 5 \\
+	& & \tabitem Anzahl Zimmer=3 & \\ 
 	& & \tabitem Anzahl Schlafzimmer=2 & \\ \cline{2-4}
 
 	& 4er-Attributmenge & \tabitem Nahe am Wasser & 5 \\
@@ -830,7 +833,7 @@ TC10 Überprüft ob 2 Cluster gefunden werden. Der erste besitzt 5 Buchungen, de
 
 
 \paragraph{TC11, Datenquelle \cref{app:testdatenquellen:11}:} Bei TC11 und TC12 unterscheiden sich die Resultate der k-prototype und DBSCAN Algorithmen. Deshalb werden die Resultate separat in TC11-1 und TC11-2 aufgeführt.
-TC 11 Überprüft ob 1 Cluster gefunden wird mit 9 Buchungen und 1 Noise Punkt. 
+TC 11 Überprüft ob 1 Cluster gefunden wird mit 9 Buchungen und 1 Noise Punkt. Bei TC10 wurden zwei ähnlich grosse Cluster generiert. Hier wird überprüft ob die Clustering- und der Apriori-Algorithmus korrekt funktioniert wenn die Gruppen unterschiedliche Grössen haben. Der kleine Cluster hat zusätzlich so wenig Objekte, dass der Apriori keine häufigen Attribute auffindet.
 
 Erwartetes Resultat vom DBSCAN Algorithmus:
 \begin{longtable}{ | l | l | l | l |} 	
@@ -877,6 +880,9 @@ Erwartetes Resultat vom DBSCAN Algorithmus:
 	& & \tabitem Anzahl Schlafzimmer=2 & \\ \cline{3-4}
 	& & \tabitem Nahe am Meer & 9 \\
 	& & \tabitem Anzahl Zimmer=3 & \\ 
+	& & \tabitem Anzahl Schlafzimmer=2 & \\ \cline{3-4}
+	& & \tabitem Nahe am Wasser & 9 \\
+	& & \tabitem Anzahl Zimmer=3 & \\ 
 	& & \tabitem Anzahl Schlafzimmer=2 & \\ \cline{2-4}
 
 	& 4er-Attributmenge & \tabitem Nahe am Wasser & 9 \\
@@ -893,7 +899,7 @@ Erwartetes Resultat vom k-prototype Algorithmus:
 \begin{longtable}{ | l | l | l | l |} 	
 	\hline 
 	\rowcolor{tableheadcolor}
-	\multicolumn{4}{|l|}{\bfseries ID: TC11-2 KPrototype} \\ \hline 
+	\multicolumn{4}{|l|}{\bfseries ID: TC11-2 k-prototype} \\ \hline 
 	Datebquelle & \multicolumn{3}{|l|}{\cref{app:testdatenquellen:11}} \\ \hline 
 	Dateneinschränkung & \multicolumn{3}{|l|}{Keine} \\ \hline 
 	
@@ -909,12 +915,92 @@ Erwartetes Resultat vom k-prototype Algorithmus:
 	& Fehler & \multicolumn{2}{|l|}{0} \\ \cline{2-4} 
 	& Grösse & \multicolumn{2}{|l|}{1} \\ \cline{2-4} 
 	& \multicolumn{3}{|L{7.5cm}|}{Der Apriori Algorithmus findet keine häufigen Attribute, da $minsup$ auf 3 gesetzt ist und nur 1 Element in diesem Cluster vorhanden ist.} \\ \hline
-	\caption{TC11-2 Definition: Erwartetes Resultat vom KPrototype Algorithmus}
+	\caption{TC11-2 Definition: Erwartetes Resultat vom k-prototype Algorithmus}
 	\centering
 	\label{fig:recherche:testcases:11:2}
 \end{longtable}
 
-\paragraph{TC12, Datenquelle \cref{app:testdatenquellen:12}:}\todo{}
+\paragraph{TC12, Datenquelle \cref{app:testdatenquellen:12}:} Dieser Testfall ist der Realität am nächsten, da die einzelnen Instanzen alle zueinander unterschiedlich sind. Es gibt zwei Gruppen die gefunden werden sollen. Die erste umfasst die Buchungen mit den IDs 1 bis 5, die zweite die Instanzen 6 bis 10. Die Clusters untereinander sind sich ähnlich. Buchungen von 1 bis 5 teilen sich die Attribute "`DIWATER"' (Distanz zum Wasser), "`DIPUBT"' (Distanz zu den ÖV) und "`DISEA"' (Distanz zum Meer). Instanzen 6 bis 10 teilen sich "`weeklyprice"' (Wochenpreis), "`ROOMS"' (Anzahl Zimmer) und "`CAIRCOND"' (Aircondition). 
+
+Der k-prototype sollte diese beiden Gruppen finden. Die besten Clusterzentren sind die Buchungen mit den IDs 3 und 7, da sie den geringsten Fehler erzeugen. Von ihnen aus wird die Distanz zu allen anderen Instanzen berechnet was den Fehler des Clusters ergibt (siehe \cref{eq:recherche:clusteranalysis:1} \nameref{eq:recherche:clusteranalysis:1}). Im ersten Cluster (mit den IDs 1 bis 5) gibt es 6 kategorische Attribute welche unterschiedlich sind zu jenen von der Buchung 3. Zählt man dies mit den Unterschieden der numerischen Attribute zusammen, erhält man als Clusterfehler 6.086575. Vom zweiten Cluster erhält man den Fehler 3.090957.
+
+Der DBSCAN sollte die selben Cluster wie der k-prototype finden, jedoch wird die Buchung mit der ID 2 als Noise aussortieren. Dies ist die einzige Instanz, welche zu allen anderen Buchungen minimal zwei unterschiedliche kategorische Attribute besitzt. Jedes kategorische Attribut welches unterschiedlich ist erhöht die Distanz um 1. Sprich die Buchung hat zu allen anderen Instanzen minimal den Abstand von 2. Da $\epsilon$ (Radius) auf 2 gesetzt ist wird ID 2 als Noise behandelt (siehe Berechnung der \textit{neighborhood density} in \cref{sec:recherche:algorithmen:dbscan} \nameref{sec:recherche:algorithmen:dbscan}).
+
+Erwartetes Resultat vom DBSCAN Algorithmus:
+\begin{longtable}{ | l | l | l | l |} 	
+	\hline 
+	\rowcolor{tableheadcolor}
+	\multicolumn{4}{|l|}{\bfseries ID: TC12-1 DBSCAN} \\ \hline 
+	Datebquelle & \multicolumn{3}{|l|}{\cref{app:testdatenquellen:12}} \\ \hline 
+	Dateneinschränkung & \multicolumn{3}{|l|}{Keine} \\ \hline 
+	
+	\rowcolor{tableheadcolor}
+	\multicolumn{4}{|l|}{\bfseries Erwartetes Resultat} \\ \hline 
+	Noise Punkte & \multicolumn{3}{|l|}{1} \\ \hline 
+	
+	% ----------------------------------------------		
+	\multicolumn{4}{|l|}{\textbf{Cluster 1}} \\ \cline{2-4} 
+	& Grösse & \multicolumn{2}{|l|}{4} \\ \cline{2-4} 
+	&& Attributmenge & Anzahl \\ \cline{2-4} 
+	
+	& 1er-Attributmenge & \tabitem Nahe am Meer & 4 \\ \hline
+		
+	% ----------------------------------------------		
+	\multicolumn{4}{|l|}{\textbf{Cluster 1}} \\ \cline{2-4} 
+	& Grösse & \multicolumn{2}{|l|}{5} \\ \cline{2-4} 
+	&& Attributmenge & Anzahl \\ \cline{2-4} 
+	
+	& 1er-Attributmenge & \tabitem Aircondition & 4 \\ \cline{3-4} 
+	& & \tabitem Wochenpreis=günstig & 3 \\ \cline{3-4} 
+	& & \tabitem Anzahl Zimmer=9 & 3 \\ \cline{3-4} 
+	& & \tabitem Anzahl Schlafzimmer=8 & 3 \\ \cline{2-4} 
+	
+	& 2er-Attributmenge & \tabitem Anzahl Zimmer=9 & 3 \\
+	& & \tabitem Wochenpreis=günstig & \\ \hline
+
+	\caption{TC12-1 Definition: Erwartetes Resultat vom DBSCAN Algorithmus}
+	\centering
+	\label{fig:recherche:testcases:12:1}
+\end{longtable}
+
+Erwartetes Resultat vom k-prototype Algorithmus:
+\begin{longtable}{ | l | l | l | l |} 	
+	\hline 
+	\rowcolor{tableheadcolor}
+	\multicolumn{4}{|l|}{\bfseries ID: TC12-2 k-prototype} \\ \hline 
+	Datebquelle & \multicolumn{3}{|l|}{\cref{app:testdatenquellen:12}} \\ \hline 
+	Dateneinschränkung & \multicolumn{3}{|l|}{Keine} \\ \hline 
+	
+	\rowcolor{tableheadcolor}
+	\multicolumn{4}{|l|}{\bfseries Erwartetes Resultat} \\ \hline 
+		
+	% ----------------------------------------------		
+	\multicolumn{4}{|l|}{\textbf{Cluster 1}} \\ \cline{2-4}
+	& Fehler & \multicolumn{2}{|l|}{6.086575} \\ \cline{2-4}  
+	& Grösse & \multicolumn{2}{|l|}{5} \\ \cline{2-4} 
+	&& Attributmenge & Anzahl \\ \cline{2-4} 
+	
+	& 1er-Attributmenge & \tabitem Nahe am Meer & 4 \\ \cline{2-4}
+	& & \tabitem Nahe am ÖV (öffentlicher Verkehr) & 3 \\ \hline
+		
+	% ----------------------------------------------		
+	\multicolumn{4}{|l|}{\textbf{Cluster 1}} \\ \cline{2-4} 
+	& Fehler & \multicolumn{2}{|l|}{3.090957} \\ \cline{2-4} 
+	& Grösse & \multicolumn{2}{|l|}{5} \\ \cline{2-4} 
+	&& Attributmenge & Anzahl \\ \cline{2-4} 
+	
+	& 1er-Attributmenge & \tabitem Aircondition & 4 \\ \cline{3-4} 
+	& & \tabitem Wochenpreis=günstig & 3 \\ \cline{3-4} 
+	& & \tabitem Anzahl Zimmer=9 & 3 \\ \cline{3-4} 
+	& & \tabitem Anzahl Schlafzimmer=8 & 3 \\ \cline{2-4} 
+	
+	& 2er-Attributmenge & \tabitem Anzahl Zimmer=9 & 3 \\
+	& & \tabitem Wochenpreis=günstig & \\ \hline
+		
+	\caption{TC12-2 Definition: Erwartetes Resultat vom k-prototype Algorithmus}
+	\centering
+	\label{fig:recherche:testcases:12:2}
+\end{longtable}
 
 \section{Programmiersprache}
 Als Programmiersprache für eine Weblösung gibt es diverse zur Auswahl. Eingesetzt werden soll \gls{php}, da die Abteilung welche bei einem Erfolg des Projektes den Code übernehmen soll in dieser Sprache arbeitet.

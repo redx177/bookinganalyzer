@@ -278,7 +278,7 @@ Der Algorithmus führt mehrere Begriffe ein\footcite{data_mining_concepts_and_te
 \begin{itemize}
 	\item \textit{neighborhood density}: Wie viele Instanzen befinden sich im Radius von $\epsilon$ um einen Punkt $p$. 
 	\begin{equation}
-	\mathit{ND}_{\epsilon}(p) = \{q | q \in D \wedge d(p,q) \leq \epsilon\}
+	\mathit{ND}_{\epsilon}(p) = \{q | q \in D \wedge d(p,q) < \epsilon\}
 	\end{equation}
 	\item \textit{core object}: Instanz welche mindestens $minpts$ in der Nachbarschaft haben.
 	\begin{equation}
