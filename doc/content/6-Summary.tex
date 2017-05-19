@@ -16,7 +16,7 @@ Hier werden die Testfälle nochmals aufgeführt und mit den tatsächlichen Ausga
 Alle Test sind erfolgreich. In \cref{fig:testingfazit:testing:testcases:uebersicht} wird eine Übersicht gegeben. In \cref{fig:testingfazit:testing:testcases:1} bis \cref{fig:testingfazit:testing:testcases:12:2} sind anschliessend alle Auswertung der Testfälle aufgeführt. Nach jeder Tabelle ist zusätzlich noch ein Bild vorhanden welches die Ausgabe des Programmes aufzeigt.
 
 \begin{table}[H] 
-	\caption{TC1 Auswertung}
+	\caption{Übersicht der Testfälle}
 	\centering
 	%\rowcolors{1}{tablebodycolor}{tablerowcolor}
 	\label{fig:testingfazit:testing:testcases:uebersicht}
@@ -1027,9 +1027,55 @@ Alle Test sind erfolgreich. In \cref{fig:testingfazit:testing:testcases:uebersic
 Im \cref{sec:einleitung:ziel:hypothesen} \nameref{sec:einleitung:ziel:hypothesen} sind Hypothesen aufgestellt worden welche auf ihre Richtigkeit geprüft wurden. Nachfolgend wird das Resultat vorgestellt.
 
 %"`"'
-\paragraph{Hypothese 1: "`Die meisten Kunden von Interhome kommen aus der Schweiz oder Frankreich"'} Durch eine Einschränkung der analysierten Attribute des Apriori Algorithmus auf das Herkunftsland des Kunden wurde diese Hypothese bestätigt. 20.94\% aller Buchungen wurden von Schweizer getätigt und 18.58\% von Franzosen. 
+\paragraph{Hypothese 1: "`Die meisten Kunden von Interhome kommen aus der Schweiz oder Frankreich"'} Durch eine Einschränkung der analysierten Attribute des Apriori Algorithmus auf das Herkunftsland des Kunden wurde diese Hypothese bestätigt. 20.94\% aller Buchungen wurden von Schweizer getätigt und 18.58\% von Franzosen. Das Resultat der Apriori Analyse wird in \cref{fig:testingfazit:testing:hypothesen:hypothese1} gezeigt. Die erste Spalte stellt das Attribut dar. "`Object Country"' ist das Land wo das Objekt steht, "`=switzerland"' sagt es liegt in der Schweiz. In der zweiten Spalte wird die Anzahl der Buchungen gezeigt, welche zum Beispiel das Attribut "`Object Country=switzerland"' besitzen, sowie eine Prozentzahl. Diese gibt an wie viele Buchungen dieses Attribut besitzen verglichen mit allen analysierten Instanzen.
+
+\begin{figure}[H]
+	\RawFloats
+	\centering
+	\includegraphics[width=0.5\textwidth]{images/hypothese1}
+	\caption{Kunden von Interhome gruppiert nach Land}
+	\label{fig:testingfazit:testing:hypothesen:hypothese1}
+\end{figure}
+
 \paragraph{Hypothese 2: "`Die meisten Buchungen werden für die Schweiz und für Frankreich getätigt"'} Das Resultat des Apriori Algorithmus wurde für die Auswertung dieser Hypothese eingeschränkt, so dass nur der Standort des Objektes analysiert wird. Als Filter wurde gesetzt dass die Buchung aus der Schweiz stammen muss. Dadurch konnte die Hypothese bestätigt werden. 19.92\% aller Buchungen wurde für Objekte in der Schweiz getätigt, und 13.97\% für deren aus Frankreich.
-\paragraph{Hypothese 3: "`Schweizer Kunden buchen meistens Objekte in der Schweiz."'} Eingeschränkt wurden die Attribute hier auf den Standort des Objektes. Zusätzlich wurde ein Filter gesetzt auf die Herkunft des Kunden. Als Resultat gab das Programm aus, dass 49.24\% aller Schweizer ein Objekt in der Schweiz buchen. Abgeschlagen auf dem zweiten Platz rangiert Frankreich mit 7.34\% und danach Italien mit 6.99\%. Es ist generell gültig, dass meistens ein Ferienhaus im eigenen Land gebucht wird. Jedoch ist es nirgends so extrem wie in der Schweiz. Franzosen buchen mit 32.20\% am meisten Objekte in Frankreich und mit 16.50\% in Spanien. Italiener buchen zu 18.01\% Objekte in Italien und 17.11\% in Spanien.
+
+\begin{figure}[H]
+	\RawFloats
+	\centering
+	\includegraphics[width=0.5\textwidth]{images/hypothese2}
+	\caption{Buchungen von Interhome gruppiert nach Land}
+	\label{fig:testingfazit:testing:hypothesen:hypothese2}
+\end{figure}
+
+\paragraph{Hypothese 3: "`Schweizer Kunden buchen meistens Objekte in der Schweiz."'} Eingeschränkt wurden die Attribute hier auf den Standort des Objektes. Zusätzlich wurde ein Filter gesetzt auf die Herkunft des Kunden. Als Resultat gab das Programm aus, dass 49.24\% aller Schweizer ein Objekt in der Schweiz buchen. Abgeschlagen auf dem zweiten Platz rangiert Frankreich mit 7.34\% und danach Italien mit 6.99\%. Die Hypothese ist somit bestätigt.
+
+\begin{figure}[H]
+	\RawFloats
+	\centering
+	\includegraphics[width=0.5\textwidth]{images/hypothese3-1}
+	\caption{Buchungen von Interhome welche von Schweizer getätigt wurden, gruppiert nach Land}
+	\label{fig:testingfazit:testing:hypothesen:hypothese3:1}
+\end{figure}
+
+Es ist generell gültig, dass Kunden meistens ein Ferienhaus im eigenen Land buchen. Jedoch ist es nirgends so extrem wie in der Schweiz. Franzosen buchen mit 32.20\% am meisten Objekte in Frankreich und mit 16.50\% in Spanien. Italiener buchen zu 18.01\% Objekte in Italien und 17.11\% in Spanien.
+
+\begin{figure}[H]
+	\begin{subfigure}[t]{0.4\textwidth}
+		\centering
+		\includegraphics[width=1\textwidth]{images/hypothese3-2}
+		\caption{Franzosen}
+		\label{fig:testingfazit:testing:hypothesen:hypothese3:2:1}
+	\end{subfigure} 
+	\begin{subfigure}[t]{0.4\textwidth}
+		\centering
+		\includegraphics[width=1\textwidth]{images/hypothese3-3}
+		\caption{Italiener}
+		\label{fig:testingfazit:testing:hypothesen:hypothese3:2:2}
+	\end{subfigure}
+	\caption{Buchungen von Interhome welche von anderen Nationen getätigt wurden.}
+	\label{fig:testingfazit:testing:hypothesen:hypothese3:2}
+\end{figure}
+
 \paragraph{Hypothese 4: "`Bei Destinationen mit Meer Anschluss werden öfters Objekte mit mehreren Reisenden gebucht"'} Um diese Hypothese zu überprüfen werden verschiedene Destinationen miteinander verglichen. Benötigt werden Orte am Meer und solche im Landes inneren. Dazu wurden die fünf meist gebuchten Regionen ermittelt, welche nahe am Strand sind. Dies konnte mit dem Proof of Concept gemacht werden. Dazu wurde die Ortschaft analysiert von allen Buchungen bei denen das Objekt nahe am Strand liegt. Das Resultat dieser Analyse ist \cref{sec:testingfazit:testing:hypothesen:1} abgebildet. Die \% Spalte zeigt die Häufigkeit dieser Ortschaft in allen Buchungen, bei welchen das Objekt nahe an einem Strand liegt.
 
 \begin{table}[H] 
@@ -1048,9 +1094,9 @@ Im \cref{sec:einleitung:ziel:hypothesen} \nameref{sec:einleitung:ziel:hypothesen
 	\end{tabular}
 \end{table}
 
-Anschliessend wurde für diese Buchungen die Häufigkeiten der Buchungen gezählt, gruppiert nach Anzahl der Reisenden (PAX). Also wie viele Buchungen wurden mit 2 PAX getätigt, wie viele mit 3 PAX, wie viele mit 4 PAX, etc. Das Resultat wird in \cref{sec:testingfazit:testing:hypothesen:2} gezeigt. Die Kolonne "`\#-PAX"' stellt die Anzahl der Reisenden dar. Die Kolonne "`\%"' die Häufigkeit wie oft die PAX Anzahl vorhanden ist.
+Anschliessend wurde für diese Ortschaften die Häufigkeiten der Buchungen gezählt, gruppiert nach Anzahl der Reisenden (PAX). Also wie viele Buchungen wurden mit 2 PAX getätigt, wie viele mit 3 PAX, wie viele mit 4 PAX, etc. Das Resultat wird in \cref{sec:testingfazit:testing:hypothesen:2} gezeigt. Die Kolonne "`\#-PAX"' stellt die Anzahl der Reisenden dar. Die Kolonne "`\%"' die Häufigkeit wie oft die PAX Anzahl vorhanden ist.
 
-Man sieht dass am häufigsten 2 oder 4 Reisende vorhanden sind. Deshalb werden 2 PAX rot hinterlegt und 4 PAX grün. Erwartet wird dass grüne Felder eine möglichst hohe zahl haben, und rote eine niedrigere. 3 Reisende werden nicht verwendet da dies genau so gut Familien wie Reisegruppen sein können, und Buchungen mit 5 bis 6 PAX sind zu wenige vorhanden. Die Werten von 2 und 4 Reisenden werden nachher mit denen von Buchungen verglichen, welche nicht am Strand liegen. Sind die grünen Felder generell höher bei Buchungen am Strand, so gilt die Hypothese als möglich. Um sie endgültig zu bestätigen müssten mehr Informationen gesammelt werden als in dieser Arbeit vorhanden sind. Die Hypothese besagt, dass Familien mit Kindern öfters ans Meer reisen. 4 PAX jedoch müssen nicht zwingend Familien sein. Die These kann demnach widerlegt werden, denn 2 PAX sind definitiv keine Familie mit Kindern, jedoch ist eine definitive Bestätigung nicht möglich. 
+Man sieht dass am häufigsten 2 oder 4 Reisende vorhanden sind. zwei PAX ist sicher keine Familie und wird deshalb \colorbox{red!25}{rot} hinterlegt und vier PAX \colorbox{green!25}{grün}. Erwartet wird dass grüne Felder eine möglichst hohe Zahl haben, und rote eine niedrigere. 3 Reisende werden nicht verwendet da dies genau so gut Familien wie Reisegruppen sein können, und für Buchungen mit 5 bis 6 PAX sind zu wenige Instanzen vorhanden. Die Werten von 2 und 4 Reisenden werden nachher mit denen von Buchungen verglichen, welche nicht am Strand liegen. Sind die grünen Felder generell höher bei Buchungen am Strand, so gilt die Hypothese als möglich. Um sie endgültig zu bestätigen müssten mehr Informationen gesammelt werden als in dieser Arbeit vorhanden sind. Die Hypothese besagt, dass Familien mit Kindern öfters ans Meer reisen. 4 PAX jedoch müssen nicht zwingend Familien sein. Die These kann demnach widerlegt werden, denn 2 PAX sind definitiv keine Familie mit Kindern, jedoch ist eine definitive Bestätigung nicht möglich. 
 
 \begin{table}[H] 
 	\caption{Häufigkeit der Anzahl Reisenden pro Buchung für Ortschaften am Meer}
@@ -1088,9 +1134,9 @@ Man sieht dass am häufigsten 2 oder 4 Reisende vorhanden sind. Deshalb werden 2
 	\end{tabular}
 \end{table}
 
-Als Vertreter der Destinationen ohne Meeranschluss wurden Paris, Wien, Dittishausen, Krakau und Prag gewählt. Sie wurden ausgesucht weil sie sind im Landes inneren sind und viele Buchungen besitzen. 
+Als Vertreter der Destinationen ohne Meeresanschluss wurden Paris, Wien, Dittishausen, Krakau und Prag gewählt. Sie wurden ausgesucht weil sie sind im Landes inneren sind und viele Buchungen besitzen. 
 \begin{table}[H] 
-	\caption{Häufigkeit der Anzahl Reisenden pro Buchung für Ortschaften am Meer}
+	\caption{Häufigkeit der Anzahl Reisenden pro Buchung für Ortschaften welche nicht am Meer liegen}
 	\centering
 	\label{sec:testingfazit:testing:hypothesen:3}
 	\begin{tabular}{ | l | l | l | } 
@@ -1127,7 +1173,7 @@ Als Vertreter der Destinationen ohne Meeranschluss wurden Paris, Wien, Dittishau
 
 Aus der Tabelle der Buchungen mit Meeresanschluss sind durchschnittlich \colorbox{green!25}{29.89\%} der Buchungen mit vier PAX vorhanden und \colorbox{red!25}{30.13\%} mit zwei. Aus der Übersicht der Anzahl Reisenden von Ortschaften im Landesinneren sind \colorbox{green!25}{32.93\%} mit vier Reisenden und \colorbox{red!25}{30.53\%} mit zwei. Die Anzahl an Buchungen mit 4 PAX ist bei Ortschaften mit Strand um 3.04 Prozentpunkte niedriger und jene für 2 PAX stabil geblieben. Dies ist gegen die Erwartungen und die Hypothese demnach widerlegt.
 
-\paragraph{Hypothese 5: "`Schweizer Buchungen in Skiregionen haben mehrheitlich die Eigenschaft dass sie nahe am Skilift oder am öffentlichem Verkehr liegen"'} Zuerst werden die 5 grössten Skiregionen ermittelt. Dazu wird der Proof of Concept verwendet. Es werden Schweizer Ortschaften gesucht und die Häufigkeit der Region gezählt mittels dem Apriori Algorithmus. Anschliessen die fünf Ortschaften aus dem Resultat gewählt welche ein Skigebiet besitzen. Das Resultat der Apriori Analyse ist in \cref{sec:testingfazit:testing:hypothesen:4} aufgeführt. \colorbox{green!25}{Grün} hinterlegt sind diejenigen Regionen, welche ein Skigebiet besitzen und deshalb weiterverwendet werden. Anschliessend wird für jede Region mittels Apriori Analyse ermittelt, wie viele Objekte entweder nahe am Skigebiet oder nahe am Öffentlichen verkehr liegen.
+\paragraph{Hypothese 5: "`Schweizer Buchungen in Skiregionen haben mehrheitlich (80\%) die Eigenschaft dass sie nahe am Skilift oder am öffentlichem Verkehr liegen"'} Zuerst werden die 5 grössten Skiregionen ermittelt. Dazu wird der Proof of Concept verwendet. Es werden Schweizer Ortschaften gesucht und die Häufigkeit der Region gezählt mittels dem Apriori Algorithmus. Anschliessen die fünf Top-Ortschaften aus dem Resultat ausgesucht welche ein Skigebiet besitzen. Das Resultat der Apriori Analyse ist in \cref{sec:testingfazit:testing:hypothesen:4} aufgeführt. \colorbox{green!25}{Grün} hinterlegt sind diejenigen Regionen, welche ein Skigebiet besitzen und deshalb weiterverwendet werden. Anschliessend wird für jede Region mittels Apriori Analyse ermittelt, wie viele Objekte entweder nahe am Skigebiet oder nahe am Öffentlichen verkehr liegen. 
 
 \begin{table}[H] 
 	\caption{Häufigkeit der Ortschaften von Buchungen nahe Strand}
@@ -1147,7 +1193,7 @@ Aus der Tabelle der Buchungen mit Meeresanschluss sind durchschnittlich \colorbo
 	\end{tabular}
 \end{table}
 
-\begin{figure}[htb]
+\begin{figure}[H]
 	\begin{subfigure}[t]{0.8\textwidth}
 		\centering
 		\includegraphics[width=1\textwidth]{images/hypothese5-nendaz}
@@ -1182,7 +1228,7 @@ Aus der Tabelle der Buchungen mit Meeresanschluss sind durchschnittlich \colorbo
 	\label{sec:testingfazit:testing:hypothesen:5}
 \end{figure}
 
-Bei Crans-Montana mit 88.24\% und Grindelwald 93.00\% der Buchungen in der nähe des Öffentlichen Verkehr (ÖV)kann man sicher dass die Hypothese erfüllt ist. 
+Bei Crans-Montana mit 88.24\% und Grindelwald 93.00\% der Buchungen in der nähe des öffentlichen Verkehrs (ÖV) ist die Hypothese erfüllt. 
 
 In Zermatt sind 71.15\% nahe ÖV, 66.84\% nahe dem Skilift und 52.09\% in der nähe von beiden. Wenn man $66.84 - 52.09$ rechnet erhält an 14.75\%. Dies sind die Buchungen die nur in der nähe von einem Skigebiet liegen, jedoch nicht in der nähe der ÖV. Zählt man diese 14.75\% zu den 71.15\%, so erhält 85.9\% und damit alle Objekte die nahe Skilift und/oder nahe ÖV liegen. Somit ist die Hypothese auch für Zermatt erfüllt.
 
