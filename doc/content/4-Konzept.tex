@@ -18,7 +18,9 @@ Mittels Association rule learning (siehe \cref{sec:recherche:dataminingtechniken
 
 \subsubsection{Classification}
 \label{sec:konzept:disziplinauswahl:classification}
-Bei der Classification handelt es sich um ein \gls{supervisedlearning} (siehe \cref{sec:recherche:dataminingtechniken:disziplinen:classification} \nameref{sec:recherche:dataminingtechniken:disziplinen:classification}). Deshalb sind vorab Klassen zu definieren welche den Objekten zugewiesen werden. Diese Informationen sind jedoch noch nicht vorhanden, weshalb in der Anforderung FA7 ein \gls{unsupervisedlearning} Algorithmus vorausgesetzt wurde. Deshalb eignet sich die Classification für diese Aufgabenstellung nicht.
+Wie im \cref{sec:recherche:dataminingtechniken:disziplinen:classification} \nameref{sec:recherche:dataminingtechniken:disziplinen:classification} beschrieben ist das Ziel der Classification die Zuweisung einer Instanz zu einer Klasse. Die hätte sicherlich einige interessante Einsatzgebiete bei der Interhome. Zum Beispiel könnte die Liquidität von Kunden unterteilt werden in zwei Gruppen "`zahlungsfähig"' und "`zahlungsunfähig. Oder das Suchverhalten der Kunden und ob es wahrscheinlich ist ob er eine Buchung abschliesst oder nicht.
+
+Das Ziel der Arbeit ist jedoch die Analyse der Buchungsdaten auf die Häufigkeit von Attributen, wozu sich die Classification nicht eignet.
 
 \subsubsection{Lineare Regression}
 \label{sec:konzept:disziplinauswahl:regression}
@@ -30,7 +32,7 @@ Das Resultat einer Cluster analysis sind Gruppen (Clusters) von Buchungen, die u
 
 Obwohl das Clustering keine funktionale Anforderung beantwortet, ist der Ansatz trotzdem interessant. Da die Instanzen innerhalb des Clusters ähnlich zueinander sind ist zu erwarten, dass eine Häufigkeitszählung der Attribute innerhalb des Clusters ähnliche Eigenschaften aufweisen. Diese sollten von der Apriori Analyse gefunden werden. 
 
-Dies könnte hilfreich sein, wenn über die gesamte zu analysierende Datenmenge die Attributverteilung sehr gleichmässig ist und das Association rule learning keine interessanten Kenntnisse liefert. Das schliesst nicht aus, das es zwei Gruppen gibt, welche für sich selber betrachtet sehr eindeutige Attributverteilungen besitzen, die sich aber gegenseitig aufheben. Zum Beispiel könnte es in Malta viele junge Besucher geben, welche kleine und günstige Ferienhäuser buchen um dort Parties zu feiern. Gleichzeitig gibt es viele Familien die dort hingehen und ausserhalb der Feierzone Strandferien machen. Über alles betrachtet könnte es sein, dass sich die beiden Gruppen aufheben, aber jede für sich selber betrachtet interessante Muster beinhalten aufweisen würde.
+Dies könnte hilfreich sein, wenn über die gesamte zu analysierende Datenmenge die Attributverteilung sehr gleichmässig ist und das Association rule learning keine interessanten Kenntnisse liefert. Das schliesst nicht aus, das es zwei Gruppen gibt, welche für sich selber betrachtet sehr eindeutige Attributverteilungen besitzen, die sich aber gegenseitig aufheben. Zum Beispiel könnte es in Malta viele junge Besucher geben, welche kleine und günstige Ferienhäuser buchen um dort Parties zu feiern. Gleichzeitig gibt es viele Familien die dort hingehen und ausserhalb der Feierzone Strandferien machen. Über alles betrachtet wäre es möglich, dass die Attributverteilung über beiden Gruppen sehr gleichmässig ist, aber jede für sich selber betrachtet interessante Muster aufweist.
 
 Deshalb wird ein versucht gewagt mittels der Cluster analysis zuerst eine Gruppierung der Buchungen durchzuführen, mit einem anschliessenden Association rule learning.
 
@@ -456,7 +458,7 @@ Der letzte Mockup zeigt die Ansicht in welcher die Einstellungen des Programmes 
 	\RawFloats
 	\centering
 	\includegraphics[width=1\textwidth]{images/wireframe-settings}
-	\caption{Mockup für die Konfiguration der Algorithmen (FA8)}
+	\caption{Mockup für die Konfiguration der Algorithmen (FA7)}
 	\label{fig:konzept:mockups:settings}
 \end{figure}
 

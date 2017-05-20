@@ -189,15 +189,16 @@ Anschliessend wird anhand eines \gls{uml}-Paketdiagrammes die Architektur visual
 Nachfolgend sind die Punkte aus dem \cref{sec:konzept} aufgeführt welche den grundsätzlichen Aufbau der Umsetzung bestimmen.
 
 \begin{itemize}
-	\item Ansichten: Es gibt vier Ansichten welche der Benutzer aufrufen kann.  Stammdaten einsehen, Attributanalyse durchführen, Attributanalyse mit Gruppierung durchführen und Einstellungen anpassen.
+	\item Ansichten: Es gibt vier Ansichten welche der Benutzer aufrufen kann. Stammdaten einsehen, Attributanalyse durchführen, Attributanalyse mit Gruppierung durchführen und Einstellungen anpassen.
 	\item Datentypen der Stammdaten: Die Datenbasis besteht aus Daten welche verschiedene Datentypen annehmen können.
 	\item Algorithmen: Es gibt drei Algorithmen welche auf die Datenbasis angewendet werden können: Apriori, KPrototype und DBScan.
 	\item Filtrierung: Vor jeder Analyse kann die Datenbasis durch filter eingeschränkt werden.
+	\item Konfiguration: Die Algorithmen sollen vom Endbenutzer konfigurierbar sein.
 \end{itemize}
 
 \subsubsection{Ansichten}
 \label{sec:proofofconcept:architektur:anforderungen:ansichten}
-Für die Darstellung der vier Ansichten wird eine Lösung angestrebt, welche die Ansicht von der Applikationslogik trennt. Dazu wird eine Templating Bibliothek für die Darstellung verwendet mit welcher die Ansichten generiert werden können. 
+Für die Darstellung der vier Ansichten (Stammdaten einsehen, Attributanalyse durchführen, Attributanalyse mit Gruppierung durchführen und Einstellungen anpassen) wird eine Lösung angestrebt, welche die Ansicht von der Applikationslogik trennt. Dazu wird eine Templating Bibliothek für die Darstellung verwendet mit welcher die Ansichten generiert werden können. 
 
 Es wurden drei Bibliotheken evaluiert welche für die Erstellung der Ansichten verwendet werden können. Diese werden in den Kategorien Syntax, Funktionalität und Dokumention bewertet. Den ersten Punkt objektiv zu bewerten ist relativ schwierig. Es wurde versucht im Vergleich zu den anderen Kandidaten ein Urteil zu fällen wie verständlich die Templates zu lesen sind. Bei der Funktionalität wir der Funktionsumfang der einzelnen Bibliotheken miteinander verglichen. Die Dokumentation schlussendlich bewertet wie verständlich die Dokumentation zu lesen ist und wie tief sie reicht. Die Bewertungsskala reicht von 1 bis 9. 1-3 ist schlecht und beduetet dass der Punkt eine echtes Hindernis darstellt. 4-6 ist im Mittelfeld. Mit solch einer Benotung kann die Bibliothek eingesetzt werden, auch wenn Verbesserungen in dem Bereich erwünscht sind. 7-9 steht dafür, dass die Library in dem Bereich sehr gut ist im Vergleich mit den Konkurrenten
 \begin{table}[H] 
@@ -259,9 +260,14 @@ Umgangen wurde diese Problematik durch den Einsatz von Hintergrundprozessen. Wen
 
 \subsubsection{Filtrierung}
 \label{sec:proofofconcept:architektur:anforderungen:filtrierung}
-Um die Analyse durch Algorithmen auf einer Untermenge der Daten durchzuführen (siehe FA3 in \cref{fig:anforderungsanalyse:funktionaleanforderung:fa3}) soll der User die Möglichkeit erhalten durch Einschränkung der Daten diese zu filtrieren. 
+Um die Analyse durch Algorithmen auf einer Untermenge der Daten durchzuführen (siehe FA3 in im \cref{sec:anforderungsanalyse:funktionaleanforderung} \nameref{sec:anforderungsanalyse:funktionaleanforderung}) soll der User die Möglichkeit erhalten durch Einschränkung der Daten diese zu filtrieren. 
 
 Deshalb wird in jeder Ansicht (ausser beim anpassen der Einstellungen) ein Formular angezeigt mit welcher die Daten eingeschränkt werden können. In der Umsetzung wurde ein Model erstellt welches die Filter für die verschiedenen Attribute abbildet (siehe \cref{sec:proofofconcept:klassenstruktur:models} \nameref{sec:proofofconcept:klassenstruktur:models}) und ein Twig Template um das Formular darzustellen (siehe \cref{sec:proofofconcept:externebibliotheken:twig} \nameref{sec:proofofconcept:externebibliotheken:twig}). Schlussendlich muss beim Zugriff der Daten die Filters beachtet werden. Es dürfen nur diejenigen Buchungen geliefert werden welche allen Kriterien zutreffen. Die Datenmengen auf die die Filter angewendet wurden werden gecached um den Zugriff zu beschleunigen (siehe \cref{sec:proofofconcept:performance:caching} \nameref{sec:proofofconcept:performance:caching}).
+
+\subsubsection{Konfiguration}
+Ein Benutzer des Programmes soll, das Programm konfigurieren können (siehe FA7 im \cref{sec:anforderungsanalyse:funktionaleanforderung} \nameref{sec:anforderungsanalyse:funktionaleanforderung}). Deshalb wird eine Konfigurationsdatei eingelesen, die alle Parameter enthält die vom Benutzer angepasst werden können. Diese Datei kann darauf hin mittels der Ansicht "`Einstellungen anpassen"' modifiziert werden. Im Code wird eine Klasse benötigt welche die Konfiguration übernimmt. Dies wird vom ConfigProvider erledigt. Mehr dazu im \cref{sec:proofofconcept:klassenstruktur} \nameref{sec:proofofconcept:klassenstruktur}. Zusätzlich gibt es noch technische Parameter die für die Ausführung des Programmes benötigt werden. Diese sind ebenfalls in der Konfigurationsdatei enthalten, können jedoch nicht in der "`Einstellungen anpassen"' Ansicht geändert werden. Alle Konfigurationen sind im \cref{sec:proofofconcept:konfiguration} \nameref{sec:proofofconcept:konfiguration} beschrieben.
+
+
 
 %\subsection{MVC}
 %\label{sec:proofofconcept:architektur:mvc}
@@ -274,7 +280,7 @@ Deshalb wird in jeder Ansicht (ausser beim anpassen der Einstellungen) ein Formu
 
 \subsection{Package-Struktur}
 \label{sec:proofofconcept:packagestruktur}
-Ein Package gruppiert ähnliche Klassen und Interfaces zusammen. Man kann sich ein Package vorstellen wie ein Ordner auf dem Computer. Die Struktur dieser Gruppen sowie deren Verwendung untereinander wird in \cref{fig:proofofconcept:packagestruktur:1} mit einem \gls{uml} Package Diagram aufgezeigt.
+Ein Package gruppiert ähnliche Klassen und Interfaces zusammen. Man kann sich ein Package vorstellen wie ein Ordner auf dem Computer. Die Struktur dieser Gruppen sowie deren Verwendung untereinander wird in \cref{fig:proofofconcept:packagestruktur:1} mit einem \gls{uml} Package Diagram aufgezeigt. 
 \begin{figure}[H]
 	\RawFloats
 	\centering
@@ -283,7 +289,7 @@ Ein Package gruppiert ähnliche Klassen und Interfaces zusammen. Man kann sich e
 	\label{fig:proofofconcept:packagestruktur:1}
 \end{figure}
 
-Die Struktur der Packages ist so ausgelegt, dass die Abhängigkeiten von oben nach unten fliessen. Sprich ein oberes Packet kann ein unteres verwenden, jedoch nicht umgekehrt. Einstiegspunkte für die Ausführung des Programmes sind die Klassen in den Packages Controllers und Services. Ersteres wird vom Benutzer verwendet wenn er eine Seite angezeigt haben möchte. Die Services sind für die Hintergrundprozesse verantwortlich und führen eine Analyse der verschiedenen Algorithmen durch (siehe \cref{sec:proofofconcept:architektur:services} \nameref{sec:proofofconcept:architektur:services}). Nachfolgend werden die einzelnen Packages erklärt.
+Das Ziel war es, gemäss dem \gls{srp} eine starke Kohäsion und eine lose Kopplung zu erreichen. Deshalb wurde die Struktur der Packages ist so ausgelegt, dass die Abhängigkeiten von oben nach unten fliessen. Sprich ein oberes Packet kann ein unteres verwenden, jedoch nicht umgekehrt. Einstiegspunkte für die Ausführung des Programmes sind die Klassen in den Packages Controllers und Services. Ersteres wird vom Benutzer verwendet wenn er eine Seite angezeigt haben möchte. Die Services sind für die Hintergrundprozesse verantwortlich und führen eine Analyse der verschiedenen Algorithmen durch (siehe \cref{sec:proofofconcept:architektur:services} \nameref{sec:proofofconcept:architektur:services}). Nachfolgend werden die einzelnen Packages erklärt.
 
 \begin{itemize}
 	\item Controllers: Nehmen die Anfragen eines Benutzers entgegen und verarbeiten diese. Dazu verwenden sie Klassen aus dem Business welches ein Datenmodel zurückliefert. Dieses Model werden anschliessend vom Controller an die View übergeben welche die Ausgabe für den Browser generiert (siehe \cref{sec:proofofconcept:architektur:mvc} \nameref{sec:proofofconcept:architektur:mvc}).
@@ -301,11 +307,13 @@ Um den Aufbau der Lösung zu erklären werden die in diesem Abschnitt die Klasse
 
 Einige Klassen sind grün eingefärbt und stellen den Ausgangspunkte dar, von welchen die Erklärungen beginnen. Rot hinterlegt sind jene Klassen die von einer externen Bibliothek bereitgestellt werden.
 
+Die Klasse ConfigProvider liefert die Konfigurationen und wird von vielen Klassen verwendet. Um die Übersichtlichkeit nicht unnötig zu erschweren wurde diese Abhängigkeit in den Klassendiagrammen weggelassen. 
+
 \subsubsection{Models}
 \label{sec:proofofconcept:klassenstruktur:models}
 Die Models sind Datencontainer mit möglichst wenig Logik. 
 
-\paragraph{Filter \& Felder} In \cref{fig:proofofconcept:klassenstruktur:5} werden die Filter und Felder gezeigt. Felder (Field) werden von den Algorithmen verwendet (z.B. Distanzmessung bei beim Clustering oder Häufigkeitszählung beim Apriori) sowie von den Filtern. Letztere werden benutzt um die Datenbasis einzuschränken. Es gibt verschiedene Arten von Feldern, welche direkt im Klassendiagram abgebildet sind. Dies wären zum Beispiel Fliesskommazahlen (FloatField), Ganzzahlen (IntegerField), Texten (String), etc. Welche Felder in der Datenbasis auf welchen Feldtypen im Code zugeordnet werden ist in der Konfiguration des Programmes definiert.\todo{cref konfiguration}
+\paragraph{Filter \& Felder} In \cref{fig:proofofconcept:klassenstruktur:5} werden die Filter und Felder gezeigt. Felder (Field) werden von den Algorithmen verwendet (z.B. Distanzmessung bei beim Clustering oder Häufigkeitszählung beim Apriori) sowie von den Filtern. Letztere werden benutzt um die Datenbasis einzuschränken. Es gibt verschiedene Arten von Feldern, welche direkt im Klassendiagram abgebildet sind. Dies wären zum Beispiel Fliesskommazahlen (FloatField), Ganzzahlen (IntegerField), Texten (String), etc. Welche Felder in der Datenbasis auf welchen Feldtypen im Code zugeordnet werden ist in der Konfiguration des Programmes definiert (siehe \cref{sec:proofofconcept:konfiguration} \nameref{sec:proofofconcept:konfiguration}).
 
 \paragraph{Resultat des Apriori-Algorithmus} In \cref{fig:proofofconcept:klassenstruktur:6} werden die Histogramme abgebildet, welche üblicherweise zur Darstellung von Häufigkeitsverteilung verwendet wird. In dieser Arbeit werden sie für die Repräsentation des Resultates eines Apriori Algorithmuses benutzt. 
 Ein "`Histograms"' besitzt ein oder mehrere "`Histogram"' welches wiederum ein oder mehrere "`HistogramBins"' enthält. "`Histograms"' beinhaltet sämtliche Attributmengen und stehen somit für das gesamte Resultat der Anaylse. Ein "`Histogram"' repräsentiert eine Iteration des Apriori Algorithmus (z.B. alle häufigen 2-Attributmengen). Schlussendlich enthält ein "`HistogramBin"' eine Attributkombination mit der Häufigkeit, wie oft sie in der Datenmenge vorkommt. Um dies an einem Beispiel zu zeigen wird eine "`Histograms"' hier gezeigt:
@@ -664,7 +672,7 @@ Das Styling einer Webseite wird üblicherweise mit \gls{css} gemacht. Es gibt je
 
 \subsection{Templating mit Twig}
 \label{sec:proofofconcept:externebibliotheken:twig}
-\gls{html} Templates werden benutzt um die Logik des Programmes von der Darstellung zu trennen (siehe \cref{sec:proofofconcept:architektur:mvc} \nameref{sec:proofofconcept:architektur:mvc}). Dazu wurde die \gls{php} Template Bibliothek Twig eingesetzt (\url{https://twig.sensiolabs.org/}).
+\gls{html} Templates werden benutzt um die Logik des Programmes von der Darstellung zu trennen (siehe \cref{sec:proofofconcept:architektur:anforderungen:ansichten} \nameref{sec:proofofconcept:architektur:anforderungen:ansichten}). Dazu wurde die \gls{php} Template Bibliothek Twig eingesetzt (\url{https://twig.sensiolabs.org/}).
 
 %"`"'
 In der Umsetzung sind die Templates von Twig im Ordner "`Templates"' hinterlegt. Nachfolgend werden die Templates kurz erklärt.
@@ -686,7 +694,7 @@ In der Umsetzung sind die Templates von Twig im Ordner "`Templates"' hinterlegt.
 
 \subsection{UnitTests mit PHPUnit}
 \label{sec:proofofconcept:externebibliotheken:phpunit}
-UnitTests wurden mit PHPUnit umgesetzt (\url{https://phpunit.de/}).
+UnitTests wurden mit PHPUnit umgesetzt (\url{https://phpunit.de/}). Mehr dazu im \cref{sec:proofofconcept:unittests} \nameref{sec:proofofconcept:unittests}
 
 \subsection{Package Managing mit Composer}
 Ein Package Manager verwaltet die Abhängigkeiten von externen Bibliotheken welche in einem Projekt benutzt werden. In der Entwicklung dieser Arbeit wurde Composer (\url{https://getcomposer.org/}) eingesetzt. Verwendet wurde der Package Manager um Bibliotheken wie Twig, PHPUnit und PHP-DI zu verwalten.
@@ -713,7 +721,7 @@ Nachfolgend werden die im File "`composer.json"' definierten Abhängigkeiten bes
 	\item twbs/bootstrap: Twitter Bootstrap. Siehe \cref{sec:proofofconcept:externebibliotheken:bootstrap}
 	\item phpunit/phpunit: PHPUnit Test Runner. Siehe \cref{sec:proofofconcept:externebibliotheken:phpunit}
 	\item php-di/php-di: Dependency Injection Framework PHP-DI. Siehe \cref{sec:proofofconcept:dependency-injection}
-	\item mikey179/vfsStream: Virtual File Stream. Wird benutzt um den Dateizugriff bei den UnitTests zu simulieren.\todo{cref UnitTests}
+	\item mikey179/vfsStream: Virtual File Stream. Wird benutzt um den Dateizugriff bei den UnitTests zu simulieren. Mehr dazu im \cref{sec:proofofconcept:unittests} \nameref{sec:proofofconcept:unittests}
 \end{itemize}
 
 \subsection{Versionsverwaltung mit Git und GitHub}
@@ -731,6 +739,111 @@ Eingesetzt wurde Redis für den Zugriff auf die Daten mittels Iteratoren (siehe 
 
 
 \section{UnitTests}
+\label{sec:proofofconcept:unittests}
+Zur zusätzlichen Kontrolle der Funktionalität wurden UnitTests eingesetzt. Diese Testen einzelne Komponenten im Code. Es werden Erwartungen definiert, anschliessend der Code ausgeführt und schlussendlich die Rückgabe gegen die Erwartungen verglichen. \cref{...} zeigt die Auswertung der Tests.
+
+\begin{figure}[H]
+	\RawFloats
+	\centering
+	\includegraphics[width=1\textwidth]{images/unittests}
+	\caption{Auswertungen der UnitTests}
+	\label{fig:proofofconcept:unittests:1}
+\end{figure}
+
+Insgesammt wurden 86 Testfälle definiert, welche die Klassen in den Packages "`Business"' und "`Utilities"' abdecken. Die Models wurden nicht getestet da sie nur zur Datenhaltung verwendet werden und keine Logik enthalten. Leider konnten die Controller nicht mit UnitTests abgedeckt werden, da sie externe Abhängigkeiten zu den Services beinhalten. Würde ein Test ausgeführt werden, so hätte das zur folge dass ein Service, somit eine Analyse, gestartet würde.
+
+Um den Dateizugriff der Iteratoren (siehe \cref{sec:proofofconcept:klassenstruktur:algorithmen} \nameref{sec:proofofconcept:klassenstruktur:algorithmen}) zu testen wurde die externe Bibliothek "`vfsStream"' verwendet. Dies erzeugt ein VFS (Virtual File Stream). Damit greift der Test nicht auf ein File auf dem Computer zu, sondern auf ein virtuelles Dateisystem.
+
+\section{Installation}
+In diesem Abschnitt wird die Installation des Proof of Concepts beschrieben. Beschrieben wird die Einrichtung für ein Linux auf Debian Basis. Es ist jedoch übertragbar auf alle Betriebssysteme.
+
+Um das Programm zu installieren wird PHP 7 und Redis benötigt. Zusätzlich müssen noch alle externen Bibliotheken mit Composer geladen werden. Zuerst werden die Kommandozeilen-Befehle aufgeführt mit einer nachträglichen Erklärung. 
+
+\begin{enumerate}
+\item sudo apt-get apache2
+\item sudo add-apt-repository ppa:ondrej/php
+\item sudo apt-get update
+\item sudo apt-get install php7.1-dev php-pear php7.1-mbstring php7.1-cgi
+\end{enumerate}
+Befehl 1. installiert einen Apache Webserver (siehe \url{https://httpd.apache.org/}). Die restlichen Kommandos werden benötigt um \gls{php} und all seine Abhängigkeiten zu installieren. 
+
+Der Sourcecode des Programmes ist auf Github abgelegt (siehe \url{https://github.com/soultemptation/bookinganalyzerimpl}). Dieser muss für die Ausführung heruntergeladen werden. Dies kann entweder auf der Github Seite gemacht werden oder über die Kommandozeile. Für letzteres sollte zuerst dort hin navigiert werden, wo der Quellcode heruntergeladen werden soll. Dann kann folgender Befehl ausgeführt werden.
+\begin{enumerate}[resume]
+\item git clone git@github.com:soultemptation/bookinganalyzerimpl.git
+\end{enumerate}
+
+Danach können alle Abhängigkeiten des Programmes mittels Composer heruntergeladen werden. Dazu sollte die Kommandozeile im Ordner des Quellcodes stehen. Danach folgender Befehl ausführen.
+\begin{enumerate}[resume]
+\item php composer.phar update
+\end{enumerate}
+
+Als letztes muss Redis installiert und die Buchungsdaten in die Redis Datenbank importiert werden (siehe \cref{sec:proofofconcept:performance:datenzugriff} \nameref{sec:proofofconcept:performance:datenzugriff}).
+
+\begin{enumerate}[resume]
+\item sudo pecl install redis
+\item sudo bash -c "echo extension=redis.so > /etc/php/7.X/apache2/redis.ini"
+\item sudo bash -c "echo extension=redis.so > /etc/php/7.X/cli/redis.ini"
+\item sudo /etc/init.d/apache2 restart
+\item php Services/FillRedis/fillredis.php
+\end{enumerate}
+
+Befehl 7 installiert Redis als \gls{php} Erweiterung. Anschliessend wird mit dem Kommando 8 und 9 die Erweiterung in \gls{php} registriert. Schlussendlich wird der Apache Server neu gestartet und darauf hin der FillRedis Service gestartet.
+
+Danach kann im Browser unter der Adresse "`http://localhost"' das Programm gestartet werden.
+
+\section{Konfiguration}
+\label{sec:proofofconcept:konfiguration}
+Zur Konfigurierung der Algorithmen kann die "`Einstellungen anpassen"' Ansicht des Programmes aufgerufen werden. Es können jedoch noch mehr Konfigurationen vorgenommen werden, welche nicht für die Endbenutzer gedacht sind. Zum Beispiel was für Felder in der Datenbasis verwendet werden sollen, wie die diskretierung der Felder auf die ursprünglichen Werte zurückgerechnet werden kann, etc. 
+
+Die Konfigurationen sind im File "`config.php"' hinterlegt (siehe \url{https://github.com/soultemptation/bookinganalyzerimpl/blob/master/config.php}). Die Struktur ist ein \gls{php} Array. Nachfolgend werden die Felder beschrieben.
+
+\begin{itemize}
+\item dataSource: Pfad zum \gls{csv} File welches alle Buchungen enthält.
+\item pageSize: Wie viel Resultate in der "`Stammdaten einsehen"' Ansicht angezeigt werden.
+\item paginationWindow: Wie viele Seiten unterhalb der Resultate in der "`Stammdaten einsehen"' Ansicht angezeigt werden.
+\item booleanFields: Welche Felder in der Datenbasis werden als Binäre-Werte interpretiert.
+\item integerFields: Welche Felder in der Datenbasis werden als Zahlen-Werte interpretiert.
+\item floatFields: Welche Felder in der Datenbasis werden als Fliesskomma-Werte interpretiert.
+\item stringFields: Welche Felder in der Datenbasis werden als Text-Werte interpretiert.
+\item priceFields: Welche Felder in der Datenbasis werden als Preis-Werte interpretiert.
+\item distanceFields: Welche Felder in der Datenbasis werden als Distanz-Werte interpretiert.
+\item floatFieldsBoundaries: Alle Flieskomma-Werte sind das Resultat einer diskretierung. Um diese dem Benutzer angezeigt werden muss die Diskretierung zurückgerechnet werden. Dieses Feld definiert wie das Resultat der Diskretierung rückgängig gemacht werden kann.
+\item atLeastFilterFields: Es gibt Felder welche einen "`Ab"'-Wert beinhalten. Zum Beispiel soll für den Filter "`Zimmer"' mit dem Wert "`3+"' alle Instanzen ausgewählt werden, welche 3 oder mehr Zimmer beinhalten. Dieses Feld definiert, für welche Felder solch eine "`Ab"'-Suche durchgeführt werden soll.
+\item fieldNameMapping: Dieses Feld beinhaltet die Namen der Felder. Dem Benutzer wird somit anstelle des Feldes "`CUCNTRY"' der Name "`Customer Country"' angezeigt.
+\item fileCacheDirectory: Beinhaltet den Pfad zu den Cache Dateien.
+\item apriori: Beinhaltet alle Konfigurationen für den Apriori Algorithmus.
+\item kprototype: Beinhaltet alle Konfigurationen für den k-prototype Algorithmus.
+\item dbscan: Beinhaltet alle Konfigurationen für den DBSCAN Algorithmus.
+\end{itemize}
+
+Wenn in der Datenbasis ein neues Feld hinzugefügt wird, so kann es in der Konfiguration erweitert werden und es wird automatisch in den Algorithmen verwendet. Dazu muss es in einem der Felder "`booleanFields"', "`integerfields"', "`floatFields"', "`stringFields"', "`priceFields"' oder "`distancefields"' hinzugefügt werden. Ist ein diskretiertes Feld, so muss zusätzlich noch ein Eintrag im Feld "`floatFieldsBoundaries"' erstellt werden.
 
 
+\section{Fazit}
+\label{sec:proofofconcept:fazit}
+Implementiert wurden eine Webanwendung mittels \gls{php}. Im \cref{app:pocansichten} wird die Programmoberfläche der Umsetzung gezeigt. Den grössten Einfluss auf die Entwicklung hatten die Anforderungen aus dem Konzept (siehe \cref{sec:proofofconcept:architektur:anforderungen} \nameref{sec:proofofconcept:architektur:anforderungen}) sowie die Laufzeit der Algorithmen. Da diese länger als 30 Sekunden dauern wurde die Berechnung in Hintergrundprozesse ausgelagert. Nichts desto trotz wurde eine Lösung erstellt, welche Modular aufgebaut ist (siehe \cref{sec:proofofconcept:packagestruktur} \nameref{sec:proofofconcept:packagestruktur}) und leicht durch weitere Attribute erweitert werden kann (siehe \cref{sec:proofofconcept:konfiguration} \nameref{sec:proofofconcept:konfiguration}). Um die Applikation um einen Algorithmus zu erweitern kann ein weiterer Service hinzugefügt werden (siehe \cref{sec:proofofconcept:architektur:services} \nameref{sec:proofofconcept:architektur:services}).
+
+Erste Analysen welche mit dem Programm durchgeführt wurden zeigten auf, dass der Apriori-Algorithmus sehr hilfreich ist, je spezifischer die Anfrage gestellt wird. Bei einer Apriori Analyse der gesamte Datenbasis mit allen Attributen ist das Resultat nicht sonderlich aussagekräftig. 
+
+\begin{figure}[H]
+	\RawFloats
+	\centering
+	\includegraphics[width=1\textwidth]{images/result-of-everything}
+	\caption{Resultat der Apriori Analyse mit allen Buchungen und sämtlichen Attributen}
+	\label{fig:proofofconcept:fazit:1}
+\end{figure}
+
+Bessere Resultate erhält man, wenn die Datenbasis eingeschränkt wird. Zum Beispiel wenn man nur Kunden aus der Schweiz in der Analyse verwendet. Anschliessend kann man dasselbe für Kunden aus Frankreich machen und die beiden Resultate gegeneinander vergleichen. Auch hilfreich ist die Einschränkung der Attribute, welche in die Analyse einfliessen. Zuerst angedacht war in der Arbeit, dass die Algorithmen möglichst oft mit möglichst vielen Attributen arbeiten. Bei der Auswertung der Hypothesen (siehe \cref{sec:einleitung:ziel:hypothesen} \nameref{sec:einleitung:ziel:hypothesen}) hat sich jedoch gezeigt dass viele Fragestellungen nur wenige Attribute benötigen. Besonders oft wurden die Wochentage, Monate, Destinationen des Objektes und des Kunden sowie die Distanzen verwendet. Die Restlichen Attribute werden in Zukunft hoffentlich bei der Analyse durch Interhome verwendet. Ansonsten können diese leicht durch eine Konfigurationsänderung entfernt werden.
+
+Die grösste Stärke des Apriori Algorithmus ist dessen Geschwindigkeit. Je höher der $minsup$ ist, desto schneller Arbeitet er. Bei ein Wert von 0.1 dauert eine Analyse im Durchschnitt 32 Sekunden über die gesamte Datenbasis mit allen Attributen. Das lädt ein verschiedene Kombinationen an Filtern auszuprobieren um ein brauchbares Resultat zu finden. Die Clustering Algorithmen hingegen sind sehr langsam. Wenn die Analyse auf 1'500 Instanzen eingeschränkt wird dauert ein Durchlauf bereits über 20 Minuten. Das Negative daran ist die exponentielle Laufzeit. 3'000 Instanzen brauchen demnach nicht 40 Minuten, sondern bereits Stunden. Nicht gerade hilfreich ist dabei die Tatsache, dass mehrere verschiedene Parameter die Analyse massiv beeinträchtigen (siehe \cref{sec:recherche:algorithmen:k-prototypes} \nameref{sec:recherche:algorithmen:k-prototypes} und \cref{sec:recherche:algorithmen:dbscan} \nameref{sec:recherche:algorithmen:dbscan}). Im \cref{sec:konzept:parameterauswahl} \nameref{sec:konzept:parameterauswahl} wurde zum Beispiel die Elbow-Methode zur Erhebung eines geeigneten $k$ Wertes vorgenommen. Jedoch ist dies bei der Laufzeit der Algorithmen nicht möglich weshalb sie nicht umgesetzt wurde. Die Parameter $\epsilon$, $minpts$ und $\gamma$ sollen explorativ ermittelt werden. Jedoch ist dies bei diesen Laufzeiten nicht praktikabel. 
+
+Nichts desto trotz wurden Durchläufe der Clustering Algorithmen ausgeführt. Die Resultate waren jedoch nicht besonders aufschlussreich. Der k-prototype findet per Definition immer $k$ Cluster. Erwartet wurde, dass einige Attribute in einer Gruppe sehr oft vertreten sind, und in einer anderen möglichst selten. Jedoch zeigten die Resultate die selben Attribute oft in beiden Clustern mit ähnlicher Häufigkeit, womit keine klaren Schlüsse gezogen werden konnten. Der DBSCAN findet auf den Daten von Interhome entweder nur einen Cluster, oder einen grösseren Cluster und ganz viele Noise Punkte. Entweder benötigen die Clustering Algorithmen noch weitere Feineinstellungen der Parameter, oder es sind schlichtweg keine eindeutigen Cluster in den Daten zu finden. Die Resultate lassen aber letzteres Vermuten. Denn dieses Verhalten wäre erklärbar, wenn viele Instanzen zueinander ähnlich sind und es nur wenige Ausreisser gibt. In \cref{fig:proofofconcept:fazit:2} wird die vermutete Verhalten der Buchungen in der Datenbasis Beispielhaft auf einem Koordinatensytem aufgezeigt. Grüne Punkte gehören zu einem Cluster und sind alle sehr ähnlich zu einander und irgendwo in der Mitte angesiedelt. Ausserhalb der Hauptgruppe gibt es wenige Ausreisser, welche jedoch untereinander keinen Cluster bilden können. Dann würde der k-prototype $k$ Clusters finden, diese jedoch nicht klar unterscheiden könne. Der DBSCAN findet bei solch einer Verteilung nur eine Gruppe und einige Noise Punkte.
+
+\begin{figure}[H]
+	\RawFloats
+	\centering
+	\includegraphics[width=1\textwidth]{images/expected-data-distribution}
+	\caption{Vermutete Verteilung der Buchungen in der Datenbasis}
+	\label{fig:proofofconcept:fazit:2}
+\end{figure}
 

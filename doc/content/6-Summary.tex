@@ -1076,7 +1076,9 @@ Es ist generell gültig, dass Kunden meistens ein Ferienhaus im eigenen Land buc
 	\label{fig:testingfazit:testing:hypothesen:hypothese3:2}
 \end{figure}
 
-\paragraph{Hypothese 4: "`Bei Destinationen mit Meer Anschluss werden öfters Objekte mit mehreren Reisenden gebucht"'} Um diese Hypothese zu überprüfen werden verschiedene Destinationen miteinander verglichen. Benötigt werden Orte am Meer und solche im Landes inneren. Dazu wurden die fünf meist gebuchten Regionen ermittelt, welche nahe am Strand sind. Dies konnte mit dem Proof of Concept gemacht werden. Dazu wurde die Ortschaft analysiert von allen Buchungen bei denen das Objekt nahe am Strand liegt. Das Resultat dieser Analyse ist \cref{sec:testingfazit:testing:hypothesen:1} abgebildet. Die \% Spalte zeigt die Häufigkeit dieser Ortschaft in allen Buchungen, bei welchen das Objekt nahe an einem Strand liegt.
+\paragraph{Hypothese 4: "`Bei Destinationen mit Meer Anschluss werden öfters Objekte mit mehreren Reisenden gebucht"'} Um diese Hypothese zu überprüfen werden verschiedene Destinationen miteinander verglichen. Benötigt werden Orte am Meer und solche im Landes inneren. Es werden deshalb zuerst Destinationen ermittelt und danach die Durchschnitte der Anzahl \gls{pax} verglichen. Sind durchschnittlich mehr Buchungen mit 2 Reisenden und weniger mit höheren \gls{pax}-Anzahlen vorhanden ist die Hypothese bestätigt.
+
+Es wurden die fünf meist gebuchten Regionen ausfindig gemacht, welche nahe am Strand sind. Dies konnte mit dem Proof of Concept gemacht werden. Dazu wurde die Ortschaft von allen Buchungen analysiert, bei denen das Objekt nahe am Strand liegt. Das Resultat dieser Analyse ist in \cref{sec:testingfazit:testing:hypothesen:1} abgebildet. Die \% Spalte zeigt wie häufig die Ortschaft in der Datenmenge vorhanden ist.
 
 \begin{table}[H] 
 	\caption{Häufigkeit der Ortschaften von Buchungen nahe Strand}
@@ -1094,9 +1096,12 @@ Es ist generell gültig, dass Kunden meistens ein Ferienhaus im eigenen Land buc
 	\end{tabular}
 \end{table}
 
-Anschliessend wurde für diese Ortschaften die Häufigkeiten der Buchungen gezählt, gruppiert nach Anzahl der Reisenden (PAX). Also wie viele Buchungen wurden mit 2 PAX getätigt, wie viele mit 3 PAX, wie viele mit 4 PAX, etc. Das Resultat wird in \cref{sec:testingfazit:testing:hypothesen:2} gezeigt. Die Kolonne "`\#-PAX"' stellt die Anzahl der Reisenden dar. Die Kolonne "`\%"' die Häufigkeit wie oft die PAX Anzahl vorhanden ist.
+Anschliessend wurde für diese Ortschaften die Häufigkeiten der Anzahl von Passagieren ermittelt. Also wie viele Buchungen wurden mit 2 \gls{pax} getätigt, wie viele mit 3 \gls{pax}, wie viele mit 4 \gls{pax}, etc. Das Resultat wird in \cref{sec:testingfazit:testing:hypothesen:2} gezeigt. Die Kolonne "`\#-PAX"' stellt die Anzahl der Reisenden dar. Die Kolonne "`\%"' die Häufigkeit, wie oft die \gls{pax} Anzahl vorhanden ist in allen Buchungen, bei welchen das Objekt nahe am Meer liegt.
 
-Man sieht dass am häufigsten 2 oder 4 Reisende vorhanden sind. zwei PAX ist sicher keine Familie und wird deshalb \colorbox{red!25}{rot} hinterlegt und vier PAX \colorbox{green!25}{grün}. Erwartet wird dass grüne Felder eine möglichst hohe Zahl haben, und rote eine niedrigere. 3 Reisende werden nicht verwendet da dies genau so gut Familien wie Reisegruppen sein können, und für Buchungen mit 5 bis 6 PAX sind zu wenige Instanzen vorhanden. Die Werten von 2 und 4 Reisenden werden nachher mit denen von Buchungen verglichen, welche nicht am Strand liegen. Sind die grünen Felder generell höher bei Buchungen am Strand, so gilt die Hypothese als möglich. Um sie endgültig zu bestätigen müssten mehr Informationen gesammelt werden als in dieser Arbeit vorhanden sind. Die Hypothese besagt, dass Familien mit Kindern öfters ans Meer reisen. 4 PAX jedoch müssen nicht zwingend Familien sein. Die These kann demnach widerlegt werden, denn 2 PAX sind definitiv keine Familie mit Kindern, jedoch ist eine definitive Bestätigung nicht möglich. 
+%Man sieht dass am häufigsten 2 oder 4 Reisende vorhanden sind. Zwei \gls{pax} sind sicher keine Familie. Steigt die 
+%
+%
+%hinterlegt und vier Passagiere \colorbox{green!25}{grün}. Erwartet wird dass grüne Felder eine möglichst hohe Zahl haben, und rote eine niedrigere. 3 Reisende werden nicht verwendet da dies genau so gut Familien wie Reisegruppen sein können, und für Buchungen mit 5 bis 6 \gls{pax} sind zu wenige Instanzen vorhanden. Die Werten von 2 und 4 Reisenden werden nachher mit denen von Buchungen verglichen, welche nicht am Strand liegen. Sind die grünen Felder generell höher bei Buchungen am Strand, so gilt die Hypothese als möglich. Um sie endgültig zu bestätigen müssten mehr Informationen gesammelt werden als in dieser Arbeit vorhanden sind. Die Hypothese besagt, dass Familien mit Kindern öfters ans Meer reisen. 4 \gls{pax} jedoch müssen nicht zwingend Familien sein. Die These kann demnach widerlegt werden, denn 2 Reisende sind definitiv keine Familie mit Kindern, jedoch ist eine definitive Bestätigung nicht möglich. 
 
 \begin{table}[H] 
 	\caption{Häufigkeit der Anzahl Reisenden pro Buchung für Ortschaften am Meer}
@@ -1106,28 +1111,28 @@ Man sieht dass am häufigsten 2 oder 4 Reisende vorhanden sind. zwei PAX ist sic
 		\hline 
 		\rowcolor{tableheadcolor}
 		\bfseries Ortschaft & \bfseries \#-PAX & \bfseries \% \\ \hline 
-		Spanien - Dénia & 4 & \cellcolor{green!25}37.32\% \\ \cline{2-3} 
-		 & 2 & \cellcolor{red!25}26.17\% \\ \cline{2-3}
+		Spanien - Dénia & 4 & 37.32\% \\ \cline{2-3} 
+		 & 2 & 26.17\% \\ \cline{2-3}
 		 & 3 & 18.42\% \\ \cline{2-3} 
 		 & 5 & 7.43\% \\ \cline{2-3}
 		 & 6 & 5.98\% \\ \hline 
-		Frankreich - Cap d'Agde & 2 & \cellcolor{red!25}32.00\% \\ \cline{2-3} 
-		 & 4 & \cellcolor{green!25}27.11\% \\ \cline{2-3}
+		Frankreich - Cap d'Agde & 2 & 32.00\% \\ \cline{2-3} 
+		 & 4 & 27.11\% \\ \cline{2-3}
 		 & 3 & 21.78\% \\ \cline{2-3} 
 		 & 5 & 8.89\% \\ \cline{2-3}
 		 & 6 & 6.22\% \\ \hline 
-		Spanien - Llançà & 4 & \cellcolor{green!25}32.24\% \\ \cline{2-3}
-		& 2 & \cellcolor{red!25}27.32\% \\ \cline{2-3} 
+		Spanien - Llançà & 4 & 32.24\% \\ \cline{2-3}
+		& 2 & 27.32\% \\ \cline{2-3} 
 		& 3 & 16.12\% \\ \cline{2-3}
 		& 5 & 8.2\% \\ \cline{2-3}
 		& 6 & 5.19\% \\ \hline 
-		Kroatien - Zadar & 4 & \cellcolor{green!25}31.25\% \\ \cline{2-3}
-		& 2 & \cellcolor{red!25}18.42\% \\ \cline{2-3} 
+		Kroatien - Zadar & 4 & 31.25\% \\ \cline{2-3}
+		& 2 & 18.42\% \\ \cline{2-3} 
 		& 5 & 15.79\% \\ \cline{2-3}
 		& 3 & 14.80\% \\ \cline{2-3}
 		& 6 & 8.22\% \\ \hline 
-		Frankreich - Cannes & 2 & \cellcolor{red!25}46.72\% \\ \cline{2-3} 
-		& 4 & \cellcolor{green!25}21.52\% \\ \cline{2-3}
+		Frankreich - Cannes & 2 & 46.72\% \\ \cline{2-3} 
+		& 4 & 21.52\% \\ \cline{2-3}
 		& 3 & 17.06\% \\ \cline{2-3} 
 		& 5 & 3.15\% \\ \cline{2-3}
 		& 6 & 1.84\% \\ \hline 
@@ -1143,35 +1148,54 @@ Als Vertreter der Destinationen ohne Meeresanschluss wurden Paris, Wien, Dittish
 		\hline 
 		\rowcolor{tableheadcolor}
 		\bfseries Ortschaft & \bfseries \#-PAX & \bfseries \% \\ \hline 
-		Frankreich - Paris & 2 & \cellcolor{red!25}45.83\% \\ \cline{2-3} 
-		 & 4 & \cellcolor{green!25}26.21\% \\ \cline{2-3}
+		Frankreich - Paris & 2 & 45.83\% \\ \cline{2-3} 
+		 & 4 & 26.21\% \\ \cline{2-3}
 		 & 3 & 14.76\% \\ \cline{2-3} 
 		 & 5 & 5.44\% \\ \cline{2-3}
 		 & 6 & 2.33\% \\ \hline 
-		Österreich - Wien & 2 & \cellcolor{red!25}36.07\% \\ \cline{2-3} 
-		 & 4 & \cellcolor{green!25}29.18\% \\ \cline{2-3}
+		Österreich - Wien & 2 & 36.07\% \\ \cline{2-3} 
+		 & 4 & 29.18\% \\ \cline{2-3}
 		 & 3 & 19.10\% \\ \cline{2-3} 
 		 & 5 & 10.08\% \\ \cline{2-3}
 		 & 6 & 2.65\% \\ \hline 
-		Deutschland - Dittishausen & 2 & \cellcolor{red!25}37.38\% \\ \cline{2-3}
-		& 4 & \cellcolor{green!25}25.54\% \\ \cline{2-3} 
+		Deutschland - Dittishausen & 2 & 37.38\% \\ \cline{2-3}
+		& 4 & 25.54\% \\ \cline{2-3} 
 		& 3 & 19.08\% \\ \cline{2-3}
 		& 5 & 7.38\% \\ \cline{2-3}
 		& 6 & 4.31\% \\ \hline 
-		Polen - Krakau & 4 & \cellcolor{green!25}38.46\% \\ \cline{2-3}
-		& 2 & \cellcolor{red!25}17.31\% \\ \cline{2-3} 
+		Polen - Krakau & 4 & 38.46\% \\ \cline{2-3}
+		& 2 & 17.31\% \\ \cline{2-3} 
 		& 6 & 15.38\% \\ \cline{2-3}
 		& 5 & 15.38\% \\ \cline{2-3}
 		& 3 & 9.62\% \\ \hline 
-		Tschechien - Prag & 4 & \cellcolor{green!25}45.26\% \\ \cline{2-3} 
+		Tschechien - Prag & 4 & 45.26\% \\ \cline{2-3} 
 		& 3 & 20.44\% \\ \cline{2-3}
-		& 2 & \cellcolor{red!25}16.06\% \\ \cline{2-3} 
+		& 2 & 16.06\% \\ \cline{2-3} 
 		& 5 & 9.49\% \\ \cline{2-3}
 		& 6 & 8.03\% \\ \hline 
 	\end{tabular}
 \end{table}
 
-Aus der Tabelle der Buchungen mit Meeresanschluss sind durchschnittlich \colorbox{green!25}{29.89\%} der Buchungen mit vier PAX vorhanden und \colorbox{red!25}{30.13\%} mit zwei. Aus der Übersicht der Anzahl Reisenden von Ortschaften im Landesinneren sind \colorbox{green!25}{32.93\%} mit vier Reisenden und \colorbox{red!25}{30.53\%} mit zwei. Die Anzahl an Buchungen mit 4 PAX ist bei Ortschaften mit Strand um 3.04 Prozentpunkte niedriger und jene für 2 PAX stabil geblieben. Dies ist gegen die Erwartungen und die Hypothese demnach widerlegt.
+Die \cref{sec:testingfazit:testing:hypothesen:3:2} zeigt die Durchschnitte der Anzahl der Reisenden auf.
+\begin{table}[H] 
+	\caption{Durchschnittliche Häufigkeit der verschiedenen }
+	\centering
+	\label{sec:testingfazit:testing:hypothesen:3:2}
+	\begin{tabular}{ | c | c | c | } 
+		\hline 
+		\rowcolor{tableheadcolor}
+		\bfseries \#-PAX & \bfseries Meer & \bfseries Landesinnere \\ \hline 		
+		2 & 30.13\% & 30.53\% \\ \hline
+		3 & 17.64\% & 16.60\% \\ \hline
+		4 & 29.89\% & 32.94\% \\ \hline
+		5 & 8.69\% & 9.55\% \\ \hline
+		6 & 5.48\% & 6.54\% \\ \hline
+	\end{tabular}
+\end{table}
+
+Die Werte für zwei \gls{pax} ist mit 30.13\% gegenüber 30.53\% annähernd stabil. Dreis Reisende gehen eher ans Meer (17.64\% gegenüber 16.50\%). Bei vier, fünf und sechs Passagieren ist der Wert höher in Destinationen im Landesinneren als am Meer. Am spannendsten sind vier \gls{pax}, da es mit rund 30\% die häufigste Reisengruppengrösse darstellt. Da dieser Wert jedoch im Landesinneren 3\% Punkte höher ist, gilt die Hypothese als widerlegt.
+
+In diesem Bereich würde es sich jedoch anbieten, die Nachforschungen noch etwas zu verstärken. Die Beschreibung der Hypothese besagt, dass Familien eher ans Meer gehen. Grössere Reisegruppen müssen aber nicht zwingend eine Familie sein. Man könnte zum Beispiel Analysieren, ob Gruppen mit zwei Erwachsenen und 1 bis mehrere Kindern sich anders verhalten als Gruppen von nur Erwachsenen Personen.
 
 \paragraph{Hypothese 5: "`Schweizer Buchungen in Skiregionen haben mehrheitlich (80\%) die Eigenschaft dass sie nahe am Skilift oder am öffentlichem Verkehr liegen"'} Zuerst werden die 5 grössten Skiregionen ermittelt. Dazu wird der Proof of Concept verwendet. Es werden Schweizer Ortschaften gesucht und die Häufigkeit der Region gezählt mittels dem Apriori Algorithmus. Anschliessen die fünf Top-Ortschaften aus dem Resultat ausgesucht welche ein Skigebiet besitzen. Das Resultat der Apriori Analyse ist in \cref{sec:testingfazit:testing:hypothesen:4} aufgeführt. \colorbox{green!25}{Grün} hinterlegt sind diejenigen Regionen, welche ein Skigebiet besitzen und deshalb weiterverwendet werden. Anschliessend wird für jede Region mittels Apriori Analyse ermittelt, wie viele Objekte entweder nahe am Skigebiet oder nahe am Öffentlichen verkehr liegen. 
 
@@ -1298,13 +1322,26 @@ Aus der Auswertung des Proof of Concepts ist ersichtlich, dass im Juli und im So
 Die teuren/Luxus Buchungen sind am meisten Vertreten im Juni und November, und nicht am Anfang Jahr wie erwartet. Jedoch ist ersichtlich, dass die Anzahl der Buchungen im Januar deutlich am höchsten ist mit 14'041 und kontinuierlich abnehmen. Es werden demnach nicht teurere Buchungen anfang des Jahres getätigt, sondern mehr. Diese Hypothese muss somit widerlegt werden. Die gewonnen Erkenntnisse sind dennoch spannend. 
 
 \section{Fazit}
+Die Anforderung dieser Arbeit war es, Buchungen von Interhome nach Häufigkeit der Attribute zu analysieren und damit Muster aufzuzeigen. Um dieses Ziel zu erreichen wurden Hypothesen aufgestellt und Algorithmen des Data Mining gesucht, welche die Fragestellungen beantworten können. Es wurde entschieden, den Apriori Algorithmus einzusetzen, da er genau für solche Problemstellungen ausgelegt ist. Zusätzlich wurden noch die zwei Clustering Algorithmen k-prototype und DBSCAN gewählt, in der Hoffnung dass sie die Resultate der Analyse mittels Apriori verbessern. 
 
-\section{Mögliche Erweiterungen/Verbesserungen}
-Diskretiesierungsschritte \cref{sec:recherche:datenvorbereitung} nach Häufigkeitsanalyse.
-Z.b. die Preise plotten -> man sieht ein peek bei CHF1000/Buchung. +/- 1/3 vom Peek sind die normalen Preise. Darunter Budget, darüber Luxury
+Die Auswertung der Hypothesen (siehe \cref{sec:testingfazit:testing:hypothesen} \nameref{sec:testingfazit:testing:hypothesen}) hat gezeigt, dass sich die Auswahl des Apriori Algorithmus bewährt hat. Einzig bei Hypothese 4 gab es Probleme bei der Auswertung wegen des Begriffes "`Familie"'. Die Datenbasis kennt nur \gls{pax} und der Algorithmus weiss nicht, ob es sich um eine Reisegruppe oder eine Familie handelt. Durch eine Analyse welche zwischen Erwachsenen und Kinder unterscheiden würde könnten die Resultate noch verfeinert werden. Da kann noch mehr Nachgeforscht werden. Verhalten sich Reisende mit Kindern anders als Gruppen von nur Erwachsenen?
 
-\gls{optics} einsetzen um $\epsilon$ bei \gls{dbscan} zu eliminieren.
+Die funktionalen Anforderungen aus \cref{sec:anforderungsanalyse:funktionaleanforderung} \nameref{sec:anforderungsanalyse:funktionaleanforderung} wurden alle umgesetzt. Eine Häufigkeitsanalyse kann gemäss FA1 auf allen Instanzen durchgeführt werden und laut FA3 auch auf einer Untermenge. Die vorgegebene Nachvollziehbarkeit von FA2 ist auch gegeben. Es wird für jede Apriori Analyse die Anzahl der Buchungen sowie die Prozentanzahl an der analysierten Menge angegeben. Um FA4 und FA5 zu erfüllen wurde die "`Explore"' Ansicht erstellt welche alle Stammdaten oder eine Untermenge davon anzeigt. FA6 wird vom Apriori Algorithmus unterstützt. Er zählt die vorkommen von numerischen und kategorischen Attributen. Damit die Clustering Algorithmen mit mixed data types umgehen können wurde eine Distanzmessung definiert welche dies beherrscht (siehe \cref{sec:konzept:anwendungderalgorithmen:distanzmessung} \nameref{sec:konzept:anwendungderalgorithmen:distanzmessung}). FA7 gibt vor dass der Benutzer die Algorithmen konfigurieren kann (siehe \cref{sec:anforderungsanalyse:funktionaleanforderung} \nameref{sec:anforderungsanalyse:funktionaleanforderung}). Dazu wurde die Ansicht "`Settings"' erstellt.  
 
-Hierarchical clustering einsetzen. Allerdings weniger performant und deshalb schlecht fürs explorieren geeignet.
+Für die Messung der Komplexität der nicht funktionalen Anforderung NFA1 (siehe \cref{sec:anforderungsanalyse:nichtfunktionaleanforderung} \nameref{sec:anforderungsanalyse:nichtfunktionaleanforderung}) wurde das Programm zwei Mitarbeitern der Interhome vorgestellt, welche rasch eigene Analysen starten konnten. Sie benutzten verschiedene Filter und machten Anpassungen an den Einstellungen. Die einzelnen Parameter musste Ihnen jedoch erklärt werden da die Erklärung der Einstellungen nicht sprechend genug waren. Obwohl dies ein kleines Detail ist, trägt es trotzdem wesentlich zur Akzeptanz des Programmes bei. Da ist sicher noch Verbesserdungsbedarf. Um die Modularität der Umsetzung gemäss NFA2 zu gewährleisten wurde bei der Entwicklung versucht das \gls{srp} einzuhalten. Durch den Einsatz von UnitTests wurde ebenfalls eine möglichst starke Kohäsion und eine lose Kopplung angestrebt. Weitere Attribute in der Datenbasis können durch reine Konfigurationsänderungen hinzugefügt werden. Für die Einführung eines neuen Algorithmus muss ein neuer Service erstellt werden, jedoch ist keine Änderung an bestehenden Code nötig. Für die Erweiterbarkeit der Daten gemäss NFA3 müssen neue Daten entsprechend \cref{sec:recherche:datenvorbereitung} \nameref{sec:recherche:datenvorbereitung} vorbereitet werden. Ist eine Lizenz für das RapidMiner Programm vorhanden ist dies durch wenige Klicks erledigt, ansonsten muss eine andere Lösung gefunden werden. Sind die Daten korrekt vorbereitet kann jedoch in der Konfiguration des umgesetzten Programmes die neue Datenbasis eingebunden werden. 
 
-Sockets einsetzen um Polling vom Webbrowser zu vermeiden.
+Wie im \cref{sec:proofofconcept:fazit} \nameref{sec:proofofconcept:fazit} erläutert eignet sich der Apriori Algorithmus für die explorative Suche von Mustern. Hauptsache dafür ist dessen Geschwindigkeit und die Einfachheit des Programmes. Die Clustering Algorithmen konnten leider keine hilfreichen Resultate liefern. Wie im \cref{sec:proofofconcept:fazit} \nameref{sec:proofofconcept:fazit} beschrieben ist noch unklar, ob es an den falschen Parameter der Algorithmen liegt. Es wurde eine Hypothese aufgestellt welche jedoch das Verhalten der Clusteralgorithmen erklärt. Dieses würde darauf schliessen, dass es keine klaren Gruppen gibt und die beiden Algorithmen demnach nicht geeignet sind um die Buchungen von Interhome zu analysieren.
+
+
+%\section{Mögliche Erweiterungen/Verbesserungen}
+%Diskretiesierungsschritte \cref{sec:recherche:datenvorbereitung} nach Häufigkeitsanalyse.
+%Z.b. die Preise plotten -> man sieht ein peek bei CHF1000/Buchung. +/- 1/3 vom Peek sind die normalen Preise. Darunter Budget, darüber Luxury
+%
+%\gls{optics} einsetzen um $\epsilon$ bei \gls{dbscan} zu eliminieren.
+%
+%Hierarchical clustering einsetzen. Allerdings weniger performant und deshalb schlecht fürs explorieren geeignet.
+%
+%Sockets einsetzen um Polling vom Webbrowser zu vermeiden.
+
+\section{Schlusswort}
+Die Apriori Analyse hat sich als hilfreiches Werkzeug für die Attributanalyse der Interhome Buchungsdaten herausgestellt, solange die korrekten Anfragen gestellt werden. Die Clustering Algorithmen konnten hingegen keinen Beitrag zum Ziel dieser Arbeit leisten. Trotzdem wurde durch ihren Einsatz wertvolle Einblicke und ein besseres Verständnis der Datenbasis gewonnen werden. Für den produktiven Einsatz sollte jedoch die Beischreibung der möglichen Einstellungen im Programm noch verständlicher erläutert werden. 

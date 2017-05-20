@@ -45,7 +45,9 @@ In der \cref{fig:anfoderungsanalyse:anwendungsfaelle:1} werden die Anwendungsfä
 
 \paragraph{Analyse durchführen} Es sollte möglich sein, einen oder mehrere Algorithmen auf die Daten anzuwenden und so eine Analyse durchzuführen. Die Daten sollen initial eingeschränkt werden können um nur eine Untermenge zu analysieren.
 
-\paragraph{Algorithmen konfigurieren} Der Benutzer soll die Möglichkeit besitzen, die Algorithmen zu konfigurieren. Deshalb soll eine Ansicht erstellt werden auf welcher vordefinierte Einstellungen angepasst werden können.
+\paragraph{Algorithmen konfigurieren} Der Benutzer soll die Möglichkeit besitzen, die Algorithmen zu konfigurieren. Deshalb soll eine Ansicht erstellt werden auf welcher vordefinierte Einstellungen angepasst werden können. Dies umfasst alle Parameter welche von den Algorithmen vorausgesetzt werden (siehe \cref{sec:recherche:algorithmen} \nameref{sec:recherche:algorithmen}), sowie das Gewicht zwischen numerischen und kategorischen Attributen der Distanzmessung (siehe \cref{sec:konzept:anwendungderalgorithmen:distanzmessung} \nameref{sec:konzept:anwendungderalgorithmen:distanzmessung}). Für die Beantwortung der Hypothesen aus dem \cref{sec:einleitung:ziel:hypothesen} \nameref{sec:einleitung:ziel:hypothesen} müssen die von den Algorithmen zu analysieren Attribute eingeschränkt werden können. Zum Beispiel benötigt Hypothese 1 nur das Land des Kunden. Deshalb soll es eine Konfiguration geben mit welchem die Algorithmen so angepasst werden dass nur dieses Attribut (Land des Kunden) beachtet wird.
+
+
 
 \subsection{Ablauf}
 \label{sec:anforderungsanalyse:ablauf}
@@ -66,6 +68,7 @@ Visualisiert wird der Ablauf in \cref{fig:anfoderungsanalyse:ablauf:1}.
 \label{sec:anforderungsanalyse:funktionaleanforderung}
 Nachfolgend werden die funktionale Anforderungen an das Programm gestellt.
 
+\todo{FA1: Welche Felder? Aus Hypothese}
 \begin{table}[H] 
 	\caption{FA1: Häufigkeitsanalyse der Attribute}
 	\centering
@@ -82,13 +85,12 @@ Nachfolgend werden die funktionale Anforderungen an das Programm gestellt.
 		\item Welche Destination wird am meisten gebucht von Kunden im Tessin?
 		\end{enumerate}
 		
-		Als Antwort sollte der Algorithmus eine Liste von Attributen zurückliefern. Auf die obigen Beispiele könnte dies folgendes sein:
+		Als Antwort sollte der Algorithmus eine Liste von Attributen zurückliefern. Auf die obigen Beispiele könnte dies folgendes sein: 
 		\begin{enumerate}
 		\item Objekte in Süditalien mit einem Pool.
 		\item Objekte in Zermatt und mindestens 3 Schlafzimmern.
 		\end{enumerate} \\ \hline 
 		Abhängigkeit & \\ \hline 
-		Status & Offen \\ \hline 
 	\end{tabular}
 \end{table}
 
@@ -108,7 +110,6 @@ Nachfolgend werden die funktionale Anforderungen an das Programm gestellt.
 			\item Luxushäuser (53\%), Grill (35\%) und 3 Zimmer (32\%)
 			\end{enumerate} \\ \hline 
 		Abhängigkeit & FA1 \\ \hline 
-		Status & Offen \\ \hline 
 	\end{tabular}
 \end{table}
 
@@ -124,7 +125,6 @@ Nachfolgend werden die funktionale Anforderungen an das Programm gestellt.
 		Titel & Häufigkeitsanalyse auf einer Untermenge der Daten \\ \hline 
 		Beschreibung & Eine Häufigkeitsanalyse solle gemäss FA1 auch auf einer Untermenge der Daten möglich sein. Der Benutzer soll befähigt werden den Datenbestand vor der Analyse einzuschränken. \\ \hline 
 		Abhängigkeit & FA1 \\ \hline 
-		Status & Offen \\ \hline 
 	\end{tabular}
 \end{table}
 
@@ -140,7 +140,6 @@ Nachfolgend werden die funktionale Anforderungen an das Programm gestellt.
 		Titel & Stammdaten einsehen \\ \hline 
 		Beschreibung & Um die Analyse der Daten zu validieren, sollte es möglich sein die Stammdaten einzusehen. Deshalb sollen im Programm alle Daten dargestellt werden können und vom Benutzer durchstöbert werden können. \\ \hline 
 		Abhängigkeit & \\ \hline 
-		Status & Offen \\ \hline 
 	\end{tabular}
 \end{table}
 
@@ -154,9 +153,8 @@ Nachfolgend werden die funktionale Anforderungen an das Programm gestellt.
 		\rowcolor{tableheadcolor}
 		\multicolumn{2}{|l|}{\bfseries ID: FA5} \\ \hline 
 		Titel & Untermenge der Stammdaten einsehen \\ \hline 
-		Beschreibung & Eine Untermenge der Stammdaten soll gemäss FA3 eingesehen werden können. Diese sollen gleich wie in FA2 einschränkbar sein.  \\ \hline 
+		Beschreibung & Eine Untermenge der Stammdaten soll gemäss FA3 eingesehen werden können. Diese sollen gleich wie in FA2 einschränkbar sein. \\ \hline 
 		Abhängigkeit & FA1 \& FA4 \\ \hline 
-		Status & Offen \\ \hline 
 	\end{tabular}
 \end{table}
 
@@ -172,44 +170,26 @@ Nachfolgend werden die funktionale Anforderungen an das Programm gestellt.
 		Titel & Mixed data types \\ \hline 
 		Beschreibung & Da die Buchungen von Interhome numerische (z.B. Anzahl Personen, Geolocations) und kategorische Daten (z.B. Aircondition vorhanden?, Objekttyp) beinhalten, müssen die Algorithmen in der Lage sein mit beiden Datentypen umgehen zu können. \\ \hline 
 		Abhängigkeit & \\ \hline 
-		Status & Offen \\ \hline 
 	\end{tabular}
 \end{table}
 
 \begin{table}[H] 
-	\caption{FA7: Selbständigkeit}
-	\centering
-	\rowcolors{1}{tablebodycolor}{tablerowcolor}
-	\label{fig:anforderungsanalyse:funktionaleanforderung:fa7}
-	\begin{tabular}{ | l | L{10cm} | } 
-		\hline 
-		\rowcolor{tableheadcolor}
-		\multicolumn{2}{|l|}{\bfseries ID: FA7} \\ \hline 
-		Titel & Selbständigkeit \\ \hline 
-		Beschreibung & Die Analyse der Attribute sollte selbständig Muster erkennen können. Es wird keine vorherige Eingabe vom Benutzer benötigt (ausser der Einschränkung der Daten). Siehe \gls{unsupervisedlearning} im Glossar. \\ \hline 
-		Abhängigkeit & \\ \hline 
-		Status & Offen \\ \hline 
-	\end{tabular}
-\end{table}
-
-\begin{table}[H] 
-	\caption{FA8: Algorithmen konfigurieren}
+	\caption{FA7: Algorithmen konfigurieren}
 	\centering
 	\rowcolors{1}{tablebodycolor}{tablerowcolor}
 	\label{fig:anforderungsanalyse:funktionaleanforderung:fa8}
 	\begin{tabular}{ | l | L{10cm} | } 
 		\hline 
 		\rowcolor{tableheadcolor}
-		\multicolumn{2}{|l|}{\bfseries ID: FA8} \\ \hline 
+		\multicolumn{2}{|l|}{\bfseries ID: FA7} \\ \hline 
 		Titel & Algorithmen konfigurieren \\ \hline 
-		Beschreibung & Der Benutzer soll die Möglichkeit besitzen, die Algorithmen zu konfigurieren. Deshalb sollen alle Parameter welche von den Algorithmen vorausgesetzt werden (siehe \cref{sec:recherche:algorithmen} \nameref{sec:recherche:algorithmen}) sowie das Gewicht zwischen numerischen und kategorischen Attributen der Distanzmessung (siehe \cref{sec:konzept:anwendungderalgorithmen:distanzmessung} \nameref{sec:konzept:anwendungderalgorithmen:distanzmessung}) angepasst werden können.
-		Dies sind: 
+		Beschreibung & Der Benutzer soll die Möglichkeit besitzen folgende Konfigurationen am Programm vorzunehmen:
 		\begin{itemize}
 			\item Apriori:
 			\begin{itemize}
 				\item Mindestsupport $minsup$
 			\end{itemize}
-			\item KPrototype:
+			\item k-prototype:
 			\begin{itemize}
 				\item Anzahl Clusters $k$
 			\end{itemize}
@@ -218,11 +198,11 @@ Nachfolgend werden die funktionale Anforderungen an das Programm gestellt.
 				\item Radius $\epsilon$
 				\item Minimum Anzahl an Instanzen $minpts$
 			\end{itemize}
-			\item Gewicht zwischen numerischen und kategorischen Attributen $\gamma$
+			\item Gewicht zwischen numerischen und kategorischen Attributen $\gamma$ in der Distanzberechnung (siehe \cref{sec:konzept:anwendungderalgorithmen:distanzmessung} \nameref{sec:konzept:anwendungderalgorithmen:distanzmessung}).
+			\item Zu verwendende Attribute der Algorithmen.
 		\end{itemize}
 		 \\ \hline 
 		Abhängigkeit & \\ \hline 
-		Status & Offen \\ \hline 
 	\end{tabular}
 \end{table}
 
@@ -258,9 +238,8 @@ Nachfolgend sind die nicht funktionale Anforderungen an das Programm spezifizier
 		\rowcolor{tableheadcolor}
 		\multicolumn{2}{|l|}{\bfseries ID: NFA2} \\ \hline 
 		Titel & Komplexität \\ \hline 
-		Beschreibung & Verwendet wird das Programm von Interhome Mitarbeitern ohne Vorwissen im Data Mining. Deshalb sollte die Bedingung dementsprechend ausgelegt sein. \\ \hline 
+		Beschreibung & Verwendet wird das Programm von Interhome Mitarbeitern ohne Vorwissen im Data Mining. Deshalb sollte die Bedingung möglichst einfach ausgelegt sein. \\ \hline 
 		Abhängigkeit & \\ \hline 
-		Status & Offen \\ \hline 
 	\end{tabular}
 \end{table}
 
@@ -274,9 +253,8 @@ Nachfolgend sind die nicht funktionale Anforderungen an das Programm spezifizier
 		\rowcolor{tableheadcolor}
 		\multicolumn{2}{|l|}{\bfseries ID: NFA3} \\ \hline 
 		Titel & Modularität \\ \hline 
-		Beschreibung & In Zukunft ist zu erwarten, dass das Programm um weitere Techniken des Data Mining erweitert werden soll. Deshalb sollte es Modular aufgebaut werden dass einfach weitere Algorithmen hinzugefügt werden. \\ \hline 
+		Beschreibung & In Zukunft ist zu erwarten, dass das Programm um weitere Techniken des Data Mining und weitere Attribute in der Datenbasis erweitert werden können. Deshalb sollte es Modular aufgebaut werden damit weitere Algorithmen und Attribute leicht hinzugefügt werden können. Zusätzlich sollte durch die Modularität die Verständlichkeit der des Programmes erhöhen, so dass zukünftige Entwickler sich besser in die Umsetzung einarbeiten können. \\ \hline 
 		Abhängigkeit & \\ \hline 
-		Status & Offen \\ \hline 
 	\end{tabular}
 \end{table}
 
@@ -292,7 +270,6 @@ Nachfolgend sind die nicht funktionale Anforderungen an das Programm spezifizier
 		Titel & Erweiterbarkeit der Daten \\ \hline 
 		Beschreibung & Um die aktualität der Informationen zu gewährleisten, soll der Datenbestand in Zukunft leicht erweitert werden können. \\ \hline 
 		Abhängigkeit & \\ \hline 
-		Status & Offen \\ \hline 
 	\end{tabular}
 \end{table}
  
@@ -319,7 +296,6 @@ Nachfolgend sind die nicht funktionale Anforderungen an das Programm spezifizier
 		\item Da der Datenbestand 133'001 Einträge umfasst, muss die Plattform und das Lizenzmodel diese Anzahl an Items unterstützen.
 		\end{itemize}\\ \hline 
 		Abhängigkeit & \\ \hline 
-		Status & Offen \\ \hline 
 	\end{tabular}
 \end{table}
 
