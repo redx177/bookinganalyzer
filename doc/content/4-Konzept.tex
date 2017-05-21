@@ -1,6 +1,6 @@
 \chapter{Konzept}
 \label{sec:konzept}
-Im Konzept wird beschrieben, wie die Problemstellung, welch im \cref{sec:einleitung:ziel} aufgezeigt wurde, gelöst werden kann. Dazu werden zuerst die einzusetzenden Algorithmen evaluiert (siehe \cref{sec:konzept:disziplin-und-algorithmen} \nameref{sec:konzept:disziplin-und-algorithmen}) und aufgezeigt, wie diese angewendet werden (siehe \cref{sec:konzept:anwendungderalgorithmen} \nameref{sec:konzept:anwendungderalgorithmen}). Anschliessend werden die Daten beschrieben und deren Vorbereitung erläutert (siehe \cref{sec:recherche:datenbestand} \nameref{sec:recherche:datenbestand}). \todo{ergänzen 4.4-4.6}
+Im Konzept wird beschrieben, wie die Problemstellung, welch im \cref{sec:einleitung:ziel} aufgezeigt wurde, gelöst werden kann. Dazu werden die einzusetzenden Algorithmen evaluiert und aufgezeigt, wie diese angewendet werden. Anschliessend folgt eine Beschreibung der Daten, welche von den Algorithmen verwenden, sowie deren fünfstufige  Vorbereitung. Im Abschnitt Ablauf werden die zwei Schritte gezeigt, welche bei jeder Analyse durchgeführt werden. Zum Schluss werden noch Testfälle definiert, welche die korrekte Funktionsweise der Analyse sicherstellen.
 
 \section{Selektion der Disziplinen und Algorithmenen}
 \label{sec:konzept:disziplin-und-algorithmen}
@@ -149,7 +149,7 @@ Die Daten liegen im Windows Excel Format vor. Es sind total 133'001 Datensätze 
 
 \subsection{Datenvorbereitung}
 \label{sec:recherche:datenvorbereitung}
-Die Datenvorbereitung wandelt die Daten so um dass sie für das Data Mining möglichst effizient verwendet werden können. Dies umfasst die Bereinigung, Transformation sowie Reduktion von Informationen\footcite{feature_selection_2017-01-04}. Bei ersteren werden Messfehler im Datenbestand behoben, fehlende Felder ergänzt oder Duplikate entfernt. Die Transformation wandelt Werte um damit sie für die Berechnung besser geeignet sind. Zum Beispiel können Wertebereiche in Intervalle aufgeteilt werden. Bei letzteren werden Instanzen der Datengrundlage entfernt, wodurch die Berechnungszeit verkürzt wird, oder Attribute von allen Instanzen entfernt, da deren Entropie zu gering ist. Zum Beispiel ist es unspannend, wenn ein Attribut bei (fast) allen Instanzen gleich ist. 
+Die Datenvorbereitung wandelt die Daten so um dass sie für das Data Mining möglichst effizient verwendet werden können. Dies umfasst die Bereinigung, Transformation sowie Reduktion von Informationen\footcite{feature_selection_2017-01-04}. Bei ersteren werden Messfehler im Datenbestand behoben, fehlende Felder ergänzt oder Duplikate entfernt. Die Transformation wandelt Werte um damit sie für die Berechnung besser geeignet sind. Bei letzteren werden Instanzen der Datengrundlage entfernt, wodurch die Berechnungszeit verkürzt wird, oder Attribute von allen Instanzen entfernt, da deren Entropie zu gering ist. Zum Beispiel ist es unspannend, wenn ein Attribut bei (fast) allen Instanzen gleich ist\footcite{data_mining_concepts_and_techniques}. 
 
 \subsubsection{Boolsche Werte}  
 \label{sec:recherche:datenvorbereitung:boolschewerte}
@@ -160,7 +160,7 @@ In der Datenbasis sind boolsche Werte entweder leer oder "`X"'. Dies wird umgewa
 Die Datenbasis beinhaltet bestätigte und stornierte Buchungen. Der Status wird in der Zeile C BOOKSTA gespeichert und besitzt den Wert "`OK"' wenn der Kunde die Rechnung bezahlt sowie die Reise angetreten ist, sonst beinhaltet das Feld die Buchstaben "`XX"'. Gründe für eine Stornierung gibt es viele. Zum Beispiel wenn er falsch gebucht hat, die Rechnung nicht bezahlte, die Reise nicht angetreten werden konnte, etc. Wenn es eine ernsthafte Buchung war könnte man auch annullierte Instanzen verwenden in der Analyse. Wenn jedoch etwas falsch gebucht wurde könnten diese Buchungen die Analyse verfälschen. Da kein Grund für die Annullierung angegeben ist in der Datenbasis werden alle Instanzen mit "`XX"' entfernt. 
 
 \subsubsection{Datennormierung von numerischen Werten} 
-\label{sec:recherche:datenvorbereitung:normierung} \cref{sec:konzept:anwendungderalgorithmen:distanzmessung} vorgestellte Distanzmessung arbeitet mit der euklidischen Distanz für numerische Werte. Wenn ein Attribut $A_1$ einer Buchung den Wert 1'000 hat und das einer anderen Buchung 300, so ergibt sich eine Distanz von 700. Betrachtet man ein anderes Attribut $A_2$, welches den Wert 1 hat beziehungsweise 0.3, so ist die Distanz 0.7. Dadurch fällt $A_2$ in der gesamten Distanz zwischen den beiden Buchungen überhaupt nicht in Gewicht, da es um einen Faktor 1'000 kleiner ist. Deshalb werden numerische Attribute genormt, damit alle in den gleichen Wertebereich liegen.
+Die im \label{sec:recherche:datenvorbereitung:normierung} \cref{sec:konzept:anwendungderalgorithmen:distanzmessung} vorgestellte Distanzmessung arbeitet mit der euklidischen Distanz für numerische Werte. Wenn ein Attribut $A_1$ einer Buchung den Wert 1'000 hat und das einer anderen Buchung 300, so ergibt sich eine Distanz von 700. Betrachtet man ein anderes Attribut $A_2$, welches den Wert 1 hat beziehungsweise 0.3, so ist die Distanz 0.7. Dadurch fällt $A_2$ in der gesamten Distanz zwischen den beiden Buchungen massiv weniger ins Gewicht, da es um einen Faktor 1'000 kleiner ist. Deshalb werden numerische Attribute genormt, damit alle in den gleichen Wertebereich liegen.
 
 In dieser Arbeit werden vier numerische Attribute verwendet.
 \begin{table}[H] 
@@ -181,16 +181,24 @@ In dieser Arbeit werden vier numerische Attribute verwendet.
 
 Normiert werden die Spalten AC (Sterne Bewertung des Objektes), AD (Anzahl Zimmer) und AE (Anzahl Schlafzimmer). Diese werden in ein Intervall zwischen 0 und 1 überführt.
 
-Der Preis in der Spalte E giltet für die gesamte Buchung. Dieser wird in einen Wochenpreis und pro Person normiert. Wenn eine Buchung CHF 2'000 kostet für 10 Tage für 2 Personen, so ergibt das "`CHF 1'400 / 10 Tage * 7 Tage / 2 Personen = CHF 490"'. Es wird keine Normierung auf einen Wert von 0-1 durchgeführt, da dieser Wert noch diskretiert wird (siehe nächsten Paragraphen).
+Der Preis in der Spalte E giltet für die gesamte Buchung. Dieser wird in einen Wochenpreis und pro Person normiert. Wenn eine Buchung CHF 2'000 kostet für 10 Tage für 2 Personen, so ergibt das "`CHF 1'400 / 10 Tage * 7 Tage / 2 Personen = CHF 490"'. Es wird keine Normierung auf einen Wert von 0-1 durchgeführt, da dieser Wert noch diskretiert wird (siehe \cref{sec:recherche:datenvorbereitung:diskretierung} \nameref{sec:recherche:datenvorbereitung:diskretierung}).
 
 \subsubsection{Datenerweiterung} 
-Die Daten sollen durch weitere Felder ergänzt werden. Denn eine Fragestellung von Interhome ist es, eine Häufigkeitsanalyse in einem Gebiet durchzuführen\todo{cref}. Da im Datenstamm jedoch nur das Land des Objektes vorhanden ist, muss die Region und die Ortschaft erweitert werden. 
+Die Daten müssen für die Beantwortung der Hypothesen (siehe \cref{sec:einleitung:ziel:hypothesen} \nameref{sec:einleitung:ziel:hypothesen}) durch weitere Felder ergänzt werden. 
+
+Folgende Felder werden benötigt, sind jedoch in der Datenbasis nicht vorhanden:
+\begin{itemize}
+\item Region und Ort des Objektes. In der Datenbasis ist nur das Land vorhanden.
+\item Monat und Wochentag in welchem das Objekt gebucht wurde. 
+\end{itemize}
 
 Zusätzlich müssen für die Wetterdaten die genaue Geolocation des Benutzers vorhanden sein. Im Datenstamm ist die Adresse des Kunden gespeichert, mit welcher die Geolocation ermittelt werden kann.
 
 \subsubsection{Diskretierung von Distanzen und des Wochenpreises} 
 \label{sec:recherche:datenvorbereitung:diskretierung}
-Die Zeilen AK (Distanz zum Wasser), AL (Distanz zum Skigebiet), AM (Distanz zum öffentlichen Verkehr), DZ (Distanz zum Zentrum), EA (Distanz bis zum Meer) und EB (Distanz bis zum See) sind numerische Werte, welche die Anzahl an Metern zu einem Punkt angeben. Die Werte dieser Spalten wird in folgenden Wert diskretiert. 
+Die Apriori-Analyse zählt nur exakte Übereinstimmungen. Deshalb werden kontinuierliche Werte in vorgegebene diskrete Teilmengen unterteilt damit sie vom Apriori Algorithmus verwendet werden können. Die Grenzwerte der diskretierungen wurden mit Interhome abgesprochen, da diese bereits intern entsprechend verwendet werden.
+
+Die Zeilen AK (Distanz zum Wasser), AL (Distanz zum Skigebiet), AM (Distanz zum öffentlichen Verkehr), DZ (Distanz zum Zentrum), EA (Distanz bis zum Meer) und EB (Distanz bis zum See) sind numerische Werte, welche die Anzahl an Metern zu einem Punkt angeben. Die Werte dieser Spalten wird in folgende Bereite diskretiert: 
 
 \begin{table}[h] 
 	\caption{Diskretisierungswerte für Distanzattribute}
@@ -225,8 +233,6 @@ Ebenfalls wird der Wochenpreise in nachfolgende Intervalle unterteilt.
 Bei den Distanzen sind kleine Werte spannend, welche angeben dass ein Objekt nahe am Skilift oder bei der Busstation liegt. Deshalb wurde definiert dass die Werte von 0 bis 499 Metern als nahe (engl. Close) markiert werden. Darüber liegende Werte werden ignoriert.
 
 Bei den Preisen hingegen ist es interessant, wenn ein Objekt besonders günstig oder teuer ist. Deshalb wurden zwei Intervalle definiert. Nämlich 0 bis 200 und 401 aufwärts. Alles dazwischen wird nicht weiter behandelt.
-
-Diese Datenreduktion wird vorgenommen, da dadurch die Informationen auch von der Apriori-Analyse verwendet werden kann. Dieser zählt nur exakte Übereinstimmungen. Die Grenzwerte der diskretierungen wurden mit Interhome abgesprochen, da diese bereits intern entsprechend verwendet werden.
 
 %\begin{itemize}
 %%\item Das Datenformat wurde für die einfachere programmatische Handhabung von Windows Excel in das \gls{csv}-Format transferiert.
@@ -277,7 +283,7 @@ In den Tabellen \ref{fig:recherche:datenvorbereitung:3} und \ref{fig:recherche:d
 	\end{tabular}
 \end{table}
 
-Die Diskretisierung wird durchgeführt, damit nach dem Clustering die Häufigkeit der kategorischen Werte mit dem Apriori Algorithmus erhoben werden kann. Dadurch wird das Clustering nachvollziehbar\todo{cref}\footcite{data_mining_concepts_and_techniques}. 
+Die Diskretisierung wird durchgeführt, damit nach dem Clustering die Häufigkeit der kategorischen Werte mit dem Apriori Algorithmus erhoben werden kann. Dadurch wird das Clustering (siehe \cref{sec:konzept:ablauf:analyse} \nameref{sec:konzept:ablauf:analyse}). 
 
 Es gibt verschiedene Diskretisierungsmethoden. Diese Teilen die Werte in gleiche Intervalle auf oder stellen sicher dass in jeder Kategorie die selbe Anzahl an Instanzen vorhanden sind.
 Die verwendeten Werte aus \cref{fig:recherche:datenvorbereitung:1} und \cref{fig:recherche:datenvorbereitung:2} wurde mit Interhome abgesprochen. 
@@ -322,6 +328,9 @@ In Absprache mit Interhome wurde entschieden, dass in einem ersten Schritt jene 
 		\bfseries Zelle & \bfseries Name & \bfseries Datentyp & \bfseries Beschreibung \\ \hline 
 		E & PRICES & integer & Preis \\ \hline 
 		I & NREF & categorical & Nummer des gebuchten Objektes \\ \hline 
+		L & REPAX & integer & Anzahl Passagiere \\ \hline 
+		S & CUCNTRY & categorical & Land des Kunden \\ \hline 
+		U & CUORT & string & Ortschaft des Kunden \\ \hline 
 		AC & QUAL & integer & Sterne Bewertung des Objektes \\ \hline 
 		AD & ROOMS & integer & Anzahl Zimmer \\ \hline 
 		AE & BEDROOMS & integer & Anzahl Schlafzimmer \\ \hline 
@@ -418,7 +427,7 @@ Möchte der Benutzer wissen, welche Attribute in der (vorselektierten) Datenmeng
 	\label{fig:konzept:ablauf:analyse:1}
 \end{figure}
 
-Liefert der Apriori keine zufriedenstellenden Antworten oder ist von vornherein zu erwarten, dass es verschiedene Gruppen von Buchungen gibt, so kann zuerst die Cluster Analysis durchgeführt werden. Die Instanzen werden damit in Clusters/Klassen aufgeteilt, der Benutzer würde jedoch nicht sehen weshalb. Deshalb wird auf jeder Klasse der Apriori-Algorithmus durchgeführt. Da die Instnzen in einer Klasse untereinander möglichst Homogen sein sollen und möglichst unterschiedlich zu anderen Clusters, ist anzunehmen, dass die häufigsten Attribute, welche durch den Apriori-Algorithmus gefunden werden, aussagekräftig die Klassen beschreiben.
+Liefert der Apriori keine zufriedenstellenden Antworten oder ist von vornherein zu erwarten, dass es verschiedene Gruppen von Buchungen gibt, so kann zuerst die Cluster Analysis durchgeführt werden. Die Instanzen werden damit in Clusters/Gruppen aufgeteilt, der Benutzer würde jedoch nicht sehen weshalb. Deshalb wird auf jedem Cluster der Apriori-Algorithmus durchgeführt. Da die Instanzen in einer Gruppe untereinander möglichst Homogen sein sollen und möglichst unterschiedlich zu anderen Clusters, ist anzunehmen, dass die häufigsten Attribute, welche durch den Apriori-Algorithmus gefunden werden, aussagekräftig die Klassen beschreiben.
 
 \section{Mockups des Programmes}
 \label{sec:konzept:mockups}

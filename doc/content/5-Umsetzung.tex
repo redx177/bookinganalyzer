@@ -293,12 +293,12 @@ Das Ziel war es, gemäss dem \gls{srp} eine starke Kohäsion und eine lose Koppl
 
 \begin{itemize}
 	\item Controllers: Nehmen die Anfragen eines Benutzers entgegen und verarbeiten diese. Dazu verwenden sie Klassen aus dem Business welches ein Datenmodel zurückliefert. Dieses Model werden anschliessend vom Controller an die View übergeben welche die Ausgabe für den Browser generiert (siehe \cref{sec:proofofconcept:architektur:mvc} \nameref{sec:proofofconcept:architektur:mvc}).
-	\item Services: Führen die verschiedenen Analysen durch. Sie sind so ausgelegt dass sie als eigenständiger Prozess im Hintergrund ausgeführt werden können.\todo{cref}
-	\item Business: Beinhaltet die Geschäftlogik, was in dieser Arbeit die Algorithmen umfasst, sowie alles was mit den Models interagiert. Demnach die Algorithmen selber (im Unterpacket "`Algorithms"'), die Distanzmessung (Klasse DistanceMeasurement), den Datenzugriff (Klasse BookingDataIterator), etc.\todo{cref}
-	\item Models: Klassen für die Datenhaltung welche möglichst wenig Logik beinhalten.\todo{cref}
+	\item Services: Führen die verschiedenen Analysen durch. Sie sind so ausgelegt dass sie als eigenständiger Prozess im Hintergrund ausgeführt werden können (siehe \cref{sec:proofofconcept:architektur:services} \nameref{sec:proofofconcept:architektur:services}).
+	\item Business: Beinhaltet die Geschäftlogik, was alles umfasst was mit den Models interagiert. Demnach die Algorithmen selber (im Unterpacket "`Algorithms"'), die Distanzmessung (Klasse DistanceMeasurement), den Datenzugriff (Klasse BookingDataIterator), etc. (siehe \cref{sec:proofofconcept:klassenstruktur:algorithmen} \nameref{sec:proofofconcept:klassenstruktur:algorithmen})
+	\item Models: Klassen für die Datenhaltung welche möglichst wenig Logik beinhalten (siehe \cref{sec:proofofconcept:klassenstruktur:models} \nameref{sec:proofofconcept:klassenstruktur:models}).
 	\item Utilities: Beinhalten Logik die nichts mit den Algorithmen zu tun hat und keine Models verwendet. Diese Klassen können für sich selber in einem anderen Projekt wiederverwendet werden.
 	\item Interfaces: Alle verwendeten Interfaces.
-	\item Tests: UnitTests\todo{cref}
+	\item Tests: UnitTests (siehe \cref{sec:proofofconcept:unittests} \nameref{sec:proofofconcept:unittests}).
 \end{itemize}
 
 \subsection{Klassenstruktur}
@@ -390,11 +390,11 @@ Die erste Abbildung \cref{fig:proofofconcept:klassenstruktur:1} zeigt die Contro
 	\end{itemize}
 	\item BookingDataIterator: Diese Klasse implementiert das Iterator-\gls{pattern}. Sie ermöglicht es Buchung für Buchung eine Datenquelle zu durchlaufen. Intern wird ein "`DataIterator"' verwendet um auf die Quelle der Daten zuzugreifen. Dieser liefert ein unstrukturiertes Array zurück, welches der "`BookingDataIterator"' in eine Buchung umwandelt.
 		\begin{itemize}
-			\item Iterator \& DataIterator: Von \gls{php} wird für die Implementierung des Iterator-\gls{pattern} ein Iterator Interface zur Verfügung gestellt. Das "`DataIterator"' Interface erweitert jenes von \gls{php} um eine Methode "`skip"', mit welcher eine Anzahl an Zeilen in der Datenquelle übersprungen werden kann (wird vom "`ExploreController"' verwendet), sowie eine Funktion "`count"', welche die gesamte Anzahl an Resultaten zurück gibt. Es gibt 4 Iteratoren, welche das "`DataIterator"' Interface implementieren.\todo{cref cache}
+			\item Iterator \& DataIterator: Von \gls{php} wird für die Implementierung des Iterator-\gls{pattern} ein Iterator Interface zur Verfügung gestellt. Das "`DataIterator"' Interface erweitert jenes von \gls{php} um eine Methode "`skip"', mit welcher eine Anzahl an Zeilen in der Datenquelle übersprungen werden kann (wird vom "`ExploreController"' verwendet), sowie eine Funktion "`count"', welche die gesamte Anzahl an Resultaten zurück gibt. Es gibt 4 Iteratoren, welche das "`DataIterator"' Interface implementieren. Die Auswahl des geeigneten Iterators wird im \cref{sec:proofofconcept:performance} \nameref{sec:proofofconcept:performance} erläutert.
 				\begin{itemize}
 					\item LoadRedisDataIterator \& Redis: Der "`LoadRedisDataIterator"' lädt die Daten aus einer Redis InMemory Datenbank. Verwendet wird dazu die "`Redis"' Klasse aus der \gls{pecl} (siehe \cref{sec:proofofconcept:externebibliotheken:redis} \nameref{sec:proofofconcept:externebibliotheken:redis} für Details zu Redis).
-					\item LoadIncrementalCSVDataIterator: Lädt die Daten aus einer \gls{csv}-Datei. Jede Zeile wird einzeln aus dem File gelesen.\todo{cref performance}
-					\item LoadAllCSVDataIterator: Lädt die Daten aus einer \gls{csv}-Datei. Zu Beginn werden alle Zeilen ins Memory des Programmes geladen, aus welchem Zeile für Zeile zurückgegeben wird.\todo{cref performance}
+					\item LoadIncrementalCSVDataIterator: Lädt die Daten aus einer \gls{csv}-Datei. Jede Zeile wird einzeln aus dem File gelesen.
+					\item LoadAllCSVDataIterator: Lädt die Daten aus einer \gls{csv}-Datei. Zu Beginn werden alle Zeilen ins Memory des Programmes geladen, aus welchem Zeile für Zeile zurückgegeben wird.
 					\item LoadClusterDataIterator: Der Klasse muss ein Cluster übergeben werden, über welchen iteriert wird. Verwendet wird der "`LoadClusterDataIterator"' für die Apriori-Analyse nachdem ein Clustering durchgeführt wurde.
 				\end{itemize}
 			\item DataTypeClusterer: Er übernimmt ein Array an Feldern mit untypisierten Daten aus einer Datenquelle oder den Filtern, typisiert diese und gruppiert sie. Beispiel an Daten die an den "`DataTypeClusterer"' übergeben werden:
@@ -541,6 +541,7 @@ Auf ein Sequenzdiagramm für den DBSCAN-Algorithmus wird hier verzichtet, denn d
 
 
 \section{Performance}
+\label{sec:proofofconcept:performance}
 Da die Geschwindigkeit kritisch ist wenn man mit einer grossen Datenmenge arbeitet, wurde ein Caching eingesetzt sowie mehrere Varianten für das Laden der Daten evaluiert. Diese Themen werden nachfolgend beschrieben.
 
 \subsection{Datenzugriff}
@@ -627,7 +628,7 @@ In der Arbeit werden alle Komponenten über Dependency Injection in Klassen hine
 \begin{itemize}
 	\item LoadAllCsvDataIterator: Lädt alle Buchungsdaten aus einem File ins Memory und iteriert dann über die einzelnen Instanzen.
 	\item LoadIncrementalCsvDataIterator: Lädt eine Instanz nach der anderen aus dem File.
-	\item LoadRedisDataIterator: Lädt eine Instanz nach der anderen aus einer Redis Datenbank (In Memory Datenban)\todo{cref}
+	\item LoadRedisDataIterator: Lädt eine Instanz nach der anderen aus einer Redis Datenbank (In Memory Datenban) (siehe \cref{sec:proofofconcept:externebibliotheken:redis} \nameref{sec:proofofconcept:externebibliotheken:redis}).
 \end{itemize}
 
 Es gibt demnach 3 verschiedene Möglichkeiten, wie auf die Daten zugegriffen werden kann. Mittels Dependency Injection kann nun von aussen bestimmt werden, wie der "`BookingDataIterator"' auf die Daten zugreift.
@@ -648,8 +649,6 @@ $\textdollar$apriori->run();
 \end{lstlisting}
 
 Zuerst wird ein "`ContainerBuilder"' erstellt. Auf diesem wird definiert, dass für das "`DataIterator"' Interface die Klasse "`LoadIncrementalCsvDataIterator"' verwendet werden soll. Danach wird auf Zeile 7 ein "`Container"' erstellt und anschliessend eine Instanz der Klasse "`AprioriAlgorithm"' angefordert. Der Container analysiert die Klasse und sieht dass ein "`DataIterator"' erwartet wird und reicht deshalb ein "`LoadIncrementalCsvDataIterator"' in den "`AprioriAlgorithm"' rein. Somit kann auf oberster Ebene gesteuert werden, welche Klassen wo übergeben werden.
-
-Als erfreulicher Nebeneffekt erleichtert dies die Entwicklung von UnitTests massiv (\todo{cref}).
 
 \subsection{Frontend mit Twitter Bootstrap}
 \label{sec:proofofconcept:externebibliotheken:bootstrap}
@@ -842,7 +841,7 @@ Nichts desto trotz wurden Durchläufe der Clustering Algorithmen ausgeführt. Di
 \begin{figure}[H]
 	\RawFloats
 	\centering
-	\includegraphics[width=1\textwidth]{images/expected-data-distribution}
+	\includegraphics[width=0.6\textwidth]{images/expected-data-distribution}
 	\caption{Vermutete Verteilung der Buchungen in der Datenbasis}
 	\label{fig:proofofconcept:fazit:2}
 \end{figure}

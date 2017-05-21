@@ -3,12 +3,9 @@
 
 \chapter{Anforderungsanalyse}
 \label{sec:anforderungsanalyse}
-\todo{intro}
+Dieses Kapitel stellt die Stakeholders der Arbeit vor und zeigt deren Interaktionen mit dem Programm anhand der Anwendungsfälle auf. Schlussendlich werden daraus die funktionalen und nicht funktionalen Anforderungen abgeleitet.
 
-\section{Anforderungsanalyse des Programmes}
-\todo{intro}
-
-\subsection{Stakeholders}
+\section{Stakeholders}
 \label{sec:anforderungsanalyse:stakeholders}
 In der \cref{fig:anfoderungsanalyse:stakeholders} sind die Stakeholders des Projekt abgebildet.
 \begin{table}[h] 
@@ -28,7 +25,7 @@ In der \cref{fig:anfoderungsanalyse:stakeholders} sind die Stakeholders des Proj
 	\end{tabular}
 \end{table} 
 
-\subsection{Anwendungsfälle}
+\section{Anwendungsfälle}
 \label{sec:anforderungsanalyse:anwendungsfaelle}
 In der \cref{fig:anfoderungsanalyse:anwendungsfaelle:1} werden die Anwendungsfälle des Programmes dargestellt. Die Aktoren sind von der \cref{fig:anfoderungsanalyse:stakeholders} übernommen worden. Nachfolgend werden die einzelnen Anwendungsfälle beschrieben.
 \begin{figure}[H]
@@ -49,26 +46,33 @@ In der \cref{fig:anfoderungsanalyse:anwendungsfaelle:1} werden die Anwendungsfä
 
 
 
-\subsection{Ablauf}
+\section{Ablauf}
 \label{sec:anforderungsanalyse:ablauf}
-In diesem Abschnitt wird der Ablauf von der Dateneinschränkung bis zum anbringen von Änderungswünschen erklärt.
+%In diesem Abschnitt wird der Ablauf von der Dateneinschränkung bis zum anbringen von Änderungswünschen erklärt.
+%
+%Zuerst kann der Benutzer die Daten einschränken. Der gesamte oder gefilterte Datenbestand wird anschliessend von einem Algorithmus analysiert. Daraufhin kann der Benutzer die Resultate überprüfen und wenn Fehler aufgedeckt werden diese an den Entwickler weiterleiten.
+%Visualisiert wird der Ablauf in \cref{fig:anfoderungsanalyse:ablauf:1}.
+In \cref{fig:anfoderungsanalyse:ablauf:1} sind die Abläufe der Anwendungsfälle in einem Flowchart visualisiert. 
 
-Zuerst kann der Benutzer die Daten einschränken. Der gesamte oder gefilterte Datenbestand wird anschliessend von einem Algorithmus analysiert. Daraufhin kann der Benutzer die Resultate überprüfen und wenn Fehler aufgedeckt werden diese an den Entwickler weiterleiten.
-Visualisiert wird der Ablauf in \cref{fig:anfoderungsanalyse:ablauf:1}.
+Der Hauptfall ist "`Analyse durchführen"' welcher als erstes "`Daten laden"' aufruft. Dort werden alle Einträge in der Datenbasis geladen, wenn vom Benutzer gewünscht gefiltert und zurückgegeben. Zurück bei der Analyse werden anschliessend die Konfigurationen geladen und schlussendlich der Algorithmus angewendet.
+
+Der Anwendungsfall "`Daten einsehen"' lädt die Daten auf die selbe weise wie "`Analyse durchführen"'. Anschliessend werden die Daten ausgegeben sodass der Benutzer sie einsehen kann.
+
+Der letzte Anwendungsfall ist die Konfiguration der Algorithmen. Dazu werden die einstellbaren Werte dem Benutzer ausgegeben und die Änderungen anschliessend in eine Konfigurationsdatei geschrieben, damit sie bei der nächsten Analyse verwendet werden können.
 
 \begin{figure}[H]
 	\RawFloats
 	\centering
-	\includegraphics[width=0.8\textwidth]{images/flowchart}
+	\includegraphics[width=0.9\textwidth]{images/flowchart}
 	\caption{Ablauf}
 	\label{fig:anfoderungsanalyse:ablauf:1}
 \end{figure}
 
-\subsection{Funktionale Anforderungen}
+\section{Funktionale Anforderungen}
 \label{sec:anforderungsanalyse:funktionaleanforderung}
-Nachfolgend werden die funktionale Anforderungen an das Programm gestellt.
+Nachfolgend werden die funktionale Anforderungen an das Programm aufgeführt. Abgeleitet wurden diese aus den Anwendungsfällen, dem Ablauf und den Hypothesen.
 
-\todo{FA1: Welche Felder? Aus Hypothese}
+%\todo{FA1: Welche Felder? Aus Hypothese}
 \begin{table}[H] 
 	\caption{FA1: Häufigkeitsanalyse der Attribute}
 	\centering
@@ -82,7 +86,7 @@ Nachfolgend werden die funktionale Anforderungen an das Programm gestellt.
 		Beschreibung & Das Programm muss für die Gewinnung neues Wissens aus der bisherigen Buchungen von Interhome gestaltet werden. Dazu sollen Algorithmen eingesetzt werden welche folgende beispielhaften Fragestellungen beantworten können:
 		\begin{enumerate}
 		\item Welche Attribute werden im Winter wenn es schneit in der Schweiz gebucht?
-		\item Welche Destination wird am meisten gebucht von Kunden im Tessin?
+		\item Welche Destination wird von Kunden im Tessin am meisten gebucht?
 		\end{enumerate}
 		
 		Als Antwort sollte der Algorithmus eine Liste von Attributen zurückliefern. Auf die obigen Beispiele könnte dies folgendes sein: 
@@ -207,7 +211,7 @@ Nachfolgend werden die funktionale Anforderungen an das Programm gestellt.
 \end{table}
 
 
-\subsection{Nicht funktionale Anforderungen}
+\section{Nicht funktionale Anforderungen}
 \label{sec:anforderungsanalyse:nichtfunktionaleanforderung}
 Nachfolgend sind die nicht funktionale Anforderungen an das Programm spezifiziert. Diese gehen nicht auf die Funktionalität der Applikation ein, sondern auf die Komplexität, Performanz, etc.
 
