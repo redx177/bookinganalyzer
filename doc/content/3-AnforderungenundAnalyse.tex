@@ -27,7 +27,7 @@ In der \cref{fig:anfoderungsanalyse:stakeholders} sind die Stakeholders des Proj
 
 \section{Anwendungsfälle}
 \label{sec:anforderungsanalyse:anwendungsfaelle}
-In der \cref{fig:anfoderungsanalyse:anwendungsfaelle:1} werden die Anwendungsfälle des Programmes dargestellt. Die Aktoren sind von der \cref{fig:anfoderungsanalyse:stakeholders} übernommen worden. Nachfolgend werden die einzelnen Anwendungsfälle beschrieben.
+In der \cref{fig:anfoderungsanalyse:anwendungsfaelle:1} werden die Anwendungsfälle des Programmes dargestellt. Die Aktoren sind von der \cref{fig:anfoderungsanalyse:stakeholders} übernommen worden. 
 \begin{figure}[H]
 	\RawFloats
 	\centering
@@ -38,7 +38,7 @@ In der \cref{fig:anfoderungsanalyse:anwendungsfaelle:1} werden die Anwendungsfä
 
 \paragraph{Daten einschränken} Es muss möglich sein, die Daten einzuschränken. Dies sollte über vordefinierte Filterkriterien geschehen die vom Benutzer ausgewählt werden können.
 
-\paragraph{Daten einsehen} Um ein Überblick über die gesamten Daten zu haben und um einen Algorithmus zu überprüfen, soll eine Ansicht erstellt werden welche die Daten unbearbeitet darstellt. Sie sollen jedoch gefiltert werden können damit man die selbe Einschränkung vornehmen kann welche auch bei den Algorithmen eingestellt werden kann.
+\paragraph{Daten einsehen} Um ein Überblick über die gesamten Daten zu haben soll eine Ansicht erstellt werden, welche die Daten darstellt. Sie sollen zusätzlich gefiltert werden können damit man die selbe Einschränkung vornehmen kann welche auch bei den Algorithmen eingestellt werden kann.
 
 \paragraph{Analyse durchführen} Es sollte möglich sein, einen oder mehrere Algorithmen auf die Daten anzuwenden und so eine Analyse durchzuführen. Die Daten sollen initial eingeschränkt werden können um nur eine Untermenge zu analysieren.
 
@@ -54,11 +54,11 @@ In der \cref{fig:anfoderungsanalyse:anwendungsfaelle:1} werden die Anwendungsfä
 %Visualisiert wird der Ablauf in \cref{fig:anfoderungsanalyse:ablauf:1}.
 In \cref{fig:anfoderungsanalyse:ablauf:1} sind die Abläufe der Anwendungsfälle in einem Flowchart visualisiert. 
 
-Der Hauptfall ist "`Analyse durchführen"' welcher als erstes "`Daten laden"' aufruft. Dort werden alle Einträge in der Datenbasis geladen, wenn vom Benutzer gewünscht gefiltert und zurückgegeben. Zurück bei der Analyse werden anschliessend die Konfigurationen geladen und schlussendlich der Algorithmus angewendet.
+Der Hauptfall ist "`Analyse durchführen"' welcher als erstes "`Daten laden"' aufruft. Dort werden alle Einträge in der Datenbasis geladen, anschliessend wenn vom Benutzer gewünscht gefiltert und schlussendlich zurückgegeben. Wenn das "`Daten laden"' beendet ist wird die Konfigurationen geladen und der Algorithmus angewendet.
 
 Der Anwendungsfall "`Daten einsehen"' lädt die Daten auf die selbe weise wie "`Analyse durchführen"'. Anschliessend werden die Daten ausgegeben sodass der Benutzer sie einsehen kann.
 
-Der letzte Anwendungsfall ist die Konfiguration der Algorithmen. Dazu werden die einstellbaren Werte dem Benutzer ausgegeben und die Änderungen anschliessend in eine Konfigurationsdatei geschrieben, damit sie bei der nächsten Analyse verwendet werden können.
+Der letzte Anwendungsfall ist die Konfiguration der Algorithmen. Dazu werden die einstellbaren Werte dem Benutzer ausgegeben damit er diese ändern kann. Die Änderungen werden anschliessend in eine Konfigurationsdatei geschrieben, damit sie bei der nächsten Analyse verwendet werden können.
 
 \begin{figure}[H]
 	\RawFloats

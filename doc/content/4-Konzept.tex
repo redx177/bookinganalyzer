@@ -1,10 +1,10 @@
 \chapter{Konzept}
 \label{sec:konzept}
-Im Konzept wird beschrieben, wie die Problemstellung, welch im \cref{sec:einleitung:ziel} aufgezeigt wurde, gelöst werden kann. Dazu werden die einzusetzenden Algorithmen evaluiert und aufgezeigt, wie diese angewendet werden. Anschliessend folgt eine Beschreibung der Daten, welche von den Algorithmen verwenden, sowie deren fünfstufige  Vorbereitung. Im Abschnitt Ablauf werden die zwei Schritte gezeigt, welche bei jeder Analyse durchgeführt werden. Zum Schluss werden noch Testfälle definiert, welche die korrekte Funktionsweise der Analyse sicherstellen.
+Im Konzept wird beschrieben wie die Problemstellung aus dem \cref{sec:einleitung:ziel} \nameref{sec:einleitung:ziel} gelöst werden kann. Dazu werden die einzusetzenden Algorithmen evaluiert und aufgezeigt, wie diese angewendet werden. Anschliessend folgt eine Beschreibung der Daten, welche von den Algorithmen verwendet werden, sowie deren fünfstufige Vorbereitung. Im Abschnitt Ablauf werden die zwei Schritte gezeigt, welche bei jeder Analyse durchgeführt werden. Zum Schluss werden noch Testfälle definiert, welche die korrekte Funktionsweise der Analyse sicherstellen.
 
 \section{Selektion der Disziplinen und Algorithmenen}
 \label{sec:konzept:disziplin-und-algorithmen}
-Im \cref{sec:recherche} wurden Disziplinen und Algorithmen erläutert. In diesem Abschnitt wird erklärt wie diese Auswahl getroffen wurde auf Basis der Anforderungen aus \cref{sec:anforderungsanalyse}.
+Im \cref{sec:recherche} \nameref{sec:recherche} wurden Disziplinen und Algorithmen erläutert. In diesem Abschnitt wird erklärt wie diese Auswahl getroffen wurde auf Basis der Anforderungen aus \cref{sec:anforderungsanalyse} \nameref{sec:anforderungsanalyse}.
 
 \subsection{Einschränkung der Data Mining Disziplinen}
 \label{sec:konzept:disziplinauswahl}
@@ -18,7 +18,7 @@ Mittels Association rule learning (siehe \cref{sec:recherche:dataminingtechniken
 
 \subsubsection{Classification}
 \label{sec:konzept:disziplinauswahl:classification}
-Wie im \cref{sec:recherche:dataminingtechniken:disziplinen:classification} \nameref{sec:recherche:dataminingtechniken:disziplinen:classification} beschrieben ist das Ziel der Classification die Zuweisung einer Instanz zu einer Klasse. Die hätte sicherlich einige interessante Einsatzgebiete bei der Interhome. Zum Beispiel könnte die Liquidität von Kunden unterteilt werden in zwei Gruppen "`zahlungsfähig"' und "`zahlungsunfähig. Oder das Suchverhalten der Kunden und ob es wahrscheinlich ist ob er eine Buchung abschliesst oder nicht.
+Wie im \cref{sec:recherche:dataminingtechniken:disziplinen:classification} \nameref{sec:recherche:dataminingtechniken:disziplinen:classification} beschrieben ist das Ziel der Classification die Zuweisung einer Instanz zu einer Klasse. Dies hätte sicherlich einige interessante Einsatzgebiete bei der Interhome. Zum Beispiel könnte die Liquidität von Kunden unterteilt werden in zwei Gruppen: "`zahlungsfähig"' und "`zahlungsunfähig.
 
 Das Ziel der Arbeit ist jedoch die Analyse der Buchungsdaten auf die Häufigkeit von Attributen, wozu sich die Classification nicht eignet.
 
@@ -30,11 +30,11 @@ Linere Regression Algorithmen suchen eine Formel, damit man von einer abhängige
 \label{sec:konzept:disziplinauswahl:clusteranalysis}
 Das Resultat einer Cluster analysis sind Gruppen (Clusters) von Buchungen, die untereinander ähnlich, und zu allen anderen Gruppen möglichst unähnlich sind (siehe \cref{sec:recherche:dataminingtechniken:disziplinen:clusteranalysis} \nameref{sec:recherche:dataminingtechniken:disziplinen:clusteranalysis}). Zum Beispiel können bei den Interhome Gruppen von Kunden ermittelt werden, welche ähnliche Kaufverhalten aufweisen. 
 
-Obwohl das Clustering keine funktionale Anforderung beantwortet, ist der Ansatz trotzdem interessant. Da die Instanzen innerhalb des Clusters ähnlich zueinander sind ist zu erwarten, dass eine Häufigkeitszählung der Attribute innerhalb des Clusters ähnliche Eigenschaften aufweisen. Diese sollten von der Apriori Analyse gefunden werden. 
+Obwohl das Clustering keine funktionale Anforderung erfüllt, ist der Ansatz trotzdem interessant. Da die Instanzen innerhalb des Clusters ähnlich zueinander sind ist zu erwarten, dass eine Häufigkeitszählung der Attribute innerhalb des Clusters ähnliche Eigenschaften aufweisen. Diese sollten von der Apriori Analyse gefunden werden. 
 
 Dies könnte hilfreich sein, wenn über die gesamte zu analysierende Datenmenge die Attributverteilung sehr gleichmässig ist und das Association rule learning keine interessanten Kenntnisse liefert. Das schliesst nicht aus, das es zwei Gruppen gibt, welche für sich selber betrachtet sehr eindeutige Attributverteilungen besitzen, die sich aber gegenseitig aufheben. Zum Beispiel könnte es in Malta viele junge Besucher geben, welche kleine und günstige Ferienhäuser buchen um dort Parties zu feiern. Gleichzeitig gibt es viele Familien die dort hingehen und ausserhalb der Feierzone Strandferien machen. Über alles betrachtet wäre es möglich, dass die Attributverteilung über beiden Gruppen sehr gleichmässig ist, aber jede für sich selber betrachtet interessante Muster aufweist.
 
-Deshalb wird ein versucht gewagt mittels der Cluster analysis zuerst eine Gruppierung der Buchungen durchzuführen, mit einem anschliessenden Association rule learning.
+Deshalb wird ein versucht gewagt mittels der Cluster analysis zuerst eine Gruppierung der Buchungen durchzuführen, mit einem anschliessenden einsatz des Apriori Algrotihmus (mehr zum Apriori Algorithmus unter \cref{sec:konzept:algorithmenauswahl:apriori} \nameref{sec:konzept:algorithmenauswahl:apriori}).
 
 \subsubsection{Collaborative Filtering}
 \label{sec:konzept:disziplinauswahl:collaborativefiltering}
@@ -65,7 +65,7 @@ Es gibt diverse Algorithmen welche sich verschiedene Problemstellungen annehmen.
 Nicht alle Algorithmen lassen sich eindeutig einer Gruppe zuweisen. Jedoch hilft diese Auflistung eine Übersicht über die Verfahren zu geben\footcite{data_mining_concepts_and_techniques}.
 
 Für die Auswahl eines Algorithmus müssen die Charakteristiken der Daten bekannt sein, wie diese zum Beispiel verteilt (z.B. Kugel-, Kreis-, S-Förmig) oder wie viele Cluster sinnvoll sind. Diese sind bislang jedoch noch bekannt.
-Partitioning- und Hierarchical-Vorgehensweisen benötigen zur Berechnung der Clustern deren Anzahl. Bei ersteren kann diese anhand der Elbow-Methode berechnet werden\footcite{elbow_method}. Bei Hierarchischen Clustern müsste man dies jedoch für jeden Ast ermittelt. Da die Laufzeit von solchen Algorithmen bereits $\mathcal{O}(k^2)$ beträgt ist diese Vorgehensweise nicht praktikabel\footcite{complexity_hierarchical_clustering} (siehe \cref{sec:anforderungsanalyse:algorithmen:komplexitaet} \nameref{sec:anforderungsanalyse:algorithmen:komplexitaet}). Grid-based Methoden unterteilen den Datenraum in ein Netz wodurch die Clusters erzeugt werden. Unterstützt werden dabei nur numerische Daten weshalb sich diese Gruppe nicht eignet (weitere Forschung in dem Bereich ist jedoch im Gange\footcite{sting_categorical_data}).
+Partitioning- und Hierarchical-Vorgehensweisen benötigen zur Berechnung der Clustern deren Anzahl. Bei ersteren kann diese anhand der Elbow-Methode berechnet werden\footcite{elbow_method}. Bei Hierarchischen Clustern müsste man dies jedoch für jeden Ast ermittelt. Da die Laufzeit von solchen Algorithmen bereits $\mathcal{O}(k^2)$ beträgt ist diese Vorgehensweise nicht praktikabel\footcite{complexity_hierarchical_clustering}. Grid-based Methoden unterteilen den Datenraum in ein Netz wodurch die Clusters erzeugt werden. Unterstützt werden dabei nur numerische Daten weshalb sich diese Gruppe nicht eignet (weitere Forschung in dem Bereich ist jedoch im Gange\footcite{sting_categorical_data}).
 Aus diesen Gründen werden in dieser Arbeit ein Vertreter aus der Partitioning (k-prototype) und der Density-based (DBSCAN) Gruppen umgesetzt.
 
 \paragraph{k-prototypes als partitionierender Algorithmus}
@@ -74,7 +74,7 @@ Bei den partitionierenden Algorithmen sind die bekanntesten Vertreter der k-mean
 
 \paragraph{DBSCAN als density-based Algorithmus}
 \label{sec:konzept:algorithmenauswahl:clustering:dbscan}
-Als Vertreter der Density-based Algorithmen wird \gls{dbscan} verwendet. Beschrieben der er im \cref{sec:recherche:algorithmen:dbscan}. Als alternative bietet sich \gls{optics} an. Dabei handelt es sich um eine Erweiterung von \gls{dbscan}, bei welchem kein Dichte $\epsilon$ angegeben werden muss. Jedoch erstellt \gls{optics} keine Clusters, sondern eine geordnete aufsteigende Liste, sodass räumlich benachbarte Punkte in dieser Ordnung nahe aufeinander liegen. Die Auswertung der Liste muss nachgelagert ausgeführt werden\footcite{data_mining_concepts_and_techniques}. In dieser Arbeit wird \gls{dbscan} verwendet da mit geeigneten, noch zu ermittelnden, werten für $\epsilon$ und $minpts$ ein Clustering erstellt werden kann und der Benutzer die Resultate nicht noch weiter interpretieren muss. Sollte es nötig sein, so kann nach der Arbeit überprüft werden ob \gls{optics} bessere Resultate liefert.
+Als Vertreter der Density-based Algorithmen wird \gls{dbscan} verwendet, welcher im \cref{sec:recherche:algorithmen:dbscan} beschrieben wurde. Als alternative bietet sich \gls{optics} an. Dabei handelt es sich um eine Erweiterung von \gls{dbscan}, bei welchem kein Dichte $\epsilon$ angegeben werden muss. Jedoch erstellt \gls{optics} keine Clusters, sondern eine geordnete aufsteigende Liste, sodass räumlich benachbarte Punkte in dieser Ordnung nahe aufeinander liegen. Die Auswertung der Liste muss nachgelagert ausgeführt werden\footcite{data_mining_concepts_and_techniques}. In dieser Arbeit wird \gls{dbscan} verwendet da mit geeigneten, noch zu ermittelnden, werten für $\epsilon$ und $minpts$ ein Clustering erstellt werden kann und der Benutzer die Resultate nicht noch weiter interpretieren muss. Sollte es nötig sein, so kann nach der Arbeit überprüft werden ob \gls{optics} bessere Resultate liefert.
 
 \section{Anwendung der Algorithmen}
 \label{sec:konzept:anwendungderalgorithmen}
@@ -91,8 +91,8 @@ d(I_i, I_j) = \sum_{k=1}^{m} (A_{ik} - A_{jk})^2
 
 $A_{ik}$ ist das k-te Attribute der Instanz $i$. 
 Diese Distanzmessung eignet sich nur für numerische Attribute.
-Da die Interhome Daten jedoch hauptsächlich aus kategorischen Attirbuten bestehen, wird  eine erweiterte Funktion zur Messung der Entfernung verwendet, welche im Artikel zum k-prototype Algorithmus von Zhexue Huang vorgeschlagen wird\footcite{clustering_numeric_and_categorical_values}.
-Dabei handelt es sich um eine Fusion der quadratischen euklidischen- und der Hamming-Distanz\footcite{data_mining_concepts_and_techniques}.
+Da die Interhome Daten jedoch hauptsächlich aus kategorischen Attirbuten bestehen, wird  eine erweiterte Funktion zur Messung der Entfernung verwendet, welche im Artikel zum k-prototype Algorithmus von Zhexue Huang vorgeschlagen wird\footcite{clustering_numeric_and_categorical_values} und in \cref{eq:recherche:clusteranalysis:2} aufgeführt ist.
+Dabei handelt es sich um eine Fusion der quadratischen euklidischen- (linke Summe) und der Hamming-Distanz (rechte Summe)\footcite{data_mining_concepts_and_techniques}.
 
 \begin{equation} \label{eq:recherche:clusteranalysis:2}
 d(I_i, I_j) = \sum_{k=1}^{m} (A^n_{ik} - A^n_{jk})^2 + \gamma \sum_{k=1}^{m} \delta(A^c_{ik}, A^c_{jk})
@@ -116,13 +116,13 @@ Dadurch erhalten Instanzen mit vielen Übereinstimmungen eine kleinere Distanz a
 \label{sec:konzept:parameterauswahl}
 Für die Clustering Algorithmen und die Distanzmessung werden Eingabeparameter benötigt, dessen Auswahl in diesem Abschnitt erläutert wird.
 
-Für \gls{dbscan} wird $\epsilon$ und $minpts$ benötigt, sowie $\gamma$ für die Distanzmessung (siehe \cref{sec:recherche:algorithmen:dbscan} \nameref{sec:recherche:algorithmen:dbscan} sowie \cref{sec:konzept:anwendungderalgorithmen:distanzmessung} \nameref{sec:konzept:anwendungderalgorithmen:distanzmessung}). Diese Werte müssen explorativ ermittelt werden. Dazu werden im \cref{sec:recherche:testcases} Testcases definiert welche Clusters beinhaltet. Die Parameter müssen so gesetzt werden, dass die vordefinierten Clusters gefunden werden. Anschliessend können die selben Werte auf den produktiven Daten angewendet werden.
+Für \gls{dbscan} wird $\epsilon$ und $minpts$ benötigt, sowie $\gamma$ für die Distanzmessung (siehe \cref{sec:recherche:algorithmen:dbscan} \nameref{sec:recherche:algorithmen:dbscan} sowie \cref{sec:konzept:anwendungderalgorithmen:distanzmessung} \nameref{sec:konzept:anwendungderalgorithmen:distanzmessung}). Diese Werte müssen explorativ ermittelt werden, denn sie können variieren je nach Datenbasis und gewählten Filtern. %Dazu werden im \cref{sec:recherche:testcases} Testcases definiert welche Clusters beinhaltet. Die Parameter müssen so gesetzt werden, dass die vordefinierten Clusters gefunden werden. Anschliessend können die selben Werte auf den produktiven Daten angewendet werden.
 
 Die Ermittlung des $k$ Wertes beim k-prototypes Algorithmus wird im \cref{sec:konzept:parameterauswahl:kprototypes} beschrieben.
 
 \subsubsection{k Auswahl für k-prototypes}
 \label{sec:konzept:parameterauswahl:kprototypes}
-Der k-prototypes benötigt die Anzahl an Clustern $k$ die generiert werden sollen. Zu Beginn ist jedoch noch unklar wie dieser Parameter gewählt werden soll. Mithilfe der Elbow-Methode kann der optimale Wert für $k$ ermittelt werden. Dazu wird der Algorithmus mit einem Cluster durchgeführt und danach der Wert um jeweils 1 erhöht. Der Gesamtfehler des Clusterings (total within-cluster variation) wird schlussendlich über alle Werte für $k$ in ein Koordinatensystem eingetragen. Dies ergibt eine Kurve wie sie in \cref{fig:konzept:parameterauswahl:kprototypes} aufgezeigt wird.
+Der k-prototypes benötigt die Anzahl an Clustern $k$ die generiert werden sollen. Zu Beginn einer Analyse ist jedoch noch unklar wie dieser Parameter gewählt werden soll. Mithilfe der Elbow-Methode kann der optimale Wert für $k$ ermittelt werden. Dazu wird der Algorithmus mit $k=1$ durchgeführt und der Wert nach jeder Durchlauf um jeweils 1 erhöht. Der Gesamtfehler des Clusterings (total within-cluster variation) wird schlussendlich über alle Werte für $k$ in ein Koordinatensystem eingetragen. Dies ergibt eine Kurve wie sie in \cref{fig:konzept:parameterauswahl:kprototypes} aufgezeigt wird.
 
 \begin{figure}[H]
 	\RawFloats
@@ -141,7 +141,7 @@ Nachfolgend wird der Datenbestand und die selektion der Attribute erklärt.
 
 \subsection{Beschreibung der Daten}
 \label{sec:recherche:datenbeschaffung}
-Die Daten für die Auswertung wurden aus dem \gls{irent} extrahiert werden. Da die Buchungen Kundendaten enthalten, können sie nicht veröffentlicht werden.
+Die Daten für die Auswertung wurden aus dem \gls{irent} extrahiert. Da die Buchungen Kundendaten enthalten, können sie nicht veröffentlicht werden.
 
 Die Daten liegen im Windows Excel Format vor. Es sind total 133'001 Datensätze mit jeweils 153 Felder. Die Felbeschreibungen sind im \cref{app:feldbeschreibungen} aufgeführt. Zellen A-U sind Informationen im Bezug auf die Buchungen, alle anderen (V-EW) beziehen sich auf das Objekt selber.
 
@@ -157,7 +157,9 @@ In der Datenbasis sind boolsche Werte entweder leer oder "`X"'. Dies wird umgewa
 
 \subsubsection{Filtrieren von stornierten Buchungen}
 \label{sec:recherche:datenvorbereitung:filtrieren}
-Die Datenbasis beinhaltet bestätigte und stornierte Buchungen. Der Status wird in der Zeile C BOOKSTA gespeichert und besitzt den Wert "`OK"' wenn der Kunde die Rechnung bezahlt sowie die Reise angetreten ist, sonst beinhaltet das Feld die Buchstaben "`XX"'. Gründe für eine Stornierung gibt es viele. Zum Beispiel wenn er falsch gebucht hat, die Rechnung nicht bezahlte, die Reise nicht angetreten werden konnte, etc. Wenn es eine ernsthafte Buchung war könnte man auch annullierte Instanzen verwenden in der Analyse. Wenn jedoch etwas falsch gebucht wurde könnten diese Buchungen die Analyse verfälschen. Da kein Grund für die Annullierung angegeben ist in der Datenbasis werden alle Instanzen mit "`XX"' entfernt. 
+Die Datenbasis beinhaltet bestätigte und stornierte Buchungen. Der Status wird in der Zeile C BOOKSTA gespeichert und besitzt den Wert "`OK"' wenn der Kunde die Rechnung bezahlt sowie die Reise angetreten ist, sonst beinhaltet das Feld die Buchstaben "`XX"'. Gründe für eine Stornierung gibt es viele. Zum Beispiel wenn er falsch gebucht hat, die Rechnung nicht bezahlte, die Reise nicht angetreten werden konnte, etc. 
+
+Der Grund für die Stornierung ist in der Datenbasis nicht vorhanden. Deshalb besteht die Gefahr, dass wenn stornierte Buchungen verwendet werden die Analyse verfälscht wird. Zum Beispiel wenn ein Kunde aus versehen eine Objekt mit der Dauer von drei Monate anstelle von 3 Tage gebucht hat. Deshalb werden alle Instanzen mit dem Wert "`XX"' aus der Datenbasis entfernt.
 
 \subsubsection{Datennormierung von numerischen Werten} 
 Die im \label{sec:recherche:datenvorbereitung:normierung} \cref{sec:konzept:anwendungderalgorithmen:distanzmessung} vorgestellte Distanzmessung arbeitet mit der euklidischen Distanz für numerische Werte. Wenn ein Attribut $A_1$ einer Buchung den Wert 1'000 hat und das einer anderen Buchung 300, so ergibt sich eine Distanz von 700. Betrachtet man ein anderes Attribut $A_2$, welches den Wert 1 hat beziehungsweise 0.3, so ist die Distanz 0.7. Dadurch fällt $A_2$ in der gesamten Distanz zwischen den beiden Buchungen massiv weniger ins Gewicht, da es um einen Faktor 1'000 kleiner ist. Deshalb werden numerische Attribute genormt, damit alle in den gleichen Wertebereich liegen.
