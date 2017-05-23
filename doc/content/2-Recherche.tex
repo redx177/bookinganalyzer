@@ -164,7 +164,7 @@ In der \cref{fig:recherche:vorgehensweise:apriorialgorithmus} wird der Ablauf am
 \label{fig:recherche:vorgehensweise:apriorialgorithmus}
 \end{figure}
 
-$D$ wird benötigt um die Vorkommen zu zählen. Die roten Elemente in $L_k$ werden entfernt weil $minsup$ nicht erreicht wurde, welches im Beispiel den Wert 2 hat. Nach der Säuberung von $L_k$ erstellt der apriori\_gen die Kandidaten $C_k$ für den nächsten durchlauf (join). Anschliessend werden in $C_k$ diejenigen Elemente entfernt, welche in $L_{k-1}$ als nicht häufig erkannt wurde (prune). Zum Beispiel kann in $C_3$ das Element {Brot, Butter, Wurst} entfernt werden, da in $L_2$ {Butter, Wurst} den Wert $minsup$ unterschreitet.
+$D$ wird benötigt, um die Vorkommen zu zählen. Die roten Elemente in $L_k$ werden entfernt, weil $minsup$ nicht erreicht wurde, welches im Beispiel den Wert 2 hat. Nach der Säuberung von $L_k$ erstellt der apriori\_gen die Kandidaten $C_k$ für den nächsten Durchlauf (join). Anschliessend werden in $C_k$ diejenigen Elemente entfernt, welche in $L_{k-1}$ als nicht häufig erkannt wurden (prune). Zum Beispiel kann in $C_3$ das Element {Brot, Butter, Wurst} entfernt werden, da in $L_2$ {Butter, Wurst} den Wert $minsup$ unterschreitet.
 
 Der Algorithmus wird gestoppt, wenn es keine häufigen Kandidaten mehr gibt, was in $C_4$ der Fall ist.
 
@@ -172,11 +172,11 @@ Der Algorithmus kann somit in drei Schritte aufgeteilt werden.
 \begin{enumerate}
 \item Häufigkeitszählung
 \item Generierung der x+1-Attributmenge (Apriori-gen Funktion, join step)
-\item Entfernung der Elemente welche den $minsup$ nicht erfüllen (Apriori-gen Funktion, prune step)
+\item Entfernung der Elemente, welche den $minsup$ nicht erfüllen (Apriori-gen Funktion, prune step)
 \end{enumerate}
 
 Die nachfolgende Apriori-Methode führt die Häufigkeitszählung durch.
-Gegeben ist die gesamte Datenmenge $D$, welche für die Häufigkeitszählung verwendet wird, sowie der minimum Support $minsup$ welche die Attribute zu erfüllen haben.
+Gegeben ist die gesamte Datenmenge $D$, welche für die Häufigkeitszählung verwendet wird sowie der minimum Support $minsup$, welcher die Attribute zu erfüllen haben.
 \begin{lstlisting}[language=pseudocode]
 procedure apriori($D$: Datenmenge; $minsup$: Minimum support) {
 	$L_1 \gets$ find_frequent_1%-%itemsets($D$)
@@ -195,8 +195,8 @@ procedure apriori($D$: Datenmenge; $minsup$: Minimum support) {
 	return $\bigcup\limits_{k} L_{k}$
 }
 \end{lstlisting}
-Im ersten Schritt wird die 1-Attributmenge mit häufigen Elementen definiert. In den Zeilen 3 bis 14 wird für $k > 2$ die Items gesammelt, welche öfters vorkommen als der $minsup$. Dazu wird mittels der apriori\_gen Funktion die \textit{Candidates} $C_k$ generiert (Zeile 5).
-Anschliessend werden die vorkommen von allen Elementen in $D$ gezählt, wie oft sie in $C_k$ vorkommen (Zeilen 6-12).
+Im ersten Schritt wird die 1-Attributmenge mit häufigen Elementen definiert. In den Zeilen 3 bis 14 wird für $k > 2$ die Items gesammelt, welche öfter vorkommen als der $minsup$. Dazu wird mittels der apriori\_gen Funktion die \textit{Candidates} $C_k$ generiert (Zeile 5).
+Anschliessend werden die Vorkommen von allen Elementen in $D$ gezählt, wie oft sie in $C_k$ vorkommen (Zeilen 6-12).
 
 
 \begin{lstlisting}[language=pseudocode]
