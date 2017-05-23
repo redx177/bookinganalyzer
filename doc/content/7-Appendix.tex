@@ -30,7 +30,7 @@ Es gibt dabei folgende Datentypen:
 	F & SONR & categorical & Sales Office Nummer \\ \hline 
 	G & MAINSONR & categorical & Main Sales Office Nummer \\ \hline 
 	H & BOOKLANG & categorical & Sprache der Benutzers \\ \hline 
-	I & NREF & categorical & Nummer des gebuchten Objektes \\ \hline 
+	I & NREF & categorical & Nummer des gebuchten Objekts \\ \hline 
 	J & RESBEGDATE & date & Startdatum des Aufenthaltes \\ \hline 
 	K & RESENDDATE & date & Enddatum des Aufenthaltes \\ \hline 
 	L & REPAX & integer & Anzahl Passagiere \\ \hline 
@@ -46,18 +46,18 @@ Es gibt dabei folgende Datentypen:
 	
 	\rowcolor{tableheadcolor}
 	\multicolumn{4}{|c|}{\textbf{Objektdaten}} \\ \hline
-	V & OBGEOLAT & float & Breitengrad des Objektes \\ \hline 
-	W & OBGEOLONG & float & Längengrad des Objektes \\ \hline 
-	X & OBSTRAS & string & Strasse des Objektes \\ \hline 
-	Y & OBCNTRY & categorical & Land des Objektes \\ \hline 
-	Z & OBZIP & integer & Postleitzahl des Objektes \\ \hline 
-	AA & OBORT & string & Ortschaft des Objektes \\ \hline 
+	V & OBGEOLAT & float & Breitengrad des Objekts \\ \hline 
+	W & OBGEOLONG & float & Längengrad des Objekts \\ \hline 
+	X & OBSTRAS & string & Strasse des Objekts \\ \hline 
+	Y & OBCNTRY & categorical & Land des Objekts \\ \hline 
+	Z & OBZIP & integer & Postleitzahl des Objekts \\ \hline 
+	AA & OBORT & string & Ortschaft des Objekts \\ \hline 
 	AB & PAX & string & Anzahl möglicher Gäste \\ \hline 
-	AC & QUAL & string & Sterne Bewertung des Objektes \\ \hline 
+	AC & QUAL & string & Sterne Bewertung des Objekts \\ \hline 
 	AD & ROOMS & string & Anzahl Zimmer \\ \hline 
 	AE & BEDROOMS & string & Anzahl Schlafzimmer \\ \hline 
-	AF & BRAND & categorical & Provider des Objektes. A = Villa Vacant, B = Bungalow.Net, C = Interchalet, DAC = Dan Center, D = Sol og Strang, E = DanCenter, F = Belvilla, FER = Feratel, G = Adagio, H = Hotelpac, I = Interhome, J = Just France, JAS = Jassu Travel, L = Lomarengas, M = HR Special Residence, NFM = Norddeich Ferienwohnungen Maus GmbH, O = Roompot, P = Topic Travel, Q = Aquadelta, R = Resortquest, S = TOMAS, T = Tui Wolters, V = Vacando, W = PO for IH, Y = Centerparcs, Z = Sunpars, IL = Interhome Light, TAB = Total Accommodation Booking System, APA = Apartments Apart, PVI = Portvil, AMA = Interhome, SPR = Swisspeak Resorts\\ \hline 
-	AG & ACCOMTYPE & categorical & Typ des Objektes\\ \hline 
+	AF & BRAND & categorical & Provider des Objekts. A = Villa Vacant, B = Bungalow.Net, C = Interchalet, DAC = Dan Center, D = Sol og Strang, E = DanCenter, F = Belvilla, FER = Feratel, G = Adagio, H = Hotelpac, I = Interhome, J = Just France, JAS = Jassu Travel, L = Lomarengas, M = HR Special Residence, NFM = Norddeich Ferienwohnungen Maus GmbH, O = Roompot, P = Topic Travel, Q = Aquadelta, R = Resortquest, S = TOMAS, T = Tui Wolters, V = Vacando, W = PO for IH, Y = Centerparcs, Z = Sunpars, IL = Interhome Light, TAB = Total Accommodation Booking System, APA = Apartments Apart, PVI = Portvil, AMA = Interhome, SPR = Swisspeak Resorts\\ \hline 
+	AG & ACCOMTYPE & categorical & Typ des Objekts\\ \hline 
 	AH & PETS & boolean & Haustiere erlaubt? \\ \hline 
 	AI & CHOUSE & categorical & A = Apartment (Wohnung), H = ) \\ \hline 
 	AJ & HOUSETYPE & categorical & Typ des Hauses ??? \\ \hline 
@@ -70,7 +70,7 @@ Es gibt dabei folgende Datentypen:
 	AQ & CBATHANDSH & boolean & Bad oder eine Dusche im Objekt \\ \hline 
 	AR & CAIRCOND & boolean & Aircondition im Objekt\\ \hline 
 	AS & CCENTRAL & boolean & Objekt liegt zentral gelegen \\ \hline 
-	AT & CSUNNY & boolean & Umgebung des Objektes ist sonnig \\ \hline 
+	AT & CSUNNY & boolean & Umgebung des Objekts ist sonnig \\ \hline 
 	AU & CFENCED & boolean & Objekt ist umzäunt \\ \hline 
 	AV & CGARDEN & boolean & Objekt besitzt einen Garten \\ \hline 
 	AW & CPOOL & boolean & Objekt besitzt einen Pool \\ \hline 
@@ -202,7 +202,7 @@ Es gibt dabei folgende Datentypen:
 {}
 {\id & \NREF & \DIWATER & \DIPUBT & \DISEA & \weeklyprice & \PETS & \CAIRCOND & \ROOMS & \BEDROOMS}
 
-\section{TC2: 2 gleiche Binäreattribute}
+\section{TC2: 2 gleiche Binärattribute}
 \label{app:testdatenquellen:2}
 
 \csvreader[myTableStyle]%
@@ -298,82 +298,82 @@ Nachfolgend werden die Klassendiagramme präsentiert. Die Erklärung dazu ist im
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.5\textwidth]{images/diagram-class-filters}
-	\caption{Klassendiagram der Filter und Felder Datenmodellen}
+	\caption{Klassendiagramm der Filter und Felder Datenmodellen}
 	\label{fig:proofofconcept:klassenstruktur:5}
 \end{figure}
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.6\textwidth]{images/diagram-class-Histograms}
-	\caption{Klassendiagram der Histogram-Modellen}
+	\caption{Klassendiagramm der Histogram-Modellen}
 	\label{fig:proofofconcept:klassenstruktur:6}
 \end{figure}
 \begin{sidewaysfigure}[H]
 	\centering
 	\includegraphics[width=1\textwidth]{images/diagram-class-clusters}
-	\caption{Klassendiagram der Clusterresultaten}
+	\caption{Klassendiagramm der Clusterresultaten}
 	\label{fig:proofofconcept:klassenstruktur:7}
 \end{sidewaysfigure}
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=1\textwidth]{images/diagram-class-Controller}
-	\caption{Klassendiagram der Controller}
+	\caption{Klassendiagramm der Controller}
 	\label{fig:proofofconcept:klassenstruktur:1}
 \end{figure}
 \begin{sidewaysfigure}[H]
 	\centering
 	\includegraphics[width=1\textwidth]{images/diagram-class-AprioriAlgorithm}
-	\caption{Klassendiagram des Apriori Alogorithmus}
+	\caption{Klassendiagramm des Apriori Alogorithmus}
 	\label{fig:proofofconcept:klassenstruktur:2}
 \end{sidewaysfigure}
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=1\textwidth]{images/diagram-class-DBScanAlgorithm}
-	\caption{Klassendiagram des DBScan Alogorithmus}
+	\caption{Klassendiagramm des DBScan Alogorithmus}
 	\label{fig:proofofconcept:klassenstruktur:3}
 \end{figure}
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=1\textwidth]{images/diagram-class-KPrototypeAlgorithm}
-	\caption{Klassendiagram des KPrototype Alogorithmus}
+	\caption{Klassendiagramm des KPrototype Alogorithmus}
 	\label{fig:proofofconcept:klassenstruktur:4}
 \end{figure}
 
-\chapter{Ansichten des Programmes}
-Nachfolgend werden Ansichten des Programmes aufgezeigt, welches in der Proof of Concept Phase umgesetzt wurde.
+\chapter{Ansichten des Programms}
+Nachfolgend werden Ansichten des Programms aufgezeigt, welches in der Proof of Concept Phase umgesetzt wurde.
 \label{app:pocansichten}
 \begin{figure}[H]
 	\RawFloats
 	\centering
 	\includegraphics[width=1\textwidth]{images/program-filters}
-	\caption{Ansichten des Programmes: Filters}
+	\caption{Ansichten des Programms: Filters}
 \end{figure}
 \begin{figure}[H]
 	\RawFloats
 	\centering
 	\includegraphics[width=1\textwidth]{images/program-explore-results}
-	\caption{Ansichten des Programmes: Stammdaten einsehen}
+	\caption{Ansichten des Programms: Stammdaten einsehen}
 \end{figure}
 \begin{figure}[H]
 	\RawFloats
 	\centering
 	\includegraphics[width=1\textwidth]{images/program-apriori-results}
-	\caption{Ansichten des Programmes: Resultat einer Apriori Analyse}
+	\caption{Ansichten des Programms: Resultat einer Apriori Analyse}
 \end{figure}
 \begin{figure}[H]
 	\RawFloats
 	\centering
 	\includegraphics[width=1\textwidth]{images/program-kprototype-results}
-	\caption{Ansichten des Programmes: Resultat einer k-prototype Analyse}
+	\caption{Ansichten des Programms: Resultat einer k-prototype Analyse}
 \end{figure}
 \begin{figure}[H]
 	\RawFloats
 	\centering
 	\includegraphics[width=0.8\textwidth]{images/program-dbscan-results}
-	\caption{Ansichten des Programmes: Resultat einer DBSCAN Analyse}
+	\caption{Ansichten des Programms: Resultat einer DBSCAN Analyse}
 \end{figure}
 \begin{figure}[H]
 	\RawFloats
 	\centering
 	\includegraphics[width=1\textwidth]{images/program-settings}
-	\caption{Ansichten des Programmes: Ausschnitt der Ansicht "`Algorithmen konfigurieren"'}
+	\caption{Ansichten des \textbf{Programms}: Ausschnitt der Ansicht "`Algorithmen konfigurieren"'}
 \end{figure}

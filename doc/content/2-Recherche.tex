@@ -14,11 +14,11 @@ Data Mining sieht folgende Schritte vor:
 	\item Überprüfung der Resultate
 \end{enumerate}
 
-Schritt 1 ist die Beschaffung der Daten, welche analysiert werden sollen (siehe \cref{sec:recherche:datenbeschaffung} \nameref{sec:recherche:datenbeschaffung}). 
+Schritt 1 ist die Beschaffung der Daten, die analysiert werden sollen (siehe \cref{sec:recherche:datenbeschaffung} \nameref{sec:recherche:datenbeschaffung}). 
 
-Die Vorbereitung der Daten Bereinigt, Transformiert und Reduziert Informationen und wird im \cref{sec:recherche:datenvorbereitung} \nameref{sec:recherche:datenvorbereitung} beschrieben.
+Die Vorbereitung der Daten bereinigt, transformiert und reduziert Informationen und wird im \cref{sec:recherche:datenvorbereitung} \nameref{sec:recherche:datenvorbereitung} beschrieben.
 
-Der dritte Punkt ist das eigentliche Datengewinnung. Dabei werden Methoden des Data Mining auf die Daten angewendet. Mögliche Vorgehensweisen werden im \cref{sec:recherche:dataminingtechniken:disziplinen} \nameref{sec:recherche:dataminingtechniken:disziplinen} beschrieben.
+Der dritte Punkt ist die eigentliche Datengewinnung. Dabei werden Methoden des Data Mining auf die Daten angewendet. Mögliche Vorgehensweisen werden im \cref{sec:recherche:dataminingtechniken:disziplinen} \nameref{sec:recherche:dataminingtechniken:disziplinen} beschrieben.
 
 Beim letzten Schritt werden die Resultate überprüft. Ist das Resultat nicht zufriedenstellend, so werden Punkt 2-4 wiederholt.
 
@@ -26,7 +26,7 @@ Beim letzten Schritt werden die Resultate überprüft. Ist das Resultat nicht zu
 \label{sec:recherche:dataminingtechniken:disziplinen}
 Die Auswahl der Algorithmen ist riesig. Alle zu beschreiben würde eine Arbeit für sich selbst benötigen. Deshalb wurde die Auswahl der Techniken eingeschränkt auf die im Buch \cite{data_mining_concepts_and_techniques}. 
  
-Vorgestellt werden fünf Techniken welche zum Teil ganz unterschiedliche Problemstellungen angehen. Cluster analysis und Classification unterteilen die Datenmenge in ähnliche Gruppen. Association rule learning, Lineare Regression und Collaborative Filtering versuchen anhand bestehender Daten werte für neue Datensätze vorherzusagen. Nachfolgend werden diese Techniken genauer erläutert.
+Vorgestellt werden fünf Techniken, die zum Teil ganz unterschiedliche Problemstellungen angehen. Cluster analysis und Classification unterteilen die Datenmenge in ähnliche Gruppen. Association rule learning, Lineare Regression und Collaborative Filtering versuchen anhand bestehender Daten Werte für neue Datensätze vorherzusagen. Nachfolgend werden diese Techniken genauer erläutert.
 
 \subsection{Association rule learning}
 \label{sec:recherche:dataminingtechniken:disziplinen:association}
@@ -34,11 +34,11 @@ Bei Association rule learning (Assoziationsanalyse) handelt es sich um \gls{supe
 
 Der Prozess in der Assoziationsanalyse besteht aus zwei Schritten. Zuerst werden häufig auftretende Attributkombinationen gesucht, aus welchen anschliessend Regeln generiert werden\footcite{association_rule_learning_2017-01-05}.
 
-Im Falle einer Warenkorbanalyse ein Beispiel einer Regel: "`Samstags wenn ein Kunde Käse und Brot kauft, dann kauft er auch Liquor"'. Oder im Falle von Interhome "Wenn ein Kunde eine Ferienwohnung mit Pool am Meer bucht, dann besitzt das Objekt auch eine Klimaanlage".
+Im Falle einer Warenkorbanalyse ein Beispiel einer Regel: "`Samstags, wenn ein Kunde Käse und Brot kauft, dann kauft er auch Liquor"'. Oder im Falle von Interhome: "Wenn ein Kunde eine Ferienwohnung mit Pool am Meer bucht, dann besitzt das Objekt auch eine Klimaanlage".
 
 \subsection{Classification}
 \label{sec:recherche:dataminingtechniken:disziplinen:classification}
-Das Ziel der Classification (Klassifikation) ist es, eine Instanz einer Klasse zuzuweisen. Dies könnte die Kreditwürdigkeit eines Kunden sein. Die Klassen sind dabei vordefiniert, wodurch es um ein \gls{supervisedlearning} handelt.
+Das Ziel der Classification (Klassifikation) ist es, eine Instanz einer Klasse zuzuweisen. Dies könnte die Kreditwürdigkeit eines Kunden sein. Die Klassen sind dabei vordefiniert, wodurch es sich um ein \gls{supervisedlearning} handelt.
 
 Es gibt verschiedene Techniken für die Zuweisung einer Instanz zu einer Klasse. Es können Entscheidungsregeln, Bayes-Klassifikatoren, neuronale Netze und weitere verwendet werden\footcite{comparision_classification_algorithms}. Entscheidungsregeln können als Bäume dargestellt werden und sind visuell einfach verständlich.
 
@@ -49,20 +49,20 @@ Es gibt verschiedene Techniken für die Zuweisung einer Instanz zu einer Klasse.
 	\label{fig:recherche:dataminingtechniken:disziplinen:classification}
 \end{figure}
 
-\cref{fig:recherche:dataminingtechniken:disziplinen:classification} zeigt einen Entscheidungsbaum, welcher von oben nach unten durchlaufen wird. Die Quadrate sind Entscheidungen, und bei den Ovalen handelt es sich um Zuweisungen zu der Klasse "`kreditwürdig"'.
+\cref{fig:recherche:dataminingtechniken:disziplinen:classification} zeigt einen Entscheidungsbaum, welcher von oben nach unten durchlaufen wird. Die Quadrate sind Entscheidungen und bei den Ovalen handelt es sich um Zuweisungen zu der Klasse "`kreditwürdig"'.
 
 % Evt. noch was schreiben über Training- und Testdaten
 
 \subsection{Lineare Regression}
 \label{sec:recherche:dataminingtechniken:disziplinen:regression}
-Bei der linearen Regression wird ein Wert $Y$ prognostiziert welcher Abhängig von mehreren Variablen $X_p$ ist. Man spricht von einer abhängiger Variable $Y$, einer (oder mehrere) unabhängige Grösse(n) $X_p$ und einer (oder mehrere) unbekannte(n) Parameter $\beta_p$. Dabei werden bestehende Daten auf einem Koordinatensystem aufgetragen und eine Funktion gesucht, welche die Messungen möglichst genau annähert. Für gegebene unabhängige Variablen kann somit die abhängige Grösse errechnet werden.
+Bei der linearen Regression wird ein Wert $Y$ prognostiziert, welcher abhängig von mehreren Variablen $X_p$ ist. Man spricht von einer abhängigen Variable $Y$, einer (oder mehrere) unabhängige Grösse(n) $X_p$ und einer (oder mehrere) unbekannte(n) Parameter $\beta_p$. Dabei werden bestehende Daten auf einem Koordinatensystem aufgetragen und eine Funktion gesucht, welche die Messungen möglichst genau annähert. Für gegebene unabhängige Variablen kann somit die abhängige Grösse errechnet werden.
 
-Die \cref{eq:recherche:dataminingtechniken:disziplinen:regression:1} zeigt die Generalisierte Gleichung der linearen Regression.
+Die \cref{eq:recherche:dataminingtechniken:disziplinen:regression:1} zeigt die generalisierte Gleichung der linearen Regression.
 
 \begin{equation} \label{eq:recherche:dataminingtechniken:disziplinen:regression:1}
 Y = \beta_0 + \beta_1 * X_1 + \dots + \beta_p * X_p + \epsilon
 \end{equation}
-Benötigt wird ein Datensatz mit $Y$ und $X_p$ Paaren um die $\beta$ Parameter zu lernen (man spricht von einem Modell). Da die Messwerte oft nicht auf der Regressionslinie liegen, wird ein Fehleranteil $\epsilon$ benötigt\footcite{Einfache_lineare_Regression_2017-03-14}.
+Benötigt wird ein Datensatz mit $Y$ und $X_p$ Paaren, um die $\beta$ Parameter zu lernen (man spricht von einem Modell). Da die Messwerte oft nicht auf der Regressionslinie liegen, wird ein Fehleranteil $\epsilon$ benötigt\footcite{Einfache_lineare_Regression_2017-03-14}.
 
 Bei der einfachen linearen Regression wird nur ein $X$ gegeben.
 
@@ -83,9 +83,9 @@ Y = \beta_0 + \beta_1 * X_1 + \epsilon
 
 \subsection{Cluster analysis}
 \label{sec:recherche:dataminingtechniken:disziplinen:clusteranalysis}
-Die Cluster analysis (Clusteranalyse) weist, ähnlich zur \nameref{sec:recherche:dataminingtechniken:disziplinen:classification}, den Instanzen eine Klasse zu. Jedoch sind diese zu beginn nicht bekannt, wodurch es sich um ein \gls{unsupervisedlearning} handelt.
+Die Cluster analysis (Clusteranalyse) weist, ähnlich zur \nameref{sec:recherche:dataminingtechniken:disziplinen:classification}, den Instanzen eine Klasse zu. Jedoch sind diese zu Beginn nicht bekannt, wodurch es sich um ein \gls{unsupervisedlearning} handelt.
 
-In \cref{fig:recherche:dataminingtechniken:disziplinen:clusteranalysis} sind Punkte in einem Koordinatensystem eingetragen. Diese werden bei der Clusteranalyse in mehrere Gruppen unterteilt, welche die Klassen abbilden. Im Gegensatz zur \nameref{sec:recherche:dataminingtechniken:disziplinen:classification} haben diese jedoch keine weitere Bedeutung sondern geben nur an, dass sie ähnlich zu allen anderen Instanzen im selben Cluster sind. Je nach Verfahren ist es unterschiedlich, wie viele Klassen gebildet werden oder ob die Anzahl vorgegeben ist\footcite{data_mining_concepts_and_techniques}.
+In \cref{fig:recherche:dataminingtechniken:disziplinen:clusteranalysis} sind Punkte in einem Koordinatensystem eingetragen. Diese werden bei der Clusteranalyse in mehrere Gruppen unterteilt, die die Klassen abbilden. Im Gegensatz zur \nameref{sec:recherche:dataminingtechniken:disziplinen:classification} haben diese jedoch keine weitere Bedeutung, sondern geben nur an, dass sie ähnlich zu allen anderen Instanzen im selben Cluster sind. Je nach Verfahren ist es unterschiedlich, wie viele Klassen gebildet werden, oder, ob die Anzahl vorgegeben ist\footcite{data_mining_concepts_and_techniques}.
 \begin{figure}[H]
 	\RawFloats
 	\centering
@@ -95,14 +95,14 @@ In \cref{fig:recherche:dataminingtechniken:disziplinen:clusteranalysis} sind Pun
 	\label{fig:recherche:dataminingtechniken:disziplinen:clusteranalysis}
 \end{figure}
 
-Eingesetzt wird die Clusteranalyse zum Beispiel für die Erkennung von Kundengruppen oder zur  Zusammenfassung und Vergleich gleichartiger Produkten\footcite{einsatzgebiet_clusteranalyse}.
+Eingesetzt wird die Clusteranalyse zum Beispiel für die Erkennung von Kundengruppen, oder zur  Zusammenfassung und Vergleich gleichartiger Produkte\footcite{einsatzgebiet_clusteranalyse}.
 
 
 \subsection{Collaborative Filtering}
 \label{sec:recherche:dataminingtechniken:disziplinen:collaborativefiltering}
-Beim Collaborative Filtering werden Verhaltensmuster von Benutzern analysiert um daraus Empfehlungen für andere Kunden zu generieren. Am Beispiel einer Videotheke sind die einzelnen Instanzen die Filme, und die Empfehlungen die Bewertungen der Filme durch die Kunden. 
+Beim Collaborative Filtering werden Verhaltensmuster von Benutzern analysiert, um daraus Empfehlungen für andere Kunden zu generieren. Am Beispiel einer Videotheke sind die einzelnen Instanzen, die Filme, und die Empfehlungen, die Bewertungen der Filme durch die Kunden. 
 
-In der \cref{fig:recherche:dataminingtechniken:disziplinen:collaborativefiltering} sind in den Zeilen Filme (Instanzen) aufgeführt und in den Spalten die Kunden. Ein Feld stellt eine Bewertungen eines Kunden dar. "`+"' steht für eine positive und "`-"' für eine negative Bewertung. Leere Felder bedeutet dass der Kunde diesen Film nicht bewertet hat. Mittels kollaborativen Filtern kann nun vorhergesagt werden, ob ein Benutzer die gelb hinterlegte Instanz positiv oder negativ bewertet\footcite{collaborative_filtering}.
+In der \cref{fig:recherche:dataminingtechniken:disziplinen:collaborativefiltering} sind in den Zeilen Filme (Instanzen) aufgeführt und in den Spalten die Kunden. Ein Feld stellt eine Bewertung eines Kunden dar. "`+"' steht für eine positive und "`-"' für eine negative Bewertung. Leere Felder bedeuten, dass der Kunde diesen Film nicht bewertet hat. Mittels kollaborativen Filtern kann nun vorhergesagt werden, ob ein Benutzer die gelb hinterlegte Instanz positiv, oder negativ bewertet\footcite{collaborative_filtering}.
 \begin{table}[H] 
 	\caption{Beispiel von Collaborative Filtering einer Videotheke}
 	\centering
@@ -130,30 +130,30 @@ Hier werden drei Algorithmen aus den Problembeschreibungen im \cref{sec:recherch
 
 \subsection{Association rule learning: Apriori}
 \label{sec:recherche:apriori}
-Der Apriori Algorithmus ist der erste von zwei Schritten des \nameref{sec:recherche:dataminingtechniken:disziplinen:association} (\cref{sec:recherche:dataminingtechniken:disziplinen:association}), dessen Ziel es ist häufige Attribut-Kombinationen aufzufinden. 
+Der Apriori Algorithmus ist der Erste von zwei Schritten des \nameref{sec:recherche:dataminingtechniken:disziplinen:association} (\cref{sec:recherche:dataminingtechniken:disziplinen:association}), dessen Ziel es ist häufige Attribut-Kombinationen aufzufinden. 
 
 Nachfolgend wird der Ablauf des Algorithmus erklärt.
-Als Parameter verlangt dieser den Mindestsupport $minsup$ welcher definiert, wie oft eine Attributmenge $C$ in Instanzen $I$ in der Datenmenge $D$ vorkommen muss, damit diese als relevant betrachtet werden.
+Als Parameter verlangt dieser den Mindestsupport $minsup$, welcher definiert, wie oft eine Attributmenge $C$ einer Instanz $I$ in der Datenmenge $D$ vorkommen muss, damit diese als relevant betrachtet werden kann.
 \begin{enumerate}
 	\item Zähle die Vorkommen von allen Attributen und fasse das Resultat in $C_1$ (Kandidaten (candidates) 1-Attributmengen) zusammen.
-	\item Entferne Elemente aus $C_1$ welche $minsup$ nicht erfüllen und speichere das Resultat in $L_1$ (frequente 1-Attributmengen).
+	\item Entferne Elemente aus $C_1$, welche $minsup$ nicht erfüllen und speichere das Resultat in $L_1$ (frequente 1-Attributmengen).
 	\item Setze $k=2$
 	\item Solange $L_{k-1} \neq \emptyset$:
 	\begin {enumerate}
-	\item Generiere alle Möglichen Kombinationen für $C_k$ aus $L_{k-1}$ (apriori\_gen).
-	\item Entferne Elemente aus $C_k$ welche $minsup$ nicht erfüllen und speichere das Resultat in $L_k$.
+	\item Generiere alle möglichen Kombinationen für $C_k$ aus $L_{k-1}$ (apriori\_gen).
+	\item Entferne Elemente aus $C_k$, welche $minsup$ nicht erfüllen und speichere das Resultat in $L_k$.
 	\item Erhöhe $k$ um eins.
 \end{enumerate}
 \item Das Resultat sind alle Elemente in $L_k$.
 \end{enumerate}
 
-Als erstes (Schritte 1-2) werden alle einzelnen Attribute (1-Attributmenge) gezählt und diejenigen entfernt, welche $minsup$ nicht erfüllen.
+Als Erstes (Schritte 1-2) werden alle einzelnen Attribute (1-Attributmenge) gezählt und diejenigen entfernt, welche $minsup$ nicht erfüllen.
 
 Danach wird Iterativ die Attributmenge um ein Element erweitert und wiederum auf $minsup$ überprüft, bis keine Elemente mehr den Mindestsupport erreichen (Schritt 3).
 
 Vereinfacht dargestellt ist der Punkt 3.a. Dieser Schritt heisst apriori\_gen und seine Aufgabe ist es, die häufigen Attriutmengen für die nächste Iteration zu generieren. Er nimmt die Liste mit den frequentierten Datensätzen der vorherigen Iteration ($L{k-1}$) und erweitert alle Mengen um ein Element. Er macht sich die Eigenschaft zunutze, dass wenn in $L_{k-1}$ ein Element $minsup$ nicht erfüllt, kann es dies auch nicht in $C_k$, wodurch $C_k$ verkürzt und der Algorithmus beschleunigt wird\footcite{data_mining_concepts_and_techniques}.
 
-In der \cref{fig:recherche:vorgehensweise:apriorialgorithmus} wird der Ablauf am Beispiel eines Warenkorbes veranschaulicht.
+In der \cref{fig:recherche:vorgehensweise:apriorialgorithmus} wird der Ablauf am Beispiel eines Warenkorbs veranschaulicht.
 
 \begin{figure}[H]
 \RawFloats

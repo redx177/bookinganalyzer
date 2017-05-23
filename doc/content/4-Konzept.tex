@@ -2,7 +2,7 @@
 \label{sec:konzept}
 Im Konzept wird beschrieben wie die Problemstellung aus dem \cref{sec:einleitung:ziel} \nameref{sec:einleitung:ziel} gelöst werden kann. Dazu werden die einzusetzenden Algorithmen evaluiert und aufgezeigt, wie diese angewendet werden. Anschliessend folgt eine Beschreibung der Daten, welche von den Algorithmen verwendet werden, sowie deren fünfstufige Vorbereitung. Im Abschnitt Ablauf werden die zwei Schritte gezeigt, welche bei jeder Analyse durchgeführt werden. Zum Schluss werden noch Testfälle definiert, welche die korrekte Funktionsweise der Analyse sicherstellen.
 
-\section{Selektion der Disziplinen und Algorithmenen}
+\section{Selektion der Disziplinen und Algorithmen}
 \label{sec:konzept:disziplin-und-algorithmen}
 Im \cref{sec:recherche} \nameref{sec:recherche} wurden Disziplinen und Algorithmen erläutert. In diesem Abschnitt wird erklärt wie diese Auswahl getroffen wurde auf Basis der Anforderungen aus \cref{sec:anforderungsanalyse} \nameref{sec:anforderungsanalyse}.
 
@@ -166,7 +166,7 @@ Die im \label{sec:recherche:datenvorbereitung:normierung} \cref{sec:konzept:anwe
 
 In dieser Arbeit werden vier numerische Attribute verwendet.
 \begin{table}[H] 
-	\caption{Numerishce Attribute}
+	\caption{Numerische Attribute}
 	\centering
 	\rowcolors{1}{tablebodycolor}{tablerowcolor}
 	\label{fig:recherche:datenvorbereitung:5}
@@ -175,13 +175,13 @@ In dieser Arbeit werden vier numerische Attribute verwendet.
 		\rowcolor{tableheadcolor}
 		\bfseries Zelle & \bfseries Name & \bfseries Datentyp & \bfseries Beschreibung \\ \hline 
 		E & PRICES & integer & Preis \\ \hline 
-		AC & QUAL & integer & Sterne Bewertung des Objektes \\ \hline 
+		AC & QUAL & integer & Sterne Bewertung des Objekts \\ \hline 
 		AD & ROOMS & integer & Anzahl Zimmer \\ \hline 
 		AE & BEDROOMS & integer & Anzahl Schlafzimmer \\ \hline 
 	\end{tabular}
 \end{table}
 
-Normiert werden die Spalten AC (Sterne Bewertung des Objektes), AD (Anzahl Zimmer) und AE (Anzahl Schlafzimmer). Diese werden in ein Intervall zwischen 0 und 1 überführt.
+Normiert werden die Spalten AC (Sterne Bewertung des Objekts), AD (Anzahl Zimmer) und AE (Anzahl Schlafzimmer). Diese werden in ein Intervall zwischen 0 und 1 überführt.
 
 Der Preis in der Spalte E giltet für die gesamte Buchung. Dieser wird in einen Wochenpreis und pro Person normiert. Wenn eine Buchung CHF 2'000 kostet für 10 Tage für 2 Personen, so ergibt das "`CHF 1'400 / 10 Tage * 7 Tage / 2 Personen = CHF 490"'. Es wird keine Normierung auf einen Wert von 0-1 durchgeführt, da dieser Wert noch diskretiert wird (siehe \cref{sec:recherche:datenvorbereitung:diskretierung} \nameref{sec:recherche:datenvorbereitung:diskretierung}).
 
@@ -190,7 +190,7 @@ Die Daten müssen für die Beantwortung der Hypothesen (siehe \cref{sec:einleitu
 
 Folgende Felder werden benötigt, sind jedoch in der Datenbasis nicht vorhanden:
 \begin{itemize}
-\item Region und Ort des Objektes. In der Datenbasis ist nur das Land vorhanden.
+\item Region und Ort des Objekts. In der Datenbasis ist nur das Land vorhanden.
 \item Monat und Wochentag in welchem das Objekt gebucht wurde. 
 \end{itemize}
 
@@ -329,11 +329,11 @@ In Absprache mit Interhome wurde entschieden, dass in einem ersten Schritt jene 
 		\rowcolor{tableheadcolor}
 		\bfseries Zelle & \bfseries Name & \bfseries Datentyp & \bfseries Beschreibung \\ \hline 
 		E & PRICES & integer & Preis \\ \hline 
-		I & NREF & categorical & Nummer des gebuchten Objektes \\ \hline 
+		I & NREF & categorical & Nummer des gebuchten Objekts \\ \hline 
 		L & REPAX & integer & Anzahl Passagiere \\ \hline 
 		S & CUCNTRY & categorical & Land des Kunden \\ \hline 
 		U & CUORT & string & Ortschaft des Kunden \\ \hline 
-		AC & QUAL & integer & Sterne Bewertung des Objektes \\ \hline 
+		AC & QUAL & integer & Sterne Bewertung des Objekts \\ \hline 
 		AD & ROOMS & integer & Anzahl Zimmer \\ \hline 
 		AE & BEDROOMS & integer & Anzahl Schlafzimmer \\ \hline 
 		AH & PETS & boolean & Haustiere erlaubt? \\ \hline 
@@ -431,16 +431,16 @@ Möchte der Benutzer wissen, welche Attribute in der (vorselektierten) Datenmeng
 
 Liefert der Apriori keine zufriedenstellenden Antworten oder ist von vornherein zu erwarten, dass es verschiedene Gruppen von Buchungen gibt, so kann zuerst die Cluster Analysis durchgeführt werden. Die Instanzen werden damit in Clusters/Gruppen aufgeteilt, der Benutzer würde jedoch nicht sehen weshalb. Deshalb wird auf jedem Cluster der Apriori-Algorithmus durchgeführt. Da die Instanzen in einer Gruppe untereinander möglichst Homogen sein sollen und möglichst unterschiedlich zu anderen Clusters, ist anzunehmen, dass die häufigsten Attribute, welche durch den Apriori-Algorithmus gefunden werden, aussagekräftig die Klassen beschreiben.
 
-\section{Mockups des Programmes}
+\section{Mockups des Programms}
 \label{sec:konzept:mockups}
-Die graphischen Oberfläche des Programmes wird nachfolgend anhand von Mockups aufgezeigt. Die Auflistung der Stammdaten sowie der Resultate ist einfachheitshalber verkürzt dargestellt. Auf jeder Seite zuoberst ist das Interhome Logo sowie die Navigation platziert.
+Die graphischen Oberfläche des Programms wird nachfolgend anhand von Mockups aufgezeigt. Die Auflistung der Stammdaten sowie der Resultate ist einfachheitshalber verkürzt dargestellt. Auf jeder Seite zuoberst ist das Interhome Logo sowie die Navigation platziert.
 
 In \cref{fig:konzept:mockups:stammdaten} ist die Startseite abgebildet in welcher der Benutzer die Stammdaten (\nameref{fig:anforderungsanalyse:funktionaleanforderung:fa4}) einsehen kann. Im oberen Bereich sind die Filter, mit welchen der Datenbestand eingeschränkt werden kann. 
 \begin{figure}[H]
 	\RawFloats
 	\centering
 	\includegraphics[width=1\textwidth]{images/wireframe-explore}
-	\caption{Mockup für das einsehen der Stammdaten (FA4 \& FA5)}
+	\caption{Mockup für das Einsehen der Stammdaten (FA4 \& FA5)}
 	\label{fig:konzept:mockups:stammdaten}
 \end{figure}
 
@@ -463,7 +463,7 @@ Der dritte Reiter führt zur Analyse mit den Clustering Algorithmen k-prototypes
 	\label{fig:konzept:mockups:clustering}
 \end{figure}
 
-Der letzte Mockup zeigt die Ansicht in welcher die Einstellungen des Programmes angepasst werden können. Dabei handelt es sich um ein Formular in welchem jedes Feld eine Einstellungsmöglichkeit darstellt. Zu jedem Wert wird es eine Beschreibung geben damit der Benutzer verstehen kann worum es sich bei dieser Einstellung handelt.
+Der letzte Mockup zeigt die Ansicht in welcher die Einstellungen des Programms angepasst werden können. Dabei handelt es sich um ein Formular in welchem jedes Feld eine Einstellungsmöglichkeit darstellt. Zu jedem Wert wird es eine Beschreibung geben damit der Benutzer verstehen kann worum es sich bei dieser Einstellung handelt.
 
 \begin{figure}[H]
 	\RawFloats

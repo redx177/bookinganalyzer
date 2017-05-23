@@ -96,11 +96,11 @@ Die Programme für die Datenanreicherungen sind jeweils eine Kommandozeilen-Soft
 
 \subsubsection{Land, Region, Ortschaft}
 \label{sec:proofofconcept:datenvorbereitung:datenerweiterung:landregionortschaft}
-Es wurde ein Programm für die Anreicherung vom Land, der Region sowie der Ortschaft der Objekte erstellt. Es erwartet eine \gls{csv} Datei mit einem @-Zeichen als Feldseparator, sowie das Feld "`NREF"' welches in jeder Zeile vorkommen muss und die ID des Objektes beinhaltet. Der Quellcode ist einsehbar in Github unter \url{https://github.com/soultemptation/bookinganalyzerdestinations}.
+Es wurde ein Programm für die Anreicherung vom Land, der Region sowie der Ortschaft der Objekte erstellt. Es erwartet eine \gls{csv} Datei mit einem @-Zeichen als Feldseparator, sowie das Feld "`NREF"' welches in jeder Zeile vorkommen muss und die ID des Objekts beinhaltet. Der Quellcode ist einsehbar in Github unter \url{https://github.com/soultemptation/bookinganalyzerdestinations}.
 
-Die Software verarbeitet Zeile für Zeile der Datei und fügt am Ende drei Felder mit den Namen "`country"', "`region"' und "`place"' an. Um die Daten zu erhalten wird der Such-Service von Interhome angesprochen, welcher die drei Informationen zurückliefert. Als Parameter des Services wird die `NREF"' des Objektes übergeben. 
+Die Software verarbeitet Zeile für Zeile der Datei und fügt am Ende drei Felder mit den Namen "`country"', "`region"' und "`place"' an. Um die Daten zu erhalten wird der Such-Service von Interhome angesprochen, welcher die drei Informationen zurückliefert. Als Parameter des Services wird die `NREF"' des Objekts übergeben. 
 
-Es kann sein dass das Objekt bei Interhome nicht mehr vorhanden ist und der Service nichts zurück liefert. Deshalb gibt es nach der Ausführung des Programmes Buchungen welche keine Informationen für das Land, die Region und die Ortschaft besitzen.
+Es kann sein dass das Objekt bei Interhome nicht mehr vorhanden ist und der Service nichts zurück liefert. Deshalb gibt es nach der Ausführung des Programms Buchungen welche keine Informationen für das Land, die Region und die Ortschaft besitzen.
 
 Im Programm wird ein Cache verwendet, welcher für jede "`NREF"' das Land, die Region und die Ortschaft zwischenspeichert. Wenn eine "`NREF"' zum zweiten mal angefragt werden soll, können die Daten aus dem Cache bezogen werden und es muss kein weiterer Service Aufruf durchgeführt werden. Für die 133'001 Buchungen mussten dank des Caches nur 78'342 Anfragen an den Service gestellt werden.
 
@@ -265,7 +265,7 @@ Um die Analyse durch Algorithmen auf einer Untermenge der Daten durchzuführen (
 Deshalb wird in jeder Ansicht (ausser beim anpassen der Einstellungen) ein Formular angezeigt mit welcher die Daten eingeschränkt werden können. In der Umsetzung wurde ein Model erstellt welches die Filter für die verschiedenen Attribute abbildet (siehe \cref{sec:proofofconcept:klassenstruktur:models} \nameref{sec:proofofconcept:klassenstruktur:models}) und ein Twig Template um das Formular darzustellen (siehe \cref{sec:proofofconcept:externebibliotheken:twig} \nameref{sec:proofofconcept:externebibliotheken:twig}). Schlussendlich muss beim Zugriff der Daten die Filters beachtet werden. Es dürfen nur diejenigen Buchungen geliefert werden welche allen Kriterien zutreffen. Die Datenmengen auf die die Filter angewendet wurden werden gecached um den Zugriff zu beschleunigen (siehe \cref{sec:proofofconcept:performance:caching} \nameref{sec:proofofconcept:performance:caching}).
 
 \subsubsection{Konfiguration}
-Ein Benutzer des Programmes soll, das Programm konfigurieren können (siehe FA7 im \cref{sec:anforderungsanalyse:funktionaleanforderung} \nameref{sec:anforderungsanalyse:funktionaleanforderung}). Deshalb wird eine Konfigurationsdatei eingelesen, die alle Parameter enthält die vom Benutzer angepasst werden können. Diese Datei kann darauf hin mittels der Ansicht "`Einstellungen anpassen"' modifiziert werden. Im Code wird eine Klasse benötigt welche die Konfiguration übernimmt. Dies wird vom ConfigProvider erledigt. Mehr dazu im \cref{sec:proofofconcept:klassenstruktur} \nameref{sec:proofofconcept:klassenstruktur}. Zusätzlich gibt es noch technische Parameter die für die Ausführung des Programmes benötigt werden. Diese sind ebenfalls in der Konfigurationsdatei enthalten, können jedoch nicht in der "`Einstellungen anpassen"' Ansicht geändert werden. Alle Konfigurationen sind im \cref{sec:proofofconcept:konfiguration} \nameref{sec:proofofconcept:konfiguration} beschrieben.
+Ein Benutzer des Programms soll, das Programm konfigurieren können (siehe FA7 im \cref{sec:anforderungsanalyse:funktionaleanforderung} \nameref{sec:anforderungsanalyse:funktionaleanforderung}). Deshalb wird eine Konfigurationsdatei eingelesen, die alle Parameter enthält die vom Benutzer angepasst werden können. Diese Datei kann darauf hin mittels der Ansicht "`Einstellungen anpassen"' modifiziert werden. Im Code wird eine Klasse benötigt welche die Konfiguration übernimmt. Dies wird vom ConfigProvider erledigt. Mehr dazu im \cref{sec:proofofconcept:klassenstruktur} \nameref{sec:proofofconcept:klassenstruktur}. Zusätzlich gibt es noch technische Parameter die für die Ausführung des Programms benötigt werden. Diese sind ebenfalls in der Konfigurationsdatei enthalten, können jedoch nicht in der "`Einstellungen anpassen"' Ansicht geändert werden. Alle Konfigurationen sind im \cref{sec:proofofconcept:konfiguration} \nameref{sec:proofofconcept:konfiguration} beschrieben.
 
 
 
@@ -280,7 +280,7 @@ Ein Benutzer des Programmes soll, das Programm konfigurieren können (siehe FA7 
 
 \subsection{Package-Struktur}
 \label{sec:proofofconcept:packagestruktur}
-Ein Package gruppiert ähnliche Klassen und Interfaces zusammen. Man kann sich ein Package vorstellen wie ein Ordner auf dem Computer. Die Struktur dieser Gruppen sowie deren Verwendung untereinander wird in \cref{fig:proofofconcept:packagestruktur:1} mit einem \gls{uml} Package Diagram aufgezeigt. 
+Ein Package gruppiert ähnliche Klassen und Interfaces zusammen. Man kann sich ein Package vorstellen wie ein Ordner auf dem Computer. Die Struktur dieser Gruppen sowie deren Verwendung untereinander wird in \cref{fig:proofofconcept:packagestruktur:1} mit einem \gls{uml} Package Diagramm aufgezeigt. 
 \begin{figure}[H]
 	\RawFloats
 	\centering
@@ -289,7 +289,7 @@ Ein Package gruppiert ähnliche Klassen und Interfaces zusammen. Man kann sich e
 	\label{fig:proofofconcept:packagestruktur:1}
 \end{figure}
 
-Das Ziel war es, gemäss dem \gls{srp} eine starke Kohäsion und eine lose Kopplung zu erreichen. Deshalb wurde die Struktur der Packages ist so ausgelegt, dass die Abhängigkeiten von oben nach unten fliessen. Sprich ein oberes Packet kann ein unteres verwenden, jedoch nicht umgekehrt. Einstiegspunkte für die Ausführung des Programmes sind die Klassen in den Packages Controllers und Services. Ersteres wird vom Benutzer verwendet wenn er eine Seite angezeigt haben möchte. Die Services sind für die Hintergrundprozesse verantwortlich und führen eine Analyse der verschiedenen Algorithmen durch (siehe \cref{sec:proofofconcept:architektur:services} \nameref{sec:proofofconcept:architektur:services}). Nachfolgend werden die einzelnen Packages erklärt.
+Das Ziel war es, gemäss dem \gls{srp} eine starke Kohäsion und eine lose Kopplung zu erreichen. Deshalb wurde die Struktur der Packages ist so ausgelegt, dass die Abhängigkeiten von oben nach unten fliessen. Sprich ein oberes Packet kann ein unteres verwenden, jedoch nicht umgekehrt. Einstiegspunkte für die Ausführung des Programms sind die Klassen in den Packages Controllers und Services. Ersteres wird vom Benutzer verwendet wenn er eine Seite angezeigt haben möchte. Die Services sind für die Hintergrundprozesse verantwortlich und führen eine Analyse der verschiedenen Algorithmen durch (siehe \cref{sec:proofofconcept:architektur:services} \nameref{sec:proofofconcept:architektur:services}). Nachfolgend werden die einzelnen Packages erklärt.
 
 \begin{itemize}
 	\item Controllers: Nehmen die Anfragen eines Benutzers entgegen und verarbeiten diese. Dazu verwenden sie Klassen aus dem Business welches ein Datenmodel zurückliefert. Dieses Model werden anschliessend vom Controller an die View übergeben welche die Ausgabe für den Browser generiert (siehe \cref{sec:proofofconcept:architektur:mvc} \nameref{sec:proofofconcept:architektur:mvc}).
@@ -313,7 +313,7 @@ Die Klasse ConfigProvider liefert die Konfigurationen und wird von vielen Klasse
 \label{sec:proofofconcept:klassenstruktur:models}
 Die Models sind Datencontainer mit möglichst wenig Logik. 
 
-\paragraph{Filter \& Felder} In \cref{fig:proofofconcept:klassenstruktur:5} werden die Filter und Felder gezeigt. Felder (Field) werden von den Algorithmen verwendet (z.B. Distanzmessung bei beim Clustering oder Häufigkeitszählung beim Apriori) sowie von den Filtern. Letztere werden benutzt um die Datenbasis einzuschränken. Es gibt verschiedene Arten von Feldern, welche direkt im Klassendiagram abgebildet sind. Dies wären zum Beispiel Fliesskommazahlen (FloatField), Ganzzahlen (IntegerField), Texten (String), etc. Welche Felder in der Datenbasis auf welchen Feldtypen im Code zugeordnet werden ist in der Konfiguration des Programmes definiert (siehe \cref{sec:proofofconcept:konfiguration} \nameref{sec:proofofconcept:konfiguration}).
+\paragraph{Filter \& Felder} In \cref{fig:proofofconcept:klassenstruktur:5} werden die Filter und Felder gezeigt. Felder (Field) werden von den Algorithmen verwendet (z.B. Distanzmessung bei beim Clustering oder Häufigkeitszählung beim Apriori) sowie von den Filtern. Letztere werden benutzt um die Datenbasis einzuschränken. Es gibt verschiedene Arten von Feldern, welche direkt im Klassendiagramm abgebildet sind. Dies wären zum Beispiel Fliesskommazahlen (FloatField), Ganzzahlen (IntegerField), Texten (String), etc. Welche Felder in der Datenbasis auf welchen Feldtypen im Code zugeordnet werden ist in der Konfiguration des Programms definiert (siehe \cref{sec:proofofconcept:konfiguration} \nameref{sec:proofofconcept:konfiguration}).
 
 \paragraph{Resultat des Apriori-Algorithmus} In \cref{fig:proofofconcept:klassenstruktur:6} werden die Histogramme abgebildet, welche üblicherweise zur Darstellung von Häufigkeitsverteilung verwendet wird. In dieser Arbeit werden sie für die Repräsentation des Resultates eines Apriori Algorithmuses benutzt. 
 Ein "`Histograms"' besitzt ein oder mehrere "`Histogram"' welches wiederum ein oder mehrere "`HistogramBins"' enthält. "`Histograms"' beinhaltet sämtliche Attributmengen und stehen somit für das gesamte Resultat der Anaylse. Ein "`Histogram"' repräsentiert eine Iteration des Apriori Algorithmus (z.B. alle häufigen 2-Attributmengen). Schlussendlich enthält ein "`HistogramBin"' eine Attributkombination mit der Häufigkeit, wie oft sie in der Datenmenge vorkommt. Um dies an einem Beispiel zu zeigen wird eine "`Histograms"' hier gezeigt:
@@ -369,7 +369,7 @@ Die erste Abbildung \cref{fig:proofofconcept:klassenstruktur:1} zeigt die Contro
 				\item UrlGenerator: Der URLGenerator wird benötigt um die Links zwischen den Seiten (Buchungslisten) zu erzeugen.
 			\end{itemize}
 		\item AttributanalysisController \& AttributanalysisWithGroupingController: Diese beiden Controller sind für die Darstellung von \cref{fig:konzept:mockups:apriori} und \cref{fig:konzept:mockups:clustering} verantwortlich und stossen die Services für die Analysen an (siehe \cref{sec:proofofconcept:architektur:services} \nameref{sec:proofofconcept:architektur:services}). 
-		\item SettingsController: Zeigt ein Formular mit welchem die Einstellungen des Programmes angepasst werden können.
+		\item SettingsController: Zeigt ein Formular mit welchem die Einstellungen des Programms angepasst werden können.
 		\item Twig\_Environment: Dies ist die View (siehe \cref{sec:proofofconcept:architektur:mvc} \nameref{sec:proofofconcept:architektur:mvc}) welche das \gls{html} generiert, welches an den Browser gesendet wird für die Darstellung. Verwendet wird diese Klasse von allen Controllern.
 		\item FiltersProvider: Liefert die Filter welche für den Aufbau des Formulares für die Einschränkung des Datenbestandes benötigt wird.
 			\begin{itemize}
@@ -394,7 +394,7 @@ Die erste Abbildung \cref{fig:proofofconcept:klassenstruktur:1} zeigt die Contro
 				\begin{itemize}
 					\item LoadRedisDataIterator \& Redis: Der "`LoadRedisDataIterator"' lädt die Daten aus einer Redis InMemory Datenbank. Verwendet wird dazu die "`Redis"' Klasse aus der \gls{pecl} (siehe \cref{sec:proofofconcept:externebibliotheken:redis} \nameref{sec:proofofconcept:externebibliotheken:redis} für Details zu Redis).
 					\item LoadIncrementalCSVDataIterator: Lädt die Daten aus einer \gls{csv}-Datei. Jede Zeile wird einzeln aus dem File gelesen.
-					\item LoadAllCSVDataIterator: Lädt die Daten aus einer \gls{csv}-Datei. Zu Beginn werden alle Zeilen ins Memory des Programmes geladen, aus welchem Zeile für Zeile zurückgegeben wird.
+					\item LoadAllCSVDataIterator: Lädt die Daten aus einer \gls{csv}-Datei. Zu Beginn werden alle Zeilen ins Memory des Programms geladen, aus welchem Zeile für Zeile zurückgegeben wird.
 					\item LoadClusterDataIterator: Der Klasse muss ein Cluster übergeben werden, über welchen iteriert wird. Verwendet wird der "`LoadClusterDataIterator"' für die Apriori-Analyse nachdem ein Clustering durchgeführt wurde.
 				\end{itemize}
 			\item DataTypeClusterer: Er übernimmt ein Array an Feldern mit untypisierten Daten aus einer Datenquelle oder den Filtern, typisiert diese und gruppiert sie. Beispiel an Daten die an den "`DataTypeClusterer"' übergeben werden:
@@ -507,13 +507,13 @@ Zur erklärung dieses Befehles wird er aufgebrochen:
 	\item \textbf{php}: Es wird der Befehl "`php"' ausgeführt welcher ein \gls{php} Programm startet.
 	\item \textbf{/Services/Apriori/apriori.php}: Das auszuführende \gls{php} Programm. Hier die Apriori Analyse.
 	\item \textbf{``stars=4,country=Switzerland''}: Parameter die an das "`apriori.php"' Programm übergeben werden. In diesem Beispiel sind das die Filterkriterien des Benutzers.
-	\item \textbf{> /Services/Apriori/wip/output.txt}: Mit "`>"' wird die Standartausgabe des Programmes definiert. Jegliche Ausgabe des Programmes wird hiermit in die Datei "`output.txt"' geschrieben.
+	\item \textbf{> /Services/Apriori/wip/output.txt}: Mit "`>"' wird die Standartausgabe des Programms definiert. Jegliche Ausgabe des Programms wird hiermit in die Datei "`output.txt"' geschrieben.
 	\item \textbf{2>\&1}: Mit "`2>"' wird gesagt wohin Fehlemeldungen geschrieben werden. \&1 gibt an dass es an den selben Ort wie die Standartausgabe gespeichert werden soll. Also auch ins "`output.txt"'.
 	\item \textbf{\&}: Durch das \& wird der Befehl im Hintergrund ausgeführt. Wenn dies nicht angegeben wird würde das Programm, welches den "`php"' Befehl gestartet hat warten, bis das "`apriori.php"' Programm fertig gearbeitet hat.
-	\item \textbf{echo \$! > /pidfile.txt}: "echo \$!" gibt die Prozessid des "`apriori.php"' Programmes aus. Mit "`> /pidfile.txt"' wird die Ausgabe (also die Prozessid) in die Datei "`pidfile.txt"' geschrieben.
+	\item \textbf{echo \$! > /pidfile.txt}: "echo \$!" gibt die Prozessid des "`apriori.php"' Programms aus. Mit "`> /pidfile.txt"' wird die Ausgabe (also die Prozessid) in die Datei "`pidfile.txt"' geschrieben.
 \end{itemize}
 
-\paragraph{Ablauf des Apriori-Programmes}
+\paragraph{Ablauf des Apriori-Programms}
 Der Ablauf der Apriori-Analyse wird in \cref{fig:proofofconcept:architektur:hintergrundprozesser:1} verbildlicht.
 
 \begin{figure}[H]
@@ -525,7 +525,7 @@ Der Ablauf der Apriori-Analyse wird in \cref{fig:proofofconcept:architektur:hint
 
 Der Anfang mit dem Erstellen des "`Container"' und dem Caching ist gleich wie in \cref{fig:proofofconcept:architektur:webserver:1}. Das "`apriori.php"' Programm ruft danach den Apriori-Algorithmus auf welcher sein Resultat periodisch in eine Datei schreibt (siehe \cref{sec:proofofconcept:kommunikationsablauf} \nameref{sec:proofofconcept:kommunikationsablauf}). Dies ermöglicht dem Algorithmus regelmässig einen Zwischenstand abzuspeichern welcher dem Benutzer angezeigt werden kann.
 
-\paragraph{Ablauf des Clustering-Programmes}
+\paragraph{Ablauf des Clustering-Programms}
 Der Ablauf der Clustering-Analysen ist identisch zu jenem des Apriori-Algorithmus, mit zwei Ausnahmen. Zum einen wird vor dem "`AprioriAlgorithm"' der "`KPrototypeAlgorithm"' ausgeführt wird, welcher ein "`KPrototypeResult"' zurück liefert. 
 Zum anderen wird dem "`AprioriAlgorithm"' das Resultat vom KPrototype als Parameter übergeben. Dadurch ist em dem "`KPrototypeAlgorithm"' möglich, nur die Elemente eines Clusters zu analysieren und nicht die gesamte Datenmenge. 
 Es wurde bewusst entschieden, dass der "`AprioriAlgorithm"' aus der kprototype.php Datei hinaus aufgerufen wird. Dadurch kann zukünftig dieser Algorithmus einfach durch eine Alternative ausgetauscht werden.
@@ -671,7 +671,7 @@ Das Styling einer Webseite wird üblicherweise mit \gls{css} gemacht. Es gibt je
 
 \subsection{Templating mit Twig}
 \label{sec:proofofconcept:externebibliotheken:twig}
-\gls{html} Templates werden benutzt um die Logik des Programmes von der Darstellung zu trennen (siehe \cref{sec:proofofconcept:architektur:anforderungen:ansichten} \nameref{sec:proofofconcept:architektur:anforderungen:ansichten}). Dazu wurde die \gls{php} Template Bibliothek Twig eingesetzt (\url{https://twig.sensiolabs.org/}).
+\gls{html} Templates werden benutzt um die Logik des Programms von der Darstellung zu trennen (siehe \cref{sec:proofofconcept:architektur:anforderungen:ansichten} \nameref{sec:proofofconcept:architektur:anforderungen:ansichten}). Dazu wurde die \gls{php} Template Bibliothek Twig eingesetzt (\url{https://twig.sensiolabs.org/}).
 
 %"`"'
 In der Umsetzung sind die Templates von Twig im Ordner "`Templates"' hinterlegt. Nachfolgend werden die Templates kurz erklärt.
@@ -724,13 +724,13 @@ Nachfolgend werden die im File "`composer.json"' definierten Abhängigkeiten bes
 \end{itemize}
 
 \subsection{Versionsverwaltung mit Git und GitHub}
-Eine Versionsverwaltung wird verwendet um Änderungen an Dateien aufzuzeichnen. Eingesetzt wurde das verteilte System Git (\url{https://git-scm.com/}) für die Kontrolle des Quellcodes des Programmes, der Hilfsprogramme für die Datenvorbereitung sowie dieser Dokumentation. Es empfiehlt sich zusätzlich einen zentralen Server einzusetzen, da der gesamte Code sonst nur auf dem Rechner des Entwicklers gespeichert ist. Dazu wurde GitHub benutzt (\url{https://github.com/}). Dies erlaubt es über Git eine Kopie auf dem Server von GitHub anzulegen. Das sichert einem gegen Datenverlust ab und erlaubt es auf verschieden Computern an dem selben Projekt zu arbeiten.
+Eine Versionsverwaltung wird verwendet um Änderungen an Dateien aufzuzeichnen. Eingesetzt wurde das verteilte System Git (\url{https://git-scm.com/}) für die Kontrolle des Quellcodes des Programms, der Hilfsprogramme für die Datenvorbereitung sowie dieser Dokumentation. Es empfiehlt sich zusätzlich einen zentralen Server einzusetzen, da der gesamte Code sonst nur auf dem Rechner des Entwicklers gespeichert ist. Dazu wurde GitHub benutzt (\url{https://github.com/}). Dies erlaubt es über Git eine Kopie auf dem Server von GitHub anzulegen. Das sichert einem gegen Datenverlust ab und erlaubt es auf verschieden Computern an dem selben Projekt zu arbeiten.
 
 \subsection{InMemory Datenbank mit Redis}
 \label{sec:proofofconcept:externebibliotheken:redis}
 Normalerweise speichert eine Datenbank die Daten auf die Festplatte ab. Eine alternative Herangehensweise ist es, die Informationen im Kurzzeitspeicher zu behalten. Wenn dies eine Datenbank macht spricht man von einer InMemory Datenbank. Eine solche wurde in der Arbeit mit Redis verwendet (\url{https://redis.io/}).
 
-Vor der Ausführung des Programmes muss Redis gestartet und mit Daten befüllt werden, wozu ein Hilfsprogramm erstellt wurde (Code unter \url{https://github.com/soultemptation/bookinganalyzerimpl/blob/master/Services/FillRedis/fillredis.php}). Danach können die Analysen gestartet werden welche die Daten aus Redis auslesen. 
+Vor der Ausführung des Programms muss Redis gestartet und mit Daten befüllt werden, wozu ein Hilfsprogramm erstellt wurde (Code unter \url{https://github.com/soultemptation/bookinganalyzerimpl/blob/master/Services/FillRedis/fillredis.php}). Danach können die Analysen gestartet werden welche die Daten aus Redis auslesen. 
 
 Wird die Datenbank gestoppt speichert sie die Daten auf die Festplatte ab und lädt  sie von dort wenn Redis wieder gestartet wird. Dadurch müssen die Informationen nach dem Neustart nicht nochmals importiert werden.
 
@@ -766,12 +766,12 @@ Um das Programm zu installieren wird PHP 7 und Redis benötigt. Zusätzlich müs
 \end{enumerate}
 Befehl 1. installiert einen Apache Webserver (siehe \url{https://httpd.apache.org/}). Die restlichen Kommandos werden benötigt um \gls{php} und all seine Abhängigkeiten zu installieren. 
 
-Der Sourcecode des Programmes ist auf Github abgelegt (siehe \url{https://github.com/soultemptation/bookinganalyzerimpl}). Dieser muss für die Ausführung heruntergeladen werden. Dies kann entweder auf der Github Seite gemacht werden oder über die Kommandozeile. Für letzteres sollte zuerst dort hin navigiert werden, wo der Quellcode heruntergeladen werden soll. Dann kann folgender Befehl ausgeführt werden.
+Der Sourcecode des Programms ist auf Github abgelegt (siehe \url{https://github.com/soultemptation/bookinganalyzerimpl}). Dieser muss für die Ausführung heruntergeladen werden. Dies kann entweder auf der Github Seite gemacht werden oder über die Kommandozeile. Für letzteres sollte zuerst dort hin navigiert werden, wo der Quellcode heruntergeladen werden soll. Dann kann folgender Befehl ausgeführt werden.
 \begin{enumerate}[resume]
 \item git clone git@github.com:soultemptation/bookinganalyzerimpl.git
 \end{enumerate}
 
-Danach können alle Abhängigkeiten des Programmes mittels Composer heruntergeladen werden. Dazu sollte die Kommandozeile im Ordner des Quellcodes stehen. Danach folgender Befehl ausführen.
+Danach können alle Abhängigkeiten des Programms mittels Composer heruntergeladen werden. Dazu sollte die Kommandozeile im Ordner des Quellcodes stehen. Danach folgender Befehl ausführen.
 \begin{enumerate}[resume]
 \item php composer.phar update
 \end{enumerate}
@@ -792,7 +792,7 @@ Danach kann im Browser unter der Adresse "`http://localhost"' das Programm gesta
 
 \section{Konfiguration}
 \label{sec:proofofconcept:konfiguration}
-Zur Konfigurierung der Algorithmen kann die "`Einstellungen anpassen"' Ansicht des Programmes aufgerufen werden. Es können jedoch noch mehr Konfigurationen vorgenommen werden, welche nicht für die Endbenutzer gedacht sind. Zum Beispiel was für Felder in der Datenbasis verwendet werden sollen, wie die diskretierung der Felder auf die ursprünglichen Werte zurückgerechnet werden kann, etc. 
+Zur Konfigurierung der Algorithmen kann die "`Einstellungen anpassen"' Ansicht des Programms aufgerufen werden. Es können jedoch noch mehr Konfigurationen vorgenommen werden, welche nicht für die Endbenutzer gedacht sind. Zum Beispiel was für Felder in der Datenbasis verwendet werden sollen, wie die diskretierung der Felder auf die ursprünglichen Werte zurückgerechnet werden kann, etc. 
 
 Die Konfigurationen sind im File "`config.php"' hinterlegt (siehe \url{https://github.com/soultemptation/bookinganalyzerimpl/blob/master/config.php}). Die Struktur ist ein \gls{php} Array. Nachfolgend werden die Felder beschrieben.
 
@@ -832,7 +832,7 @@ Erste Analysen welche mit dem Programm durchgeführt wurden zeigten auf, dass de
 	\label{fig:proofofconcept:fazit:1}
 \end{figure}
 
-Bessere Resultate erhält man, wenn die Datenbasis eingeschränkt wird. Zum Beispiel wenn man nur Kunden aus der Schweiz in der Analyse verwendet. Anschliessend kann man dasselbe für Kunden aus Frankreich machen und die beiden Resultate gegeneinander vergleichen. Auch hilfreich ist die Einschränkung der Attribute, welche in die Analyse einfliessen. Zuerst angedacht war in der Arbeit, dass die Algorithmen möglichst oft mit möglichst vielen Attributen arbeiten. Bei der Auswertung der Hypothesen (siehe \cref{sec:einleitung:ziel:hypothesen} \nameref{sec:einleitung:ziel:hypothesen}) hat sich jedoch gezeigt dass viele Fragestellungen nur wenige Attribute benötigen. Besonders oft wurden die Wochentage, Monate, Destinationen des Objektes und des Kunden sowie die Distanzen verwendet. Die Restlichen Attribute werden in Zukunft hoffentlich bei der Analyse durch Interhome verwendet. Ansonsten können diese leicht durch eine Konfigurationsänderung entfernt werden.
+Bessere Resultate erhält man, wenn die Datenbasis eingeschränkt wird. Zum Beispiel wenn man nur Kunden aus der Schweiz in der Analyse verwendet. Anschliessend kann man dasselbe für Kunden aus Frankreich machen und die beiden Resultate gegeneinander vergleichen. Auch hilfreich ist die Einschränkung der Attribute, welche in die Analyse einfliessen. Zuerst angedacht war in der Arbeit, dass die Algorithmen möglichst oft mit möglichst vielen Attributen arbeiten. Bei der Auswertung der Hypothesen (siehe \cref{sec:einleitung:ziel:hypothesen} \nameref{sec:einleitung:ziel:hypothesen}) hat sich jedoch gezeigt dass viele Fragestellungen nur wenige Attribute benötigen. Besonders oft wurden die Wochentage, Monate, Destinationen des Objekts und des Kunden sowie die Distanzen verwendet. Die Restlichen Attribute werden in Zukunft hoffentlich bei der Analyse durch Interhome verwendet. Ansonsten können diese leicht durch eine Konfigurationsänderung entfernt werden.
 
 Die grösste Stärke des Apriori Algorithmus ist dessen Geschwindigkeit. Je höher der $minsup$ ist, desto schneller Arbeitet er. Bei ein Wert von 0.1 dauert eine Analyse im Durchschnitt 32 Sekunden über die gesamte Datenbasis mit allen Attributen. Das lädt ein verschiedene Kombinationen an Filtern auszuprobieren um ein brauchbares Resultat zu finden. Die Clustering Algorithmen hingegen sind sehr langsam. Wenn die Analyse auf 1'500 Instanzen eingeschränkt wird dauert ein Durchlauf bereits über 20 Minuten. Das Negative daran ist die exponentielle Laufzeit. 3'000 Instanzen brauchen demnach nicht 40 Minuten, sondern bereits Stunden. Nicht gerade hilfreich ist dabei die Tatsache, dass mehrere verschiedene Parameter die Analyse massiv beeinträchtigen (siehe \cref{sec:recherche:algorithmen:k-prototypes} \nameref{sec:recherche:algorithmen:k-prototypes} und \cref{sec:recherche:algorithmen:dbscan} \nameref{sec:recherche:algorithmen:dbscan}). Im \cref{sec:konzept:parameterauswahl} \nameref{sec:konzept:parameterauswahl} wurde zum Beispiel die Elbow-Methode zur Erhebung eines geeigneten $k$ Wertes vorgenommen. Jedoch ist dies bei der Laufzeit der Algorithmen nicht möglich weshalb sie nicht umgesetzt wurde. Die Parameter $\epsilon$, $minpts$ und $\gamma$ sollen explorativ ermittelt werden. Jedoch ist dies bei diesen Laufzeiten nicht praktikabel. 
 
