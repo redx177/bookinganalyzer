@@ -49,13 +49,13 @@ Im \cref{sec:konzept:disziplinauswahl} wurden die Disziplinen auf Association ru
 Das Association rule learning besteht aus zwei Schritten. Zuerst werden mittels des Apriori Algorithmus häufige Attributkombinationen gesucht und anschliessend Regeln aufgestellt, um Korrelationen zwischen gemeinsam auftretenden Eigenschaften aufzuzeigen.
 In dieser Arbeit wird nur der Apriori Algorithmus implementiert. Dieser erlaubt es FA1, FA2, FA3 und FA4 zu beantworten. Der zweite Schritt wird nicht durchgeführt, da die Regeln des Association rule learning für die Aufgabenstellung dieser Arbeit nicht benötigt werden.
 
-Es gibt Alternativen zum Apriori Algorithmus. Dies sind zum Beispiel der AprioriTid oder AprioriHybrid. Diese generieren die identischen Resultate und unterscheiden sich nur in der Laufzeit. Der AprioriTid kann zu beginn der Häufigkeitszählung bessere Leistung aufzeigen, ist jedoch langsamer gegen dessen Ende. Der AprioriHybrid verwendet zu Beginn der Apriori, und am Schluss den AprioriTid\footcite{association_rule_learning_2017-01-05}. 
+Es gibt Alternativen zum Apriori Algorithmus. Dies sind zum Beispiel der AprioriTid oder AprioriHybrid. Diese generieren die identischen Resultate und unterscheiden sich nur in der Laufzeit. Der AprioriTid kann zu Beginn der Häufigkeitszählung bessere Leistung aufzeigen, ist jedoch langsamer gegen dessen Ende. Der AprioriHybrid verwendet zu Beginn der Apriori, und am Schluss den AprioriTid\footcite{association_rule_learning_2017-01-05}. 
 
-Es ist noch unklar, welcher Algorithmus die besseren Laufzeiten aufweist. Zum Schluss oder nach der Arbeit kann in einer Vertiefung der AprioriTid oder der AprioriHybrid eingesetzt werden um die Leistungen der Algorithmen zu vergleichen. Im ersten Schritt wird der Apriori benutzt um zu analysieren, ob die Resultate brauchbare Informationen liefern.
+Es ist noch unklar, welcher Algorithmus die besseren Laufzeiten aufweist. Zum Schluss, oder nach der Arbeit, kann in einer Vertiefung der AprioriTid, oder der AprioriHybrid, eingesetzt werden, um die Leistungen der Algorithmen zu vergleichen. Im ersten Schritt wird der Apriori benutzt um zu analysieren, ob die Resultate brauchbare Informationen liefern.
 
 \subsubsection{Clustering}
 \label{sec:konzept:algorithmenauswahl:clustering}
-Es gibt diverse Algorithmen welche sich verschiedene Problemstellungen annehmen. Unterteilen lassen sich diese in vier Gruppen:
+Es gibt diverse Algorithmen, welche sich verschiedene Problemstellungen annehmen. Unterteilen lassen sich diese in vier Gruppen:
 \begin{itemize}
 	\item Partitioning
 	\item Hierarchical
@@ -64,21 +64,21 @@ Es gibt diverse Algorithmen welche sich verschiedene Problemstellungen annehmen.
 \end{itemize}
 Nicht alle Algorithmen lassen sich eindeutig einer Gruppe zuweisen. Jedoch hilft diese Auflistung eine Übersicht über die Verfahren zu geben\footcite{data_mining_concepts_and_techniques}.
 
-Für die Auswahl eines Algorithmus müssen die Charakteristiken der Daten bekannt sein, wie diese zum Beispiel verteilt (z.B. Kugel-, Kreis-, S-Förmig) oder wie viele Cluster sinnvoll sind. Diese sind bislang jedoch noch bekannt.
-Partitioning- und Hierarchical-Vorgehensweisen benötigen zur Berechnung der Clustern deren Anzahl. Bei ersteren kann diese anhand der Elbow-Methode berechnet werden\footcite{elbow_method}. Bei Hierarchischen Clustern müsste man dies jedoch für jeden Ast ermittelt. Da die Laufzeit von solchen Algorithmen bereits $\mathcal{O}(k^2)$ beträgt ist diese Vorgehensweise nicht praktikabel\footcite{complexity_hierarchical_clustering}. Grid-based Methoden unterteilen den Datenraum in ein Netz wodurch die Clusters erzeugt werden. Unterstützt werden dabei nur numerische Daten weshalb sich diese Gruppe nicht eignet (weitere Forschung in dem Bereich ist jedoch im Gange\footcite{sting_categorical_data}).
+Für die Auswahl eines Algorithmus müssen die Charakteristiken der Daten bekannt sein, wie diese zum Beispiel verteilt (z.B. Kugel-, Kreis-, S-Förmig), oder wie viele Cluster sinnvoll sind. Diese sind bislang jedoch noch nicht bekannt.
+Partitioning- und Hierarchical-Vorgehensweisen benötigen zur Berechnung der Clustern deren Anzahl. Beim Ersteren kann dies anhand der Elbow-Methode berechnet werden\footcite{elbow_method}. Bei Hierarchischen Clustern müsste man dies jedoch für jeden Ast ermitteln. Da die Laufzeit von solchen Algorithmen bereits $\mathcal{O}(k^2)$ beträgt, ist diese Vorgehensweise nicht praktikabel\footcite{complexity_hierarchical_clustering}. Grid-based Methoden unterteilen den Datenraum in ein Netz, wodurch die Clusters erzeugt werden. Unterstützt werden dabei nur numerische Daten, weshalb sich diese Gruppe nicht eignet (weitere Forschung in dem Bereich ist jedoch im Gange\footcite{sting_categorical_data}).
 Aus diesen Gründen werden in dieser Arbeit ein Vertreter aus der Partitioning (k-prototype) und der Density-based (DBSCAN) Gruppen umgesetzt.
 
-\paragraph{k-prototypes als partitionierender Algorithmus}
+\paragraph{k-prototypes als partitionierender Algorithmus.}
 \label{sec:konzept:algorithmenauswahl:clustering:kprototypes}
-Bei den partitionierenden Algorithmen sind die bekanntesten Vertreter der k-means und der k-medoids. Beide funktionieren nur mit numerischen Daten, weshalb eine alternative mit dem k-prototypes eruiert wurde. Der k-prototypes ist eine Abwandlung vom k-medoids und wurde im \cref{sec:recherche:algorithmen:k-prototypes} beschrieben. Dieser Algorithmus wurde gewählt, da er mit numerischen, sowie mit kategorischen Daten umgehen kann und mit Medoiden anstelle vom geometrischer Schwerpunkt arbeitet. Letzteres hat den Vorteil, dass der Algorithmus damit robuster gegenüber Ausreissern ist\footcite{data_mining_concepts_and_techniques}. Ob es Ausreisser in den Interhome Daten gibt ist noch unbekannt. Es ist jedoch zu erwarten, dass es einige exotische Objekte gibt, die selten gebucht werden und das Clustering damit verziehen. 
+Bei den partitionierenden Algorithmen sind die bekanntesten Vertreter der k-means und der k-medoids. Beide funktionieren nur mit numerischen Daten, weshalb eine Alternative mit dem k-prototypes eruiert wurde. Der k-prototypes ist eine Abwandlung vom k-medoids und wurde im \cref{sec:recherche:algorithmen:k-prototypes} beschrieben. Dieser Algorithmus wurde gewählt, da er mit numerischen sowie mit kategorischen Daten umgehen kann und mit Medoiden anstelle vom geometrischen Schwerpunkt arbeitet. Letzteres hat den Vorteil, dass der Algorithmus damit robuster gegenüber Ausreissern ist\footcite{data_mining_concepts_and_techniques}. Ob es Ausreisser in den Interhome Daten gibt, ist noch unbekannt. Es ist jedoch zu erwarten, dass es einige exotische Objekte gibt, die selten gebucht werden und das Clustering damit verziehen. 
 
-\paragraph{DBSCAN als density-based Algorithmus}
+\paragraph{DBSCAN als density-based Algorithmus.}
 \label{sec:konzept:algorithmenauswahl:clustering:dbscan}
-Als Vertreter der Density-based Algorithmen wird \gls{dbscan} verwendet, welcher im \cref{sec:recherche:algorithmen:dbscan} beschrieben wurde. Als alternative bietet sich \gls{optics} an. Dabei handelt es sich um eine Erweiterung von \gls{dbscan}, bei welchem kein Dichte $\epsilon$ angegeben werden muss. Jedoch erstellt \gls{optics} keine Clusters, sondern eine geordnete aufsteigende Liste, sodass räumlich benachbarte Punkte in dieser Ordnung nahe aufeinander liegen. Die Auswertung der Liste muss nachgelagert ausgeführt werden\footcite{data_mining_concepts_and_techniques}. In dieser Arbeit wird \gls{dbscan} verwendet da mit geeigneten, noch zu ermittelnden, werten für $\epsilon$ und $minpts$ ein Clustering erstellt werden kann und der Benutzer die Resultate nicht noch weiter interpretieren muss. Sollte es nötig sein, so kann nach der Arbeit überprüft werden ob \gls{optics} bessere Resultate liefert.
+Als Vertreter der Density-based Algorithmen wird \gls{dbscan} verwendet, welcher im \cref{sec:recherche:algorithmen:dbscan} beschrieben wurde. Als Alternative bietet sich \gls{optics} an. Dabei handelt es sich um eine Erweiterung von \gls{dbscan}, bei welchem keine Dichte $\epsilon$ angegeben werden muss. Jedoch erstellt \gls{optics} keine Clusters, sondern eine geordnete aufsteigende Liste, sodass räumlich benachbarte Punkte in dieser Ordnung nahe aufeinander liegen. Die Auswertung der Liste muss nachgelagert ausgeführt werden\footcite{data_mining_concepts_and_techniques}. In dieser Arbeit wird \gls{dbscan} verwendet, da mit geeigneten, noch zu ermittelnden, Werten für $\epsilon$ und $minpts$ ein Clustering erstellt werden kann und der Benutzer die Resultate nicht noch weiter interpretieren muss. Sollte es nötig sein, so kann nach der Arbeit überprüft werden, ob \gls{optics} bessere Resultate liefert.
 
 \section{Anwendung der Algorithmen}
 \label{sec:konzept:anwendungderalgorithmen}
-Bei der Anwendung der Algorithmen gibt es Probleme, welche in diesem Abschnitt beschrieben werden. Zum einen müssen die Algorithmen vergleichbar sein, wozu eine einheitliche Distanzmessung eingesetzt wird und sie müssen mit kategorischen Attributen arbeiten können. Diese Problematik wird im \cref{sec:konzept:anwendungderalgorithmen:distanzmessung} näher erläutert. Zum anderen müssen die verschiedenen Parameter, welche die Algorithmen benötigen, korrekt gesetzt werden, was im \cref{sec:konzept:parameterauswahl} besprochen wird.
+Bei der Anwendung der Algorithmen gibt es Probleme, welche in diesem Abschnitt beschrieben werden. Zum Einen müssen die Algorithmen vergleichbar sein, wozu eine einheitliche Distanzmessung eingesetzt wird. Ebenfalls müssen sie mit kategorischen Attributen arbeiten können. Diese Problematik wird im \cref{sec:konzept:anwendungderalgorithmen:distanzmessung} näher erläutert. Zum Anderen müssen die verschiedenen Parameter, welche die Algorithmen benötigen, korrekt gesetzt werden, was im \cref{sec:konzept:parameterauswahl} besprochen wird.
 
 \subsection{Distanzmessung}
 \label{sec:konzept:anwendungderalgorithmen:distanzmessung}
@@ -89,7 +89,7 @@ Dazu eignet sich zum Beispiel die quadratische euklidische Distanz wie sie in de
 d(I_i, I_j) = \sum_{k=1}^{m} (A_{ik} - A_{jk})^2
 \end{equation}
 
-$A_{ik}$ ist das k-te Attribute der Instanz $i$. 
+$A_{ik}$ ist das k-te Attribut der Instanz $i$. 
 Diese Distanzmessung eignet sich nur für numerische Attribute.
 Da die Interhome Daten jedoch hauptsächlich aus kategorischen Attirbuten bestehen, wird  eine erweiterte Funktion zur Messung der Entfernung verwendet, welche im Artikel zum k-prototype Algorithmus von Zhexue Huang vorgeschlagen wird\footcite{clustering_numeric_and_categorical_values} und in \cref{eq:recherche:clusteranalysis:2} aufgeführt ist.
 Dabei handelt es sich um eine Fusion der quadratischen euklidischen- (linke Summe) und der Hamming-Distanz (rechte Summe)\footcite{data_mining_concepts_and_techniques}.
@@ -98,8 +98,8 @@ Dabei handelt es sich um eine Fusion der quadratischen euklidischen- (linke Summ
 d(I_i, I_j) = \sum_{k=1}^{m} (A^n_{ik} - A^n_{jk})^2 + \gamma \sum_{k=1}^{m} \delta(A^c_{ik}, A^c_{jk})
 \end{equation}
 
-$A^n_{ik}$ und $A^c_{ik}$ stehen für die numerischen ($A^n$) beziehungsweise kategorischen ($A^c$) Attribute $k$ der Instanz $i$. 
-$\gamma$ ist das Gewicht mit welcher die numerischen und kategorischen Attribute verglichen werden.
+$A^n_{ik}$ und $A^c_{ik}$ stehen für die numerischen ($A^n$), beziehungsweise kategorischen ($A^c$), Attribute $k$ der Instanz $i$. 
+$\gamma$ ist das Gewicht, mit welcher die numerischen und kategorischen Attribute verglichen werden.
 $\delta$ ist definiert als:
 
 \begin{equation} \label{eq:recherche:clusteranalysis:3}
@@ -116,13 +116,13 @@ Dadurch erhalten Instanzen mit vielen Übereinstimmungen eine kleinere Distanz a
 \label{sec:konzept:parameterauswahl}
 Für die Clustering Algorithmen und die Distanzmessung werden Eingabeparameter benötigt, dessen Auswahl in diesem Abschnitt erläutert wird.
 
-Für \gls{dbscan} wird $\epsilon$ und $minpts$ benötigt, sowie $\gamma$ für die Distanzmessung (siehe \cref{sec:recherche:algorithmen:dbscan} \nameref{sec:recherche:algorithmen:dbscan} sowie \cref{sec:konzept:anwendungderalgorithmen:distanzmessung} \nameref{sec:konzept:anwendungderalgorithmen:distanzmessung}). Diese Werte müssen explorativ ermittelt werden, denn sie können variieren je nach Datenbasis und gewählten Filtern. %Dazu werden im \cref{sec:recherche:testcases} Testcases definiert welche Clusters beinhaltet. Die Parameter müssen so gesetzt werden, dass die vordefinierten Clusters gefunden werden. Anschliessend können die selben Werte auf den produktiven Daten angewendet werden.
+Für \gls{dbscan} wird $\epsilon$ und $minpts$ benötigt sowie $\gamma$ für die Distanzmessung (siehe \cref{sec:recherche:algorithmen:dbscan} \nameref{sec:recherche:algorithmen:dbscan} sowie \cref{sec:konzept:anwendungderalgorithmen:distanzmessung} \nameref{sec:konzept:anwendungderalgorithmen:distanzmessung}). Diese Werte müssen explorativ ermittelt werden, denn sie können je nach Datenbasis und gewählten Filtern variieren. %Dazu werden im \cref{sec:recherche:testcases} Testcases definiert welche Clusters beinhaltet. Die Parameter müssen so gesetzt werden, dass die vordefinierten Clusters gefunden werden. Anschliessend können die selben Werte auf den produktiven Daten angewendet werden.
 
 Die Ermittlung des $k$ Wertes beim k-prototypes Algorithmus wird im \cref{sec:konzept:parameterauswahl:kprototypes} beschrieben.
 
 \subsubsection{k Auswahl für k-prototypes}
 \label{sec:konzept:parameterauswahl:kprototypes}
-Der k-prototypes benötigt die Anzahl an Clustern $k$ die generiert werden sollen. Zu Beginn einer Analyse ist jedoch noch unklar wie dieser Parameter gewählt werden soll. Mithilfe der Elbow-Methode kann der optimale Wert für $k$ ermittelt werden. Dazu wird der Algorithmus mit $k=1$ durchgeführt und der Wert nach jeder Durchlauf um jeweils 1 erhöht. Der Gesamtfehler des Clusterings (total within-cluster variation) wird schlussendlich über alle Werte für $k$ in ein Koordinatensystem eingetragen. Dies ergibt eine Kurve wie sie in \cref{fig:konzept:parameterauswahl:kprototypes} aufgezeigt wird.
+Der k-prototypes benötigt die Anzahl an Clustern $k$, die generiert werden sollen. Zu Beginn einer Analyse ist jedoch noch unklar, wie dieser Parameter gewählt werden soll. Mithilfe der Elbow-Methode kann der optimale Wert für $k$ ermittelt werden. Dazu wird der Algorithmus mit $k=1$ durchgeführt und der Wert nach jedem Durchlauf um jeweils 1 erhöht. Der Gesamtfehler des Clusterings (total within-cluster variation) wird schlussendlich über alle Werte für $k$ in ein Koordinatensystem eingetragen. Dies ergibt eine Kurve, wie sie in \cref{fig:konzept:parameterauswahl:kprototypes} aufgezeigt wird.
 
 \begin{figure}[H]
 	\RawFloats
@@ -133,7 +133,7 @@ Der k-prototypes benötigt die Anzahl an Clustern $k$ die generiert werden solle
 	\label{fig:konzept:parameterauswahl:kprototypes}
 \end{figure}
 
-Bei einem Cluster $k=1$ ist der Fehler am grössten und erreichen 0 wenn $k=n$, wobei $n$ die Anzahl Instanzen darstellt. Der optimale Wert liegt dort wo die Kurve beginnt abzuflachen. Im obigen Beispiel ist dies $k=3$.
+Bei einem Cluster $k=1$ ist der Fehler am grössten und erreichtn 0 wenn $k=n$, wobei $n$ die Anzahl Instanzen darstellt. Der optimale Wert liegt dort, wo die Kurve beginnt abzuflachen. Im obigen Beispiel ist dies $k=3$.
 
 \section{Datenbestand}
 \label{sec:recherche:datenbestand}
@@ -143,26 +143,27 @@ Nachfolgend wird der Datenbestand und die selektion der Attribute erklärt.
 \label{sec:recherche:datenbeschaffung}
 Die Daten für die Auswertung wurden aus dem \gls{irent} extrahiert. Da die Buchungen Kundendaten enthalten, können sie nicht veröffentlicht werden.
 
-Die Daten liegen im Windows Excel Format vor. Es sind total 133'001 Datensätze mit jeweils 153 Felder. Die Felbeschreibungen sind im \cref{app:feldbeschreibungen} aufgeführt. Zellen A-U sind Informationen im Bezug auf die Buchungen, alle anderen (V-EW) beziehen sich auf das Objekt selber.
+Die Daten liegen im Windows Excel Format vor. Es sind total 133'001 Datensätze mit jeweils 153 Feldern. Die Feldbeschreibungen sind im \cref{app:feldbeschreibungen} aufgeführt. Zellen A-U sind Informationen im Bezug auf die Buchungen. Alle Anderen (V-EW) beziehen sich auf das Objekt selber.
 
-"`boolean"' Datentypen werden behandelt wie "`categorical"' Werte mit nur zwei Ausprägungen, sprich "`0"' und "`1"',
+"`boolean"' Datentypen werden behandelt wie "`categorical"' Werte mit nur zwei Ausprägungen, also "`0"' und "`1"'.
 
 \subsection{Datenvorbereitung}
 \label{sec:recherche:datenvorbereitung}
-Die Datenvorbereitung wandelt die Daten so um dass sie für das Data Mining möglichst effizient verwendet werden können. Dies umfasst die Bereinigung, Transformation sowie Reduktion von Informationen\footcite{feature_selection_2017-01-04}. Bei ersteren werden Messfehler im Datenbestand behoben, fehlende Felder ergänzt oder Duplikate entfernt. Die Transformation wandelt Werte um damit sie für die Berechnung besser geeignet sind. Bei letzteren werden Instanzen der Datengrundlage entfernt, wodurch die Berechnungszeit verkürzt wird, oder Attribute von allen Instanzen entfernt, da deren Entropie zu gering ist. Zum Beispiel ist es unspannend, wenn ein Attribut bei (fast) allen Instanzen gleich ist\footcite{data_mining_concepts_and_techniques}. 
+Die Datenvorbereitung wandelt die Daten so um, dass sie für das Data Mining möglichst effizient verwendet werden können. Dies umfasst die Bereinigung, Transformation sowie Reduktion von Informationen\footcite{feature_selection_2017-01-04}. Beim Ersten werden Messfehler im Datenbestand behoben, fehlende Felder ergänzt, oder Duplikate entfernt. Die Transformation wandelt Werte um, damit sie für die Berechnung besser geeignet sind. Bei Letzteren werden Instanzen der Datengrundlage entfernt, wodurch die Berechnungszeit verkürzt wird, oder Attribute von allen Instanzen entfernt, da deren Entropie zu gering ist. Zum Beispiel ist es unspannend, wenn ein Attribut bei (fast) allen Instanzen gleich ist\footcite{data_mining_concepts_and_techniques}. 
 
 \subsubsection{Boolsche Werte}  
 \label{sec:recherche:datenvorbereitung:boolschewerte}
-In der Datenbasis sind boolsche Werte entweder leer oder "`X"'. Dies wird umgewandelt auf "`0"' oder "`1"'.
+In der Datenbasis sind boolsche Werte entweder leer, oder "`X"'. Dies wird umgewandelt auf "`0"' oder "`1"'.
 
 \subsubsection{Filtrieren von stornierten Buchungen}
 \label{sec:recherche:datenvorbereitung:filtrieren}
-Die Datenbasis beinhaltet bestätigte und stornierte Buchungen. Der Status wird in der Zeile C BOOKSTA gespeichert und besitzt den Wert "`OK"' wenn der Kunde die Rechnung bezahlt sowie die Reise angetreten ist, sonst beinhaltet das Feld die Buchstaben "`XX"'. Gründe für eine Stornierung gibt es viele. Zum Beispiel wenn er falsch gebucht hat, die Rechnung nicht bezahlte, die Reise nicht angetreten werden konnte, etc. 
+Die Datenbasis beinhaltet bestätigte und stornierte Buchungen. Der Status wird in der Zeile C BOOKSTA gespeichert und besitzt den Wert "`OK"', wenn der Kunde die Rechnung bezahlt sowie die Reise angetreten hat, sonst beinhaltet das Feld die Buchstaben "`XX"'. Gründe für eine Stornierung gibt es viele. Zum Beispiel, wenn der Kunde falsch gebucht oder die Rechnung nicht bezahlt hat. Ebenfalls kann es möglich sein, dass er aus persönlichen Gründen die Reise nicht antreten konnte.
+Der Grund für die Stornierung ist in der Datenbasis nicht vorhanden. Deshalb besteht die Gefahr, dass, wenn stornierte Buchungen verwendet werden, die Analyse verfälscht wird. Zum Beispiel, wenn ein Kunde aus Versehen ein Objekt mit der Dauer von drei Monaten anstelle von 3 Tagen gebucht hat. Deshalb werden alle Instanzen mit dem Wert "`XX"' aus der Datenbasis entfernt.
 
-Der Grund für die Stornierung ist in der Datenbasis nicht vorhanden. Deshalb besteht die Gefahr, dass wenn stornierte Buchungen verwendet werden die Analyse verfälscht wird. Zum Beispiel wenn ein Kunde aus versehen eine Objekt mit der Dauer von drei Monate anstelle von 3 Tage gebucht hat. Deshalb werden alle Instanzen mit dem Wert "`XX"' aus der Datenbasis entfernt.
+Nachdem alle Buchungen mit dem Status "`XX"' entfernt wurden enthält die Datenbasis noch 111'442 Instanzen. Es werden demnach 21'559 Einträge aussortiert.% 133'001
 
 \subsubsection{Datennormierung von numerischen Werten} 
-Die im \label{sec:recherche:datenvorbereitung:normierung} \cref{sec:konzept:anwendungderalgorithmen:distanzmessung} vorgestellte Distanzmessung arbeitet mit der euklidischen Distanz für numerische Werte. Wenn ein Attribut $A_1$ einer Buchung den Wert 1'000 hat und das einer anderen Buchung 300, so ergibt sich eine Distanz von 700. Betrachtet man ein anderes Attribut $A_2$, welches den Wert 1 hat beziehungsweise 0.3, so ist die Distanz 0.7. Dadurch fällt $A_2$ in der gesamten Distanz zwischen den beiden Buchungen massiv weniger ins Gewicht, da es um einen Faktor 1'000 kleiner ist. Deshalb werden numerische Attribute genormt, damit alle in den gleichen Wertebereich liegen.
+Die im \label{sec:recherche:datenvorbereitung:normierung} \cref{sec:konzept:anwendungderalgorithmen:distanzmessung} vorgestellte Distanzmessung arbeitet mit der euklidischen Distanz für numerische Werte. Wenn ein Attribut $A_1$ einer Buchung den Wert 1'000 hat und das einer anderen Buchung 300, so ergibt sich eine Distanz von 700. Betrachtet man ein anderes Attribut $A_2$, welches den Wert 1 hat, beziehungsweise 0.3, so ist die Distanz 0.7. Dadurch fällt $A_2$ in der gesamten Distanz zwischen den beiden Buchungen massiv weniger ins Gewicht, da es um einen Faktor 1'000 kleiner ist. Deshalb werden numerische Attribute genormt, damit alle in den gleichen Wertebereich liegen.
 
 In dieser Arbeit werden vier numerische Attribute verwendet.
 \begin{table}[H] 
@@ -191,16 +192,16 @@ Die Daten müssen für die Beantwortung der Hypothesen (siehe \cref{sec:einleitu
 Folgende Felder werden benötigt, sind jedoch in der Datenbasis nicht vorhanden:
 \begin{itemize}
 \item Region und Ort des Objekts. In der Datenbasis ist nur das Land vorhanden.
-\item Monat und Wochentag in welchem das Objekt gebucht wurde. 
+\item Monat und Wochentag, in welchem das Objekt gebucht wurde. 
 \end{itemize}
 
 Zusätzlich müssen für die Wetterdaten die genaue Geolocation des Benutzers vorhanden sein. Im Datenstamm ist die Adresse des Kunden gespeichert, mit welcher die Geolocation ermittelt werden kann.
 
 \subsubsection{Diskretierung von Distanzen und des Wochenpreises} 
 \label{sec:recherche:datenvorbereitung:diskretierung}
-Die Apriori-Analyse zählt nur exakte Übereinstimmungen. Deshalb werden kontinuierliche Werte in vorgegebene diskrete Teilmengen unterteilt damit sie vom Apriori Algorithmus verwendet werden können. Die Grenzwerte der diskretierungen wurden mit Interhome abgesprochen, da diese bereits intern entsprechend verwendet werden.
+Die Apriori-Analyse zählt nur exakte Übereinstimmungen. Deshalb werden kontinuierliche Werte in vorgegebene diskrete Teilmengen unterteilt, damit sie vom Apriori Algorithmus verwendet werden können. Die Grenzwerte der Diskretierungen wurden mit Interhome abgesprochen, da diese bereits intern entsprechend verwendet werden.
 
-Die Zeilen AK (Distanz zum Wasser), AL (Distanz zum Skigebiet), AM (Distanz zum öffentlichen Verkehr), DZ (Distanz zum Zentrum), EA (Distanz bis zum Meer) und EB (Distanz bis zum See) sind numerische Werte, welche die Anzahl an Metern zu einem Punkt angeben. Die Werte dieser Spalten wird in folgende Bereite diskretiert: 
+Die Zeilen AK (Distanz zum Wasser), AL (Distanz zum Skigebiet), AM (Distanz zum öffentlichen Verkehr), DZ (Distanz zum Zentrum), EA (Distanz bis zum Meer) und EB (Distanz bis zum See) sind numerische Werte, welche die Anzahl an Metern zu einem Punkt angeben. Die Werte dieser Spalten werden in folgende Bereiche diskretiert: 
 
 \begin{table}[h] 
 	\caption{Diskretisierungswerte für Distanzattribute}
@@ -232,9 +233,9 @@ Ebenfalls wird der Wochenpreise in nachfolgende Intervalle unterteilt.
 	\end{tabular}
 \end{table}
 
-Bei den Distanzen sind kleine Werte spannend, welche angeben dass ein Objekt nahe am Skilift oder bei der Busstation liegt. Deshalb wurde definiert dass die Werte von 0 bis 499 Metern als nahe (engl. Close) markiert werden. Darüber liegende Werte werden ignoriert.
+Bei den Distanzen sind kleine Werte spannend, welche angeben, dass ein Objekt nahe beim Skilift, oder bei der Busstation liegt. Deshalb wurde definiert, dass die Werte von 0 bis 499 Metern als nahe (engl. Close) markiert werden. Darüber liegende Werte werden ignoriert.
 
-Bei den Preisen hingegen ist es interessant, wenn ein Objekt besonders günstig oder teuer ist. Deshalb wurden zwei Intervalle definiert. Nämlich 0 bis 200 und 401 aufwärts. Alles dazwischen wird nicht weiter behandelt.
+Bei den Preisen hingegen ist es interessant, wenn ein Objekt besonders günstig, oder teuer ist. Deshalb wurden zwei Intervalle definiert. Nämlich 0 bis 200 und 401 aufwärts. Alles dazwischen wird nicht weiter behandelt.
 
 %\begin{itemize}
 %%\item Das Datenformat wurde für die einfachere programmatische Handhabung von Windows Excel in das \gls{csv}-Format transferiert.
@@ -243,7 +244,7 @@ Bei den Preisen hingegen ist es interessant, wenn ein Objekt besonders günstig 
 %\item Der Preis wird normiert auf Wochenpreise. wurde diskretisiert. Spannend für die Interpretation sind nur werte welche kleiner als 500 sind oder über 2000. Siehe \cref{fig:recherche:datenvorbereitung:2}.
 %\end{itemize}
 
-In den Tabellen \ref{fig:recherche:datenvorbereitung:3} und \ref{fig:recherche:datenvorbereitung:4} wird ein Beispiel gegeben. In der ersten Tabelle sind Buchungen vor der diskretisierung aufgeführt und in der zweiten danach. Distanzwerte von 500 oder mehr und Preise zwischen 499 und 2000 wurden entfernt. Dies ist zum Beispiel bei dem Wert "`Distanz zum Skilift"' der Buchung mit ID 3 geschehen.
+In den Tabellen \ref{fig:recherche:datenvorbereitung:3} und \ref{fig:recherche:datenvorbereitung:4} wird ein Beispiel gegeben. In der Ersten Tabelle sind Buchungen vor der Diskretisierung aufgeführt und in der Tweiten danach. Distanzwerte von 500 oder mehr und Preise zwischen 499 und 2000 wurden entfernt. Dies ist zum Beispiel bei dem Wert "`Distanz zum Skilift"' der Buchung mit ID 3 geschehen.
 
 \begin{table}[H] 
 	\caption{Datenbestand vor der Diskretisierung}
@@ -287,7 +288,7 @@ In den Tabellen \ref{fig:recherche:datenvorbereitung:3} und \ref{fig:recherche:d
 
 Die Diskretisierung wird durchgeführt, damit nach dem Clustering die Häufigkeit der kategorischen Werte mit dem Apriori Algorithmus erhoben werden kann. Dadurch wird das Clustering (siehe \cref{sec:konzept:ablauf:analyse} \nameref{sec:konzept:ablauf:analyse}). 
 
-Es gibt verschiedene Diskretisierungsmethoden. Diese Teilen die Werte in gleiche Intervalle auf oder stellen sicher dass in jeder Kategorie die selbe Anzahl an Instanzen vorhanden sind.
+Es gibt verschiedene Diskretisierungsmethoden. Diese Teilen die Werte in gleiche Intervalle auf, oder stellen sicher, dass in jeder Kategorie die selbe Anzahl an Instanzen vorhanden sind.
 Die verwendeten Werte aus \cref{fig:recherche:datenvorbereitung:1} und \cref{fig:recherche:datenvorbereitung:2} wurde mit Interhome abgesprochen. 
 
 \subsection{Attributeinschränkung}
@@ -295,7 +296,7 @@ Die verwendeten Werte aus \cref{fig:recherche:datenvorbereitung:1} und \cref{fig
 Der Datenbestand besteht aus 153 Attributen/Spalten. Aus folgenden Gründen sollten die Attribute eingeschränkt werden:
 \begin{itemize}
 \item Laufzeit der Algorithmen kann durch eine Attributreduktion verbessert werden.
-\item Es gibt Attribute welche andere Zusammenfassen. In der \cref{fig:recherche:attributeinschraenkung:1} ist die Zelle "`AW"' eine Aggregation von den darunterliegenden Feldern.
+\item Es gibt Attribute, welche andere zusammenfassen. In der \cref{fig:recherche:attributeinschraenkung:1} ist die Zelle "`AW"' eine Aggregation von den darunterliegenden Feldern.
 \end{itemize}
 
 \begin{table}[H] 
@@ -317,7 +318,7 @@ Der Datenbestand besteht aus 153 Attributen/Spalten. Aus folgenden Gründen soll
 	\end{tabular}
 \end{table}
 
-In Absprache mit Interhome wurde entschieden, dass in einem ersten Schritt jene Attribute verwendet werden sollen, welche auch direkt auf der Webseite dargestellt werden. Die zu verwendenden Spalten sind in der \cref{fig:recherche:attributeinschraenkung:2} aufgeführt. Das Feld "`NREF"' beinhaltet die Objektidentifikation. Dieses wird für die Attributanalyse nicht verwendet, hilft jedoch den Testern bei der Validierung der Resultate und sollte deshalb beim einsehen des Datenbestandes mit angezeigt werden.
+In Absprache mit Interhome wurde entschieden, dass in einem ersten Schritt jene Attribute verwendet werden sollen, welche auch direkt auf der Webseite dargestellt werden. Die zu verwendenden Spalten sind in der \cref{fig:recherche:attributeinschraenkung:2} aufgeführt. Das Feld "`NREF"' beinhaltet die Objektidentifikation. Dieses wird für die Attributanalyse nicht verwendet, hilft jedoch den Testern bei der Validierung der Resultate und sollte deshalb beim Einsehen des Datenbestandes mit angezeigt werden.
 
 \begin{table}[H] 
 	\caption{Zu verwendende Attribute}
@@ -363,12 +364,12 @@ In Absprache mit Interhome wurde entschieden, dass in einem ersten Schritt jene 
 
 \section{Ablauf}
 \label{sec:konzept:ablauf}
-Der Ablauf des Data Mining im zu entwickelnden Programm ist zweistufig. Als erstes gibt der User eine Abfrage ein, für welche anschliessend eine Liste von häufig auftretenden Attributen gesucht werden soll (siehe \cref{sec:einleitung:ziel} \nameref{sec:einleitung:ziel}).
+Der Ablauf des Data Mining im zu entwickelnden Programm ist zweistufig. Als Erstes gibt der User eine Abfrage ein, für welche anschliessend eine Liste von häufig auftretenden Attributen gesucht werden soll (siehe \cref{sec:einleitung:ziel} \nameref{sec:einleitung:ziel}).
 
 
 \subsection{Einschränkung des Datenbestandes}
 \label{sec:konzept:ablauf:einschraenkung}
-Im ersten Schritt wird der Datenbestand durch die Auswahl von Attributen durch den Benutzer eingeschränkt. Er kann 0-n Werte aus den in der \cref{fig:recherche:attributeinschraenkung:2} gelisteten Attributen selektieren. Anschliessend werden alle Instanzen aus der Datenmenge entfernt welche den Kriterien nicht genügen. Dies bildet die Grundlage für die Analyse im Schritt 2.
+Im ersten Schritt wird der Datenbestand durch die Auswahl von Attributen durch den Benutzer eingeschränkt. Er kann 0-n Werte aus den in der \cref{fig:recherche:attributeinschraenkung:2} gelisteten Attributen selektieren. Anschliessend werden alle Instanzen aus der Datenmenge entfernt, welche den Kriterien nicht genügen. Dies bildet die Grundlage für die Analyse im Schritt 2.
 
 \begin{figure}[H]
 	\RawFloats
@@ -378,9 +379,9 @@ Im ersten Schritt wird der Datenbestand durch die Auswahl von Attributen durch d
 	\label{fig:konzept:ablauf:einschraenkung:1}
 \end{figure}
 
-\cref{fig:konzept:ablauf:einschraenkung:1} zeigt einige Filters welche der User auswählen kann. Mit einem Klick auf den "`Run analysis"' Button werden die Daten zuerst eingeschränkt und der Analyseprozess gestartet.
+\cref{fig:konzept:ablauf:einschraenkung:1} zeigt einige Filters, welche der User auswählen kann. Mit einem Klick auf den "`Run analysis"' Button werden die Daten zuerst eingeschränkt und anschliessend der Analyseprozess gestartet.
 
-Nach der Einschränkung der Daten werden nur noch folgende Buchungen berücksichtigt, welche den Filtern genügen. \cref{fig:konzept:ablauf:einschraenkung:2} zeigt einen Datenbestand vor der Anwendung von Filtern, und \cref{fig:konzept:ablauf:einschraenkung:3} die Daten danach.
+Nach der Einschränkung der Daten werden nur noch folgende Buchungen berücksichtigt, welche den Filtern genügen. \cref{fig:konzept:ablauf:einschraenkung:2} zeigt einen Datenbestand vor dem Filtrieren, und \cref{fig:konzept:ablauf:einschraenkung:3} die Daten nachdem der Filter "`Preis=luxury"' angewendet wurde.
 \begin{table}[H] 
 	\caption{Datenbestand vor der Anwendung der Filterkriterien}
 	\centering
@@ -411,16 +412,17 @@ Nach der Einschränkung der Daten werden nur noch folgende Buchungen berücksich
 		\rowcolor{tableheadcolor}
 		\bfseries \rotatebox{90}{ID} & \bfseries \rotatebox{90}{Ortschaft} & \bfseries \rotatebox{90}{Preis} & \bfseries \rotatebox{90}{Qualität} & \bfseries \rotatebox{90}{Tiere erlaubt} & \bfseries \rotatebox{90}{Grill vorhanden} & \bfseries \rotatebox{90}{Balkon vorhanden} & \bfseries \rotatebox{90}{Distanz zum Meer (m)} & \bfseries \rotatebox{90}{Distanz zum Skilift (m)} \\ \hline 
 		
-		3 & Zermatt & luxury & 4 & \checkmark & \checkmark &  & 350 & \\ \hline 
-		6 & Cannes & luxury & 5 &  & \checkmark &  & 80 &  \\ \hline 
+		3 & Zermatt & luxury & 4 & \checkmark & \checkmark &  & close & \\ \hline 
+		6 & Cannes & luxury & 5 &  & \checkmark &  & close &  \\ \hline 
+		7 & Zermatt & luxury & 2 & \checkmark & \checkmark &  &  &  \\ \hline 
 	\end{tabular}
 \end{table}
 
 \subsection{Auffinden von Attributen}
 \label{sec:konzept:ablauf:analyse}
-Für den zweiten Schritt wird entweder ein \nameref{sec:konzept:disziplinauswahl:association} (siehe \cref{sec:konzept:disziplinauswahl:association}) oder eine \nameref{sec:konzept:disziplinauswahl:clusteranalysis} (siehe \cref{sec:konzept:disziplinauswahl:clusteranalysis}) durchgeführt. 
+Für den zweiten Schritt wird entweder ein \nameref{sec:konzept:disziplinauswahl:association} (siehe \cref{sec:konzept:disziplinauswahl:association}), oder eine \nameref{sec:konzept:disziplinauswahl:clusteranalysis} (siehe \cref{sec:konzept:disziplinauswahl:clusteranalysis}) durchgeführt. 
 
-Möchte der Benutzer wissen, welche Attribute in der (vorselektierten) Datenmenge oft vorkommen, so kann der Apriori-Algorithmus verwendet werden. Eine beispielhafte Ausgabe ist in der \cref{fig:konzept:ablauf:analyse:1} aufgezeigt. Die erste Tabelle beinhaltet alle einzelnen Attribute welche als häufig erachtet werden, die zweiten Tabelle sind alle häufigen zweier Attributkombinationen, die dritte Tabelle alle dreier Attributkombinationen. Dies geht weiter bis der Apriori-Algorithmus keine häufigen Kombinationen mehr findet.
+Möchte der Benutzer wissen, welche Attribute in der (vorselektierten) Datenmenge oft vorkommen, so kann der Apriori-Algorithmus verwendet werden. Eine beispielhafte Ausgabe ist in der \cref{fig:konzept:ablauf:analyse:1} aufgezeigt. Die erste Tabelle beinhaltet alle einzelnen Attribute, welche als häufig erachtet werden. Die Zweite alle häufigen Zweier-Attributkombinationen und die Dritte alle Dreier-Attributkombinationen. Dies geht weiter bis der Apriori-Algorithmus keine häufigen Kombinationen mehr findet.
 \begin{figure}[H]
 	\RawFloats
 	\centering
@@ -429,13 +431,13 @@ Möchte der Benutzer wissen, welche Attribute in der (vorselektierten) Datenmeng
 	\label{fig:konzept:ablauf:analyse:1}
 \end{figure}
 
-Liefert der Apriori keine zufriedenstellenden Antworten oder ist von vornherein zu erwarten, dass es verschiedene Gruppen von Buchungen gibt, so kann zuerst die Cluster Analysis durchgeführt werden. Die Instanzen werden damit in Clusters/Gruppen aufgeteilt, der Benutzer würde jedoch nicht sehen weshalb. Deshalb wird auf jedem Cluster der Apriori-Algorithmus durchgeführt. Da die Instanzen in einer Gruppe untereinander möglichst Homogen sein sollen und möglichst unterschiedlich zu anderen Clusters, ist anzunehmen, dass die häufigsten Attribute, welche durch den Apriori-Algorithmus gefunden werden, aussagekräftig die Klassen beschreiben.
+Liefert der Apriori keine zufriedenstellenden Antworten, oder ist von vornherein zu erwarten, dass es verschiedene Gruppen von Buchungen gibt, so kann zuerst die Cluster Analysis durchgeführt werden. Die Instanzen werden damit in Clusters/Gruppen aufgeteilt, der Benutzer würde jedoch nicht sehen weshalb. Deshalb wird auf jedem Cluster der Apriori-Algorithmus durchgeführt. Da die Instanzen in einer Gruppe untereinander möglichst Homogen sein sollen und möglichst unterschiedlich zu anderen Clusters, ist anzunehmen, dass die häufigsten Attribute, welche durch den Apriori-Algorithmus gefunden werden, aussagekräftig die Klassen beschreiben.
 
 \section{Mockups des Programms}
 \label{sec:konzept:mockups}
 Die graphischen Oberfläche des Programms wird nachfolgend anhand von Mockups aufgezeigt. Die Auflistung der Stammdaten sowie der Resultate ist einfachheitshalber verkürzt dargestellt. Auf jeder Seite zuoberst ist das Interhome Logo sowie die Navigation platziert.
 
-In \cref{fig:konzept:mockups:stammdaten} ist die Startseite abgebildet in welcher der Benutzer die Stammdaten (\nameref{fig:anforderungsanalyse:funktionaleanforderung:fa4}) einsehen kann. Im oberen Bereich sind die Filter, mit welchen der Datenbestand eingeschränkt werden kann. 
+In \cref{fig:konzept:mockups:stammdaten} ist die Startseite abgebildet, in welcher der Benutzer die Stammdaten (\nameref{fig:anforderungsanalyse:funktionaleanforderung:fa4}) einsehen kann. Im oberen Bereich sind die Filter, mit welchen der Datenbestand eingeschränkt werden kann. 
 \begin{figure}[H]
 	\RawFloats
 	\centering
@@ -444,7 +446,7 @@ In \cref{fig:konzept:mockups:stammdaten} ist die Startseite abgebildet in welche
 	\label{fig:konzept:mockups:stammdaten}
 \end{figure}
 
-Auf der zweiten Seite, welche in \cref{fig:konzept:mockups:apriori} dargestellt ist, kann der Benutzer eine apriori Analyse durchführen (siehe \cref{sec:konzept:algorithmenauswahl:apriori} \nameref{sec:konzept:algorithmenauswahl:apriori}). Wie vorher sind zuoberst die selben Filter platziert. Darunter sind die Attribute aufgelistet, welche vom Algorithmus gefunden wurde sowie deren Häufigkeit. Zuunterst ist zur Kontrolle noch der analysierte Datenbestand aufgeführt.
+Auf der zweiten Seite, welche in \cref{fig:konzept:mockups:apriori} dargestellt ist, kann der Benutzer eine apriori Analyse durchführen (siehe \cref{sec:konzept:algorithmenauswahl:apriori} \nameref{sec:konzept:algorithmenauswahl:apriori}). Wie vorher sind zuoberst die selben Filter platziert. Darunter sind die Attribute aufgelistet, welche vom Algorithmus gefunden wurden sowie deren Häufigkeit. Zuunterst ist zur Kontrolle noch der analysierte Datenbestand aufgeführt.
 \begin{figure}[H]
 	\RawFloats
 	\centering
@@ -453,7 +455,7 @@ Auf der zweiten Seite, welche in \cref{fig:konzept:mockups:apriori} dargestellt 
 	\label{fig:konzept:mockups:apriori}
 \end{figure}
 
-Der dritte Reiter führt zur Analyse mit den Clustering Algorithmen k-prototypes und DBSCAN (\cref{sec:konzept:algorithmenauswahl:clustering} \nameref{sec:konzept:algorithmenauswahl:clustering}). Die Filter sind entsprechend den vorherigen Seite zuoberst platziert. Es gibt jedoch zwei Buttons um die Analyse mit den entsprechenden Algorithmen zu starten. Zuunterst sind die gefunden Clusters abgebildet, mit den häufigen Attributen sowie den Buchungen, welche zu den entsprechenden Clustern gehören. Zur Verbesserung der Übersicht können die Bereiche auf- und zugeklappt werden.
+Der dritte Reiter führt zur Analyse mit den Clustering Algorithmen k-prototypes und DBSCAN (\cref{sec:konzept:algorithmenauswahl:clustering} \nameref{sec:konzept:algorithmenauswahl:clustering}). Die Filter sind entsprechend den vorherigen Seiten zuoberst platziert. Es gibt jedoch zwei Buttons, um die Analyse mit den entsprechenden Algorithmen zu starten. Zuunterst sind die gefundenen Cluster abgebildet, mit den häufigen Attributen sowie den Buchungen, welche zu den entsprechenden Clustern gehören. Zur Verbesserung der Übersicht können die Bereiche auf- und zugeklappt werden.
 
 \begin{figure}[H]
 	\RawFloats
@@ -490,14 +492,14 @@ Der letzte Mockup zeigt die Ansicht in welcher die Einstellungen des Programms a
 % - Rooms: ??? (2?)
 % - Pets allowed: yes
 
-In diesem Abschnitt sind Testfälle definiert welche am Schluss der Entwicklung ausgewertet werden (siehe \cref{sec:testingfazit:testing:testcases} \nameref{sec:testingfazit:testing:testcases}). Dadurch können die Erwartungen an das Programm mit der tatsächlichen Ausgabe des Proof of Concepts verglichen werden. Dazu wurden Datenquellen erstellt, in welchen die zu findenden Mustern von vornherein bekannt sind. Sobald der Proof of Concept umgesetzt wurde können die Resultate mit den  nachfolgend vorgestellten Informationen verglichen werden. Dadurch wird die richtige Funktionsweise des Programms sichergestellt.
+In diesem Abschnitt sind Testfälle definiert, welche am Schluss der Entwicklung ausgewertet werden (siehe \cref{sec:testingfazit:testing:testcases} \nameref{sec:testingfazit:testing:testcases}). Dadurch können die Erwartungen an das Programm mit der tatsächlichen Ausgabe des Proof of Concepts verglichen werden. Dazu wurden Datenquellen erstellt, in welchen die zu findenden Muster von vornherein bekannt sind. Sobald der Proof of Concept umgesetzt wurde, können die Resultate mit den  nachfolgend vorgestellten Informationen verglichen werden. Dadurch wird die richtige Funktionsweise des Programms sichergestellt.
 
 Es sind 12 Testdatenquellen definiert worden, welche im \cref{app:testdatenquellen} aufgeführt sind.
-Sie bestehen aus 9 - 18 Einträge mit jeweils 10 Attributen. Die Felder "`id"' und "`NREF"' in den Quellen sind nur für das Verständnis vorhanden und tragen nicht zur Testauswertung bei. Die restlichen Attribute bestehen aus Distanzen ("`DIWATER"', "`DIPUBT"', "`DISEA"'), Preisen ("`weeklyprice"'), Binär- ("`PETS"', "`CAIRCOND"') und numerischen ("`ROOMS"', "`BEDROOMS"') Werten. Dadurch sind kategorische sowie numerische Attribute abgedeckt. 
+Sie bestehen aus 9 - 18 Instanzen mit jeweils 10 Attributen. Die Felder "`id"' und "`NREF"' in den Quellen sind nur für das Verständnis vorhanden und tragen nicht zur Testauswertung bei. Die restlichen Attribute bestehen aus Distanzen ("`DIWATER"', "`DIPUBT"', "`DISEA"'), Preisen ("`weeklyprice"'), Binär- ("`PETS"', "`CAIRCOND"') und numerischen ("`ROOMS"', "`BEDROOMS"') Werten. Dadurch sind kategorische sowie numerische Attribute abgedeckt. 
 
-Die \glspl{tc} 1 bis 9 überprüfen die Richtigkeit des Apriori Algorithmus. Sie stellen sicher, dass Distanz-, Preis-, binären- und numerischen Attribute richtig aufsummiert und durch den Apriori-Gen Vorgang zu weiteren Attributmengen kombiniert werden. Zusätzlich überprüfen sie ob die Einschränkung der Datenmenge durch den Benutzer korrekt funktionieren. \glspl{tc} 10 bis 12 kontrollieren ihrerseits die Cluster Algorithmen. 
+Die \glspl{tc} 1 bis 9 überprüfen die Richtigkeit des Apriori Algorithmus. Sie stellen sicher, dass Distanz-, Preis-, binären- und numerischen Attribute richtig aufsummiert und durch den Apriori-Gen Vorgang zu weiteren Attributmengen kombiniert werden. Zusätzlich überprüfen sie, ob die Einschränkung der Datenmenge durch den Benutzer korrekt funktionieren. \glspl{tc} 10 bis 12 kontrollieren ihrerseits die Cluster Algorithmen. 
 
-Für die nachfolgenden Erwartungen werden nachfolgende Parameter vorausgesetzt. Diese müssen nachher bei der Testausführung gesetzt werden. Stimmen die Resultate überein ist der Test erfolgreich. 
+Für die nachfolgenden Erwartungen werden nachfolgende Parameter vorausgesetzt. Diese müssen nachher bei der Testausführung gesetzt werden. Stimmen die Resultate überein, ist der Test erfolgreich. 
 \begin{itemize}
 	\item Apriori
 	\begin{itemize}
@@ -519,7 +521,7 @@ Für die nachfolgenden Erwartungen werden nachfolgende Parameter vorausgesetzt. 
 	\end{itemize}
 \end{itemize}
 
-\paragraph{TC1, Datenquelle \cref{app:testdatenquellen:1}:} Überprüft ob 2 Distanzattribute korrekt aufsummiert und miteinander zu einer 2er Menge kombiniert werden. 
+\paragraph{TC1, Datenquelle \cref{app:testdatenquellen:1}:} Überprüft, ob 2 Distanzattribute korrekt aufsummiert und miteinander zu einer 2er Menge kombiniert werden. 
 
 \begin{table}[H] 
 	\caption{TC1 Definition}
@@ -545,7 +547,7 @@ Für die nachfolgenden Erwartungen werden nachfolgende Parameter vorausgesetzt. 
 	\end{tabular}
 \end{table}
 
-\paragraph{TC2, Datenquelle \cref{app:testdatenquellen:2}:} Überprüft ob 2 Binärattribute korrekt aufsummiert und miteinander zu einer 2er Menge kombiniert werden. 
+\paragraph{TC2, Datenquelle \cref{app:testdatenquellen:2}:} Überprüft, ob 2 Binärattribute korrekt aufsummiert und miteinander zu einer 2er Menge kombiniert werden. 
 
 \begin{table}[H] 
 	\caption{TC2 Definition}
@@ -570,7 +572,7 @@ Für die nachfolgenden Erwartungen werden nachfolgende Parameter vorausgesetzt. 
 	\end{tabular}
 \end{table}
 
-\paragraph{TC3, Datenquelle \cref{app:testdatenquellen:3}:} Überprüft ob 2 numerische Attribute korrekt aufsummiert und miteinander zu einer 2er Menge kombiniert werden. 
+\paragraph{TC3, Datenquelle \cref{app:testdatenquellen:3}:} Überprüft, ob 2 numerische Attribute korrekt aufsummiert und miteinander zu einer 2er Menge kombiniert werden. 
 
 
 \begin{table}[H] 
@@ -596,7 +598,7 @@ Für die nachfolgenden Erwartungen werden nachfolgende Parameter vorausgesetzt. 
 	\end{tabular}
 \end{table}
 
-\paragraph{TC4, Datenquelle \cref{app:testdatenquellen:4}:} Überprüft ob 1 numerisches und ein Binärattribut korrekt aufsummiert und miteinander zu einer 2er Menge kombiniert werden.
+\paragraph{TC4, Datenquelle \cref{app:testdatenquellen:4}:} Überprüft, ob 1 numerisches und ein Binärattribut korrekt aufsummiert und miteinander zu einer 2er Menge kombiniert werden.
 
 \begin{table}[H] 
 	\caption{TC4 Definition}
@@ -621,7 +623,7 @@ Für die nachfolgenden Erwartungen werden nachfolgende Parameter vorausgesetzt. 
 	\end{tabular}
 \end{table}
 
-\paragraph{TC5, Datenquelle \cref{app:testdatenquellen:5}:} Überprüft ob 2 Distanzattribute korrekt aufsummiert und miteinander zu einer 2er Menge kombiniert werden unter der Anwendung einer Dateneinschränkung eines binären Attributes. 
+\paragraph{TC5, Datenquelle \cref{app:testdatenquellen:5}:} Überprüft, ob 2 Distanzattribute korrekt aufsummiert und miteinander zu einer 2er Menge kombiniert werden, unter der Anwendung einer Dateneinschränkung eines binären Attributs. 
 
 \begin{table}[H] 
 	\caption{TC5 Definition}
@@ -646,7 +648,7 @@ Für die nachfolgenden Erwartungen werden nachfolgende Parameter vorausgesetzt. 
 	\end{tabular}
 \end{table}
 
-\paragraph{TC6, Datenquelle \cref{app:testdatenquellen:6}:} Überprüft ob 2 Distanzattribute korrekt aufsummiert und miteinander zu einer 2er Menge kombiniert werden unter der Anwendung einer Dateneinschränkung eines Distanzattributes. 
+\paragraph{TC6, Datenquelle \cref{app:testdatenquellen:6}:} Überprüft, ob 2 Distanzattribute korrekt aufsummiert und miteinander zu einer 2er Menge kombiniert werden, unter der Anwendung einer Dateneinschränkung eines Distanzattributs. 
 
 \begin{table}[H] 
 	\caption{TC6 Definition}
@@ -671,7 +673,7 @@ Für die nachfolgenden Erwartungen werden nachfolgende Parameter vorausgesetzt. 
 	\end{tabular}
 \end{table}
 
-\paragraph{TC7, Datenquelle \cref{app:testdatenquellen:7}:} Überprüft ob 2 Distanzattribute korrekt aufsummiert und miteinander zu einer 2er Menge kombiniert werden unter der Anwendung einer Dateneinschränkung eines numerischen Attributes. 
+\paragraph{TC7, Datenquelle \cref{app:testdatenquellen:7}:} Überprüft, ob 2 Distanzattribute korrekt aufsummiert und miteinander zu einer 2er Menge kombiniert werden, unter der Anwendung einer Dateneinschränkung eines numerischen Attributs. 
 
 \begin{table}[H] 
 	\caption{TC7 Definition}
@@ -696,7 +698,7 @@ Für die nachfolgenden Erwartungen werden nachfolgende Parameter vorausgesetzt. 
 	\end{tabular}
 \end{table}
 
-\paragraph{TC8, Datenquelle \cref{app:testdatenquellen:8}:} Überprüft ob 2 Distanzattribute und 1 binäres Attribut korrekt aufsummiert und miteinander zu einer 2er und 3er Menge kombiniert werden. 
+\paragraph{TC8, Datenquelle \cref{app:testdatenquellen:8}:} Überprüft, ob 2 Distanzattribute und 1 binäres Attribut korrekt aufsummiert und miteinander zu einer 2er und 3er Menge kombiniert werden. 
 
 \begin{table}[H] 
 	\caption{TC8 Definition}
@@ -730,7 +732,7 @@ Für die nachfolgenden Erwartungen werden nachfolgende Parameter vorausgesetzt. 
 	\end{tabular}
 \end{table}
 
-\paragraph{TC9, Datenquelle \cref{app:testdatenquellen:9}:} Überprüft ob 2 Distanz-, 1 binäres- und 1 numerisches Attribut korrekt aufsummiert und miteinander zu 2er Mengen kombiniert werden. Die Kombinationen sind so gewählt dass keine 3er Menge erstellt werden kann.
+\paragraph{TC9, Datenquelle \cref{app:testdatenquellen:9}:} Überprüft, ob 2 Distanz-, 1 binäres- und 1 numerisches Attribut korrekt aufsummiert und miteinander zu 2er Mengen kombiniert werden. Die Kombinationen sind so gewählt, dass keine 3er Menge erstellt werden kann.
 
 \begin{table}[H] 
 	\caption{TC9 Definition}
@@ -761,7 +763,7 @@ Für die nachfolgenden Erwartungen werden nachfolgende Parameter vorausgesetzt. 
 
 \paragraph{TC10, Datenquelle \cref{app:testdatenquellen:10}:} TC10 bis TC12 testen die Clustering Algorithmen. Deshalb werden die erwarteten Resultate zusätzlich noch nach Cluster unterteilt, welche zusätzlich den Fehler der Gruppierung angeben sowie die Anzahl der Buchungen.
 
-TC10 Überprüft ob 2 Cluster gefunden werden. Der erste besitzt 5 Buchungen, der zweite deren 4. Ziel des Testfalles ist es zu überprüfen, ob die Clusters korrekt erstellt werden und ob der Apriori-Algorithmus richtig auf die Gruppen angewendet wird.
+TC10 Überprüft, ob 2 Cluster gefunden werden. Der Erste besitzt 5 Buchungen, der Zweite 4. Ziel des Testfalles ist es zu überprüfen, ob die Clusters korrekt erstellt werden und ob der Apriori-Algorithmus richtig auf die Gruppen angewendet wird.
 
 \begin{longtable}{ | l | l | l | l |} 	
 	\hline 
@@ -846,7 +848,7 @@ TC10 Überprüft ob 2 Cluster gefunden werden. Der erste besitzt 5 Buchungen, de
 
 
 \paragraph{TC11, Datenquelle \cref{app:testdatenquellen:11}:} Bei TC11 und TC12 unterscheiden sich die Resultate der k-prototype und DBSCAN Algorithmen. Deshalb werden die Resultate separat in TC11-1 und TC11-2 aufgeführt.
-TC 11 Überprüft ob 1 Cluster gefunden wird mit 9 Buchungen und 1 Noise Punkt. Bei TC10 wurden zwei ähnlich grosse Cluster generiert. Hier wird überprüft ob die Clustering- und der Apriori-Algorithmus korrekt funktioniert wenn die Gruppen unterschiedliche Grössen haben. Der kleine Cluster hat zusätzlich so wenig Objekte, dass der Apriori keine häufigen Attribute auffindet.
+TC 11 Überprüft, ob 1 Cluster gefunden wird mit 9 Buchungen und 1 Noise Punkt. Bei TC10 wurden zwei ähnlich grosse Cluster generiert. Hier wird überprüft, ob die Clustering- und der Apriori-Algorithmus korrekt funktionieren, wenn die Gruppen unterschiedliche Grössen haben. Der kleine Cluster hat zusätzlich so wenig Objekte, dass der Apriori keine häufigen Attribute auffindet.
 
 Erwartetes Resultat vom DBSCAN Algorithmus:
 \begin{longtable}{ | l | l | l | l |} 	
@@ -922,7 +924,7 @@ Erwartetes Resultat vom k-prototype Algorithmus:
 	\multicolumn{4}{|l|}{\textbf{Cluster 1}} \\ \cline{2-4} 
 	& Fehler & \multicolumn{2}{|l|}{0} \\ \cline{2-4} 
 	& Grösse & \multicolumn{2}{|l|}{9} \\ \cline{2-4} 
-	& \multicolumn{3}{|L{7.5cm}|}{Das Resultat der Analyse dieses Clusters vom Apriori Algorithmus ist dasselbe wie jenes vom DBSCAN welches oben aufgeführt wurde. Zur Verbesserung der Übersicht wird das Resultat hier nicht noch einmal aufgeführt.} \\ \hline
+	& \multicolumn{3}{|L{7.5cm}|}{Das Resultat der Analyse dieses Clusters vom Apriori Algorithmus ist dasselbe wie jenes vom DBSCAN, welches oben aufgeführt wurde. Zur Verbesserung der Übersicht wird das Resultat hier nicht noch einmal aufgeführt.} \\ \hline
 
 	\multicolumn{4}{|l|}{\textbf{Cluster 2}} \\ \cline{2-4} 
 	& Fehler & \multicolumn{2}{|l|}{0} \\ \cline{2-4} 
@@ -933,11 +935,11 @@ Erwartetes Resultat vom k-prototype Algorithmus:
 	\label{fig:recherche:testcases:11:2}
 \end{longtable}
 
-\paragraph{TC12, Datenquelle \cref{app:testdatenquellen:12}:} Dieser Testfall ist der Realität am nächsten, da die einzelnen Instanzen alle zueinander unterschiedlich sind. Es gibt zwei Gruppen die gefunden werden sollen. Die erste umfasst die Buchungen mit den IDs 1 bis 5, die zweite die Instanzen 6 bis 10. Die Clusters untereinander sind sich ähnlich. Buchungen von 1 bis 5 teilen sich die Attribute "`DIWATER"' (Distanz zum Wasser), "`DIPUBT"' (Distanz zu den ÖV) und "`DISEA"' (Distanz zum Meer). Instanzen 6 bis 10 teilen sich "`weeklyprice"' (Wochenpreis), "`ROOMS"' (Anzahl Zimmer) und "`CAIRCOND"' (Aircondition). 
+\paragraph{TC12, Datenquelle \cref{app:testdatenquellen:12}:} Dieser Testfall ist der Realität am nächsten, da die einzelnen Instanzen alle zueinander unterschiedlich sind. Es gibt zwei Gruppen, die gefunden werden sollen. Die Erste umfasst die Buchungen mit den IDs 1 bis 5, die Zweite die Instanzen 6 bis 10. Die Clusters untereinander sind sich ähnlich. Buchungen von 1 bis 5 teilen sich die Attribute "`DIWATER"' (Distanz zum Wasser), "`DIPUBT"' (Distanz zu den ÖV) und "`DISEA"' (Distanz zum Meer). Instanzen 6 bis 10 teilen sich "`weeklyprice"' (Wochenpreis), "`ROOMS"' (Anzahl Zimmer) und "`CAIRCOND"' (Aircondition). 
 
-Der k-prototype sollte diese beiden Gruppen finden. Die besten Clusterzentren sind die Buchungen mit den IDs 3 und 7, da sie den geringsten Fehler erzeugen. Von ihnen aus wird die Distanz zu allen anderen Instanzen berechnet was den Fehler des Clusters ergibt (siehe \cref{eq:recherche:clusteranalysis:1} \nameref{eq:recherche:clusteranalysis:1}). Im ersten Cluster (mit den IDs 1 bis 5) gibt es 6 kategorische Attribute welche unterschiedlich sind zu jenen von der Buchung 3. Zählt man dies mit den Unterschieden der numerischen Attribute zusammen, erhält man als Clusterfehler 6.086575. Vom zweiten Cluster erhält man den Fehler 3.090957.
+Der k-prototype sollte diese beiden Gruppen finden. Die besten Clusterzentren sind die Buchungen mit den IDs 3 und 7, da sie den geringsten Fehler erzeugen. Von ihnen aus wird die Distanz zu allen anderen Instanzen berechnet, was den Fehler des Clusters ergibt (siehe \cref{eq:recherche:clusteranalysis:1} \nameref{eq:recherche:clusteranalysis:1}). Im ersten Cluster (mit den IDs 1 bis 5) gibt es 6 kategorische Attribute, welche unterschiedlich sind zu jenen von der Buchung 3. Zählt man dies mit den Unterschieden der numerischen Attribute zusammen, erhält man als Clusterfehler 6.086575. Vom zweiten Cluster erhält man den Fehler 3.090957.
 
-Der DBSCAN sollte die selben Cluster wie der k-prototype finden, jedoch wird die Buchung mit der ID 2 als Noise aussortieren. Dies ist die einzige Instanz, welche zu allen anderen Buchungen minimal zwei unterschiedliche kategorische Attribute besitzt. Jedes kategorische Attribut welches unterschiedlich ist erhöht die Distanz um 1. Sprich die Buchung hat zu allen anderen Instanzen minimal den Abstand von 2. Da $\epsilon$ (Radius) auf 2 gesetzt ist wird ID 2 als Noise behandelt (siehe Berechnung der \textit{neighborhood density} in \cref{sec:recherche:algorithmen:dbscan} \nameref{sec:recherche:algorithmen:dbscan}).
+Der DBSCAN sollte die selben Cluster wie der k-prototype finden, jedoch wird die Buchung mit der ID 2 als Noise aussortiert. Dies ist die einzige Instanz, welche zu allen anderen Buchungen minimal zwei unterschiedliche kategorische Attribute besitzt. Jedes kategorische Attribut, welches unterschiedlich ist, erhöht die Distanz um 1. Demnach hat die Buchung zu allen anderen Instanzen minimal den Abstand von 2. Da $\epsilon$ (Radius) auf 2 gesetzt ist, wird ID 2 als Noise behandelt (siehe Berechnung der \textit{neighborhood density} in \cref{sec:recherche:algorithmen:dbscan} \nameref{sec:recherche:algorithmen:dbscan}).
 
 Erwartetes Resultat vom DBSCAN Algorithmus:
 \begin{longtable}{ | l | l | l | l |} 	
@@ -1016,4 +1018,4 @@ Erwartetes Resultat vom k-prototype Algorithmus:
 \end{longtable}
 
 \section{Programmiersprache}
-Als Programmiersprache für eine Weblösung gibt es diverse zur Auswahl. Eingesetzt werden soll \gls{php}, da die Abteilung welche bei einem Erfolg des Projektes den Code übernehmen soll in dieser Sprache arbeitet.
+Als Programmiersprache für eine Weblösung gibt es diverse zur Auswahl. Eingesetzt werden soll \gls{php}, da die Abteilung, welche bei einem Erfolg des Projekts den Code übernehmen soll in dieser Sprache arbeitet.

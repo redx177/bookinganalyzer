@@ -92,23 +92,23 @@ Die Daten müssen für die Verwendung im Proof of Concept vorbereitet werden. Da
 
 \subsection{Datenerweiterung}
 \label{sec:proofofconcept:datenvorbereitung:datenerweiterung}
-Die Programme für die Datenanreicherungen sind jeweils eine Kommandozeilen-Software welche hier vorgestellt werden.
+Die Programme für die Datenanreicherungen sind jeweils eine Kommandozeilen-Software, welche hier vorgestellt werden.
 
 \subsubsection{Land, Region, Ortschaft}
 \label{sec:proofofconcept:datenvorbereitung:datenerweiterung:landregionortschaft}
-Es wurde ein Programm für die Anreicherung vom Land, der Region sowie der Ortschaft der Objekte erstellt. Es erwartet eine \gls{csv} Datei mit einem @-Zeichen als Feldseparator, sowie das Feld "`NREF"' welches in jeder Zeile vorkommen muss und die ID des Objekts beinhaltet. Der Quellcode ist einsehbar in Github unter \url{https://github.com/soultemptation/bookinganalyzerdestinations}.
+Es wurde ein Programm für die Anreicherung vom Land, der Region sowie der Ortschaft der Objekte erstellt. Es erwartet eine \gls{csv} Datei mit einem @-Zeichen als Feldseparator sowie das Feld "`NREF"', welches in jeder Zeile vorkommen muss und die ID des Objekts beinhaltet. Der Quellcode ist einsehbar in Github unter \url{https://github.com/soultemptation/bookinganalyzerdestinations}.
 
-Die Software verarbeitet Zeile für Zeile der Datei und fügt am Ende drei Felder mit den Namen "`country"', "`region"' und "`place"' an. Um die Daten zu erhalten wird der Such-Service von Interhome angesprochen, welcher die drei Informationen zurückliefert. Als Parameter des Services wird die `NREF"' des Objekts übergeben. 
+Die Software verarbeitet Zeile für Zeile der Datei und fügt am Ende drei Felder mit den Namen "`country"', "`region"' und "`place"' an. Um die Daten zu erhalten, wird der Such-Service von Interhome angesprochen, welcher die drei Informationen zurückliefert. Als Parameter des Services wird die `NREF"' des Objekts übergeben. 
 
-Es kann sein dass das Objekt bei Interhome nicht mehr vorhanden ist und der Service nichts zurück liefert. Deshalb gibt es nach der Ausführung des Programms Buchungen welche keine Informationen für das Land, die Region und die Ortschaft besitzen.
+Es kann sein, dass das Objekt bei Interhome nicht mehr vorhanden ist und der Service nichts zurück liefert. Deshalb gibt es nach der Ausführung des Programms Buchungen, welche keine Informationen für das Land, die Region und die Ortschaft besitzen.
 
-Im Programm wird ein Cache verwendet, welcher für jede "`NREF"' das Land, die Region und die Ortschaft zwischenspeichert. Wenn eine "`NREF"' zum zweiten mal angefragt werden soll, können die Daten aus dem Cache bezogen werden und es muss kein weiterer Service Aufruf durchgeführt werden. Für die 133'001 Buchungen mussten dank des Caches nur 78'342 Anfragen an den Service gestellt werden.
+Im Programm wird ein Cache verwendet, welcher für jede "`NREF"' das Land, die Region und die Ortschaft zwischenspeichert. Wenn eine "`NREF"' zum zweiten Mal angefragt werden soll, können die Daten aus dem Cache bezogen werden und es muss kein weiterer Serviceaufruf durchgeführt werden. Für die 133'001 Buchungen mussten dank des Caches nur 78'342 Anfragen an den Service gestellt werden.
 
 \subsubsection{Geolocation}
 \label{sec:proofofconcept:datenvorbereitung:datenerweiterung:geolocation}
-Das Programm für die Anreicherung der Geolocation erwartet wie die im \cref{sec:proofofconcept:datenvorbereitung:datenerweiterung:landregionortschaft} vorgestellte Software eine \gls{csv} Datei, in welchem die Felder mit einem @-Zeichen getrennt sind, sowie die Attribute "`CUSTRAS"' (Strasse), "`CUCNTRY"' (Land), "`CUZIP"' (Postleitzahl) und "`CUORT"' (Ort). Unter \url{https://github.com/soultemptation/BookingAnalyzerGeocoding} ist der Quellcode abgelegt. 
+Das Programm für die Anreicherung der Geolocation erwartet, wie die im \cref{sec:proofofconcept:datenvorbereitung:datenerweiterung:landregionortschaft} vorgestellte Software eine \gls{csv} Datei, in welchem die Felder mit einem @-Zeichen getrennt sind sowie die Attribute "`CUSTRAS"' (Strasse), "`CUCNTRY"' (Land), "`CUZIP"' (Postleitzahl) und "`CUORT"' (Ort). Unter \url{https://github.com/soultemptation/BookingAnalyzerGeocoding} ist der Quellcode abgelegt. 
 
-Um die Adresse in Geo-Koordinaten umzuwandeln wurde die "`Locations API"' von Bing Maps (Microsoft) verwendet (siehe \url{https://msdn.microsoft.com/en-us/library/ff701715.aspx}). Da der Service nicht kostenlos ist und 133'001 Geocoding-Anfragen gesendet werden mussten, wurde eine Lizenz benötigt welche an einen "`API Key"' gebunden ist. Es konnte eine Studenten-Lizenz erworben werden, welcher 10'000 Anfragen pro Tag erlaubt.
+Um die Adresse in Geo-Koordinaten umzuwandeln wurde die "`Locations API"' von Bing Maps (Microsoft) verwendet (siehe \url{https://msdn.microsoft.com/en-us/library/ff701715.aspx}). Da der Service nicht kostenlos ist und 133'001 Geocoding-Anfragen gesendet werden mussten, wurde eine Lizenz benötigt, welche an einen "`API Key"' gebunden ist. Es konnte eine Studenten-Lizenz erworben werden, welche 10'000 Anfragen pro Tag erlaubt.
 
 Das Programm geht jede Zeile der Datenquelle durch und sendet eine Anfrage an die "`Locations API"'. Übergeben wird die Adresse des Kunden sowie ein "`API Key"' für die Authentifizierung. Die Anfrage ist folgendermassen aufgebaut:
 
@@ -129,11 +129,11 @@ Bing Maps liefert dafür die Koordinaten "`47.37766, 8.53259"' zurück. In der \
 \end{figure}
 
 \subsection{Datenvorbereitung mit RapidMiner}
-Im \cref{sec:recherche:datenvorbereitung} wurde beschrieben, wie die Daten vorbereitet werden sollen. Dieser Abschnitt zeigt auf wie das Program RapidMiner verwendet wurde um diese Vorgaben zu erfüllen. \cref{fig:recherche:rapidminer:1} zeigt den definierte Prozess auf.
+Im \cref{sec:recherche:datenvorbereitung} wurde beschrieben, wie die Daten vorbereitet werden sollen. Dieser Abschnitt zeigt auf, wie das Program RapidMiner verwendet wurde, um diese Vorgaben zu erfüllen. \cref{fig:recherche:rapidminer:1} zeigt den definierte Prozess auf.
 
 %Zuerst werden die Daten aus dem \gls{csv} File geladen. Anschliessend die Attribute gemäss \cref{fig:recherche:attributeinschraenkung:2} eingeschränkt sowie die Diskretisierung entsprechend \cref{fig:recherche:datenvorbereitung:1} und \ref{fig:recherche:datenvorbereitung:2} durchgeführt.
 
-\begin{figure}[htb]
+\begin{figure}[H]
 	\begin{subfigure}[t]{1\textwidth}
 		\centering
 		\includegraphics[width=1\textwidth]{images/rapidminer-process}
@@ -143,64 +143,66 @@ Im \cref{sec:recherche:datenvorbereitung} wurde beschrieben, wie die Daten vorbe
 	\begin{subfigure}[t]{0.5\textwidth}
 		\centering
 		\includegraphics[width=1\textwidth]{images/rapidminer-process-discretization}
-		\caption{Subprocess für die Diskretisierung}
+		\caption{Unterprozess für die Diskretisierung}
 		\label{fig:recherche:rapidminer:1:2}
 	\end{subfigure}
 	\begin{subfigure}[t]{0.8\textwidth}
 		\centering
 		\includegraphics[width=1\textwidth]{images/rapidminer-process-replace-values}
-		\caption{Subprocess für die Ersetzung von Attributwerten}
+		\caption{Unterprozess für die Ersetzung von Attributwerten}
 		\label{fig:recherche:rapidminer:1:3}
 	\end{subfigure}
 	\caption{RapidMiner Prozess für die Vorbereitung der Daten}
 	\label{fig:recherche:rapidminer:1}
 \end{figure}
 
- In \ref{fig:recherche:rapidminer:1:1} wird der Hauptprozess gezeigt wie er im RapidMiner definiert wurde. Nachfolgend werden die einzelnen Schritte 
+In \ref{fig:recherche:rapidminer:1:1} wird der Hauptprozess gezeigt wie er im RapidMiner definiert wurde. Das Programm beginnt mit der Ausführung der Aktion "`Retrieve data"' und folgt der Linie bis zu "`Write CSV"'. Die beiden Schritte "`Discretization"' und "`Replace Values"' sind Unterprozesse, welche in \ref{fig:recherche:rapidminer:1:2} beziehungsweise \ref{fig:recherche:rapidminer:1:3} gezeigt werden.
+
+Nachfolgend werden die einzelnen Aktionen erklärt:
  \begin{itemize}
- 	\item Retrieve data: Lädt die Buchungen aus der Datenquelle damit diese bearbeitet werden können. 
+ 	\item Retrieve data: Lädt die Buchungen aus der Datenquelle, damit diese bearbeitet werden können. 
  	\item Filter Exapmles: Entfernt alle Buchungen mit dem Status "`XX"' (siehe \cref{sec:recherche:datenvorbereitung:filtrieren} \nameref{sec:recherche:datenvorbereitung:filtrieren}).
- 	\item Select Attribute: Entfernt alle Attribute welche nicht in der \cref{fig:recherche:attributeinschraenkung:2} ausfgewählführt werden, sind die Informationen nachher voll anonymisiert und können auch veröffentlicht werden. Der letzte Schritt schreibt das Resultat in ein \gls{csv} File damit es nachher weiterverwendet werden kann.
+ 	\item Select Attribute: Entfernt alle Attribute, welche nicht in der \cref{fig:recherche:attributeinschraenkung:2} aufgeführt werden. Danach sind die Informationen voll anonymisiert und können auch veröffentlicht werden. Der letzte Schritt schreibt das Resultat in ein \gls{csv} File, damit es nachher weiterverwendet werden kann.
  	\item Generate ID: Generiert eine ID für die eindeutige Identifikation der Buchungen.
  	\item Normalize: Normiert nummerische Werte auf einen Interval $0 \leq x \leq 1$ (siehe \cref{sec:recherche:datenvorbereitung:normierung} \nameref{sec:recherche:datenvorbereitung:normierung}).
  	\item Weeklyprice: Berechnet den Wochenpreis einer Buchung (siehe \cref{sec:recherche:datenvorbereitung:normierung} \nameref{sec:recherche:datenvorbereitung:normierung}).
- 	\item Discretization: Ist ein Unterprozess welcher in \cref{fig:recherche:rapidminer:1:2} dargestellt ist.
+ 	\item Discretization: Ist ein Unterprozess, welcher in \cref{fig:recherche:rapidminer:1:2} dargestellt wird.
 	 	\begin{itemize}
-	 		\item Discretize Price: Diskretiert die Preise gemäss \cref{fig:recherche:datenvorbereitung:2}. Die Preisspannen die nicht im Resultat verwendet werden sollen werden später im Schritt "`Replace Values"' entfernt.
-	 		\item Discretize Distance: Diskretiert die Distanzen gemäss \cref{fig:recherche:datenvorbereitung:1}. Distanzspannen die nicht im Resultat verwendet werden sollen werden später im Schritt "`Replace Values"' entfernt.
+	 		\item Discretize Price: Diskretiert die Preise gemäss \cref{fig:recherche:datenvorbereitung:2}. Die Preisspannen, die nicht im Resultat verwendet werden sollen, werden später im Schritt "`Replace Values"' entfernt.
+	 		\item Discretize Distance: Diskretiert die Distanzen gemäss \cref{fig:recherche:datenvorbereitung:1}. Distanzspannen, die nicht im Resultat verwendet werden sollen, werden später im Schritt "`Replace Values"' entfernt.
 	 	\end{itemize}
- 	\item Replace Values: Ist ein Unterprozess welcher in \cref{fig:recherche:rapidminer:1:3} dargestellt ist.
+ 	\item Replace Values: Ist ein Unterprozess, welcher in \cref{fig:recherche:rapidminer:1:3} dargestellt ist.
  		\begin{itemize}
 			\item Replace X -> 1 und Replace empty -> 0: Wandelt boolsche Werte in 1 und 0 um (siehe \cref{sec:recherche:datenvorbereitung:boolschewerte} \nameref{sec:recherche:datenvorbereitung:boolschewerte}). 
-			\item Remove price "normal": Bei der diskretierung des Preises sollen nur günstige und luxus Buchungen beachtet werden (siehe \cref{sec:recherche:datenvorbereitung:diskretierung} \nameref{sec:recherche:datenvorbereitung:diskretierung}). Mittlere Werte werden deshalb in diesem Schritt entfernt.
+			\item Remove price "normal": Bei der Diskretierung des Preises sollen nur günstige und luxus Buchungen beachtet werden (siehe \cref{sec:recherche:datenvorbereitung:diskretierung} \nameref{sec:recherche:datenvorbereitung:diskretierung}). Mittlere Werte werden deshalb in diesem Schritt entfernt.
 			\item Remove distance 499<: Gleich wie für den Preis werden Distanzen mit einem grösseren Wert als 499 nicht verwendet und deshalb in diesem Schritt entfernt.
  		\end{itemize}
- 	\item Remove Price: Entfernt den gesamt Preis der Buchung. Dieser muss beim Schritt "`Select Attribute"' hinzugefügt werden damit der Wochenpreis berechnet werden kann. Im Resultat wird das Attribut jedoch nicht mehr benötig.
+ 	\item Remove Price: Entfernt den gesamten Preis der Buchung. Dieses Attribut muss beim Schritt "`Select Attribute"' hinzugefügt werden, damit der Wochenpreis berechnet werden kann. Im Resultat wird das Attribut jedoch nicht mehr benötig.
  	\item Write CSV: Speichert das Resultat im \gls{csv} Format auf die Festplatte ab.
  \end{itemize}
 
 \section{Architektur}
 \label{sec:proofofconcept:architektur}
-Zuerst werden in diesem Abschnitt die wesentlichen Punkte aufgeführt, welche im \cref{sec:konzept} definiert wurden und Einfluss auf die Architektur genommen haben, und wie sie den Aufbau mitbestimmt haben. 
-Anschliessend wird anhand eines \gls{uml}-Paketdiagrammes die Architektur visualisiert.
+Zuerst werden in diesem Abschnitt die wesentlichen Punkte aufgeführt, welche im \cref{sec:konzept} definiert wurden und Einfluss auf die Architektur genommen haben und wie sie den Aufbau mitbestimmt haben. 
+Anschliessend wird anhand eines \gls{uml}-Paketdiagramms die Architektur visualisiert.
 
 \subsection{Anforderungen aus dem Konzept}
 \label{sec:proofofconcept:architektur:anforderungen}
-Nachfolgend sind die Punkte aus dem \cref{sec:konzept} aufgeführt welche den grundsätzlichen Aufbau der Umsetzung bestimmen.
+Nachfolgend sind die Punkte aus dem \cref{sec:konzept} aufgeführt, welche den grundsätzlichen Aufbau der Umsetzung bestimmen.
 
 \begin{itemize}
-	\item Ansichten: Es gibt vier Ansichten welche der Benutzer aufrufen kann. Stammdaten einsehen, Attributanalyse durchführen, Attributanalyse mit Gruppierung durchführen und Einstellungen anpassen.
-	\item Datentypen der Stammdaten: Die Datenbasis besteht aus Daten welche verschiedene Datentypen annehmen können.
-	\item Algorithmen: Es gibt drei Algorithmen welche auf die Datenbasis angewendet werden können: Apriori, KPrototype und DBScan.
-	\item Filtrierung: Vor jeder Analyse kann die Datenbasis durch filter eingeschränkt werden.
+	\item Ansichten: Es gibt vier Ansichten, welche der Benutzer aufrufen kann. Stammdaten einsehen, Attributanalyse durchführen, Attributanalyse mit Gruppierung durchführen und Einstellungen anpassen.
+	\item Datentypen der Stammdaten: Die Datenbasis besteht aus Daten, welche verschiedene Datentypen annehmen können.
+	\item Algorithmen: Es gibt drei Algorithmen welche auf die Datenbasis angewendet werden können: Apriori, k-prototpye und DBSCAN.
+	\item Filtrierung: Vor jeder Analyse kann die Datenbasis durch Filter eingeschränkt werden.
 	\item Konfiguration: Die Algorithmen sollen vom Endbenutzer konfigurierbar sein.
 \end{itemize}
 
 \subsubsection{Ansichten}
 \label{sec:proofofconcept:architektur:anforderungen:ansichten}
-Für die Darstellung der vier Ansichten (Stammdaten einsehen, Attributanalyse durchführen, Attributanalyse mit Gruppierung durchführen und Einstellungen anpassen) wird eine Lösung angestrebt, welche die Ansicht von der Applikationslogik trennt. Dazu wird eine Templating Bibliothek für die Darstellung verwendet mit welcher die Ansichten generiert werden können. 
+Für die Darstellung der vier Ansichten (Stammdaten einsehen, Attributanalyse durchführen, Attributanalyse mit Gruppierung durchführen und Einstellungen anpassen) wird eine Lösung angestrebt, welche die Ansicht von der Applikationslogik trennt. Dazu wird eine Templating Bibliothek für die Darstellung verwendet, mit welcher die Ansichten generiert werden können. 
 
-Es wurden drei Bibliotheken evaluiert welche für die Erstellung der Ansichten verwendet werden können. Diese werden in den Kategorien Syntax, Funktionalität und Dokumention bewertet. Den ersten Punkt objektiv zu bewerten ist relativ schwierig. Es wurde versucht im Vergleich zu den anderen Kandidaten ein Urteil zu fällen wie verständlich die Templates zu lesen sind. Bei der Funktionalität wir der Funktionsumfang der einzelnen Bibliotheken miteinander verglichen. Die Dokumentation schlussendlich bewertet wie verständlich die Dokumentation zu lesen ist und wie tief sie reicht. Die Bewertungsskala reicht von 1 bis 9. 1-3 ist schlecht und beduetet dass der Punkt eine echtes Hindernis darstellt. 4-6 ist im Mittelfeld. Mit solch einer Benotung kann die Bibliothek eingesetzt werden, auch wenn Verbesserungen in dem Bereich erwünscht sind. 7-9 steht dafür, dass die Library in dem Bereich sehr gut ist im Vergleich mit den Konkurrenten
+Es wurden drei Bibliotheken evaluiert, welche für die Erstellung der Ansichten verwendet werden können. Diese werden in den Kategorien Syntax, Funktionalität und Dokumentation bewertet. Den ersten Punkt objektiv zu bewerten ist relativ schwierig. Es wurde versucht im Vergleich zu den anderen Kandidaten ein Urteil zu fällen, wie verständlich die Templates zu lesen sind. Bei der Funktionalität wir der Funktionsumfang der einzelnen Bibliotheken miteinander verglichen. Die Dokumentation schlussendlich bewertet, wie verständlich die Dokumentation zu lesen ist und wie tief sie reicht. Die Bewertungsskala reicht von 1 bis 9. 1-3 ist schlecht und bedeutet, dass der Punkt ein echtes Hindernis darstellt. 4-6 ist im Mittelfeld. Mit solch einer Benotung kann die Bibliothek eingesetzt werden, auch wenn Verbesserungen in dem Bereich erwünscht sind. 7-9 steht dafür, dass die Library in dem Bereich sehr gut ist im Vergleich mit den Konkurrenten.
 \begin{table}[H] 
 	\caption{Vergleich verschiedener Templating Bibliotheken}
 	\centering
@@ -217,11 +219,11 @@ Es wurden drei Bibliotheken evaluiert welche für die Erstellung der Ansichten v
 	\end{tabular}
 \end{table}
 
-Blade (\url{https://laravel.com/docs/5.4/blade}) bietet eine herausragende Funktionalität an. Es werden die üblichen Befehle für die Ausgabe von Variablen, die Iteration über Listen und die IF/ELSE abfragen unterstützt. Zusätzlich können Grundgerüste erstellt werden welche später von einem anderen Template mit Daten befüllt werden. Dadurch kann in einer Datei der Grundaufbau der Seite definiert werden welche Bereiche definiert, welche später mit Inhalt befüllt werden. Dies fördert den modularen Aufbau massiv. Die Syntax jedoch ist sehr unleserlich. Die Verwendung von `Sections"' (siehe \url{https://laravel.com/docs/5.4/blade}) ist ein zentraler Bestandteil der Bibliothek aber die Verwendung ist schwer leserlich. Die Dokumentation schlussendlich ist sehr übersichtlich, jedoch sind einige detaillierteren Funktionalitäten ausgelassen worden.
+Blade (\url{https://laravel.com/docs/5.4/blade}) bietet eine herausragende Funktionalität an. Es werden die üblichen Befehle für die Ausgabe von Variablen, der Iteration über Listen und die IF/ELSE Abfragen unterstützt. Zusätzlich können Grundgerüste erstellt werden, welche später von einem anderen Template mit Daten befüllt werden. Dadurch kann in einer Datei der Grundaufbau der Seite definiert werden, welche Bereiche definiert, die später mit Inhalt befüllt werden. Dies fördert den modularen Aufbau massiv. Die Syntax jedoch ist sehr unleserlich. Die Verwendung von `Sections"' (siehe \url{https://laravel.com/docs/5.4/blade}) ist ein zentraler Bestandteil der Bibliothek, aber die Verwendung ist schwer leserlich. Die Dokumentation ist schlussendlich sehr übersichtlich, jedoch sind einige detaillierteren Funktionalitäten ausgelassen worden.
 
-Mustache (\url{https://mustache.github.io}) ist eine Library welche in über 30 Programmiersprachen portiert wurde. Deshalb ist die Dokumentation dazu auch sehr detailliert und gut verständlich. An Funktionalität bietet Mustache jedoch nur die Ausgabe von Variablen, eine Funktion zum Iterieren und eine Überprüfung ob ein Wert "`null"' ist. Da sind die beiden Kontrahenten um einiges stärker. Die Syntax ist leserlich und einfach verständlich, unter anderem auch weil die Funktionalität sehr eingeschränkt ist.
+Mustache (\url{https://mustache.github.io}) ist eine Library, welche in über 30 Programmiersprachen portiert wurde. Deshalb ist die Dokumentation dazu auch sehr detailliert und gut verständlich. An Funktionalität bietet Mustache jedoch nur die Ausgabe von Variablen, eine Funktion zum Iterieren und eine Überprüfung, ob ein Wert "`null"' ist. Da sind die beiden Kontrahenten um einiges stärker. Die Syntax ist leserlich und einfach verständlich, unter anderem auch, weil die Funktionalität sehr eingeschränkt ist.
 
-Twig (\url{https://twig.sensiolabs.org}) wurde inspieriert von Jinja, einer Templating Engine für die Programmiersprache Python. Die Syntax ist gut verständlich und sehr ähnlich zu jener von Mustache. Da jedoch die Funktionalität um einiges umfangreicher ausfällt wird auch die Verständlichkeit etwas beeinträchtigt. Wie gesagt die ist Funktionalität besser als bei Mustache, genauer gesagt ist sie hervorragend. Vergleichbar mit jener von Blade weshalb sie beide eine 9 erhalten. Im vergleich mit den anderen Kandidaten ist die Dokumentation am umfangreichsten und generell sehr verständlich.
+Twig (\url{https://twig.sensiolabs.org}) wurde inspieriert von Jinja, einer Templating Engine für die Programmiersprache Python. Die Syntax ist gut verständlich und sehr ähnlich zu jener von Mustache. Da jedoch die Funktionalität um einiges umfangreicher ausfällt, wird auch die Verständlichkeit etwas beeinträchtigt. Wie bereits erwähnt, die Funktionalität ist besser als bei Mustache, genauer gesagt ist sie hervorragend. Vergleichbar mit jener von Blade, weshalb sie beide eine 9 erhalten. Im Vergleich mit den anderen Kandidaten ist die Dokumentation am umfangreichsten und generell sehr verständlich.
 
 Fazit: Eingesetzt wird Twig, weil es eine herausragende Dokumentation und Funktionsumfang bietet, welche über einige Schwächen beim Syntax hinwegzutäuschen vermag. Mehr zur Umsetzung der Ansichten mit Twig kann im \cref{sec:proofofconcept:externebibliotheken:twig} nachgelesen werden.
 
@@ -248,24 +250,24 @@ Bislang wurde von numerischen und kategorischen Attributen gesprochen. Dies ist 
 	\end{tabular}
 \end{table}
 
-Die Algorithmen behandelt Integer und Float als numerische-, und Boolean, Distance und Price als kategorische Attribute. Das Programm benötigt jedoch eine Unterscheidung dieser Typen da sie in verschiedene Datentypen abgelegt werden müssen. Zusätzlich werden noch Texte benötigt, welche zwar nicht analysiert, jedoch für die Filtrierung notwendig sind.
+Die Algorithmen behandelt Integer und Float als numerische- und Boolean, Distance und Price als kategorische Attribute. Das Programm benötigt jedoch eine Unterscheidung dieser Typen, da sie in verschiedene Datentypen abgelegt werden müssen. Zusätzlich werden noch Texte benötigt, welche zwar nicht analysiert, jedoch für die Filtrierung notwendig sind.
 
-In der Umsetzung sind die Datentypen im Package "`Models"' abgelegt. Siehe \cref{sec:proofofconcept:packagestruktur} \nameref{sec:proofofconcept:packagestruktur} für eine Übersicht oder \cref{sec:proofofconcept:klassenstruktur:models} \nameref{sec:proofofconcept:klassenstruktur:models} für eine detaillierte Aufstellung.
+In der Umsetzung sind die Datentypen im Package "`Models"' abgelegt. Siehe \cref{sec:proofofconcept:packagestruktur} \nameref{sec:proofofconcept:packagestruktur} für eine Übersicht, oder \cref{sec:proofofconcept:klassenstruktur:models} \nameref{sec:proofofconcept:klassenstruktur:models} für eine detaillierte Aufstellung.
 
 \subsubsection{Algorithmen}
 \label{sec:proofofconcept:architektur:anforderungen:algorithmen}
-Den grössten Einfluss auf die Architektur haben die Algorithmen. Eine Webanfrage hat normalerweise eine obere Laufzeitgrenze von 30 Sekunden. Bis dann muss der Server eine Antwort liefern, sonst wird dem Benutzer eine Fehlermeldung angezeigt und der Prozess auf dem Server gestoppt. Da die Analyse, je nach Datenmenge, einige Minuten bis Stunden dauern kann musste dafür eine Lösung gefunden werden. 
+Den grössten Einfluss auf die Architektur haben die Algorithmen. Eine Webanfrage hat normalerweise eine obere Laufzeitgrenze von 30 Sekunden. Bis dann muss der Server eine Antwort liefern, sonst wird dem Benutzer eine Fehlermeldung angezeigt und der Prozess auf dem Server gestoppt. Da die Analyse, je nach Datenmenge, einige Minuten bis Stunden dauern kann, musste dafür eine Lösung gefunden werden. 
 
-Umgangen wurde diese Problematik durch den Einsatz von Hintergrundprozessen. Wenn der User auf einer Ansicht die Filter ausfüllt und den Analyseprozess startet wird ein Prozess auf dem Server gestartet und dem Benutzer eine Seite angezeigt mit der Info, dass die Analyse gestartet wurde. Der Prozess läuft dann im Hintergrund weiter und sendet dem Benutzer regelmässige Aktualisierungen über den Vorgang der Analyse. Mehr dazu im \cref{sec:proofofconcept:kommunikationsablauf} \nameref{sec:proofofconcept:kommunikationsablauf}.
+Umgangen wurde diese Problematik durch den Einsatz von Hintergrundprozessen. Wenn der User auf einer Ansicht die Filter ausfüllt und den Analyseprozess startet, wird ein Prozess auf dem Server gestartet und dem Benutzer eine Seite mit der Information angezeigt, dass die Analyse begonnen hat. Der Prozess läuft im Hintergrund weiter und sendet dem Benutzer regelmässige Aktualisierungen über den Vorgang der Analyse. Mehr dazu im \cref{sec:proofofconcept:kommunikationsablauf} \nameref{sec:proofofconcept:kommunikationsablauf}.
 
 \subsubsection{Filtrierung}
 \label{sec:proofofconcept:architektur:anforderungen:filtrierung}
-Um die Analyse durch Algorithmen auf einer Untermenge der Daten durchzuführen (siehe FA3 in im \cref{sec:anforderungsanalyse:funktionaleanforderung} \nameref{sec:anforderungsanalyse:funktionaleanforderung}) soll der User die Möglichkeit erhalten durch Einschränkung der Daten diese zu filtrieren. 
+Um die Analyse durch Algorithmen auf einer Untermenge der Daten durchzuführen (siehe FA3 in im \cref{sec:anforderungsanalyse:funktionaleanforderung} \nameref{sec:anforderungsanalyse:funktionaleanforderung}), soll der User die Möglichkeit erhalten durch Einschränkung der Daten diese zu filtrieren. 
 
-Deshalb wird in jeder Ansicht (ausser beim anpassen der Einstellungen) ein Formular angezeigt mit welcher die Daten eingeschränkt werden können. In der Umsetzung wurde ein Model erstellt welches die Filter für die verschiedenen Attribute abbildet (siehe \cref{sec:proofofconcept:klassenstruktur:models} \nameref{sec:proofofconcept:klassenstruktur:models}) und ein Twig Template um das Formular darzustellen (siehe \cref{sec:proofofconcept:externebibliotheken:twig} \nameref{sec:proofofconcept:externebibliotheken:twig}). Schlussendlich muss beim Zugriff der Daten die Filters beachtet werden. Es dürfen nur diejenigen Buchungen geliefert werden welche allen Kriterien zutreffen. Die Datenmengen auf die die Filter angewendet wurden werden gecached um den Zugriff zu beschleunigen (siehe \cref{sec:proofofconcept:performance:caching} \nameref{sec:proofofconcept:performance:caching}).
+Deshalb wird in jeder Ansicht (ausser beim Anpassen der Einstellungen) ein Formular angezeigt, mit welcher die Daten eingeschränkt werden können. In der Umsetzung wurde ein Model erstellt, welches die Filter für die verschiedenen Attribute abbildet (siehe \cref{sec:proofofconcept:klassenstruktur:models} \nameref{sec:proofofconcept:klassenstruktur:models}) und ein Twig Template, um das Formular darzustellen (siehe \cref{sec:proofofconcept:externebibliotheken:twig} \nameref{sec:proofofconcept:externebibliotheken:twig}). Schlussendlich müssen beim Zugriff der Daten die Filter beachtet werden. Es dürfen nur diejenigen Buchungen geliefert werden, welche allen Kriterien zutreffen. Die Datenmengen, auf die die Filter angewendet wurden, werden gecached, um den Zugriff zu beschleunigen (siehe \cref{sec:proofofconcept:performance:caching} \nameref{sec:proofofconcept:performance:caching}).
 
 \subsubsection{Konfiguration}
-Ein Benutzer des Programms soll, das Programm konfigurieren können (siehe FA7 im \cref{sec:anforderungsanalyse:funktionaleanforderung} \nameref{sec:anforderungsanalyse:funktionaleanforderung}). Deshalb wird eine Konfigurationsdatei eingelesen, die alle Parameter enthält die vom Benutzer angepasst werden können. Diese Datei kann darauf hin mittels der Ansicht "`Einstellungen anpassen"' modifiziert werden. Im Code wird eine Klasse benötigt welche die Konfiguration übernimmt. Dies wird vom ConfigProvider erledigt. Mehr dazu im \cref{sec:proofofconcept:klassenstruktur} \nameref{sec:proofofconcept:klassenstruktur}. Zusätzlich gibt es noch technische Parameter die für die Ausführung des Programms benötigt werden. Diese sind ebenfalls in der Konfigurationsdatei enthalten, können jedoch nicht in der "`Einstellungen anpassen"' Ansicht geändert werden. Alle Konfigurationen sind im \cref{sec:proofofconcept:konfiguration} \nameref{sec:proofofconcept:konfiguration} beschrieben.
+Ein Benutzer des Programms soll das Programm konfigurieren können (siehe FA7 im \cref{sec:anforderungsanalyse:funktionaleanforderung} \nameref{sec:anforderungsanalyse:funktionaleanforderung}). Deshalb wird eine Konfigurationsdatei eingelesen, die alle Parameter enthält, die vom Benutzer angepasst werden können. Diese Datei kann daraufhin mittels der Ansicht "`Einstellungen anpassen"' modifiziert werden. Im Code wird eine Klasse benötigt, welche die Konfiguration übernimmt. Dies wird vom ConfigProvider erledigt. Mehr dazu im \cref{sec:proofofconcept:klassenstruktur} \nameref{sec:proofofconcept:klassenstruktur}. Zusätzlich gibt es noch technische Parameter, die für die Ausführung des Programms benötigt werden. Diese sind ebenfalls in der Konfigurationsdatei enthalten, können jedoch nicht in der "`Einstellungen anpassen"' Ansicht geändert werden. Alle Konfigurationen sind im \cref{sec:proofofconcept:konfiguration} \nameref{sec:proofofconcept:konfiguration} beschrieben.
 
 
 
@@ -280,7 +282,7 @@ Ein Benutzer des Programms soll, das Programm konfigurieren können (siehe FA7 i
 
 \subsection{Package-Struktur}
 \label{sec:proofofconcept:packagestruktur}
-Ein Package gruppiert ähnliche Klassen und Interfaces zusammen. Man kann sich ein Package vorstellen wie ein Ordner auf dem Computer. Die Struktur dieser Gruppen sowie deren Verwendung untereinander wird in \cref{fig:proofofconcept:packagestruktur:1} mit einem \gls{uml} Package Diagramm aufgezeigt. 
+Ein Package gruppiert ähnliche Klassen und Interfaces zusammen. Man kann sich ein Package vorstellen, wie einen Ordner auf dem Computer. Die Struktur dieser Gruppen sowie deren Verwendung untereinander wird in \cref{fig:proofofconcept:packagestruktur:1} mit einem \gls{uml} Package Diagramm aufgezeigt. 
 \begin{figure}[H]
 	\RawFloats
 	\centering
@@ -289,34 +291,34 @@ Ein Package gruppiert ähnliche Klassen und Interfaces zusammen. Man kann sich e
 	\label{fig:proofofconcept:packagestruktur:1}
 \end{figure}
 
-Das Ziel war es, gemäss dem \gls{srp} eine starke Kohäsion und eine lose Kopplung zu erreichen. Deshalb wurde die Struktur der Packages ist so ausgelegt, dass die Abhängigkeiten von oben nach unten fliessen. Sprich ein oberes Packet kann ein unteres verwenden, jedoch nicht umgekehrt. Einstiegspunkte für die Ausführung des Programms sind die Klassen in den Packages Controllers und Services. Ersteres wird vom Benutzer verwendet wenn er eine Seite angezeigt haben möchte. Die Services sind für die Hintergrundprozesse verantwortlich und führen eine Analyse der verschiedenen Algorithmen durch (siehe \cref{sec:proofofconcept:architektur:services} \nameref{sec:proofofconcept:architektur:services}). Nachfolgend werden die einzelnen Packages erklärt.
+Das Ziel war es, gemäss dem \gls{srp}, eine starke Kohäsion und eine lose Kopplung zu erreichen. Deshalb wurde die Struktur der Packages so ausgelegt, dass die Abhängigkeiten von oben nach unten fliessen. Das bedeutet ein oberes Packet kann ein Unteres verwenden, jedoch nicht umgekehrt. Einstiegspunkte für die Ausführung des Programms sind die Klassen in den Packages Controllers und Services. Ersteres wird vom Benutzer verwendet, wenn er eine Seite angezeigt haben möchte. Die Services sind für die Hintergrundprozesse verantwortlich und führen eine Analyse der verschiedenen Algorithmen durch (siehe \cref{sec:proofofconcept:architektur:services} \nameref{sec:proofofconcept:architektur:services}). Nachfolgend werden die einzelnen Packages erklärt.
 
 \begin{itemize}
-	\item Controllers: Nehmen die Anfragen eines Benutzers entgegen und verarbeiten diese. Dazu verwenden sie Klassen aus dem Business welches ein Datenmodel zurückliefert. Dieses Model werden anschliessend vom Controller an die View übergeben welche die Ausgabe für den Browser generiert (siehe \cref{sec:proofofconcept:architektur:mvc} \nameref{sec:proofofconcept:architektur:mvc}).
-	\item Services: Führen die verschiedenen Analysen durch. Sie sind so ausgelegt dass sie als eigenständiger Prozess im Hintergrund ausgeführt werden können (siehe \cref{sec:proofofconcept:architektur:services} \nameref{sec:proofofconcept:architektur:services}).
+	\item Controllers: Nehmen die Anfragen eines Benutzers entgegen und verarbeiten diese. Dazu verwenden sie Klassen aus dem Business, welche ein Datenmodel zurückliefern. Dieses Model wird anschliessend vom Controller ans Twig übergeben, welche die Ausgabe für den Browser generiert (siehe \cref{sec:proofofconcept:externebibliotheken:twig} \nameref{sec:proofofconcept:externebibliotheken:twig}).
+	\item Services: Führen die verschiedenen Analysen durch. Sie sind so ausgelegt, dass sie als eigenständiger Prozess im Hintergrund ausgeführt werden können (siehe \cref{sec:proofofconcept:architektur:services} \nameref{sec:proofofconcept:architektur:services}).
 	\item Business: Beinhaltet die Geschäftlogik, was alles umfasst was mit den Models interagiert. Demnach die Algorithmen selber (im Unterpacket "`Algorithms"'), die Distanzmessung (Klasse DistanceMeasurement), den Datenzugriff (Klasse BookingDataIterator), etc. (siehe \cref{sec:proofofconcept:klassenstruktur:algorithmen} \nameref{sec:proofofconcept:klassenstruktur:algorithmen})
-	\item Models: Klassen für die Datenhaltung welche möglichst wenig Logik beinhalten (siehe \cref{sec:proofofconcept:klassenstruktur:models} \nameref{sec:proofofconcept:klassenstruktur:models}).
-	\item Utilities: Beinhalten Logik die nichts mit den Algorithmen zu tun hat und keine Models verwendet. Diese Klassen können für sich selber in einem anderen Projekt wiederverwendet werden.
+	\item Models: Klassen für die Datenhaltung, welche möglichst wenig Logik beinhalten (siehe \cref{sec:proofofconcept:klassenstruktur:models} \nameref{sec:proofofconcept:klassenstruktur:models}).
+	\item Utilities: Beinhalten Logik, die nichts mit den Algorithmen zu tun haben und keine Models verwendet. Diese Klassen können für sich selber in einem anderen Projekt wiederverwendet werden.
 	\item Interfaces: Alle verwendeten Interfaces.
 	\item Tests: UnitTests (siehe \cref{sec:proofofconcept:unittests} \nameref{sec:proofofconcept:unittests}).
 \end{itemize}
 
 \subsection{Klassenstruktur}
 \label{sec:proofofconcept:klassenstruktur}
-Um den Aufbau der Lösung zu erklären werden die in diesem Abschnitt die Klassen sowie deren Abhängigkeiten gezeigt. Verwendet werden \gls{uml} Klassendiagramme für die Darstellung. Diese wurden jedoch in den \cref{app:klassendiagram} verschoben da sie wegen ihrer Grösse die Übersichtlichkeit erschweren.
+Um den Aufbau der Lösung zu erklären, werden die in diesem Abschnitt die Klassen sowie deren Abhängigkeiten gezeigt. Verwendet werden \gls{uml} Klassendiagramme für die Darstellung. Diese wurden jedoch in den \cref{app:klassendiagram} verschoben, da sie wegen ihrer Grösse die Übersichtlichkeit erschweren.
 
-Einige Klassen sind grün eingefärbt und stellen den Ausgangspunkte dar, von welchen die Erklärungen beginnen. Rot hinterlegt sind jene Klassen die von einer externen Bibliothek bereitgestellt werden.
+Einige Klassen sind grün eingefärbt und stellen den Ausgangspunkte dar, von welchen die Erklärungen beginnen. Rot hinterlegt sind jene Klassen, die von einer externen Bibliothek bereitgestellt werden.
 
-Die Klasse ConfigProvider liefert die Konfigurationen und wird von vielen Klassen verwendet. Um die Übersichtlichkeit nicht unnötig zu erschweren wurde diese Abhängigkeit in den Klassendiagrammen weggelassen. 
+Die Klasse ConfigProvider liefert die Konfigurationen und wird von vielen Klassen verwendet. Um die Übersichtlichkeit nicht unnötig zu erschweren, wurde diese Abhängigkeit in den Klassendiagrammen weggelassen. 
 
 \subsubsection{Models}
 \label{sec:proofofconcept:klassenstruktur:models}
 Die Models sind Datencontainer mit möglichst wenig Logik. 
 
-\paragraph{Filter \& Felder} In \cref{fig:proofofconcept:klassenstruktur:5} werden die Filter und Felder gezeigt. Felder (Field) werden von den Algorithmen verwendet (z.B. Distanzmessung bei beim Clustering oder Häufigkeitszählung beim Apriori) sowie von den Filtern. Letztere werden benutzt um die Datenbasis einzuschränken. Es gibt verschiedene Arten von Feldern, welche direkt im Klassendiagramm abgebildet sind. Dies wären zum Beispiel Fliesskommazahlen (FloatField), Ganzzahlen (IntegerField), Texten (String), etc. Welche Felder in der Datenbasis auf welchen Feldtypen im Code zugeordnet werden ist in der Konfiguration des Programms definiert (siehe \cref{sec:proofofconcept:konfiguration} \nameref{sec:proofofconcept:konfiguration}).
+\paragraph{Filter \& Felder} In \cref{fig:proofofconcept:klassenstruktur:5} werden die Filter und Felder gezeigt. Felder (Field) werden von den Algorithmen verwendet (z.B. Distanzmessung bei beim Clustering oder Häufigkeitszählung beim Apriori) sowie von den Filtern. Letztere werden benutzt, um die Datenbasis einzuschränken. Es gibt verschiedene Arten von Feldern, welche direkt im Klassendiagramm abgebildet sind. Dies wären zum Beispiel Fliesskommazahlen (FloatField), Ganzzahlen (IntegerField), Texte (String), etc. Welche Felder in der Datenbasis auf welchen Feldtypen im Code zugeordnet werden, ist in der Konfiguration des Programms definiert (siehe \cref{sec:proofofconcept:konfiguration} \nameref{sec:proofofconcept:konfiguration}).
 
-\paragraph{Resultat des Apriori-Algorithmus} In \cref{fig:proofofconcept:klassenstruktur:6} werden die Histogramme abgebildet, welche üblicherweise zur Darstellung von Häufigkeitsverteilung verwendet wird. In dieser Arbeit werden sie für die Repräsentation des Resultates eines Apriori Algorithmuses benutzt. 
-Ein "`Histograms"' besitzt ein oder mehrere "`Histogram"' welches wiederum ein oder mehrere "`HistogramBins"' enthält. "`Histograms"' beinhaltet sämtliche Attributmengen und stehen somit für das gesamte Resultat der Anaylse. Ein "`Histogram"' repräsentiert eine Iteration des Apriori Algorithmus (z.B. alle häufigen 2-Attributmengen). Schlussendlich enthält ein "`HistogramBin"' eine Attributkombination mit der Häufigkeit, wie oft sie in der Datenmenge vorkommt. Um dies an einem Beispiel zu zeigen wird eine "`Histograms"' hier gezeigt:
+\paragraph{Resultat des Apriori-Algorithmus.} In \cref{fig:proofofconcept:klassenstruktur:6} werden die Histogramme abgebildet, die üblicherweise zur Darstellung von Häufigkeitsverteilung verwendet werden. In dieser Arbeit werden sie für die Repräsentation des Resultats eines Apriori Algorithmuses benutzt. 
+Ein "`Histograms"' besitzt ein, oder mehrere "`Histogram"'e, welche wiederum ein, oder mehrere "`HistogramBin"' enthalten. "`Histograms"' beinhaltet sämtliche Attributmengen und stehen somit für das gesamte Resultat der Anaylse. Ein "`Histogram"' repräsentiert eine Iteration des Apriori Algorithmus (z.B. alle häufigen 2-Attributmengen). Schlussendlich enthält ein "`HistogramBin"' eine Attributkombination mit der Häufigkeit, wie oft sie in der Datenmenge vorkommt. Um dies an einem Beispiel zu zeigen, wird ein "`Histograms"' hier gezeigt:
 \begin{itemize}
 \item \textbf{\#1 Histograms}:
 	\begin{itemize}
@@ -339,17 +341,17 @@ Ein "`Histograms"' besitzt ein oder mehrere "`Histogram"' welches wiederum ein o
 \end{itemize}  
 
 
-\paragraph{Resultat der Clustering-Algorithmen} Das Model für die Resultate der Clustering Algorithmen wird in \cref{fig:proofofconcept:klassenstruktur:7} gezeigt. Gemeinsamkeiten der beiden Algorithmen sind in den Interfaces "`ClusteringResult"' und "`Cluster"' zu finden. Deren Unterschiede sind jeweils in den entsprechenden Implementationen definiert. Die einzelnen Klassen werden nachfolgend beschrieben.
+\paragraph{Resultat der Clustering-Algorithmen.} Das Model für die Resultate der Clustering Algorithmen wird in \cref{fig:proofofconcept:klassenstruktur:7} gezeigt. Gemeinsamkeiten der beiden Algorithmen sind in den Interfaces "`ClusteringResult"' und "`Cluster"' zu finden. Deren Unterschiede sind jeweils in den entsprechenden Implementationen definiert. Die einzelnen Klassen werden nachfolgend beschrieben.
 \begin{itemize}
-	\item ClusterinResult: Definiert das ein Resultat vom DBScan und vom KProtoype ein oder mehrere Cluster besitzen muss.
+	\item ClusterinResult: Definiert, dass ein Resultat vom DBSCAN und vom k-prototype ein, oder mehrere Cluster besitzen muss.
 	\begin{itemize}  
-		\item DBScanResult: Das Resultat einer DBScan Analyse. Zusätzlich zu den Clustern selber besitzt die Klasse Noise-Punkte, welche keinem Cluster zugewiesen werden können (siehe \cref{sec:recherche:algorithmen:dbscan} \nameref{sec:recherche:algorithmen:dbscan}).
-		\item KPrototypeResult: Das Resultat einer KPrototype Analyse. Neben den Clustern beinhaltet die Klasse die Gesamtkosten des Clusterings.
+		\item DBScanResult: Das Resultat einer DBSCAN Analyse. Zusätzlich zu den Clustern selber besitzt die Klasse Noise-Punkte, die keinem Cluster zugewiesen werden können (siehe \cref{sec:recherche:algorithmen:dbscan} \nameref{sec:recherche:algorithmen:dbscan}).
+		\item KPrototypeResult: Das Resultat einer k-prototpye Analyse. Neben den Clustern beinhaltet die Klasse die Gesamtkosten des Clusterings.
 	\end{itemize}  
-	\item Cluster: Ein Cluster besteht bei beiden Algorithmen aus einem oder mehreren Punkten.
+	\item Cluster: Ein Cluster besteht bei beiden Algorithmen aus einem, oder mehreren Punkten.
 		\begin{itemize}  
-			\item DBScanCluster \& ClusterPoint: Der "`DBScanCluster"' besitzt nur die einzelnen Datenpunkte "`ClusterPoint"'. Diese beinhalten die ID der Buchung welche sie darstellen.
-			\item KPrototypeCluster \& DistanceClusterPoint: Die Cluster beim KPrototypeCluster besitzen ein Zentrum, welches auf der Klasse "`KPrototypeCluster"' abgelegt ist. Jeder Datenpunkt in diesem Cluster ist vom Typ "`DistanceClusterPoint"' welcher neben der ID der Buchung welche er repräsentiert noch die Distanz bis zum Zentrum des Clusters beinhalten.
+			\item DBScanCluster \& ClusterPoint: Der "`DBScanCluster"' besitzt nur die einzelnen Datenpunkte "`ClusterPoint"'. Diese beinhalten die ID der Buchung, welche sie darstellen.
+			\item KPrototypeCluster \& DistanceClusterPoint: Die Cluster beim KPrototypeCluster besitzen ein Zentrum, welches auf der Klasse "`KPrototypeCluster"' abgelegt wird. Jeder Datenpunkt in diesem Cluster ist vom Typ "`DistanceClusterPoint"', der neben der ID der Buchung, welche er repräsentiert, noch die Distanz bis zum Zentrum des Clusters beinhaltet.
 		\end{itemize}  
 \end{itemize}  
 
@@ -430,21 +432,21 @@ object(DataTypeCluster) {
 		\end{itemize}
 \end{itemize}
 
-\cref{fig:proofofconcept:klassenstruktur:3} zeigt den Service für den DBScan Algorithmus. Die Klasse "`BookingDataIterator"' wurde bereits im \cref{fig:proofofconcept:klassenstruktur:2} erläutert und wurde deshalb nicht mehr detailliert abgebildet.
+\cref{fig:proofofconcept:klassenstruktur:3} zeigt den Service für den DBSCAN Algorithmus. Die Klasse "`BookingDataIterator"' wurde bereits im \cref{fig:proofofconcept:klassenstruktur:2} erläutert und wurde deshalb nicht mehr detailliert abgebildet.
 \begin{itemize}
-	\item DBScanAlgorithm: Führt den DBScan Algorithmus aus. 
-	\item ClusteringProgress \& DBScanClusteringProgress: Eine abstrakte Klasse welche das Resultat eines Clusterings in ein File abspeichert. Kann für den DBScan und den KPrototype verwendet werden. Die abgeleitete Klasse "`DBScanClusteringProgress"' wird lediglich benötigt um die richtige View zu laden und die korrekte Konfiguration bereitzustellen.
+	\item DBScanAlgorithm: Führt den DBSCAN Algorithmus aus. 
+	\item ClusteringProgress \& DBScanClusteringProgress: Eine abstrakte Klasse welche das Resultat eines Clusterings in ein File abspeichert. Kann für den DBSCAN und den k-prototpye verwendet werden. Die abgeleitete Klasse "`DBScanClusteringProgress"' wird lediglich benötigt um die richtige View zu laden und die korrekte Konfiguration bereitzustellen.
 	\begin{itemize}
 		\item Runtime: Verfolgt die Laufzeit des Algorithmus seit der Service gestartet wurde. 
 	\end{itemize}
 	\item DistanceMeasurement: Implementation der Distanzmessung aus der \cref{eq:recherche:clusteranalysis:2}.
 \end{itemize}
 
-\cref{fig:proofofconcept:klassenstruktur:4} zeigt den Service für den KPrototype Algorithmus. Die Klassen "`BookingDataIterator"' und "`DistanceMeasurement"' wurden bereits dokumentiert und werden hier nicht mehr erläutert.
+\cref{fig:proofofconcept:klassenstruktur:4} zeigt den Service für den k-prototpye Algorithmus. Die Klassen "`BookingDataIterator"' und "`DistanceMeasurement"' wurden bereits dokumentiert und werden hier nicht mehr erläutert.
 \begin{itemize}
-	\item KPrototypeAlgorithm: Führt den KPrototype Algorithmus aus. 
+	\item KPrototypeAlgorithm: Führt den k-prototpye Algorithmus aus. 
 	\item ClusteringProgress \& KPrototypeClusteringProgress: Der ClusteringProgress ist der selbe wie in \cref{fig:proofofconcept:klassenstruktur:3}. Die abgeleitete Klasse "`KPrototypeClusteringProgress"' liefert, gleich wie "`DBScanClusteringProgress"' die View sowie die Konfiguration. 
-	\item Random, Randomizer, Redis \& BookingBuilder: Der KPrototype Algorithmus wählt die initialen Clusterzentren zufällig. Dafür werden diese 4 Klassen benötigt. Random und Randomizer erlauben es zufällg eine Buchungs-Id auszuwählen. Die Redis InMemory Datenbank liefert die Rohdaten der Buchung und der "`BookingBuilder"' wandelt sie in eine Klasse "`Booking"' um (siehe \cref{sec:proofofconcept:externebibliotheken:redis} \nameref{sec:proofofconcept:externebibliotheken:redis} für Details zu Redis).
+	\item Random, Randomizer, Redis \& BookingBuilder: Der k-prototpye Algorithmus wählt die initialen Clusterzentren zufällig. Dafür werden diese 4 Klassen benötigt. Random und Randomizer erlauben es zufällg eine Buchungs-Id auszuwählen. Die Redis InMemory Datenbank liefert die Rohdaten der Buchung und der "`BookingBuilder"' wandelt sie in eine Klasse "`Booking"' um (siehe \cref{sec:proofofconcept:externebibliotheken:redis} \nameref{sec:proofofconcept:externebibliotheken:redis} für Details zu Redis).
 \end{itemize}
 
 \section{Abläufe}
@@ -527,17 +529,17 @@ Der Anfang mit dem Erstellen des "`Container"' und dem Caching ist gleich wie in
 
 \paragraph{Ablauf des Clustering-Programms}
 Der Ablauf der Clustering-Analysen ist identisch zu jenem des Apriori-Algorithmus, mit zwei Ausnahmen. Zum einen wird vor dem "`AprioriAlgorithm"' der "`KPrototypeAlgorithm"' ausgeführt wird, welcher ein "`KPrototypeResult"' zurück liefert. 
-Zum anderen wird dem "`AprioriAlgorithm"' das Resultat vom KPrototype als Parameter übergeben. Dadurch ist em dem "`KPrototypeAlgorithm"' möglich, nur die Elemente eines Clusters zu analysieren und nicht die gesamte Datenmenge. 
+Zum anderen wird dem "`AprioriAlgorithm"' das Resultat vom k-prototpye als Parameter übergeben. Dadurch ist em dem "`KPrototypeAlgorithm"' möglich, nur die Elemente eines Clusters zu analysieren und nicht die gesamte Datenmenge. 
 Es wurde bewusst entschieden, dass der "`AprioriAlgorithm"' aus der kprototype.php Datei hinaus aufgerufen wird. Dadurch kann zukünftig dieser Algorithmus einfach durch eine Alternative ausgetauscht werden.
 Abgebildet ist der Ablauf in \cref{fig:proofofconcept:architektur:hintergrundprozesser:2}. 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=1\textwidth]{images/diagram-sequence-kprototype}
-	\caption{Sequenzdiagramm für die Initialisierung der KPrototype-Analyse}
+	\caption{Sequenzdiagramm für die Initialisierung der k-prototpye-Analyse}
 	\label{fig:proofofconcept:architektur:hintergrundprozesser:2}
 \end{figure}
 
-Auf ein Sequenzdiagramm für den DBSCAN-Algorithmus wird hier verzichtet, denn die Visualisierung des DBSCAN-Ablaufs ist identisch wie jener vom KPrototype. Lediglich die Namen der aufgerufenen Klassen müssten angepasst werden.
+Auf ein Sequenzdiagramm für den DBSCAN-Algorithmus wird hier verzichtet, denn die Visualisierung des DBSCAN-Ablaufs ist identisch wie jene vom k-prototpye. Lediglich die Namen der aufgerufenen Klassen müssten angepasst werden.
 
 
 \section{Performance}
@@ -686,8 +688,8 @@ In der Umsetzung sind die Templates von Twig im Ordner "`Templates"' hinterlegt.
 	\item filters.twig: Gibt das Formular für die Filtrierung der Stammdaten aus.
 	\item bookingListing.twig: Gibt die Stammdaten als Tabelle aus. Verwendet wird dies für das einsehen der Stammdaten.
 	\item apriori.twig: Das Resultat oder der Zwischenstand der Apriori kann mit dem apriori.twig Template erstellt werden.
-	\item kprototypeClusters: Gibt das Resultat oder den Zwischenstand des KPrototype Clusterings aus.
-	\item dbscanClusters: Gibt das Resultat oder den Zwischenstand des DBScan Clusters aus.
+	\item kprototypeClusters: Gibt das Resultat oder den Zwischenstand des k-prototpye Clusterings aus.
+	\item dbscanClusters: Gibt das Resultat oder den Zwischenstand des DBSCAN Clusters aus.
 	\item histogramsAsTable.twig: Dies gibt die Resultate des Apriori Algorithmus als Tabelle aus. 
 \end{itemize}
 
@@ -734,7 +736,7 @@ Vor der Ausführung des Programms muss Redis gestartet und mit Daten befüllt we
 
 Wird die Datenbank gestoppt speichert sie die Daten auf die Festplatte ab und lädt  sie von dort wenn Redis wieder gestartet wird. Dadurch müssen die Informationen nach dem Neustart nicht nochmals importiert werden.
 
-Eingesetzt wurde Redis für den Zugriff auf die Daten mittels Iteratoren (siehe \cref{sec:proofofconcept:performance:datenzugriff} \nameref{sec:proofofconcept:performance:datenzugriff}). Diese eignen sich wenn alle Elemente der Datenbasis gelesen werden müssen, was bei der Ausführung der Algorithmen nötig ist. Die KPrototype Analyse benötigt zu beginn jedoch zufällig ausgewählte Clusterzentren. Mit Iteratoren wäre der Zugriff langsam. Wenn z.B. das Element auf Zeile 2'000 benötigt würde, müssten zuerst die vorherigen 1'999 Einträge gelesen werden. Redis hingegen unterstützt den Zugriff über einen Identifikator, womit direkt auf eine Buchung zugegriffen werden kann. Aus diesem Grund verwendet der KPrototype Algorithmus eine Redis Datenbank.
+Eingesetzt wurde Redis für den Zugriff auf die Daten mittels Iteratoren (siehe \cref{sec:proofofconcept:performance:datenzugriff} \nameref{sec:proofofconcept:performance:datenzugriff}). Diese eignen sich wenn alle Elemente der Datenbasis gelesen werden müssen, was bei der Ausführung der Algorithmen nötig ist. Die k-prototpye Analyse benötigt zu beginn jedoch zufällig ausgewählte Clusterzentren. Mit Iteratoren wäre der Zugriff langsam. Wenn z.B. das Element auf Zeile 2'000 benötigt würde, müssten zuerst die vorherigen 1'999 Einträge gelesen werden. Redis hingegen unterstützt den Zugriff über einen Identifikator, womit direkt auf eine Buchung zugegriffen werden kann. Aus diesem Grund verwendet der k-prototpye Algorithmus eine Redis Datenbank.
 
 
 \section{UnitTests}
