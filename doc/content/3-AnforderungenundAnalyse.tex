@@ -19,8 +19,8 @@ In der \cref{fig:anfoderungsanalyse:stakeholders} sind die Stakeholders des Proj
 		\bfseries Stakeholder & \bfseries Beschreibung & \bfseries Erwartungen \\ \hline 
 		%Kunde & Besucher der Webseite, welcher Objekte buchen möchte und Werbung wahrnimmt. & Durch das Projekt sollen ihm passendere Objekte und Vorschläge angezeigt werden. \\ \hline 
 		Interhome Marketing & Das Marketing ist für die Werbung auf der Interhome Webseite verantwortlich. & Möchte auf der Webseite passendere Angebote dem Benutzer darstellen.  \\ \hline 
-		Interhome Einkauf & Abteilung welche die Objekte einkauft welche auf der Interhome Webseite dargestellt werden. & Sie sollen durch das Projekt den Kunden besser verstehen und somit die Objekte einkaufen, welche von den Kunden gewünscht sind. \\ \hline 
-		Interhome Tester & Testet das Programm und gibt Feedback ob es korrekt arbeitet. & Eine gut entwickeltes Programm welches bereits grundlegend von der Hotelplan Entwicklung getestet wurde. \\ \hline 
+		Interhome Einkauf & Abteilung, welche die Objekte einkauft, die auf der Interhome Webseite dargestellt werden. & Sie sollen durch das Projekt den Kunden besser verstehen und somit die Objekte einkaufen, welche von den Kunden gewünscht sind. \\ \hline 
+		Interhome Tester & Testet das Programm und gibt Feedback, ob es korrekt arbeitet. & Eine gut entwickeltes Programm, welches bereits grundlegend von der Hotelplan Entwicklung getestet wurde. \\ \hline 
 		Hotelplan Entwickler & Verantwortlich für die Umsetzung dieses Projektes. & Eine reibungslose Umsetzung des Projektes sowie eine konstruktive Kooperation mit den Testern. \\ \hline 
 	\end{tabular}
 \end{table} 
@@ -36,13 +36,13 @@ In der \cref{fig:anfoderungsanalyse:anwendungsfaelle:1} werden die Anwendungsfä
 	\label{fig:anfoderungsanalyse:anwendungsfaelle:1}
 \end{figure}
 
-\paragraph{Daten einschränken} Es muss möglich sein, die Daten einzuschränken. Dies sollte über vordefinierte Filterkriterien geschehen die vom Benutzer ausgewählt werden können.
+\paragraph{Daten einschränken} Es muss möglich sein die Daten einzuschränken. Dies sollte über vordefinierte Filterkriterien geschehen, die vom Benutzer ausgewählt werden können.
 
-\paragraph{Daten einsehen} Um ein Überblick über die gesamten Daten zu haben soll eine Ansicht erstellt werden, welche die Daten darstellt. Sie sollen zusätzlich gefiltert werden können damit man die selbe Einschränkung vornehmen kann welche auch bei den Algorithmen eingestellt werden kann.
+\paragraph{Daten einsehen} Um einen Überblick über die gesamten Daten zu haben, soll eine Ansicht erstellt werden, welche die Daten darstellt. Sie sollen zusätzlich gefiltert werden können, damit man die selbe Einschränkung vornehmen kann, welche auch bei den Algorithmen eingestellt werden kann.
 
-\paragraph{Analyse durchführen} Es sollte möglich sein, einen oder mehrere Algorithmen auf die Daten anzuwenden und so eine Analyse durchzuführen. Die Daten sollen initial eingeschränkt werden können um nur eine Untermenge zu analysieren.
+\paragraph{Analyse durchführen} Es sollte möglich sein einen, oder mehrere Algorithmen auf die Daten anzuwenden und so eine Analyse durchzuführen. Die Daten sollen initial eingeschränkt werden können, um nur eine Untermenge zu analysieren.
 
-\paragraph{Algorithmen konfigurieren} Der Benutzer soll die Möglichkeit besitzen, die Algorithmen zu konfigurieren. Deshalb soll eine Ansicht erstellt werden auf welcher vordefinierte Einstellungen angepasst werden können. Dies umfasst alle Parameter welche von den Algorithmen vorausgesetzt werden (siehe \cref{sec:recherche:algorithmen} \nameref{sec:recherche:algorithmen}), sowie das Gewicht zwischen numerischen und kategorischen Attributen der Distanzmessung (siehe \cref{sec:konzept:anwendungderalgorithmen:distanzmessung} \nameref{sec:konzept:anwendungderalgorithmen:distanzmessung}). Für die Beantwortung der Hypothesen aus dem \cref{sec:einleitung:ziel:hypothesen} \nameref{sec:einleitung:ziel:hypothesen} müssen die von den Algorithmen zu analysieren Attribute eingeschränkt werden können. Zum Beispiel benötigt Hypothese 1 nur das Land des Kunden. Deshalb soll es eine Konfiguration geben mit welchem die Algorithmen so angepasst werden dass nur dieses Attribut (Land des Kunden) beachtet wird.
+\paragraph{Algorithmen konfigurieren} Der Benutzer soll die Möglichkeit besitzen die Algorithmen zu konfigurieren. Deshalb soll eine Ansicht erstellt werden, auf welcher vordefinierte Einstellungen angepasst werden können. Dies umfasst alle Parameter, die von den Algorithmen vorausgesetzt werden (siehe \cref{sec:recherche:algorithmen} \nameref{sec:recherche:algorithmen}) sowie das Gewicht zwischen numerischen und kategorischen Attributen der Distanzmessung (siehe \cref{sec:konzept:anwendungderalgorithmen:distanzmessung} \nameref{sec:konzept:anwendungderalgorithmen:distanzmessung}). Für die Beantwortung der Hypothesen aus dem \cref{sec:einleitung:ziel:hypothesen} \nameref{sec:einleitung:ziel:hypothesen} müssen die von den Algorithmen zu analysieren Attribute eingeschränkt werden können. Zum Beispiel benötigt Hypothese 1 nur das Land des Kunden. Deshalb soll es eine Konfiguration geben, mit welchem die Algorithmen so angepasst werden, dass nur dieses Attribut (Land des Kunden) beachtet wird.
 
 
 
@@ -54,11 +54,11 @@ In der \cref{fig:anfoderungsanalyse:anwendungsfaelle:1} werden die Anwendungsfä
 %Visualisiert wird der Ablauf in \cref{fig:anfoderungsanalyse:ablauf:1}.
 In \cref{fig:anfoderungsanalyse:ablauf:1} sind die Abläufe der Anwendungsfälle in einem Flowchart visualisiert. 
 
-Der Hauptfall ist "`Analyse durchführen"' welcher als erstes "`Daten laden"' aufruft. Dort werden alle Einträge in der Datenbasis geladen, anschliessend wenn vom Benutzer gewünscht gefiltert und schlussendlich zurückgegeben. Wenn das "`Daten laden"' beendet ist wird die Konfigurationen geladen und der Algorithmus angewendet.
+Der Hauptfall ist "`Analyse durchführen"', welcher als Erstes "`Daten laden"' aufruft. Dort werden alle Einträge in der Datenbasis geladen, anschliessend, wenn vom Benutzer gewünscht, gefiltert und schlussendlich zurückgegeben. Wenn das "`Daten laden"' beendet ist, wird die Konfigurationen geladen und der Algorithmus angewendet.
 
-Der Anwendungsfall "`Daten einsehen"' lädt die Daten auf die selbe weise wie "`Analyse durchführen"'. Anschliessend werden die Daten ausgegeben sodass der Benutzer sie einsehen kann.
+Der Anwendungsfall "`Daten einsehen"' lädt die Daten auf die selbe Weise wie "`Analyse durchführen"'. Anschliessend werden die Daten ausgegeben, sodass der Benutzer sie einsehen kann.
 
-Der letzte Anwendungsfall ist die Konfiguration der Algorithmen. Dazu werden die einstellbaren Werte dem Benutzer ausgegeben damit er diese ändern kann. Die Änderungen werden anschliessend in eine Konfigurationsdatei geschrieben, damit sie bei der nächsten Analyse verwendet werden können.
+Der letzte Anwendungsfall ist die Konfiguration der Algorithmen. Dazu werden die einstellbaren Werte dem Benutzer ausgegeben, damit er diese ändern kann. Die Änderungen werden anschliessend in eine Konfigurationsdatei geschrieben, damit sie bei der nächsten Analyse verwendet werden können.
 
 \begin{figure}[H]
 	\RawFloats
@@ -83,13 +83,13 @@ Nachfolgend werden die funktionale Anforderungen an das Programm aufgeführt. Ab
 		\rowcolor{tableheadcolor}
 		\multicolumn{2}{|l|}{\bfseries ID: FA1} \\ \hline 
 		Titel & Häufigkeitsanalyse der Attribute \\ \hline 
-		Beschreibung & Das Programm muss für die Gewinnung neues Wissens aus der bisherigen Buchungen von Interhome gestaltet werden. Dazu sollen Algorithmen eingesetzt werden welche folgende beispielhaften Fragestellungen beantworten können:
+		Beschreibung & Das Programm muss für die Gewinnung neues Wissens aus der bisherigen Buchungen von Interhome gestaltet werden. Dazu sollen Algorithmen eingesetzt werden, die folgende beispielhaften Fragestellungen beantworten können:
 		\begin{enumerate}
-		\item Welche Attribute werden im Winter wenn es schneit in der Schweiz gebucht?
+		\item Welche Attribute werden im Winter, wenn es schneit, in der Schweiz gebucht?
 		\item Welche Destination wird von Kunden im Tessin am meisten gebucht?
 		\end{enumerate}
 		
-		Als Antwort sollte der Algorithmus eine Liste von Attributen zurückliefern. Auf die obigen Beispiele könnte dies folgendes sein: 
+		Als Antwort sollte der Algorithmus eine Liste von Attributen zurückliefern. Auf die obigen Beispiele könnte dies folgende sein: 
 		\begin{enumerate}
 		\item Objekte in Süditalien mit einem Pool.
 		\item Objekte in Zermatt und mindestens 3 Schlafzimmern.
@@ -142,7 +142,7 @@ Nachfolgend werden die funktionale Anforderungen an das Programm aufgeführt. Ab
 		\rowcolor{tableheadcolor}
 		\multicolumn{2}{|l|}{\bfseries ID: FA4} \\ \hline 
 		Titel & Stammdaten einsehen \\ \hline 
-		Beschreibung & Um die Analyse der Daten zu validieren, sollte es möglich sein die Stammdaten einzusehen. Deshalb sollen im Programm alle Daten dargestellt werden können und vom Benutzer durchstöbert werden können. \\ \hline 
+		Beschreibung & Um die Analyse der Daten zu validieren, sollte es möglich sein die Stammdaten einzusehen. Deshalb sollen im Programm alle Daten dargestellt und vom Benutzer durchstöbert werden können. \\ \hline 
 		Abhängigkeit & \\ \hline 
 	\end{tabular}
 \end{table}
@@ -213,7 +213,7 @@ Nachfolgend werden die funktionale Anforderungen an das Programm aufgeführt. Ab
 
 \section{Nicht funktionale Anforderungen}
 \label{sec:anforderungsanalyse:nichtfunktionaleanforderung}
-Nachfolgend sind die nicht funktionale Anforderungen an das Programm spezifiziert. Diese gehen nicht auf die Funktionalität der Applikation ein, sondern auf die Komplexität, Performanz, etc.
+Nachfolgend sind die nicht funktionalen Anforderungen an das Programm spezifiziert. Diese gehen nicht auf die Funktionalität der Applikation ein, sondern auf die Komplexität, Performanz, etc.
 
 %\begin{table}[H] 
 %	\caption{NFA1: Geschwindigkeit}
@@ -257,7 +257,7 @@ Nachfolgend sind die nicht funktionale Anforderungen an das Programm spezifizier
 		\rowcolor{tableheadcolor}
 		\multicolumn{2}{|l|}{\bfseries ID: NFA3} \\ \hline 
 		Titel & Modularität \\ \hline 
-		Beschreibung & In Zukunft ist zu erwarten, dass das Programm um weitere Techniken des Data Mining und weitere Attribute in der Datenbasis erweitert werden können. Deshalb sollte es Modular aufgebaut werden damit weitere Algorithmen und Attribute leicht hinzugefügt werden können. Zusätzlich sollte durch die Modularität die Verständlichkeit des Programms erhöht werden, so dass zukünftige Entwickler sich besser in die Umsetzung einarbeiten können. \\ \hline 
+		Beschreibung & In Zukunft ist zu erwarten, dass das Programm um weitere Techniken des Data Mining und weitere Attribute in der Datenbasis erweitert werden kann. Deshalb sollte es modular aufgebaut werden, damit weitere Algorithmen und Attribute leicht hinzugefügt werden können. Zusätzlich sollte durch die Modularität die Verständlichkeit des Programms erhöht werden, so dass zukünftige Entwickler sich besser in die Umsetzung einarbeiten können. \\ \hline 
 		Abhängigkeit & \\ \hline 
 	\end{tabular}
 \end{table}
@@ -272,7 +272,7 @@ Nachfolgend sind die nicht funktionale Anforderungen an das Programm spezifizier
 		\rowcolor{tableheadcolor}
 		\multicolumn{2}{|l|}{\bfseries ID: NFA4} \\ \hline 
 		Titel & Erweiterbarkeit der Daten \\ \hline 
-		Beschreibung & Um die aktualität der Informationen zu gewährleisten, soll der Datenbestand in Zukunft leicht erweitert werden können. \\ \hline 
+		Beschreibung & Um die Aktualität der Informationen zu gewährleisten, soll der Datenbestand in Zukunft leicht erweitert werden können. \\ \hline 
 		Abhängigkeit & \\ \hline 
 	\end{tabular}
 \end{table}
@@ -289,15 +289,15 @@ Nachfolgend sind die nicht funktionale Anforderungen an das Programm spezifizier
 		Titel & Kosten \\ \hline 
 		Beschreibung & Falls ein bestehendes Programm eingesetzt wird, sollen folgende Kostenfaktoren beachtet werden: 
 		\begin{itemize}
-		\item Die Applikation sollte kostenlos einsetzbar sein. Sie benötigt demnach eine der folgenden Lizenzmodellen:
+		\item Die Applikation sollte kostenlos einsetzbar sein. Sie benötigt demnach eine der folgenden Lizenzmodelle:
 		\begin{itemize}
 		\item OpenSource. Software kann verwendet und angepasst werden (siehe \url{https://opensource.org/licenses}).
 		\item Freeware. Software kann verwendet, jedoch nicht angepasst werden.
 		\item Studenten Lizenz. Software kann als Student kostenlos eingesetzt werden.
 		\end{itemize}
-		\item Die Entwicklung wird privat auf einem Linux Rechner durchgeführt, und Zeitweise auch bei der Arbeit auf Windows Computern welche von Hotelplan Management AG bereitgestellt werden.
+		\item Die Entwicklung wird privat auf einem Linux Rechner durchgeführt und zeitweise auch bei der Arbeit auf Windows Computern, die von Hotelplan Management AG bereitgestellt werden.
 		Demnach ist es nötig, dass die Software unter Linux sowie auch Windows gestartet werden kann.
-		\item Da der Datenbestand 133'001 Einträge umfasst, muss die Plattform und das Lizenzmodel diese Anzahl an Items unterstützen.
+		\item Da der Datenbestand 133'001 Einträge umfasst, muss die Plattform und das Lizenzmodell diese Anzahl an Items unterstützen.
 		\end{itemize}\\ \hline 
 		Abhängigkeit & \\ \hline 
 	\end{tabular}

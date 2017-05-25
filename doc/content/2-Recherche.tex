@@ -212,9 +212,9 @@ procedure apriori_gen($L_{k-1}$:frequent %(k-1)-%itemsets) {
 	return $C_k$
 }
 \end{lstlisting}
-In der apriori\_gen Funktion werden k-Attributmengen generiert, indem eine (k-1)-Attributmenge erweitert wird. Dazu gibt es zwei Schleifen welche durchlaufen werden. Auf Zeile 5 wird $l_1$ um Elemente von $l_2$ erweitert. Zudem wird sichergestellt, dass gleiche Mengen nicht mehrfach in $C_k$ hinzugefügt werden können.
+In der apriori\_gen Funktion werden k-Attributmengen generiert, indem eine (k-1)-Attributmenge erweitert wird. Dazu gibt es zwei Schleifen, welche durchlaufen werden. Auf Zeile 5 wird $l_1$ um Elemente von $l_2$ erweitert. Zudem wird sichergestellt, dass gleiche Mengen nicht mehrfach in $C_k$ hinzugefügt werden können.
 
-Auf Zeile 6 werden die k-Attributmengen gesäubert (prune), indem die neuen Kandidaten $c$ überprüft werden, ob eine Submenge $i$ eines Kandidaten $c'$ nicht in $L_{k-1}$ vorhanden ist. Wenn dies der Fall ist erfüllt $i$ den $minsup$ womit $c'$ den mindest support auch nicht erfüllen kann. Somit kann $c'$ aus $c$ entfernt werden.
+Auf Zeile 6 werden die k-Attributmengen gesäubert (prune), indem die neuen Kandidaten $c$ überprüft werden, ob eine Submenge $i$ eines Kandidaten $c'$ nicht in $L_{k-1}$ vorhanden ist. Wenn dies der Fall ist, erfüllt $i$ den $minsup$, womit $c'$ den mindest support auch nicht erfüllen kann. Somit kann $c'$ aus $c$ entfernt werden.
 
 % Longer version of apriori_gen
 %$c \gets \{l_1 \cup \{i\} | i \in l_2 \wedge l_1 \cup \{i\} \in C_k \}$
@@ -253,18 +253,18 @@ Auf Zeile 6 werden die k-Attributmengen gesäubert (prune), indem die neuen Kand
 
 \subsection{Cluster analysis: k-prototype}
 \label{sec:recherche:algorithmen:k-prototypes}
-Die k-prototypes Vorgehensweise gehört zu der Gruppe der partitionierenden Clustering Algorithmen. Er ist eine Kombination des Lloyd- und des \gls{pam}- Algorithmus. Er verwendet eine angepasste Version der quadratischen euklidischen Distanz (siehe \cref{sec:konzept:algorithmenauswahl:clustering} \nameref{sec:konzept:algorithmenauswahl:clustering}), wie sie Lloyd verwendet und benutzt für die Zentren der Clusters Medoiden, wie dies der \gls{pam} Algorithmus macht\footcite{data_mining_concepts_and_techniques}\footcite{clustering_numeric_and_categorical_values}. Im k-prototype heissen die Zentren nicht Medoiden, sondern "`Prototyp"', woher auch der Name kommt.
+Die k-prototypes-Vorgehensweise gehört zu der Gruppe der partitionierenden Clustering Algorithmen. Er ist eine Kombination des Lloyd- und des \gls{pam}- Algorithmus. Er verwendet eine angepasste Version der quadratischen euklidischen Distanz (siehe \cref{sec:konzept:algorithmenauswahl:clustering} \nameref{sec:konzept:algorithmenauswahl:clustering}), wie sie Lloyd verwendet und benutzt für die Zentren der Clusters Medoiden, wie dies der \gls{pam} Algorithmus macht\footcite{data_mining_concepts_and_techniques}\footcite{clustering_numeric_and_categorical_values}. Im k-prototype heissen die Zentren nicht Medoiden, sondern "`Prototyp"', woher auch der Name kommt.
 
 Der Ablauf von k-prototypes besteht aus fünf Schritten\footcite{clustering_numeric_and_categorical_values}:
 \begin{enumerate}
 	\item Initiale Prototypen-Auswahl $\{o_1,\ldots,o_k\}$. Diese bilden die ersten Cluster.
 	\item Alloziere jede Instanz zu ihrem nächsten Prototypen.
 	\item Wähle zufällig einen Prototypen $o_{random}$ als Ersatz für den aktuellen Prototypen $o_j$ einses Clusters.
-	\item Berechne die Kosten $E_{random}$ welche die durch eine Änderung von $o_j$ durch $o_{random}$ entstehen.
+	\item Berechne die Kosten $E_{random}$, welche die durch eine Änderung von $o_j$ durch $o_{random}$ entstehen.
 	\item \textbf{if} $E_j > E_{random}$ \textbf{then} Ersetze $o_j$ durch $o_{random}$ und wiederhole 2.-5. bis keine Änderungen an den Clustern mehr vorgenommen werden.
 \end{enumerate}
 
-Der neue Prototypen in Schritt 3. wird zufällig ausgewählt. Dadurch findet der Algorithmus ein lokales Optimum, jedoch nicht zwingend das beste Resultat\footcite{data_mining_concepts_and_techniques}.
+Der neue Prototyp in Schritt 3. wird zufällig ausgewählt. Dadurch findet der Algorithmus ein lokales Optimum, jedoch nicht zwingend das beste Resultat\footcite{data_mining_concepts_and_techniques}.
 Die Funktion für die Kostenberechnung im Schritt 4 wird im \cref{sec:konzept:algorithmenauswahl:clustering:distanzmessung} vorgestellt.
 
 Die Laufzeit des Algorithmus ist $\mathcal{O}((t+1)kn)$, wobei $n$ die Anzahl Instanzen, $k$ die Anzahl Cluster und $t$ die Anzahl der Iterationen darstellt. Üblicherweise ist $k \ll n$ und $t < 100$, wodurch der Algorithmus sehr effizient ist und auch auf grossen Datenbeständen angewendet werden kann\footcite{clustering_numeric_and_categorical_values}.
@@ -272,19 +272,19 @@ Die Laufzeit des Algorithmus ist $\mathcal{O}((t+1)kn)$, wobei $n$ die Anzahl In
 \subsection{Cluster analysis: DBSCAN}
 \label{sec:recherche:algorithmen:dbscan}
 \gls{dbscan} gehört zu der Gruppe der Density-based Clustering Algorithmen. 
-Vorgegeben werden muss der Radius $\epsilon$ und die minimum Anzahl an Instanzen $minpts$. Ein Cluster wird gebildet wenn um einen Punkt im Radius $\epsilon$ mindestens $minpts$ andere Instanzen liegen. Mit diesen Informationen kann der Algorithmus in einer Laufzeit von $\mathcal{O}(n\,log\,n)$ ein Clustering durchführen.
+Vorgegeben werden muss der Radius $\epsilon$ und die minimum Anzahl an Instanzen $minpts$. Ein Cluster wird gebildet, wenn um einen Punkt im Radius $\epsilon$ mindestens $minpts$ andere Instanzen liegen. Mit diesen Informationen kann der Algorithmus in einer Laufzeit von $\mathcal{O}(n\,log\,n)$ ein Clustering durchführen.
 
 Der Algorithmus führt mehrere Begriffe ein\footcite{data_mining_concepts_and_techniques}:
 \begin{itemize}
-	\item \textit{neighborhood density}: Wie viele Instanzen befinden sich im Radius von $\epsilon$ um einen Punkt $p$. 
+	\item \textit{neighborhood density}: Wie viele Instanzen befinden sich im Radius von $\epsilon$, um einen Punkt $p$. 
 	\begin{equation}
 	\mathit{ND}_{\epsilon}(p) = \{q | q \in D \wedge d(p,q) < \epsilon\}
 	\end{equation}
-	\item \textit{core object}: Instanz welche mindestens $minpts$ in der Nachbarschaft haben.
+	\item \textit{core object}: Instanz, welche mindestens $minpts$ in der Nachbarschaft haben.
 	\begin{equation}
 	|\mathit{ND}_{\epsilon}(p)| \geq minpts
 	\end{equation}
-	\item \textit{noise}: Instanz für welche weniger als $minpts$ in der Nachbarschaft haben.
+	\item \textit{noise}: Instanz, für welche weniger als $minpts$ in der Nachbarschaft haben.
 	\begin{equation}
 	|\mathit{ND}_{\epsilon}(p)| < minpts
 	\end{equation}
@@ -304,7 +304,7 @@ Die Unterscheidung zwischen \textit{density-reachable} und \textit{density-conne
 	\label{fig:recherche:clusteranalysis:DBSCAN}
 \end{figure}
 
-Punkte m,p,o und r sind \textit{core objects} da sich in den Radien $\epsilon$ mindestens 3 andere Instanzen ($minpts = 3$) befinden. Da m und p beides \textit{core objects} sind, sind beide Punkte untereinander \textit{density-reachable}. q ist \textit{density reachable} von m und von p aus, jedoch nicht umgekehrt, da q kein \textit{core object} ist. 
+Punkte m,p,o und r sind \textit{core objects}, da sich in den Radien $\epsilon$ mindestens 3 andere Instanzen ($minpts = 3$) befinden. Da m und p beides \textit{core objects} sind, sind beide Punkte untereinander \textit{density-reachable}. q ist \textit{density reachable} von m und von p aus, jedoch nicht umgekehrt, da q kein \textit{core object} ist. 
 
 Auf der rechten Seite sind r und s \textit{density-rechable} von Punkt o, weshalb r,s und o untereinander \textit{density-connected} sind.
 
@@ -327,6 +327,7 @@ Der Algorithmus geht folgendermassen vor:
 \begin{lstlisting}
 unvisited $\gets D$
 inCluster $= \emptyset$
+noise $= \emptyset$
 foreach itemset $p \gets$ unvisited {
 	unvisited $\gets D - \{p\}$
 	if $|\mathit{ND}_{\epsilon}(p)| \geq minpts$ {
@@ -335,42 +336,52 @@ foreach itemset $p \gets$ unvisited {
 		candidates = $ND_{\epsilon}(p)$
 		foreach $q \in $ candidates {
 			// if q is unvisited.
-			if $q \: \cap$ unvisited $\neq \varnothing$ {
-				unvisited $\gets D - \{p\}$
-				clusters[$p$] $\gets$ clusters[$p$] $ \cap$ $\{q\}$
-				candidates $\gets$ candidates $\cup \: ND_{\epsilon}(q)$
+			if $\{q\} \: \cap$ unvisited $\neq \varnothing$ {
+				unvisited $\gets$ unvisited $ - \{q\}$
+				if $|\mathit{ND}_{\epsilon}(q)| \geq minpts$ {
+					candidates $\gets$ candidates $\cup \: ND_{\epsilon}(q)$
+				}
 			}
 			// if q is not in a cluster yet.
-			if $q \: \cap$ inCluster $= \varnothing$ {
+			if $\{q\} \: \cap$ inCluster $= \varnothing$ {
 				clusters[$p$] = cluster[$p$] $\cup q$
 			}
 		}
+	} else {
+		noise $\gets$ noise $\cup p$
 	}
 }
 \end{lstlisting}
-Zu Beginn werden alle Punkte als "`unvisited"' makriert. Anschliessend wird ein zufälliger Punkt $p$ gewählt welcher als "`visited"' markiert wird. Auf Zeile 4 wird überprüft ob die \textit{neighborhood density} von $p$ den mindestwert $minpts$ erfüllt. Wenn ja wird für diesen Punkt ein Cluster erstellt und all seine Nachbaren in "`candidates"' gespeichert. Schlussendlich überprüfen ob die "`candidates"' noch "`unvisited"' sind (Zeile 8). Wenn ja wird der Kandidat $q$ als "`visited"' markiert (Zeile 9), in den Cluster $p$ eingefügt (Zeile 10)und all seine Nachbaren der Liste "`candidates"' angehängt (Zeile 11).
+%					clusters[$p$] $\gets$ clusters[$p$] $ \cap$ $\{q\}$
+Jeder Punkt muss einmal "`besucht"' werden. Dazu wird zuerst eine Liste "`unvisited"' erstellt (Zeile 1), welche zu Beginn alle Elemente enthält. Da jeder Punkt nur zu einem Cluster gehören kann, wird eine Menge "`inCluster"' verwendet (Zeile 2), welche die Instanzen enthält die bereits einer Gruppe zugeordnet wurden. "`noise"' wird alle Punkte enthalten, die zu keinem Cluster gehören (Zeile 3).
 
-Abgebrochen wird wenn alle Punkte als "`visited"' markiert sind.
+Nun iteriert der Algorithmus über sämtliche Elemente in der Menge "`unvisited"' (Zeile 4). Begonnen wird mit dem Punkt $p$, welcher aus "`unvisited"' entfernt wird (Zeile 5). Erfüllt die \textit{neighborhood density} von $p$ den Mindestwert $minpts$ nicht (Zeile 23) wird $p$ in "`noise"' gespeichert (Zeile 2). Sonst (Zeile 6) wird für $p$ ein neuer Cluster erstellt (Zeile 7) und in "`inCluster"' gespeichert (Zeile 8), dass der Punkt bereits einer Gruppe zugeordnet werden konnte. Anschliessend werden alle seine Nachbaren in "`candidates"' aufgenommen (Zeile 9).
+
+Nun beginnt der Algorithmus über die "`candidates"' zu itereiren (Zeile 10). Wenn $q$ noch nicht besucht wurde (Zeile 12), wird er als dieses markiert (Zeile 13). Wenn die \textit{neighborhood density} von $q$ den Mindestwert $minpts$ erfüllt (Zeile 14), werden all Nachbaren als "`candidates"' aufgenommen (Zeile 15). Ob $q$ besucht wurde oder nicht, er wird auf jeden Fall in den Cluster von $p$ aufgenommen (Zeile 20), solange er noch keiner Gruppe zugeordnet wurde (Zeile 19).
+
+%Zu Beginn werden alle Punkte als "`unvisited"' makriert und eine leere Menge "`inCluster"' erstellt. Anschliessend wird ein zufälliger Punkt $p$ gewählt, welcher als "`visited"' markiert wird. Auf Zeile 5 wird überprüft, ob die \textit{neighborhood density} von $p$ den mindestwert $minpts$ erfüllt. Wenn ja, wird für diesen Punkt ein Cluster erstellt (Zeile 6),  und all seine Nachbaren in "`candidates"' gespeichert (Zeile 8). Schlussendlich überprüfen ob die "`candidates"' noch "`unvisited"' sind (Zeile 8). Wenn ja wird der Kandidat $q$ als "`visited"' markiert (Zeile 9), in den Cluster $p$ eingefügt (Zeile 10)und all seine Nachbaren der Liste "`candidates"' angehängt (Zeile 11).
+
+Abgebrochen wird, wenn alle Punkte als "`visited"' markiert sind.
 
 \section{Wissenschaftliche Arbeiten}
-Es wurde im Netz nach bestehenden wissenschaftlichen Arbeiten gesucht, die sich mit der Thematik dieser Arbeit bereits auseinandergesetzt hat. Der Apriori Algorithmus wird üblicherweise in Verbindung mit dem Association rule learning verwendet und nur selten für die reine Häufigkeitsanalyse eingesetzt. Deshalb wurden nur wenige Berichte gefunden welche sich rein auf den Apriori beziehen. 
-Zum Beispiel wird im Bericht "`An Apriori-based Algorithm for Mining Frequent Substructures from Graph Data"'\footcite{agm} der Apriori Algorithmus auf einer graphischen Repräsentation von chemischen Verbindungen ausgeführt. Eingesetzt wird er zur Auffindung von häufig auftretenden induzierten Subgraphen. Gemäss dem Fazit ist der Algorithmus gut geeignet um effizient Häufigkeiten aufzudecken. Obwohl das Einsatzgebiet und die Datenstrukturen des Berichtes sehr unterschiedlich sind zu dieser Arbeit sollte der Apriori Algorithmus trotzdem anwendbar sein und effiziente zu einem Resultat führen.
+Es wurde im Netz nach bestehenden wissenschaftlichen Arbeiten gesucht, die sich mit der Thematik dieser Arbeit bereits auseinandergesetzt haben. Der Apriori Algorithmus wird üblicherweise in Verbindung mit dem Association rule learning verwendet und nur selten für die reine Häufigkeitsanalyse eingesetzt. Deshalb wurden nur wenige Berichte gefunden, welche sich rein auf den Apriori beziehen. 
+Zum Beispiel wird im Bericht "`An Apriori-based Algorithm for Mining Frequent Substructures from Graph Data"'\footcite{agm} der Apriori Algorithmus auf einer graphischen Repräsentation von chemischen Verbindungen ausgeführt. Eingesetzt wird er zur Auffindung von häufig auftretenden induzierten Subgraphen. Gemäss dem Fazit ist der Algorithmus gut geeignet um effizient Häufigkeiten aufzudecken. Obwohl das Einsatzgebiet und die Datenstrukturen des Berichtes sehr unterschiedlich sind zu dieser Arbeit, sollte der Apriori Algorithmus trotzdem anwendbar sein und effiziente zu einem Resultat führen.
 
 \section{Programmevaluation}
 \label{sec:recherche:programmevaluation}
 Auf dem Markt gibt es diverse Data Mining Programme von welchen hier einige vorgestellt werden.
 
-Zwingend notwendig ist es, dass das Programm gratis ist, sowie unter den Betriebsystemen Windows sowie Linux lauffähig ist. 
+Zwingend notwendig ist es, dass das Programm gratis ist sowie unter den Betriebsystemen Windows sowie Linux lauffähig ist. 
 
 %http://thenewstack.io/six-of-the-best-open-source-data-mining-tools/
 
 \subsection{RapidMiner Studio}
-RapidMiner, früher YALE (Yet Another Learning Environment) wurde von der Technischen Universität Dortmund entwickelt und bietet eine kostenlose Version an, welche auf 10'000 Datensätze und einen logischen Prozessor beschränkt ist. Es gibt jedoch für Studenten eine Version mit welcher beliebig Grosse Daten bearbeitet werden können. Die Applikation ist in Java geschrieben und somit auf allen gängigen Betriebssystemen lauffähig\footcite{RapidMiner_Studio_2017-01-14}.
+RapidMiner, früher YALE (Yet Another Learning Environment), wurde von der Technischen Universität Dortmund entwickelt und bietet eine kostenlose Version an, welche auf 10'000 Datensätze und einen logischen Prozessor beschränkt ist. Es gibt jedoch für Studenten eine Version mit welcher beliebig grosse Daten bearbeitet werden können. Die Applikation ist in Java geschrieben und somit auf allen gängigen Betriebssystemen lauffähig\footcite{RapidMiner_Studio_2017-01-14}.
 
-RapidMiner Studio bietet für eine grosse Anzahl an Algorithmen fertige Bausteine an, welche verwendet werden können. Alle unter \cref{sec:recherche:dataminingtechniken:disziplinen} aufgeführten Methoden sind in der Applikation als Operatoren implementiert und können durch einige klicks verwendet werden. Eine Auflistung aller Operatoren ist in der RapidMiner Dokumentation aufgeführt: \url{http://docs.rapidminer.com/studio/operators/}
+RapidMiner Studio bietet für eine grosse Anzahl an Algorithmen fertige Bausteine an, welche verwendet werden können. Alle unter \cref{sec:recherche:dataminingtechniken:disziplinen} aufgeführten Methoden sind in der Applikation als Operatoren implementiert und können durch einige Klicks verwendet werden. Eine Auflistung aller Operatoren ist in der RapidMiner Dokumentation aufgeführt: \url{http://docs.rapidminer.com/studio/operators/}
 
 \subsection{Weka}
 \gls{weka} ist ein in Java entwickeltes Programm der University of Waikato, New Zealand. Veröffentlicht wurde die Software unter der \gls{acr:gnugpl} und ist somit frei verfüg- und modifizierbar\footcite{Weka_2017-01-14}.
 
-WEKA beherscht Classification, Clustering, lineare Regression und Associating Algorithmen und deckt somit alle  im \cref{sec:recherche:dataminingtechniken:disziplinen} aufgeführten Disziplinen ab\footcite{Weka_Doc_2017-01-14}\footcite{Weka_Regression_2017-01-14}.
+WEKA beherrscht Classification, Clustering, lineare Regression und Associating Algorithmen und deckt somit alle  im \cref{sec:recherche:dataminingtechniken:disziplinen} aufgeführten Disziplinen ab\footcite{Weka_Doc_2017-01-14}\footcite{Weka_Regression_2017-01-14}.
 
