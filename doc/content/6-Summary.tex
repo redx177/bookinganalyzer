@@ -9,11 +9,11 @@ Nachfolgend werden die Richtigkeit des Programms mit Hilfe der Testfälle aus \c
 
 \subsection{Testfälle}
 \label{sec:testingfazit:testing:testcases}
-Dieser Abschnitt überprüft die Korrektheit der Algorithmen, also ob diese richtig Implementiert wurden. Dazu wurde im \cref{sec:recherche:testcases} Testfälle definiert inklusive der Einstellungen des Programms.
+Dieser Abschnitt überprüft die Korrektheit der Algorithmen, also ob diese richtig implementiert wurden. Dazu wurde im \cref{sec:recherche:testcases} Testfälle definiert, inklusive der Einstellungen des Programms.
 
-Hier werden die Testfälle nochmals aufgeführt und mit den tatsächlichen Ausgaben des Proof of Concepts verglichen. Zum Ende jedes Tests ist das Ergebnis aufgeführt. \colorbox{green!25}{Grün} heisst das erwartete- stimmt mit dem tatsächlichen Resultat überein. Wenn dies nicht der Fall ist, dann ist das Ergebnis \colorbox{red!25}{rot}.
+Hier werden die Testfälle nochmals aufgeführt und mit den tatsächlichen Ausgaben des Proof of Concepts verglichen. Zum Ende jedes Tests ist das Ergebnis aufgeführt. \colorbox{green!25}{Grün} bedeutet das Erwartete- stimmt mit dem tatsächlichen Resultat überein. Wenn dies nicht der Fall ist, dann ist das Ergebnis \colorbox{red!25}{rot}.
 
-Alle Test sind erfolgreich. In \cref{fig:testingfazit:testing:testcases:uebersicht} wird eine Übersicht gegeben. In \cref{fig:testingfazit:testing:testcases:1} bis \cref{fig:testingfazit:testing:testcases:12:2} sind anschliessend alle Auswertung der Testfälle aufgeführt. Nach jeder Tabelle ist zusätzlich noch ein Bild vorhanden welches die Ausgabe des Programms aufzeigt.
+Alle Tests sind erfolgreich. In \cref{fig:testingfazit:testing:testcases:uebersicht} wird eine Übersicht gegeben. In \cref{fig:testingfazit:testing:testcases:1} bis \cref{fig:testingfazit:testing:testcases:12:2} sind anschliessend alle Auswertungen der Testfälle aufgeführt. Nach jeder Tabelle ist zusätzlich noch ein Bild vorhanden, welches die Ausgabe des Programms aufzeigt.
 
 \begin{table}[H] 
 	\caption{Übersicht der Testfälle}
@@ -793,7 +793,7 @@ Alle Test sind erfolgreich. In \cref{fig:testingfazit:testing:testcases:uebersic
 	\multicolumn{4}{|l|}{\textbf{Cluster 1}} \\ \cline{2-4} 
 	& Fehler & \multicolumn{2}{|l|}{0} \\ \cline{2-4} 
 	& Grösse & \multicolumn{2}{|l|}{9} \\ \cline{2-4} 
-	& \multicolumn{3}{|L{7.5cm}|}{Das Resultat der Analyse dieses Clusters vom Apriori Algorithmus ist dasselbe wie jenes vom DBSCAN welches oben aufgeführt wurde. Zur Verbesserung der Übersicht wird das Resultat hier nicht noch einmal aufgeführt.} \\ \hline
+	& \multicolumn{3}{|L{7.5cm}|}{Das Resultat der Analyse dieses Clusters vom Apriori Algorithmus ist dasselbe, wie jenes vom DBSCAN, welches oben aufgeführt wurde. Zur Verbesserung der Übersicht wird das Resultat hier nicht noch einmal aufgeführt.} \\ \hline
 	
 	\multicolumn{4}{|l|}{\textbf{Cluster 2}} \\ \cline{2-4} 
 	& Fehler & \multicolumn{2}{|l|}{0} \\ \cline{2-4} 
@@ -1024,10 +1024,10 @@ Alle Test sind erfolgreich. In \cref{fig:testingfazit:testing:testcases:uebersic
 
 \subsection{Hypothesen}
 \label{sec:testingfazit:testing:hypothesen}
-Im \cref{sec:einleitung:ziel:hypothesen} \nameref{sec:einleitung:ziel:hypothesen} sind Hypothesen aufgestellt worden welche auf ihre Richtigkeit geprüft wurden. Nachfolgend wird das Resultat vorgestellt.
+Im \cref{sec:einleitung:ziel:hypothesen} \nameref{sec:einleitung:ziel:hypothesen} sind Hypothesen aufgestellt worden, die auf ihre Richtigkeit geprüft wurden. Nachfolgend wird das Resultat vorgestellt.
 
 %"`"'
-\paragraph{Hypothese 1: "`Die meisten Kunden von Interhome kommen aus der Schweiz oder Frankreich."'} Durch eine Einschränkung der analysierten Attribute des Apriori Algorithmus auf das Herkunftsland des Kunden wurde diese Hypothese bestätigt. 20.94\% aller Buchungen wurden von Schweizer getätigt und 18.58\% von Franzosen. Das Resultat der Apriori Analyse wird in \cref{fig:testingfazit:testing:hypothesen:hypothese1} gezeigt. Die erste Spalte stellt das Attribut dar. "`Object Country"' ist das Land wo das Objekt steht, "`=switzerland"' sagt es liegt in der Schweiz. In der zweiten Spalte wird die Anzahl der Buchungen gezeigt, welche zum Beispiel das Attribut "`Object Country=switzerland"' besitzen, sowie eine Prozentzahl. Diese gibt an wie viele Buchungen dieses Attribut besitzen verglichen mit allen analysierten Instanzen.
+\paragraph{Hypothese 1: "`Die meisten Kunden von Interhome kommen aus der Schweiz, oder Frankreich."'} Durch eine Einschränkung der analysierten Attribute des Apriori Algorithmus auf das Herkunftsland des Kunden wurde diese Hypothese bestätigt. 20.94\% aller Buchungen wurden von Schweizern getätigt und 18.58\% von Franzosen. Das Resultat der Apriori Analyse wird in \cref{fig:testingfazit:testing:hypothesen:hypothese1} gezeigt. Die erste Spalte stellt das Attribut dar. "`Object Country"' ist das Land, wo das Objekt steht, "`=switzerland"' sagt, es liegt in der Schweiz. In der zweiten Spalte wird die Anzahl der Buchungen gezeigt, welche zum Beispiel das Attribut "`Object Country=switzerland"' besitzen sowie eine Prozentzahl. Diese gibt an, wie viele Buchungen dieses Attribut im Vergleich mit allen analysierten Instanzen besitzen.
 
 \begin{figure}[H]
 	\RawFloats
@@ -1037,7 +1037,7 @@ Im \cref{sec:einleitung:ziel:hypothesen} \nameref{sec:einleitung:ziel:hypothesen
 	\label{fig:testingfazit:testing:hypothesen:hypothese1}
 \end{figure}
 
-\paragraph{Hypothese 2: "`Die meisten Buchungen werden für die Schweiz und für Frankreich getätigt."'} Das Resultat des Apriori Algorithmus wurde für die Auswertung dieser Hypothese eingeschränkt, so dass nur der Standort des Objekts analysiert wird. Als Filter wurde gesetzt dass die Buchung aus der Schweiz stammen muss. Dadurch konnte die Hypothese bestätigt werden. 19.92\% aller Buchungen wurde für Objekte in der Schweiz getätigt, und 13.97\% für deren aus Frankreich.
+\paragraph{Hypothese 2: "`Die meisten Buchungen werden für die Schweiz und für Frankreich getätigt."'} Das Resultat des Apriori Algorithmus wurde für die Auswertung dieser Hypothese eingeschränkt, so dass nur der Standort des Objekts analysiert wird. Als Filter wurde gesetzt, dass die Buchung aus der Schweiz stammen muss. Dadurch konnte die Hypothese bestätigt werden. 19.92\% aller Buchungen wurde für Objekte in der Schweiz getätigt, und 13.97\% für deren aus Frankreich.
 
 \begin{figure}[H]
 	\RawFloats
@@ -1047,13 +1047,13 @@ Im \cref{sec:einleitung:ziel:hypothesen} \nameref{sec:einleitung:ziel:hypothesen
 	\label{fig:testingfazit:testing:hypothesen:hypothese2}
 \end{figure}
 
-\paragraph{Hypothese 3: "`Schweizer Kunden buchen meistens Objekte in der Schweiz."'} Eingeschränkt wurden die Attribute hier auf den Standort des Objekts. Zusätzlich wurde ein Filter gesetzt auf die Herkunft des Kunden. Als Resultat gab das Programm aus, dass 49.24\% aller Schweizer ein Objekt in der Schweiz buchen. Abgeschlagen auf dem zweiten Platz rangiert Frankreich mit 7.34\% und danach Italien mit 6.99\%. Die Hypothese ist somit bestätigt.
+\paragraph{Hypothese 3: "`Schweizer Kunden buchen meistens Objekte in der Schweiz."'} Eingeschränkt wurden die Attribute hier auf den Standort des Objekts. Zusätzlich wurde ein Filter gesetzt auf die Herkunft des Kunden. Als Resultat gab das Programm an, dass 49.24\% aller Schweizer ein Objekt in der Schweiz buchen. Abgeschlagen auf dem zweiten Platz rangiert Frankreich mit 7.34\% und danach Italien mit 6.99\%. Die Hypothese ist somit bestätigt.
 
 \begin{figure}[H]
 	\RawFloats
 	\centering
 	\includegraphics[width=0.5\textwidth]{images/hypothese3-1}
-	\caption{Buchungen von Interhome welche von Schweizer getätigt wurden, gruppiert nach Land}
+	\caption{Buchungen von Interhome, welche von Schweizern getätigt wurden, gruppiert nach Land}
 	\label{fig:testingfazit:testing:hypothesen:hypothese3:1}
 \end{figure}
 
@@ -1072,13 +1072,13 @@ Es ist generell gültig, dass Kunden meistens ein Ferienhaus im eigenen Land buc
 		\caption{Italiener}
 		\label{fig:testingfazit:testing:hypothesen:hypothese3:2:2}
 	\end{subfigure}
-	\caption{Buchungen von Interhome welche von anderen Nationen getätigt wurden.}
+	\caption{Buchungen von Interhome, welche von anderen Nationen getätigt wurden.}
 	\label{fig:testingfazit:testing:hypothesen:hypothese3:2}
 \end{figure}
 
-\paragraph{Hypothese 4: "`Bei Destinationen mit Meeranschluss werden öfter Objekte mit mehreren Reisenden gebucht."'} Um diese Hypothese zu überprüfen werden verschiedene Destinationen miteinander verglichen. Benötigt werden Orte am Meer und solche im Landes inneren. Es werden deshalb zuerst Destinationen ermittelt und danach die Durchschnitte der Anzahl \gls{pax} verglichen. Sind durchschnittlich mehr Buchungen mit 2 Reisenden und weniger mit höheren \gls{pax}-Anzahlen vorhanden ist die Hypothese bestätigt.
+\paragraph{Hypothese 4: "`Bei Destinationen mit Meeranschluss werden öfter Objekte mit mehreren Reisenden gebucht."'} Um diese Hypothese zu überprüfen, werden verschiedene Destinationen miteinander verglichen. Benötigt werden Orte am Meer und solche im Landesinneren. Es werden deshalb zuerst Destinationen ermittelt und danach die Durchschnitte der Anzahl \gls{pax} verglichen. Sind durchschnittlich mehr Buchungen mit 2 Reisenden und weniger mit höheren \gls{pax}-Anzahlen vorhanden, ist die Hypothese bestätigt.
 
-Es wurden die fünf meist gebuchten Regionen ausfindig gemacht, welche nahe am Strand sind. Dies konnte mit dem Proof of Concept gemacht werden. Dazu wurde die Ortschaft von allen Buchungen analysiert, bei denen das Objekt nahe am Strand liegt. Das Resultat dieser Analyse ist in \cref{sec:testingfazit:testing:hypothesen:1} abgebildet. Die \% Spalte zeigt wie häufig die Ortschaft in der Datenmenge vorhanden ist.
+Es wurden die fünf meist gebuchten Regionen ausfindig gemacht, welche nahe am Strand sind. Dies konnte mit dem Proof of Concept gemacht werden. Dazu wurde die Ortschaft von allen Buchungen analysiert, bei denen das Objekt nahe am Strand liegt. Das Resultat dieser Analyse ist in \cref{sec:testingfazit:testing:hypothesen:1} abgebildet. Die \% Spalte zeigt, wie häufig die Ortschaft in der Datenmenge vorhanden ist.
 
 \begin{table}[H] 
 	\caption{Häufigkeit der Ortschaften von Buchungen nahe Strand}
@@ -1139,9 +1139,9 @@ Anschliessend wurde für diese Ortschaften die Häufigkeiten der Anzahl von Pass
 	\end{tabular}
 \end{table}
 
-Als Vertreter der Destinationen ohne Meeresanschluss wurden Paris, Wien, Dittishausen, Krakau und Prag gewählt. Sie wurden ausgesucht weil sie sind im Landes inneren sind und viele Buchungen besitzen. 
+Als Vertreter der Destinationen ohne Meeranschluss wurden Paris, Wien, Dittishausen, Krakau und Prag gewählt. Sie wurden ausgesucht, weil sie sind im Landesinneren sind und viele Buchungen besitzen. 
 \begin{table}[H] 
-	\caption{Häufigkeit der Anzahl Reisenden pro Buchung für Ortschaften welche nicht am Meer liegen}
+	\caption{Häufigkeit der Anzahl Reisenden pro Buchung für Ortschaften, welche nicht am Meer liegen.}
 	\centering
 	\label{sec:testingfazit:testing:hypothesen:3}
 	\begin{tabular}{ | l | l | l | } 
@@ -1193,11 +1193,11 @@ Die \cref{sec:testingfazit:testing:hypothesen:3:2} zeigt die Durchschnitte der A
 	\end{tabular}
 \end{table}
 
-Die Werte für zwei \gls{pax} ist mit 30.13\% gegenüber 30.53\% annähernd stabil. Dreis Reisende gehen eher ans Meer (17.64\% gegenüber 16.50\%). Bei vier, fünf und sechs Passagieren ist der Wert höher in Destinationen im Landesinneren als am Meer. Am spannendsten sind vier \gls{pax}, da es mit rund 30\% die häufigste Reisengruppengrösse darstellt. Da dieser Wert jedoch im Landesinneren 3\% Punkte höher ist, gilt die Hypothese als widerlegt.
+Die Werte für zwei \gls{pax} ist mit 30.13\% gegenüber 30.53\% annähernd stabil. Dreier Gruppen gehen eher ans Meer (17.64\% gegenüber 16.50\%). Bei vier, fünf und sechs Passagieren ist der Wert höher in Destinationen im Landesinneren als am Meer. Am Spannendsten sind vier \gls{pax}, da es mit rund 30\% die häufigste Reisengruppengrösse darstellt. Da dieser Wert jedoch im Landesinneren 3\% Punkte höher ist, gilt die Hypothese als widerlegt.
 
-In diesem Bereich würde es sich jedoch anbieten, die Nachforschungen noch etwas zu verstärken. Die Beschreibung der Hypothese besagt, dass Familien eher ans Meer gehen. Grössere Reisegruppen müssen aber nicht zwingend eine Familie sein. Man könnte zum Beispiel Analysieren, ob Gruppen mit zwei Erwachsenen und 1 bis mehrere Kindern sich anders verhalten als Gruppen von nur Erwachsenen Personen.
+In diesem Bereich würde es sich jedoch anbieten die Nachforschungen noch etwas zu verstärken. Die Beschreibung der Hypothese besagt, dass Familien eher ans Meer gehen. Grössere Reisegruppen müssen aber nicht zwingend eine Familie sein. Man könnte zum Beispiel analysieren, ob Gruppen mit zwei Erwachsenen und 1 bis mehreren Kindern sich anders verhalten als Gruppen von nur Erwachsenen Personen.
 
-\paragraph{Hypothese 5: "`Schweizer Buchungen in Skiregionen haben mehrheitlich (80\%) die Eigenschaft, dass sie nahe am Skilift, oder am öffentlichem Verkehr liegen."'} Zuerst werden die 5 grössten Skiregionen ermittelt. Dazu wird der Proof of Concept verwendet. Es werden Schweizer Ortschaften gesucht und die Häufigkeit der Region gezählt mittels dem Apriori Algorithmus. Anschliessen die fünf Top-Ortschaften aus dem Resultat ausgesucht welche ein Skigebiet besitzen. Das Resultat der Apriori Analyse ist in \cref{sec:testingfazit:testing:hypothesen:4} aufgeführt. \colorbox{green!25}{Grün} hinterlegt sind diejenigen Regionen, welche ein Skigebiet besitzen und deshalb weiterverwendet werden. Anschliessend wird für jede Region mittels Apriori Analyse ermittelt, wie viele Objekte entweder nahe am Skigebiet oder nahe am Öffentlichen verkehr liegen. 
+\paragraph{Hypothese 5: "`Schweizer Buchungen in Skiregionen haben mehrheitlich (80\%) die Eigenschaft, dass sie nahe am Skilift, oder am öffentlichen Verkehr liegen."'} Zuerst werden die 5 grössten Skiregionen ermittelt. Dazu wird der Proof of Concept verwendet. Es werden schweizer Ortschaften gesucht und die Häufigkeit der Region mittels dem Apriori Algorithmus gezählt. Anschliessend werden die fünf Top-Ortschaften aus dem Resultat ausgesucht, die ein Skigebiet besitzen. Das Resultat der Apriori Analyse ist in \cref{sec:testingfazit:testing:hypothesen:4} aufgeführt. \colorbox{green!25}{Grün} hinterlegt sind diejenigen Regionen, die ein Skigebiet besitzen und deshalb weiterverwendet werden. Anschliessend wird für jede Region mittels Apriori Analyse ermittelt, wie viele Objekte entweder nahe am Skigebietn oder nahe am öffentlichen Verkehr liegen. 
 
 \begin{table}[H] 
 	\caption{Häufigkeit der Ortschaften von Buchungen nahe Strand}
@@ -1248,19 +1248,19 @@ In diesem Bereich würde es sich jedoch anbieten, die Nachforschungen noch etwas
 		\caption{Villars-sur-Ollon}
 		\label{sec:testingfazit:testing:hypothesen:5:5}
 	\end{subfigure}
-	\caption{Analyse der Skiregionen auf Distanz zum Skilift und zum öffentlichen Verkehr mit dem Apriori Algorithmus}
+	\caption{Analyse der Skiregionen auf Distanz zum Skilift und zum öffentlichen Verkehr mit dem Apriori Algorithmus.}
 	\label{sec:testingfazit:testing:hypothesen:5}
 \end{figure}
 
-Bei Crans-Montana mit 88.24\% und Grindelwald 93.00\% der Buchungen in der nähe des öffentlichen Verkehrs (ÖV) ist die Hypothese erfüllt. 
+Bei Crans-Montana mit 88.24\% und Grindelwald 93.00\% der Buchungen in der Nähe des öffentlichen Verkehrs (ÖV) ist die Hypothese erfüllt. 
 
-In Zermatt sind 71.15\% nahe ÖV, 66.84\% nahe dem Skilift und 52.09\% in der nähe von beiden. Wenn man $66.84 - 52.09$ rechnet erhält an 14.75\%. Dies sind die Buchungen die nur in der nähe von einem Skigebiet liegen, jedoch nicht in der nähe der ÖV. Zählt man diese 14.75\% zu den 71.15\%, so erhält 85.9\% und damit alle Objekte die nahe Skilift und/oder nahe ÖV liegen. Somit ist die Hypothese auch für Zermatt erfüllt.
+In Zermatt sind 71.15\% nahe ÖV, 66.84\% nahe dem Skilift und 52.09\% in der Nähe von beiden. Wenn man $66.84 - 52.09$ rechnet, erhält man 14.75\%. Dies sind die Buchungen, die nur in der Nähe von einem Skigebiet liegen, jedoch nicht in der Nähe der ÖV. Zählt man diese 14.75\% zu den 71.15\%, so erhält man 85.9\% und damit alle Objekte, die nahe Skilift und/oder nahe ÖV liegen. Somit ist die Hypothese auch für Zermatt erfüllt.
 
 In Villars-sur-Ollon sind 58.41\% ($32.67-20.48+46.22$)  und in Nendaz 41.7\% ($24.96-21.83+38.57$) in der Nähe vom Skilift und/oder ÖV und die Hypothese damit nicht erfüllt.
 
 Abschliessend kann die Hypothese widerlegt werden. Sie ist sicherlich richtig für einige Skigebiete, jedoch nicht für alle.
 
-\paragraph{Hypothese 6: "`Zu kalten Jahreszeiten wird von Schweizern mehr Regionen am Meer gebucht als im Sommer."'} Analysiert wird diese Hypothese mit dem Apriori Algorithmus. Filtriert wird nach Buchungen aus der Schweiz. Als Resultate werden die Region und Ortschaft der Buchungen verwendet. Das Resultat dieser Anylse ist in \cref{fig:testingfazit:testing:hypothesen:6} aufgeführt. Die Kolonne "`\#-Buchungen"' listet die Anzahl der Instanzen auf, welche im gegebenen Monat gebucht wurden.
+\paragraph{Hypothese 6: "`Zu kalten Jahreszeiten wird von Schweizern mehr Regionen am Meer gebucht als im Sommer."'} Analysiert wird diese Hypothese mit dem Apriori Algorithmus. Filtriert wird nach Buchungen aus der Schweiz. Als Resultate werden die Region und Ortschaft der Buchungen verwendet. Das Resultat dieser Anylse ist in der \cref{fig:testingfazit:testing:hypothesen:6} aufgeführt. Die Kolonne "`\#-Buchungen"' listet die Anzahl der Instanzen auf, welche im gegebenen Monat gebucht wurden.
 
 \begin{table}[H] 
 	\caption{Häufigkeit der Regionen und Ortschaften gruppiert nach Buchungsmonat}
@@ -1293,13 +1293,13 @@ Abschliessend kann die Hypothese widerlegt werden. Sie ist sicherlich richtig f�
 	\end{tabular}
 \end{table}
 
-Als warme/Sommer wurden Juli, August und September definiert sowie Dezember, Januar und Februar als kalte/Winter Monate. Aufgeführt in der Tabelle oben sind die Regionen Cote d'Azur, Costa Blanca und Toskana. Dabei handelt es sich um die Top-Regionen der Analyse welche bekannt sind für schönes und warmes Wetter. Zusätzlich ist der Ort Leukerbad ersichtlich, welcher bekannt ist für die Therme. Es wird zusätzlich noch analysiert, ob die warmen Bäder der Therma öfters im Winter gebucht werden als im Sommer.
+Als warme Sommermonate wurden Juli, August und September definiert sowie Dezember, Januar und Februar als kalte Wintermonate. Aufgeführt in der Tabelle oben sind die Regionen Côte d'Azur, Costa Blanca und Toskana. Dabei handelt es sich um die Top-Regionen der Analyse, welche bekannt für schönes und warmes Wetter sind. Zusätzlich ist der Ort Leukerbad ersichtlich, welcher bekannt für die Therme ist. Es wird zusätzlich noch analysiert, ob die warmen Bäder der Therma öfters im Winter gebucht werden als im Sommer.
 
 Aus der Auswertung des Proof of Concepts ist ersichtlich, dass im Juli und im Sommer (Juli, August und September) die aufgeführten Regionen und das Leukerbad mehr gebucht wird als im Winter. Das ist das gegenteilige Resultat der Hypothese, womit diese widerlegt ist.
 
 \paragraph{Hypothese 7: "`Anfang des Jahres werden teurere Objekte gebucht als Mitte, oder Ende des Jahres."'} Verglichen werden hier die Wochenpreise zusammengefasst nach Monat. Analysiert werden alle Buchungen. Es werden demnach keine Filter angewendet.
 \begin{table}[H] 
-	\caption{Häufigkeit der Wochenpreise gruppiert nach Buchungsmonat}
+	\caption{Häufigkeit der Wochenpreise gruppiert nach Buchungsmonat.}
 	\centering
 	\label{fig:testingfazit:testing:hypothesen:7}
 	\begin{tabular}{ | l | l | l | l | } 
@@ -1319,18 +1319,18 @@ Aus der Auswertung des Proof of Concepts ist ersichtlich, dass im Juli und im So
 	\end{tabular}
 \end{table}
 
-Die teuren/Luxus Buchungen sind am meisten Vertreten im Juni und November, und nicht am Anfang Jahr wie erwartet. Jedoch ist ersichtlich, dass die Anzahl der Buchungen im Januar deutlich am höchsten ist mit 14'041 und kontinuierlich abnehmen. Es werden demnach nicht teurere Buchungen anfang des Jahres getätigt, sondern mehr. Diese Hypothese muss somit widerlegt werden. Die gewonnen Erkenntnisse sind dennoch spannend. 
+Die teuren Luxusbuchungen sind am meisten im Juni und November vertreten und nicht am Anfang des Jahres wie erwartet. Jedoch ist ersichtlich, dass die Anzahl der Buchungen im Januar deutlich am höchsten mit 14'041 ist und kontinuierlich abnehmen. Es werden demnach nicht teurere Buchungen zu Beginn des Jahres getätigt, sondern mehr. Diese Hypothese muss somit widerlegt werden. Die gewonnenen Erkenntnisse sind dennoch spannend. 
 
 \section{Fazit}
-Die Anforderung dieser Arbeit war es, Buchungen von Interhome nach Häufigkeit der Attribute zu analysieren und damit Muster aufzuzeigen. Um dieses Ziel zu erreichen wurden Hypothesen aufgestellt und Algorithmen des Data Mining gesucht, welche die Fragestellungen beantworten können. Es wurde entschieden, den Apriori Algorithmus einzusetzen, da er genau für solche Problemstellungen ausgelegt ist. Zusätzlich wurden noch die zwei Clustering Algorithmen k-prototype und DBSCAN gewählt, in der Hoffnung dass sie die Resultate der Analyse mittels Apriori verbessern. 
+Die Anforderung dieser Arbeit war es Buchungen von Interhome nach Häufigkeit der Attribute zu analysieren und damit Muster aufzuzeigen. Um dieses Ziel zu erreichen, wurden Hypothesen aufgestellt und Algorithmen des Data Mining gesucht, welche die Fragestellungen beantworten können. Es wurde entschieden, den Apriori Algorithmus einzusetzen, da er genau für solche Problemstellungen ausgelegt ist. Zusätzlich wurden noch die zwei Clustering Algorithmen k-prototype und DBSCAN in der Hoffnung gewählt, dass sie die Resultate der Analyse mittels Apriori verbessern. 
 
-Die Auswertung der Hypothesen (siehe \cref{sec:testingfazit:testing:hypothesen} \nameref{sec:testingfazit:testing:hypothesen}) hat gezeigt, dass sich die Auswahl des Apriori Algorithmus bewährt hat. Einzig bei Hypothese 4 gab es Probleme bei der Auswertung wegen des Begriffes "`Familie"'. Die Datenbasis kennt nur \gls{pax} und der Algorithmus weiss nicht, ob es sich um eine Reisegruppe oder eine Familie handelt. Durch eine Analyse welche zwischen Erwachsenen und Kinder unterscheiden würde könnten die Resultate noch verfeinert werden. Da kann noch mehr Nachgeforscht werden. Verhalten sich Reisende mit Kindern anders als Gruppen von nur Erwachsenen?
+Die Auswertung der Hypothesen (siehe \cref{sec:testingfazit:testing:hypothesen} \nameref{sec:testingfazit:testing:hypothesen}) hat gezeigt, dass sich die Auswahl des Apriori Algorithmus bewährt hat. Einzig bei Hypothese 4 gab es Probleme bei der Auswertung wegen des Begriffs "`Familie"'. Die Datenbasis kennt nur \gls{pax} und der Algorithmus weiss nicht, ob es sich um eine Reisegruppe, oder eine Familie handelt. Durch eine Analyse, welche zwischen Erwachsenen und Kindern unterscheiden würde, könnten die Resultate noch verfeinert werden. Da kann noch mehr nachgeforscht werden. Verhalten sich Reisende mit Kindern anders als Gruppen von nur Erwachsenen?
 
-Die funktionalen Anforderungen aus \cref{sec:anforderungsanalyse:funktionaleanforderung} \nameref{sec:anforderungsanalyse:funktionaleanforderung} wurden alle umgesetzt. Eine Häufigkeitsanalyse kann gemäss FA1 auf allen Instanzen durchgeführt werden und laut FA3 auch auf einer Untermenge. Die vorgegebene Nachvollziehbarkeit von FA2 ist auch gegeben. Es wird für jede Apriori Analyse die Anzahl der Buchungen sowie die Prozentanzahl an der analysierten Menge angegeben. Um FA4 und FA5 zu erfüllen wurde die "`Explore"' Ansicht erstellt welche alle Stammdaten oder eine Untermenge davon anzeigt. FA6 wird vom Apriori Algorithmus unterstützt. Er zählt die vorkommen von numerischen und kategorischen Attributen. Damit die Clustering Algorithmen mit mixed data types umgehen können wurde eine Distanzmessung definiert welche dies beherrscht (siehe \cref{sec:konzept:anwendungderalgorithmen:distanzmessung} \nameref{sec:konzept:anwendungderalgorithmen:distanzmessung}). FA7 gibt vor dass der Benutzer die Algorithmen konfigurieren kann (siehe \cref{sec:anforderungsanalyse:funktionaleanforderung} \nameref{sec:anforderungsanalyse:funktionaleanforderung}). Dazu wurde die Ansicht "`Settings"' erstellt.  
+Die funktionalen Anforderungen aus \cref{sec:anforderungsanalyse:funktionaleanforderung} \nameref{sec:anforderungsanalyse:funktionaleanforderung} wurden alle umgesetzt. Eine Häufigkeitsanalyse kann gemäss FA1 auf allen Instanzen durchgeführt werden und laut FA3 auch auf einer Untermenge. Die vorgegebene Nachvollziehbarkeit von FA2 ist auch gegeben. Es wird für jede Apriori Analyse die Anzahl der Buchungen sowie die Prozentanzahl an der analysierten Menge angegeben. Um FA4 und FA5 zu erfüllen wurde die "`Explore"' Ansicht erstellt, welche alle Stammdaten, oder eine Untermenge davon anzeigt. FA6 wird vom Apriori Algorithmus unterstützt. Er zählt die Vorkommen von numerischen und kategorischen Attributen. Damit die Clustering Algorithmen mit mixed data types umgehen können, wurde eine Distanzmessung definiert, welche dies beherrscht (siehe \cref{sec:konzept:anwendungderalgorithmen:distanzmessung} \nameref{sec:konzept:anwendungderalgorithmen:distanzmessung}). FA7 gibt vor, dass der Benutzer die Algorithmen konfigurieren kann (siehe \cref{sec:anforderungsanalyse:funktionaleanforderung} \nameref{sec:anforderungsanalyse:funktionaleanforderung}). Dazu wurde die Ansicht "`Settings"' erstellt.  
 
-Für die Messung der Komplexität der nicht funktionalen Anforderung NFA1 (siehe \cref{sec:anforderungsanalyse:nichtfunktionaleanforderung} \nameref{sec:anforderungsanalyse:nichtfunktionaleanforderung}) wurde das Programm zwei Mitarbeitern der Interhome vorgestellt, welche rasch eigene Analysen starten konnten. Sie benutzten verschiedene Filter und machten Anpassungen an den Einstellungen. Die einzelnen Parameter musste Ihnen jedoch erklärt werden da die Erklärung der Einstellungen nicht sprechend genug waren. Obwohl dies ein kleines Detail ist, trägt es trotzdem wesentlich zur Akzeptanz des Programms bei. Da ist sicher noch Verbesserdungsbedarf. Um die Modularität der Umsetzung gemäss NFA2 zu gewährleisten wurde bei der Entwicklung versucht das \gls{srp} einzuhalten. Durch den Einsatz von UnitTests wurde ebenfalls eine möglichst starke Kohäsion und eine lose Kopplung angestrebt. Weitere Attribute in der Datenbasis können durch reine Konfigurationsänderungen hinzugefügt werden. Für die Einführung eines neuen Algorithmus muss ein neuer Service erstellt werden, jedoch ist keine Änderung an bestehenden Code nötig. Für die Erweiterbarkeit der Daten gemäss NFA3 müssen neue Daten entsprechend \cref{sec:recherche:datenvorbereitung} \nameref{sec:recherche:datenvorbereitung} vorbereitet werden. Ist eine Lizenz für das RapidMiner Programm vorhanden ist dies durch wenige Klicks erledigt, ansonsten muss eine andere Lösung gefunden werden. Sind die Daten korrekt vorbereitet kann jedoch in der Konfiguration des umgesetzten Programms die neue Datenbasis eingebunden werden. 
+Für die Messung der Komplexität der nicht funktionalen Anforderung NFA1 (siehe \cref{sec:anforderungsanalyse:nichtfunktionaleanforderung} \nameref{sec:anforderungsanalyse:nichtfunktionaleanforderung}) wurde das Programm zwei Mitarbeitern der Interhome vorgestellt, die rasch eigene Analysen starten konnten. Sie benutzten verschiedene Filter und machten Anpassungen an den Einstellungen. Die einzelnen Parameter musste ihnen jedoch erklärt werden, da die Erklärung der Einstellungen nicht sprechend genug waren. Obwohl dies ein kleines Detail ist, trägt es trotzdem wesentlich zur Akzeptanz des Programms bei. Da ist sicher noch Verbesserdungsbedarf. Um die Modularität der Umsetzung gemäss NFA2 zu gewährleisten, wurde bei der Entwicklung versucht das \gls{srp} einzuhalten. Durch den Einsatz von UnitTests wurde ebenfalls eine möglichst starke Kohäsion und eine lose Kopplung angestrebt. Weitere Attribute in der Datenbasis können durch reine Konfigurationsänderungen hinzugefügt werden. Für die Einführung eines neuen Algorithmus muss ein neuer Service erstellt werden, jedoch ist keine Änderung am bestehenden Code nötig. Für die Erweiterbarkeit der Daten gemäss NFA3 müssen neue Daten entsprechend \cref{sec:recherche:datenvorbereitung} \nameref{sec:recherche:datenvorbereitung} vorbereitet werden. Ist eine Lizenz für das RapidMiner Programm vorhanden ist dies durch wenige Klicks erledigt, ansonsten muss eine andere Lösung gefunden werden. Sind die Daten korrekt vorbereitet, kann in der Konfiguration des umgesetzten Programms die neue Datenbasis eingebunden werden. 
 
-Wie im \cref{sec:proofofconcept:fazit} \nameref{sec:proofofconcept:fazit} erläutert eignet sich der Apriori Algorithmus für die explorative Suche von Mustern. Hauptsache dafür ist dessen Geschwindigkeit und die Einfachheit des Programms. Die Clustering Algorithmen konnten leider keine hilfreichen Resultate liefern. Wie im \cref{sec:proofofconcept:fazit} \nameref{sec:proofofconcept:fazit} beschrieben ist noch unklar, ob es an den falschen Parameter der Algorithmen liegt. Es wurde eine Hypothese aufgestellt welche jedoch das Verhalten der Clusteralgorithmen erklärt. Dieses würde darauf schliessen, dass es keine klaren Gruppen gibt und die beiden Algorithmen demnach nicht geeignet sind um die Buchungen von Interhome zu analysieren.
+Wie im \cref{sec:proofofconcept:fazit} \nameref{sec:proofofconcept:fazit} erläutert, eignet sich der Apriori Algorithmus für die explorative Suche von Mustern. Hauptsache dafür ist dessen Geschwindigkeit und die Einfachheit des Programms. Die Clustering Algorithmen konnten leider keine hilfreichen Resultate liefern. Wie im \cref{sec:proofofconcept:fazit} \nameref{sec:proofofconcept:fazit} beschrieben, ist noch unklar, ob es an falschen Parametern der Algorithmen liegt. Es wurde eine Hypothese aufgestellt, die jedoch das Verhalten der Clusteralgorithmen erklärt. Dieses würde darauf schliessen, dass es keine klaren Gruppen gibt und die beiden Algorithmen demnach nicht geeignet sind, um die Buchungen von Interhome zu analysieren.
 
 
 %\section{Mögliche Erweiterungen/Verbesserungen}
@@ -1346,4 +1346,4 @@ Wie im \cref{sec:proofofconcept:fazit} \nameref{sec:proofofconcept:fazit} erläu
 %ApiroriTid, AprioriHybrid
 
 \section{Schlusswort}
-Die Apriori Analyse hat sich als hilfreiches Werkzeug für die Attributanalyse der Interhome Buchungsdaten herausgestellt, solange die korrekten Anfragen gestellt werden. Die Clustering Algorithmen konnten hingegen keinen Beitrag zum Ziel dieser Arbeit leisten. Trotzdem wurde durch ihren Einsatz wertvolle Einblicke und ein besseres Verständnis der Datenbasis gewonnen werden. Für den produktiven Einsatz sollte jedoch die Beischreibung der möglichen Einstellungen im Programm noch verständlicher erläutert werden. 
+Die Apriori Analyse hat sich als hilfreiches Werkzeug für die Attributanalyse der Interhome Buchungsdaten herausgestellt, solange die korrekten Anfragen gestellt werden. Die Clustering Algorithmen konnten hingegen keinen Beitrag zum Ziel dieser Arbeit leisten. Trotzdem wurden durch ihren Einsatz wertvolle Einblicke und ein besseres Verständnis der Datenbasis gewonnen. Für den produktiven Einsatz sollte jedoch die Beischreibung der möglichen Einstellungen im Programm noch verständlicher erläutert werden. 

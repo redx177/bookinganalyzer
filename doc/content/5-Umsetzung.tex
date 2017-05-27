@@ -362,18 +362,18 @@ Ein "`Histograms"' besitzt ein, oder mehrere "`Histogram"'e, welche wiederum ein
 \label{sec:proofofconcept:klassenstruktur:controllers}
 Die erste Abbildung \cref{fig:proofofconcept:klassenstruktur:1} zeigt die Controllers. 
 \begin{itemize}
-	 \item Controller: Das "`Controller"' Interface gibt eine "`run"' Methode vor welche den Inhalt zurück liefern welcher an den Browser zurückgesendet wird. Verwendet werden die Klassen für die Behandlung der einzelnen Internetseiten die dem Benutzer angezeigt werden können. Es gibt 4 Klassen welches dieses Interface implementieren.
+	 \item Controller: Das "`Controller"' Interface gibt eine "`run"' Methode vor, welche den Inhalt zurückliefert welcher an den Browser zurückgesendet wird. Verwendet werden die Klassen für die Behandlung der einzelnen Internetseiten die dem Benutzer angezeigt werden können. Es gibt 4 Klassen, die dieses Interface implementieren.
 	 \begin{itemize}
-		\item ExplorerController: Ist für die Darstellung der Seite "`Einsehen der Stammdaten"' verantwortlich, welche in \cref{fig:konzept:mockups:stammdaten} abgebildet ist.
+		\item ExplorerController: Ist für die Darstellung der Seite "`Einsehen der Stammdaten"' verantwortlich, die in \cref{fig:konzept:mockups:stammdaten} abgebildet ist.
 			\begin{itemize}
-				\item BookingsProvider: Um die Buchungen zu laden wird der "`BookingsProvider"' verwendet. Dieser hat eine "`getSubset"' Methode mit welcher man sich die aktuelle Seite zurückgeben lassen kann. Er übernimmt nur die Aufgabe für die Unterteilung der Buchungen auf Seiten. Das Laden der Buchungen wird vom "`BookingDataIterator"' erledigt.
+				\item BookingsProvider: Um die Buchungen zu laden, wird der "`BookingsProvider"' verwendet. Dieser hat eine "`getSubset"' Methode. mit welcher man sich die aktuelle Seite zurückgeben lassen kann. Er übernimmt nur die Aufgabe für die Unterteilung der Buchungen auf den Seiten. Das Laden der Buchungen wird vom "`BookingDataIterator"' erledigt.
 				\item BookingDataIterator: Wird in \cref{fig:proofofconcept:klassenstruktur:2} erläutert.
-				\item UrlGenerator: Der URLGenerator wird benötigt um die Links zwischen den Seiten (Buchungslisten) zu erzeugen.
+				\item UrlGenerator: Der URLGenerator wird benötigt, um die Links zwischen den Seiten (Buchungslisten) zu erzeugen.
 			\end{itemize}
 		\item AttributanalysisController \& AttributanalysisWithGroupingController: Diese beiden Controller sind für die Darstellung von \cref{fig:konzept:mockups:apriori} und \cref{fig:konzept:mockups:clustering} verantwortlich und stossen die Services für die Analysen an (siehe \cref{sec:proofofconcept:architektur:services} \nameref{sec:proofofconcept:architektur:services}). 
-		\item SettingsController: Zeigt ein Formular mit welchem die Einstellungen des Programms angepasst werden können.
-		\item Twig\_Environment: Dies ist die View (siehe \cref{sec:proofofconcept:architektur:mvc} \nameref{sec:proofofconcept:architektur:mvc}) welche das \gls{html} generiert, welches an den Browser gesendet wird für die Darstellung. Verwendet wird diese Klasse von allen Controllern.
-		\item FiltersProvider: Liefert die Filter welche für den Aufbau des Formulares für die Einschränkung des Datenbestandes benötigt wird.
+		\item SettingsController: Zeigt ein Formular, mit welchem die Einstellungen des Programms angepasst werden können.
+		\item Twig\_Environment: Dies ist die View (siehe \cref{sec:proofofconcept:externebibliotheken:twig} \nameref{sec:proofofconcept:externebibliotheken:twig}), die das \gls{html} generiert, welches an den Browser für die Darstellung gesendet wird. Verwendet wird diese Klasse von allen Controllern.
+		\item FiltersProvider: Liefert die Filter, die für den Aufbau des Formulars für die Einschränkung des Datenbestandes benötigt wird.
 			\begin{itemize}
 				\item DataTypeClusterer: Wird in \cref{fig:proofofconcept:klassenstruktur:2} erläutert.
 			\end{itemize}
@@ -384,22 +384,22 @@ Die erste Abbildung \cref{fig:proofofconcept:klassenstruktur:1} zeigt die Contro
 \label{sec:proofofconcept:klassenstruktur:algorithmen}
 \cref{fig:proofofconcept:klassenstruktur:2} zeigt den Service für den Apriori Algorithmus.
 \begin{itemize}
-	\item AprioriAlgorithm: Führt den Apriori Algorithmus aus. Abhängig was der Klasse übergeben wird analysiert sie die gesamten Datenbasis, eine durch Filter eingeschränkten Untermenge, oder das Resultat eines Clusterings. Gesteuert wird dies über den "`DataIterator"' und den "`AprioriProgress"' welche nachfolgend beschrieben werden.
+	\item AprioriAlgorithm: Führt den Apriori Algorithmus aus. Abhängig was der Klasse übergeben wird, analysiert sie die gesamten Datenbasis, eine durch Filter eingeschränkte Untermenge, oder das Resultat eines Clusterings. Gesteuert wird dies über den "`DataIterator"' und den "`AprioriProgress"', welche nachfolgend beschrieben werden.
 	\item AprioriProgress: Speichert das Resultat der Apriori Analyse. 
 	\begin{itemize}
-		\item AprioriProgressToFile: Speichert das Resultat der Apriori Analyse in ein File ab. Diese Klasse wird verwendet wenn der Algorithmus auf der gesamten Datenbasis (oder auf einer durch Filter eingeschränkten Untermenge) durchgeführt wird. 
-		\item AprioriProgressForCluster: Wenn der Apriori Algorithmus das Resultat eines Clusterings analysiert kann diese Klasse verwendet werden. Sie speichert das gesamte Ergebnis ab. Sprich es müssen alle Cluster sowie deren jeweiligen Resultate des Apriori-Algorithmus übergeben werden.
+		\item AprioriProgressToFile: Speichert das Resultat der Apriori Analyse in ein File ab. Diese Klasse wird verwendet, wenn der Algorithmus auf der gesamten Datenbasis (oder auf einer durch Filter eingeschränkten Untermenge) durchgeführt wird. 
+		\item AprioriProgressForCluster: Wenn der Apriori Algorithmus das Resultat eines Clusterings analysiert, kann diese Klasse verwendet werden. Sie speichert das gesamte Ergebnis ab. Demnach müssen alle Cluster sowie deren jeweiligen Resultate des Apriori-Algorithmus übergeben werden.
 	\end{itemize}
-	\item BookingDataIterator: Diese Klasse implementiert das Iterator-\gls{pattern}. Sie ermöglicht es Buchung für Buchung eine Datenquelle zu durchlaufen. Intern wird ein "`DataIterator"' verwendet um auf die Quelle der Daten zuzugreifen. Dieser liefert ein unstrukturiertes Array zurück, welches der "`BookingDataIterator"' in eine Buchung umwandelt.
+	\item BookingDataIterator: Diese Klasse implementiert das Iterator-\gls{pattern}. Sie ermöglicht es Buchung für Buchung eine Datenquelle zu durchlaufen. Intern wird ein "`DataIterator"' verwendet, um auf die Quelle der Daten zuzugreifen. Dieser liefert ein unstrukturiertes Array zurück, das der "`BookingDataIterator"' in eine Buchung umwandelt.
 		\begin{itemize}
-			\item Iterator \& DataIterator: Von \gls{php} wird für die Implementierung des Iterator-\gls{pattern} ein Iterator Interface zur Verfügung gestellt. Das "`DataIterator"' Interface erweitert jenes von \gls{php} um eine Methode "`skip"', mit welcher eine Anzahl an Zeilen in der Datenquelle übersprungen werden kann (wird vom "`ExploreController"' verwendet), sowie eine Funktion "`count"', welche die gesamte Anzahl an Resultaten zurück gibt. Es gibt 4 Iteratoren, welche das "`DataIterator"' Interface implementieren. Die Auswahl des geeigneten Iterators wird im \cref{sec:proofofconcept:performance} \nameref{sec:proofofconcept:performance} erläutert.
+			\item Iterator \& DataIterator: Von \gls{php} wird für die Implementierung des Iterator-\gls{pattern} ein Iterator Interface zur Verfügung gestellt. Das "`DataIterator"' Interface erweitert jenes von \gls{php} um eine Methode "`skip"', mit welcher eine Anzahl an Zeilen in der Datenquelle übersprungen werden kann (wird vom "`ExploreController"' verwendet) sowie eine Funktion "`count"', welche die gesamte Anzahl an Resultaten zurück gibt. Es gibt 4 Iteratoren, welche das "`DataIterator"' Interface implementieren. Die Auswahl des geeigneten Iterators wird im \cref{sec:proofofconcept:performance} \nameref{sec:proofofconcept:performance} erläutert.
 				\begin{itemize}
 					\item LoadRedisDataIterator \& Redis: Der "`LoadRedisDataIterator"' lädt die Daten aus einer Redis InMemory Datenbank. Verwendet wird dazu die "`Redis"' Klasse aus der \gls{pecl} (siehe \cref{sec:proofofconcept:externebibliotheken:redis} \nameref{sec:proofofconcept:externebibliotheken:redis} für Details zu Redis).
 					\item LoadIncrementalCSVDataIterator: Lädt die Daten aus einer \gls{csv}-Datei. Jede Zeile wird einzeln aus dem File gelesen.
 					\item LoadAllCSVDataIterator: Lädt die Daten aus einer \gls{csv}-Datei. Zu Beginn werden alle Zeilen ins Memory des Programms geladen, aus welchem Zeile für Zeile zurückgegeben wird.
 					\item LoadClusterDataIterator: Der Klasse muss ein Cluster übergeben werden, über welchen iteriert wird. Verwendet wird der "`LoadClusterDataIterator"' für die Apriori-Analyse nachdem ein Clustering durchgeführt wurde.
 				\end{itemize}
-			\item DataTypeClusterer: Er übernimmt ein Array an Feldern mit untypisierten Daten aus einer Datenquelle oder den Filtern, typisiert diese und gruppiert sie. Beispiel an Daten die an den "`DataTypeClusterer"' übergeben werden:
+			\item DataTypeClusterer: Er übernimmt ein Array an Feldern mit untypisierten Daten aus einer Datenquelle, oder Filtern, typisiert diese und gruppiert sie. Beispiel an Daten, die an den "`DataTypeClusterer"' übergeben werden:
 			\begin{lstlisting}[language=php]
 var $\textdollar$rawData = array(
 	'distanceToPublicTransport' => 400
@@ -428,14 +428,14 @@ object(DataTypeCluster) {
 	)
 }
 			\end{lstlisting}
-			\item BookingBuilder: Erstellt ein Objekt "`Booking"' mit hilfe eines "`DataTypeClusterer"' aus einem unstrukturierem Array.
+			\item BookingBuilder: Erstellt ein Objekt "`Booking"' mit Hilfe eines "`DataTypeClusterer"' aus einem unstrukturierem Array.
 		\end{itemize}
 \end{itemize}
 
 \cref{fig:proofofconcept:klassenstruktur:3} zeigt den Service für den DBSCAN Algorithmus. Die Klasse "`BookingDataIterator"' wurde bereits im \cref{fig:proofofconcept:klassenstruktur:2} erläutert und wurde deshalb nicht mehr detailliert abgebildet.
 \begin{itemize}
 	\item DBScanAlgorithm: Führt den DBSCAN Algorithmus aus. 
-	\item ClusteringProgress \& DBScanClusteringProgress: Eine abstrakte Klasse welche das Resultat eines Clusterings in ein File abspeichert. Kann für den DBSCAN und den k-prototpye verwendet werden. Die abgeleitete Klasse "`DBScanClusteringProgress"' wird lediglich benötigt um die richtige View zu laden und die korrekte Konfiguration bereitzustellen.
+	\item ClusteringProgress \& DBScanClusteringProgress: Eine abstrakte Klasse, die das Resultat eines Clusterings in ein File abspeichert. Kann für den DBSCAN und den k-prototpye verwendet werden. Die abgeleitete Klasse "`DBScanClusteringProgress"' wird lediglich benötigt, um die richtige View zu laden und die korrekte Konfiguration bereitzustellen.
 	\begin{itemize}
 		\item Runtime: Verfolgt die Laufzeit des Algorithmus seit der Service gestartet wurde. 
 	\end{itemize}
@@ -445,7 +445,7 @@ object(DataTypeCluster) {
 \cref{fig:proofofconcept:klassenstruktur:4} zeigt den Service für den k-prototpye Algorithmus. Die Klassen "`BookingDataIterator"' und "`DistanceMeasurement"' wurden bereits dokumentiert und werden hier nicht mehr erläutert.
 \begin{itemize}
 	\item KPrototypeAlgorithm: Führt den k-prototpye Algorithmus aus. 
-	\item ClusteringProgress \& KPrototypeClusteringProgress: Der ClusteringProgress ist der selbe wie in \cref{fig:proofofconcept:klassenstruktur:3}. Die abgeleitete Klasse "`KPrototypeClusteringProgress"' liefert, gleich wie "`DBScanClusteringProgress"' die View sowie die Konfiguration. 
+	\item ClusteringProgress \& KPrototypeClusteringProgress: Der ClusteringProgress ist der selbe wie in \cref{fig:proofofconcept:klassenstruktur:3}. Die abgeleitete Klasse "`KPrototypeClusteringProgress"' liefert gleich wie "`DBScanClusteringProgress"' die View sowie die Konfiguration. 
 	\item Random, Randomizer, Redis \& BookingBuilder: Der k-prototpye Algorithmus wählt die initialen Clusterzentren zufällig. Dafür werden diese 4 Klassen benötigt. Random und Randomizer erlauben es zufällg eine Buchungs-Id auszuwählen. Die Redis InMemory Datenbank liefert die Rohdaten der Buchung und der "`BookingBuilder"' wandelt sie in eine Klasse "`Booking"' um (siehe \cref{sec:proofofconcept:externebibliotheken:redis} \nameref{sec:proofofconcept:externebibliotheken:redis} für Details zu Redis).
 \end{itemize}
 
@@ -454,11 +454,11 @@ Zuerst wird der Kommunikationsablauf zwischen dem Benutzer, dem Server und der H
 
 \subsection{Kommunikationsablauf}
 \label{sec:proofofconcept:kommunikationsablauf}
-In \cref{fig:proofofconcept:kommunikationsablauf:1} wird der Kommunikationsablauf aufgezeigt, welcher zwischen dem Webserver und dem Browser des Benutzers stattfindet. Massgeblich beeinflusst wurde der Ablauf durch die Algorithmen (siehe \cref{sec:proofofconcept:architektur:anforderungen:algorithmen} \nameref{sec:proofofconcept:architektur:anforderungen:algorithmen}). Sobald der Benutzer eine Analyse startet wird eine Anfrage an den Server gestellt. Dieser erstellt einen Hintergrundprozess welcher die Analyse durchführt und gibt danach direkt eine Antwort an den User zurück. 
+In \cref{fig:proofofconcept:kommunikationsablauf:1} wird der Kommunikationsablauf aufgezeigt, welcher zwischen dem Webserver und dem Browser des Benutzers stattfindet. Massgeblich beeinflusst wurde der Ablauf durch die Algorithmen (siehe \cref{sec:proofofconcept:architektur:anforderungen:algorithmen} \nameref{sec:proofofconcept:architektur:anforderungen:algorithmen}). Sobald der Benutzer eine Analyse startet, wird eine Anfrage an den Server gestellt. Dieser erstellt einen Hintergrundprozess, welcher die Analyse durchführt und gibt danach direkt eine Antwort an den User zurück. 
 
 Der Hintergrundprozess führt die Analyse durch und schreibt periodisch einen Zwischenstand im \gls{html}-Format in eine Datei.
 
-Sobald die Analyse vom Server angestossen wurde kann dieser eine Rückmeldung zum Benutzer senden mit der Nachricht, dass die Analyse gestartet wurde. Der Browser des User beginnt darauf hin, die \gls{html}-Datei auf dem Server nach dem Zwischenstand abzufragen bis die Analyse beendet ist.
+Sobald die Analyse vom Server angestossen wurde, kann dieser eine Rückmeldung zum Benutzer mit der Nachricht senden, dass die Analyse gestartet wurde. Der Browser des User beginnt daraufhin die \gls{html}-Datei auf dem Server nach dem Zwischenstand abzufragen bis die Analyse beendet ist.
 \begin{figure}[H]
 	\RawFloats
 	\centering
@@ -484,21 +484,21 @@ Der Webserver nimmt einen Request des Users entgegen und verarbeitet diesen. Der
 	\label{fig:proofofconcept:architektur:webserver:1}
 \end{figure}
 
-Aufgerufen wird stets die Datei "`index.php"'. Diese Initialisiert zuerst den dependency injection Container (siehe \cref{sec:proofofconcept:dependency-injection} \nameref{sec:proofofconcept:dependency-injection}) und zwischenspeichert die Datenquelle für die vom Benutzer übergebenen Filterkriterien (siehe \cref{sec:proofofconcept:performance:caching} \nameref{sec:proofofconcept:performance:caching}).
+Aufgerufen wird stets die Datei "`index.php"'. Diese initialisiert zuerst den dependency injection Container (siehe \cref{sec:proofofconcept:dependency-injection} \nameref{sec:proofofconcept:dependency-injection}) und zwischenspeichert die Datenquelle für die vom Benutzer übergebenen Filterkriterien (siehe \cref{sec:proofofconcept:performance:caching} \nameref{sec:proofofconcept:performance:caching}).
 
-Danach wird der Controller aufgerufen welcher den Request des Benutzers behandelt. Der Controller führt die Geschäftslogik aus (im obigen Beispiel ist dies die Klasse "`BookingsProvider"') und übergibt das Resultat an die View welche für die Darstellung der Daten zuständig ist. Der Rückgabewert wird dem Benutzer im Browser angezeigt.
+Danach wird der Controller aufgerufen, der den Request des Benutzers behandelt. Der Controller führt die Geschäftslogik aus (im obigen Beispiel ist dies die Klasse "`BookingsProvider"') und übergibt das Resultat an die View, welche für die Darstellung der Daten zuständig ist. Der Rückgabewert wird dem Benutzer im Browser angezeigt.
 
-Dieser Ablauf ist gültig für die "`Explore"'-Ansicht, auf welcher der User die Buchungen einsehen kann. Wenn ein Algorithmus ausgeführt werden soll fällt die Geschäftslogik weg und es wird stattdessen ein Hintergrundprozess gestartet, welcher diese ausführt.
+Dieser Ablauf ist gültig für die "`Explore"'-Ansicht, auf welcher der User die Buchungen einsehen kann. Wenn ein Algorithmus ausgeführt werden soll, fällt die Geschäftslogik weg und es wird stattdessen ein Hintergrundprozess gestartet, welcher sie ausführt.
 
 \subsubsection{Services}
 \label{sec:proofofconcept:architektur:services}
-Services sind Hintergrundprozesse welche die Implementation der Algorithmen ausführen. Diese sind nötig um die Laufzeitlimite von Prozessen in einem Webserver zu umgehen. Weitere Informationen hierzu werden im \cref{sec:proofofconcept:kommunikationsablauf} gegeben.
+Services sind Hintergrundprozesse, die die Implementation der Algorithmen ausführen. Diese sind nötig, um die Laufzeitlimite von Prozessen in einem Webserver zu umgehen. Weitere Informationen hierzu werden im \cref{sec:proofofconcept:kommunikationsablauf} gegeben.
 
-Dieser Abschnitt erklärt die Abläufe der Services und wie sie angestossen werden. Für die Darstellung werden \gls{uml} Sequenzdiagramme verwendet. Die Implementation der Algorithmen selber wird hier nicht genauer beschrieben. Zum einen sind diese im \cref{sec:recherche:algorithmen} bereits dokumentiert und wurden hier entsprechend umgesetzt. Zum anderen würde ein Sequenzdiagramm der Algorithmen zu gross ausfallen und deshalb nicht zum Verständnis beitragen können.
+Dieser Abschnitt erklärt die Abläufe der Services und wie sie angestossen werden. Für die Darstellung werden \gls{uml} Sequenzdiagramme verwendet. Die Implementation der Algorithmen selber wird hier nicht genauer beschrieben. Zum Einen sind diese im \cref{sec:recherche:algorithmen} bereits dokumentiert und wurden hier entsprechend umgesetzt. Zum Anderen würde ein Sequenzdiagramm der Algorithmen zu gross ausfallen und deshalb nicht zum Verständnis beitragen können.
 
 
-\paragraph{Anstossen der Services}
-Die Services werden von den Controllern angestossen. Es wird ein Kommandozeilen-Befehl ausgeführt welcher im folgender Ansicht beispielhaft am Apriori-Algorithmus aufgezeigt wird.
+\paragraph{Anstossen der Services.}
+Die Services werden von den Controllern angestossen. Es wird ein Kommandozeilen-Befehl ausgeführt, welcher im folgender Ansicht beispielhaft am Apriori-Algorithmus aufgezeigt wird.
 
 \blockquote[]{
 php /Services/Apriori/apriori.php ``stars=4,country=Switzerland'' > /Services/Apriori/wip/output.txt 2>\&1 \& echo \$! > /pidfile.txt
@@ -506,16 +506,16 @@ php /Services/Apriori/apriori.php ``stars=4,country=Switzerland'' > /Services/Ap
 
 Zur erklärung dieses Befehles wird er aufgebrochen:
 \begin{itemize}
-	\item \textbf{php}: Es wird der Befehl "`php"' ausgeführt welcher ein \gls{php} Programm startet.
+	\item \textbf{php}: Es wird der Befehl "`php"' ausgeführt, welcher ein \gls{php} Programm startet.
 	\item \textbf{/Services/Apriori/apriori.php}: Das auszuführende \gls{php} Programm. Hier die Apriori Analyse.
-	\item \textbf{``stars=4,country=Switzerland''}: Parameter die an das "`apriori.php"' Programm übergeben werden. In diesem Beispiel sind das die Filterkriterien des Benutzers.
-	\item \textbf{> /Services/Apriori/wip/output.txt}: Mit "`>"' wird die Standartausgabe des Programms definiert. Jegliche Ausgabe des Programms wird hiermit in die Datei "`output.txt"' geschrieben.
-	\item \textbf{2>\&1}: Mit "`2>"' wird gesagt wohin Fehlemeldungen geschrieben werden. \&1 gibt an dass es an den selben Ort wie die Standartausgabe gespeichert werden soll. Also auch ins "`output.txt"'.
-	\item \textbf{\&}: Durch das \& wird der Befehl im Hintergrund ausgeführt. Wenn dies nicht angegeben wird würde das Programm, welches den "`php"' Befehl gestartet hat warten, bis das "`apriori.php"' Programm fertig gearbeitet hat.
+	\item \textbf{``stars=4,country=Switzerland''}: Parameter, die an das "`apriori.php"' Programm übergeben werden. In diesem Beispiel sind das die Filterkriterien des Benutzers.
+	\item \textbf{> /Services/Apriori/wip/output.txt}: Mit "`>"' wird die Standartausgabe des Programms definiert. Jegliche Ausgaben des Programms werden hiermit in die Datei "`output.txt"' geschrieben.
+	\item \textbf{2>\&1}: Mit "`2>"' wird gesagt, wohin Fehlemeldungen geschrieben werden. \&1 gibt an, dass es an den selben Ort wie die Standartausgabe gespeichert werden soll. Also auch ins "`output.txt"'.
+	\item \textbf{\&}: Durch das \& wird der Befehl im Hintergrund ausgeführt. Wenn dies nicht angegeben wird, würde das Programm, welches den "`php"' Befehl gestartet hat, warten, bis das "`apriori.php"' Programm fertig gearbeitet hat.
 	\item \textbf{echo \$! > /pidfile.txt}: "echo \$!" gibt die Prozessid des "`apriori.php"' Programms aus. Mit "`> /pidfile.txt"' wird die Ausgabe (also die Prozessid) in die Datei "`pidfile.txt"' geschrieben.
 \end{itemize}
 
-\paragraph{Ablauf des Apriori-Programms}
+\paragraph{Ablauf des Apriori-Programms.}
 Der Ablauf der Apriori-Analyse wird in \cref{fig:proofofconcept:architektur:hintergrundprozesser:1} verbildlicht.
 
 \begin{figure}[H]
@@ -525,11 +525,11 @@ Der Ablauf der Apriori-Analyse wird in \cref{fig:proofofconcept:architektur:hint
 	\label{fig:proofofconcept:architektur:hintergrundprozesser:1}
 \end{figure}
 
-Der Anfang mit dem Erstellen des "`Container"' und dem Caching ist gleich wie in \cref{fig:proofofconcept:architektur:webserver:1}. Das "`apriori.php"' Programm ruft danach den Apriori-Algorithmus auf welcher sein Resultat periodisch in eine Datei schreibt (siehe \cref{sec:proofofconcept:kommunikationsablauf} \nameref{sec:proofofconcept:kommunikationsablauf}). Dies ermöglicht dem Algorithmus regelmässig einen Zwischenstand abzuspeichern welcher dem Benutzer angezeigt werden kann.
+Der Anfang mit dem Erstellen des "`Container"' und dem Caching ist gleich wie in \cref{fig:proofofconcept:architektur:webserver:1}. Das "`apriori.php"' Programm ruft danach den Apriori-Algorithmus auf, welcher sein Resultat periodisch in eine Datei schreibt (siehe \cref{sec:proofofconcept:kommunikationsablauf} \nameref{sec:proofofconcept:kommunikationsablauf}). Dies ermöglicht dem Algorithmus regelmässig einen Zwischenstand abzuspeichern, der dem Benutzer angezeigt werden kann.
 
-\paragraph{Ablauf des Clustering-Programms}
-Der Ablauf der Clustering-Analysen ist identisch zu jenem des Apriori-Algorithmus, mit zwei Ausnahmen. Zum einen wird vor dem "`AprioriAlgorithm"' der "`KPrototypeAlgorithm"' ausgeführt wird, welcher ein "`KPrototypeResult"' zurück liefert. 
-Zum anderen wird dem "`AprioriAlgorithm"' das Resultat vom k-prototpye als Parameter übergeben. Dadurch ist em dem "`KPrototypeAlgorithm"' möglich, nur die Elemente eines Clusters zu analysieren und nicht die gesamte Datenmenge. 
+\paragraph{Ablauf des Clustering-Programms.}
+Der Ablauf der Clustering-Analysen ist identisch zu jenem des Apriori-Algorithmus, mit zwei Ausnahmen. Zum Einen wird vor dem "`AprioriAlgorithm"' der "`KPrototypeAlgorithm"' ausgeführt wird, welcher ein "`KPrototypeResult"' zurück liefert. 
+Zum Anderen wird dem "`AprioriAlgorithm"' das Resultat vom k-prototpye als Parameter übergeben. Dadurch ist es dem "`KPrototypeAlgorithm"' möglich, nur die Elemente eines Clusters zu analysieren und nicht die gesamte Datenmenge. 
 Es wurde bewusst entschieden, dass der "`AprioriAlgorithm"' aus der kprototype.php Datei hinaus aufgerufen wird. Dadurch kann zukünftig dieser Algorithmus einfach durch eine Alternative ausgetauscht werden.
 Abgebildet ist der Ablauf in \cref{fig:proofofconcept:architektur:hintergrundprozesser:2}. 
 \begin{figure}[H]
@@ -544,17 +544,17 @@ Auf ein Sequenzdiagramm für den DBSCAN-Algorithmus wird hier verzichtet, denn d
 
 \section{Performance}
 \label{sec:proofofconcept:performance}
-Da die Geschwindigkeit kritisch ist wenn man mit einer grossen Datenmenge arbeitet, wurde ein Caching eingesetzt sowie mehrere Varianten für das Laden der Daten evaluiert. Diese Themen werden nachfolgend beschrieben.
+Da die Geschwindigkeit kritisch ist, wenn man mit einer grossen Datenmenge arbeitet, wurde ein Caching eingesetzt sowie mehrere Varianten für das Laden der Daten evaluiert. Diese Themen werden nachfolgend beschrieben.
 
 \subsection{Datenzugriff}
 \label{sec:proofofconcept:performance:datenzugriff}
-Das Laden der Daten ist kritisch für die Geschwindigkeit des Gesamtsystemes. Im speziellen für die Clustering Algorithmen, da dort mehrfach über die gesamte Datenbasis iteriert werden muss. Deshalb wurden verschiedene Möglichkeiten in Betracht gezogen.
+Das Laden der Daten ist kritisch für die Geschwindigkeit des Gesamtsystemes. Im Speziellen für die Clustering Algorithmen, da dort mehrfach über die gesamte Datenbasis iteriert werden muss. Deshalb wurden verschiedene Möglichkeiten in Betracht gezogen.
 
-Da die Datenbasis im \gls{csv}-Format vorliegt wurden zwei Varianten für den Datenzugriff eruiert. Mit \gls{php} kann entweder Zeile für Zeile aus einer Datei gelesen werden, oder alles zusammen.  Bei der ersten Version wird eine Zeile erst geladen, wenn diese angefragt wird. Bei der zweiten werden alle Einträge aus der Datei in den Arbeitsspeicher gelesen und zur Laufzeit darüber iteriert.
+Da die Datenbasis im \gls{csv}-Format vorliegt, wurden zwei Varianten für den Datenzugriff eruiert. Mit \gls{php} kann entweder Zeile für Zeile aus einer Datei gelesen werden, oder alles zusammen.  Bei der ersten Version wird eine Zeile erst geladen, wenn diese angefragt wird. Bei der Zweiten werden alle Einträge aus der Datei in den Arbeitsspeicher gelesen und zur Laufzeit darüber iteriert.
 
-Mit der Redis InMemory Datenbank gibt es eine dritte Möglichkeit wie auf die Daten zugegriffen werden kann (siehe \cref{sec:proofofconcept:externebibliotheken:redis} \nameref{sec:proofofconcept:externebibliotheken:redis}). Hierzu müssen die Daten zuerst in die Redis Datenbank importiert werden und können dann bei der Analyse nur noch abgefragt werden. Dazu wurde ein Hilfsprogramm erstellt welches die Daten aus dem \gls{csv}-File ausliest nach Redis importiert. Der Quellcode kann unter \url{https://github.com/soultemptation/bookinganalyzerimpl/blob/master/Services/FillRedis/fillredis.php} eingesehen werden.
+Mit der Redis InMemory Datenbank gibt es eine dritte Möglichkeit, wie auf die Daten zugegriffen werden kann (siehe \cref{sec:proofofconcept:externebibliotheken:redis} \nameref{sec:proofofconcept:externebibliotheken:redis}). Hierzu müssen die Daten zuerst in die Redis Datenbank importiert werden und können dann bei der Analyse nur noch abgefragt werden. Dazu wurde ein Hilfsprogramm erstellt, welches die Daten aus dem \gls{csv}-File ausliest und nach Redis importiert. Der Quellcode kann unter \url{https://github.com/soultemptation/bookinganalyzerimpl/blob/master/Services/FillRedis/fillredis.php} eingesehen werden.
 
-Für die drei Herangehensweisen wurde jeweils ein Iteratoren erstellt (siehe \cref{sec:proofofconcept:klassenstruktur:algorithmen} \nameref{sec:proofofconcept:klassenstruktur:algorithmen}) um die Geschwindigkeit zu vergleichen. Dazu wurde die Apriori Analyse auf allen Daten fünf mal ausgeführt und der Durchschnitt genommen.
+Für die drei Herangehensweisen wurde jeweils ein Iteratoren erstellt (siehe \cref{sec:proofofconcept:klassenstruktur:algorithmen} \nameref{sec:proofofconcept:klassenstruktur:algorithmen}), um die Geschwindigkeit zu vergleichen. Dazu wurde die Apriori Analyse auf allen Daten fünf Mal ausgeführt und der Durchschnitt genommen.
 
 \begin{itemize}
 	\item Version 1, Zeile für Zeile laden: 9.82 Sekunden
@@ -562,32 +562,32 @@ Für die drei Herangehensweisen wurde jeweils ein Iteratoren erstellt (siehe \cr
 	\item Version 3, Daten aus Redis laden: 23.10 Sekunden
 \end{itemize}
 
-Die Variante mit dem Laden Zeile für Zeile ist mit der durchschnittlichen Zeit von 9.82 am schnellsten. Dies ist überraschend, da zu erwarten war dass auf die Daten schneller zugegriffen werden kann wenn sie im Zwischenspeicher gelagert werden. Vor allem das Resultat mit Redis war verblüffend, da sie doppelt so lange dauert, obwohl die Daten vorher schon in der Datenbank vorhanden sein müssen.
+Die Variante mit dem Laden Zeile für Zeile ist mit der durchschnittlichen Zeit von 9.82 am schnellsten. Dies ist überraschend, da zu erwarten war, dass auf die Daten schneller zugegriffen werden kann, wenn sie im Zwischenspeicher gelagert werden. Vor allem das Resultat mit Redis war verblüffend, da sie doppelt so lange dauerte, obwohl die Daten vorher schon in der Datenbank vorhanden sein müssen.
 
 \subsection{Caching}
 \label{sec:proofofconcept:performance:caching}
 Im \cref{sec:proofofconcept:performance:datenzugriff} wurde die Wichtigkeit des Datenzugriff erläutert. Dieser kann durch ein Caching (Zwischenspeichern der Daten) nochmals beschleunigt werden. 
 
-Um dies zu zeigen wurde ein Test gemacht mit der Ansicht, in welcher die Daten eingesehen werden können. Es sollen alle Buchungen von Objekten mit einer 1 Sterne-Bewertung angezeigt werden. Mit einem Caching dauert es durchschnittlich 0.31 Sekunden um die letzten 30 Instanzen anzuzeigen (wenn der Cache vorgewärmt ist, mehr dazu weiter unten). Ohne Caching hingegen benötigt das Programm durchschnittlich 10.24 Sekunden. Dies ist eine Verbesserung um das 33-fache.
+Um dies zu zeigen, wurde ein Test mit der Ansicht gemacht, in welcher die Daten eingesehen werden können. Es sollen alle Buchungen von Objekten mit einer 1 Sterne-Bewertung angezeigt werden. Mit einem Caching dauert es durchschnittlich 0.31 Sekunden um die letzten 30 Instanzen anzuzeigen (wenn der Cache vorgewärmt ist, mehr dazu weiter unten). Ohne Caching hingegen benötigt das Programm durchschnittlich 10.24 Sekunden. Dies ist eine Verbesserung um das 33-fache.
 
-Dieses Beispiel ist ein Extremfall, da es nur 1'548 Buchungen von 1 Sterne Objekten in der gesamten Datenbasis gibt. Je mehr Buchungen herausfiltert werden, desto bessere Ergebnisse liefert das Caching.
+Dieses Beispiel ist ein Extremfall, da es nur 1'548 Buchungen von 1 Sterne Objekten in der gesamten Datenbasis gibt. Je mehr Buchungen herausgefiltert werden, desto bessere Ergebnisse liefert das Caching.
 
-Wenn die ersten 30 Buchungen in der Buchungen-Einsehen Ansicht angezeigt werden, wird eine Cache-Datei geschrieben welche nur jene Instanzen enthalten, die auf die filterkriterien passen. Dazu wird die gesamte Datenbasis durchlaufen und die Kriterien auf jede Buchung anzuwenden. Sobald dies geschehen ist gilt der Cache für diese Kriterien als "`vorgewärmt"'. 
-Dieses aufwärmen dauert durchschnittlich 10 Sekunden. Dies ist die Zeit welche die Anfrage im Beispiel oben ohne Caching benötigt hat. 
+Wenn die ersten 30 Buchungen in der Buchungen-Einsehen-Ansicht angezeigt werden, wird eine Cache-Datei geschrieben, welche nur jene Instanzen enthalten, die auf die Filterkriterien passen. Dazu wird die gesamte Datenbasis durchlaufen, um die Kriterien auf jede Buchung anzuwenden. Sobald dies geschehen ist, gilt der Cache für diese Kriterien als "`vorgewärmt"'. 
+Dieses Aufwärmen dauert durchschnittlich 10 Sekunden. Dies ist die Zeit, welche die Anfrage im Beispiel oben ohne Caching benötigt hat. 
 
-Der Vorteil des Cachings ist es, dass Filterkriterien für eine Anfrage nur einmal angewendet werden müssen. Im Beispiel oben müsste ohne Caching alle 111'442 Buchungen durchlaufen und die Kriterien angewendet werden, um die letzten 30 der 1'548 Buchungen anzuzeigen. Durch den Zwischenspeicher kann dass Programm direkt zu den letzten 30 Instanzen iterieren und diese anzeigen. Deshalb liefert das Caching bessere Ergebnisse, wenn mehr Daten durch das Filtrieren wegfallen.
+Der Vorteil des Cachings ist es, dass Filterkriterien für eine Anfrage nur einmal angewendet werden müssen. Im Beispiel oben müssten ohne Caching alle 111'442 Buchungen durchlaufen und die Kriterien angewendet werden, um die letzten 30 der 1'548 Buchungen anzuzeigen. Durch den Zwischenspeicher kann das Programm direkt zu den letzten 30 Instanzen iterieren und diese anzeigen. Deshalb liefert das Caching bessere Ergebnisse, wenn mehr Daten durch das Filtrieren wegfallen.
 
-Das Caching übernimmt die Klasse "`DataCache"' (siehe \cref{sec:proofofconcept:packagestruktur} \nameref{sec:proofofconcept:packagestruktur}). Wie der Cache in den Programmablauf eingebunden wird ist in den Squenzdiagrammen im \cref{sec:proofofconcept:programmablauf} \nameref{sec:proofofconcept:programmablauf} beschrieben.
+Das Caching übernimmt die Klasse "`DataCache"' (siehe \cref{sec:proofofconcept:packagestruktur} \nameref{sec:proofofconcept:packagestruktur}). Wie der Cache im Programmablauf eingebunden wird, ist in den Squenzdiagrammen im \cref{sec:proofofconcept:programmablauf} \nameref{sec:proofofconcept:programmablauf} beschrieben.
 
 \section{Externe Bibliotheken}
 \label{sec:proofofconcept:externebibliotheken}
-Dieser Abschnitt erläutert welche externe Bibliotheken eingesetzt wurden.
+Dieser Abschnitt erläutert, welche externe Bibliotheken eingesetzt wurden.
 
 \subsection{Dependency Injection mit PHP-DI}
 \label{sec:proofofconcept:dependency-injection}
 % und um die Entkoppelung der einzelnen Module zu ermöglichen ein Dependency Injection Framework verwendet. Diese und weitere Punkte werden nachfolgend beschrieben.
-Bei der Dependency Injection handelt es sich um ein \gls{pattern}
-das zum Ziel hat, eine möglichst niedrige Kopplung zu erreichen. Dies bedeutet, dass eine Klasse so wenig Abhängigkeiten wie möglich zu anderen Komponenten aufweisen soll. Dadurch können einzelne Klassen einfacher ausgetauscht werden washt die Wartbarkeit des Systems erhöht sowie die Leserlichkeit des Codes fordert. Dies soll anhand eines Beispieles aufgezeigt werden.
+Bei der Dependency Injection handelt es sich um ein \gls{pattern},
+das zum Ziel hat, eine möglichst niedrige Kopplung zu erreichen. Dies bedeutet, dass eine Klasse so wenig Abhängigkeiten wie möglich zu anderen Komponenten aufweisen soll. Dadurch können einzelne Klassen einfacher ausgetauscht werden, was die Wartbarkeit des Systems erhöht sowie die Leserlichkeit des Codes fördert. Dies soll anhand eines Beispiels aufgezeigt werden.
 
 \begin{lstlisting}[language=php]
 var _x = $\textdollar$y
@@ -607,7 +607,7 @@ class Car {
 }
 \end{lstlisting}
 
-Im obigen Code wird eine Klasse Car erstellt in dessen Konstruktor ein V6 Motor instanziiert  wird. Der Code ist jetzt direkt gekoppelt mit der Klasse V6Engine. Wenn ein Auto mit einem V4Engine erstellt werden soll muss die Klasse entsprechend angepasst werden. 
+Im obigen Code wird eine Klasse Car erstellt, in dessen Konstruktor ein V6 Motor instanziiert  wird. Der Code ist jetzt direkt gekoppelt mit der Klasse V6Engine. Wenn ein Auto mit einem V4Engine erstellt werden soll, muss die Klasse entsprechend angepasst werden. 
 
 
 \begin{lstlisting}[language=php]
@@ -624,16 +624,16 @@ class Car {
 }
 \end{lstlisting}
 
-Hier wurde die Klasse so angepasst, dass der Konstruktor keinen Motor erstellt, sondern diesen über die Parameter übernimmt. So kann von aussen gesteuert werden, welchen Engine das Auto beinhaltet. 
+Hier wurde die Klasse so angepasst, dass der Konstruktor keinen Motor erstellt, sondern diesen über die Parameter übernimmt. So kann von Aussen gesteuert werden, welchen Engine das Auto beinhaltet. 
 
-In der Arbeit werden alle Komponenten über Dependency Injection in Klassen hineingereicht. Die einzige Ausnahme sind die Models, weshalb sie auch möglichst wenig Logik beinhalten sollten (siehe \cref{sec:proofofconcept:packagestruktur} \nameref{sec:proofofconcept:packagestruktur}). Dies kann besonders gut mit den Iteratoren veranschaulicht werden. Die Klasse "`BookingDataIterator"' nimmt ein Interface "`DataIterator"' entgegen. Es gibt 5 Klassen welche dieses Interface implementieren wovon 3 hier erläutert werden:
+In der Arbeit werden alle Komponenten über Dependency Injection in Klassen hineingereicht. Die einzige Ausnahme sind die Models, weshalb sie auch möglichst wenig Logik beinhalten sollten (siehe \cref{sec:proofofconcept:packagestruktur} \nameref{sec:proofofconcept:packagestruktur}). Dies kann besonders gut mit den Iteratoren veranschaulicht werden. Die Klasse "`BookingDataIterator"' nimmt ein Interface "`DataIterator"' entgegen. Es gibt 5 Klassen, die dieses Interface implementieren, wovon 3 hier erläutert werden:
 \begin{itemize}
 	\item LoadAllCsvDataIterator: Lädt alle Buchungsdaten aus einem File ins Memory und iteriert dann über die einzelnen Instanzen.
 	\item LoadIncrementalCsvDataIterator: Lädt eine Instanz nach der anderen aus dem File.
 	\item LoadRedisDataIterator: Lädt eine Instanz nach der anderen aus einer Redis Datenbank (In Memory Datenban) (siehe \cref{sec:proofofconcept:externebibliotheken:redis} \nameref{sec:proofofconcept:externebibliotheken:redis}).
 \end{itemize}
 
-Es gibt demnach 3 verschiedene Möglichkeiten, wie auf die Daten zugegriffen werden kann. Mittels Dependency Injection kann nun von aussen bestimmt werden, wie der "`BookingDataIterator"' auf die Daten zugreift.
+Es gibt demnach 3 verschiedene Möglichkeiten, wie auf die Daten zugegriffen werden kann. Mittels Dependency Injection kann nun von Aussen bestimmt werden, wie der "`BookingDataIterator"' auf die Daten zugreift.
 
 Für das Dependency Injection \gls{pattern}
  wird das Framework PHP-DI verwendet (siehe \url{http://php-di.org/}). In der ersten geladenen Datei wird der gesamte Objektgraph aufgebaut. Dort wird bestimmt, welche Klasse in den "`BookingDataIterator"' übergeben wird. Ein Beispiel wird nachfolgend präsentiert:
@@ -654,14 +654,14 @@ Zuerst wird ein "`ContainerBuilder"' erstellt. Auf diesem wird definiert, dass f
 
 \subsection{Frontend mit Twitter Bootstrap}
 \label{sec:proofofconcept:externebibliotheken:bootstrap}
-Für das Design des Webseite wurde Twitter Bootstrap (url{http://getbootstrap.com/})verwendet. Es bietet viele Komponenten welche man für die Entwicklung einer Webseite verwendet kann. Dies erleichtert die Umsetzung, da man sich keine Gedanken darüber machen muss wie die Seite aufgebaut oder gestaltet wird. 
+Für das Design der Webseite wurde Twitter Bootstrap (url{http://getbootstrap.com/})verwendet. Es bietet viele Komponenten, welche man für die Entwicklung einer Webseite verwendet kann. Dies erleichtert die Umsetzung, da man sich keine Gedanken darüber machen muss, wie die Seite aufgebaut, oder gestaltet wird. 
 
-Eingesetzt wurde folgende Komponenten:
+Eingesetzt wurden folgende Komponenten:
 \begin{itemize}
-	\item Navigation: Die Navigation welche auf jeder Seite zuoberst dargestellt wird (\url{http://getbootstrap.com/components/#navbar}).
+	\item Navigation: Die Navigation, welche auf jeder Seite zuoberst dargestellt wird (\url{http://getbootstrap.com/components/#navbar}).
 	\item Formulare: Die Formulare für die Einschränkung des Datenbestandes (\url{http://getbootstrap.com/css/#forms}).
-	\item Tabellen: Für die Auflistung der Buchungen für das einsehen der Stammdaten sowie den Resultaten der Apriori Analyse. (\url{http://getbootstrap.com/css/#tables}).
-	\item Pagination: Die Paginierung beim einsehen der Stammdaten (\url{http://getbootstrap.com/components/#pagination})
+	\item Tabellen: Für die Auflistung der Buchungen für das Einsehen der Stammdaten sowie den Resultaten der Apriori Analyse. (\url{http://getbootstrap.com/css/#tables}).
+	\item Pagination: Die Paginierung beim Einsehen der Stammdaten (\url{http://getbootstrap.com/components/#pagination})
 	\item Glyphicons: Die Icons für die Preise und das Häkchen der binären Attribute (\url{http://getbootstrap.com/components/#glyphicons}).
 \end{itemize}
 
@@ -669,11 +669,11 @@ Eingesetzt wurde folgende Komponenten:
 Für die JavaScript Entwicklung wurde JQuery eingesetzt (\url{https://jquery.com/}). Verwendet wurde die Bibliothek für die Abfrage des Zwischenstandes einer Analyse vom Server. Für die Textvervollständigung bei der Eingabe der Destination wurde zusätzlich noch die JQuery Erweiterung "`Autocomplete"' eingesetzt (\url{https://jqueryui.com/autocomplete/}).
 
 \subsection{Less mit Grunt}
-Das Styling einer Webseite wird üblicherweise mit \gls{css} gemacht. Es gibt jedoch Erweiterungen dazu wie LESS oder SASS. In diesem Projekt wurde LESS eingesetzt (\url{http://lesscss.org/}). Dieses muss jedoch in \gls{css} umgewandelt werden wozu Grunt verwendet wurde. (\url{https://gruntjs.com/}).
+Das Styling einer Webseite wird üblicherweise mit \gls{css} gemacht. Es gibt jedoch Erweiterungen dazu wie LESS, oder SASS. In diesem Projekt wurde LESS eingesetzt (\url{http://lesscss.org/}). Dieses muss jedoch in \gls{css} umgewandelt werden, wozu Grunt verwendet wurde. (\url{https://gruntjs.com/}).
 
 \subsection{Templating mit Twig}
 \label{sec:proofofconcept:externebibliotheken:twig}
-\gls{html} Templates werden benutzt um die Logik des Programms von der Darstellung zu trennen (siehe \cref{sec:proofofconcept:architektur:anforderungen:ansichten} \nameref{sec:proofofconcept:architektur:anforderungen:ansichten}). Dazu wurde die \gls{php} Template Bibliothek Twig eingesetzt (\url{https://twig.sensiolabs.org/}).
+\gls{html} Templates werden benutzt, um die Logik des Programms von der Darstellung zu trennen (siehe \cref{sec:proofofconcept:architektur:anforderungen:ansichten} \nameref{sec:proofofconcept:architektur:anforderungen:ansichten}). Dazu wurde die \gls{php} Template Bibliothek Twig eingesetzt (\url{https://twig.sensiolabs.org/}).
 
 %"`"'
 In der Umsetzung sind die Templates von Twig im Ordner "`Templates"' hinterlegt. Nachfolgend werden die Templates kurz erklärt.
@@ -682,14 +682,14 @@ In der Umsetzung sind die Templates von Twig im Ordner "`Templates"' hinterlegt.
 	\item head.twig: Gibt den Kopfbereich der \gls{html}-Datei aus, welche zusätzliche Daten zur Webseite beinhaltet, die nicht zur Darstellung benötigt werden. Zum Beispiel den Namen der Seite, wer die Seite erstellt hat, welche Bildschirmgrössen unterstützt werden, etc.
 	\item footer.twig: Gibt den Fussbereich der Seite aus. 
 	\item navigation.twig: Gibt die Navigation aus, mit welcher zwischen den einzelnen Ansichten gewechselt werden kann.
-	\item explore.twig: Stellt die Ansicht für das einsehen der Stammdaten zusammen. 
-	\item attributanalysis.twig \& attributanalysisWithGrouping.twig: Diese Templates stellen die Grundgerüste für die Attributanalyse und die Attributanalyse mit Groupierung dar. Sie beinhalten die Filter sowie einen Platzhalter welcher durch die Services befüllt werden kann.
-	\item settings.twig: Stellt die Ansicht für das anpassen der Einstellungen dar. 
+	\item explore.twig: Stellt die Ansicht für das Einsehen der Stammdaten zusammen. 
+	\item attributanalysis.twig \& attributanalysisWithGrouping.twig: Diese Templates stellen die Grundgerüste für die Attributanalyse und die Attributanalyse mit Groupierung dar. Sie beinhalten die Filter sowie einen Platzhalter, welcher durch die Services befüllt werden kann.
+	\item settings.twig: Stellt die Ansicht für das Anpassen der Einstellungen dar. 
 	\item filters.twig: Gibt das Formular für die Filtrierung der Stammdaten aus.
-	\item bookingListing.twig: Gibt die Stammdaten als Tabelle aus. Verwendet wird dies für das einsehen der Stammdaten.
-	\item apriori.twig: Das Resultat oder der Zwischenstand der Apriori kann mit dem apriori.twig Template erstellt werden.
-	\item kprototypeClusters: Gibt das Resultat oder den Zwischenstand des k-prototpye Clusterings aus.
-	\item dbscanClusters: Gibt das Resultat oder den Zwischenstand des DBSCAN Clusters aus.
+	\item bookingListing.twig: Gibt die Stammdaten als Tabelle aus. Verwendet wird dies für das Einsehen der Stammdaten.
+	\item apriori.twig: Das Resultat, oder der Zwischenstand vom Apriori, kann mit dem apriori.twig Template erstellt werden.
+	\item kprototypeClusters: Gibt das Resultat, oder den Zwischenstand des k-prototpye Clusterings aus.
+	\item dbscanClusters: Gibt das Resultat, oder den Zwischenstand des DBSCAN Clusters aus.
 	\item histogramsAsTable.twig: Dies gibt die Resultate des Apriori Algorithmus als Tabelle aus. 
 \end{itemize}
 
@@ -698,7 +698,7 @@ In der Umsetzung sind die Templates von Twig im Ordner "`Templates"' hinterlegt.
 UnitTests wurden mit PHPUnit umgesetzt (\url{https://phpunit.de/}). Mehr dazu im \cref{sec:proofofconcept:unittests} \nameref{sec:proofofconcept:unittests}
 
 \subsection{Package Managing mit Composer}
-Ein Package Manager verwaltet die Abhängigkeiten von externen Bibliotheken welche in einem Projekt benutzt werden. In der Entwicklung dieser Arbeit wurde Composer (\url{https://getcomposer.org/}) eingesetzt. Verwendet wurde der Package Manager um Bibliotheken wie Twig, PHPUnit und PHP-DI zu verwalten.
+Ein Package Manager verwaltet die Abhängigkeiten von externen Bibliotheken, welche in einem Projekt benutzt werden. In der Entwicklung dieser Arbeit wurde Composer (\url{https://getcomposer.org/}) eingesetzt. Verwendet wurde der Package Manager um Bibliotheken wie Twig, PHPUnit und PHP-DI zu verwalten.
 
 Composer wird über die Konfigurationsdatei "`composer.json"' gesteuert. In diesem Projekt sind dort folgende Abhängigkeiten definiert:
 
@@ -712,9 +712,9 @@ Composer wird über die Konfigurationsdatei "`composer.json"' gesteuert. In dies
   }
 \end{lstlisting}
 
-Dadurch wird definiert, dass dieses Projekt abhängigkeiten zu Twig, Bootstrap, PHPUnit, PHP-DI und vfsStream besitzt. Daneben stehen jeweils die Versionen die benutzt werden sollen. Ein "`*"' bedeutet dass die Version nicht fix ist und das Updates automatisch installiert werden dürfen. Zum Beispiel soll für Twig die Version 2.2.* benutzt werden. Aktuell ist gerade die Version 2.2.0. Falls irgendwann 2.2.1 erscheint wird Composer diese Version installieren. Falls jedoch 2.3.0 veröffentlicht wird bleibt Composer bei der Version 2.2.0. 
+Dadurch wird definiert, dass dieses Projekt Abhängigkeiten zu Twig, Bootstrap, PHPUnit, PHP-DI und vfsStream besitzt. Daneben stehen jeweils die Versionen, die benutzt werden sollen. Ein "`*"' bedeutet, dass die Version nicht fix ist und das Updates automatisch installiert werden dürfen. Zum Beispiel soll für Twig die Version 2.2.* benutzt werden. Aktuell ist gerade die Version 2.2.0. Falls irgendwann 2.2.1 erscheint wird Composer diese Version installieren. Falls jedoch 2.3.0 veröffentlicht wird, bleibt Composer bei der Version 2.2.0. 
 
-Die Package die in der Datei "`composer.json"' definiert sind werden auf der Webseite \url{https://packagist.org} gesucht. Dort sind die Packete hinterlegt. Geht man auf diese Seite kann man nach dem Text "`twig/twig"' suchen und findet dort Details zu Twig, wie zum Beispiel wer es entwickelt, welche Version gerade aktuell ist und Abhängigkeiten die das Paket mit sich bringt.
+Die Packages, die in der Datei "`composer.json"' definiert sind, werden auf der Webseite \url{https://packagist.org} gesucht. Dort sind die Packete hinterlegt. Geht man auf diese Seite kann man nach dem Text "`twig/twig"' suchen und findet dort Details zu Twig, wie zum Beispiel wer es entwickelt, welche Version gerade aktuell ist und Abhängigkeiten, die das Paket mit sich bringt.
 
 Nachfolgend werden die im File "`composer.json"' definierten Abhängigkeiten beschrieben:
 \begin{itemize}
@@ -726,22 +726,22 @@ Nachfolgend werden die im File "`composer.json"' definierten Abhängigkeiten bes
 \end{itemize}
 
 \subsection{Versionsverwaltung mit Git und GitHub}
-Eine Versionsverwaltung wird verwendet um Änderungen an Dateien aufzuzeichnen. Eingesetzt wurde das verteilte System Git (\url{https://git-scm.com/}) für die Kontrolle des Quellcodes des Programms, der Hilfsprogramme für die Datenvorbereitung sowie dieser Dokumentation. Es empfiehlt sich zusätzlich einen zentralen Server einzusetzen, da der gesamte Code sonst nur auf dem Rechner des Entwicklers gespeichert ist. Dazu wurde GitHub benutzt (\url{https://github.com/}). Dies erlaubt es über Git eine Kopie auf dem Server von GitHub anzulegen. Das sichert einem gegen Datenverlust ab und erlaubt es auf verschieden Computern an dem selben Projekt zu arbeiten.
+Eine Versionsverwaltung wird verwendet, um Änderungen an Dateien aufzuzeichnen. Eingesetzt wurde das verteilte System Git (\url{https://git-scm.com/}) für die Kontrolle des Quellcodes des Programms, der Hilfsprogramme für die Datenvorbereitung sowie dieser Dokumentation. Es empfiehlt sich zusätzlich einen zentralen Server einzusetzen, da der gesamte Code sonst nur auf dem Rechner des Entwicklers gespeichert wäre. Dazu wurde GitHub benutzt (\url{https://github.com/}). Dies erlaubt es über Git eine Kopie auf dem Server von GitHub anzulegen. Das sichert einem gegen Datenverlust ab und erlaubt es auf verschieden Computern an dem selben Projekt zu arbeiten.
 
 \subsection{InMemory Datenbank mit Redis}
 \label{sec:proofofconcept:externebibliotheken:redis}
-Normalerweise speichert eine Datenbank die Daten auf die Festplatte ab. Eine alternative Herangehensweise ist es, die Informationen im Kurzzeitspeicher zu behalten. Wenn dies eine Datenbank macht spricht man von einer InMemory Datenbank. Eine solche wurde in der Arbeit mit Redis verwendet (\url{https://redis.io/}).
+Normalerweise speichert eine Datenbank die Daten auf die Festplatte ab. Eine alternative Herangehensweise ist es, die Informationen im Kurzzeitspeicher zu behalten. Wenn dies eine Datenbank macht, spricht man von einer InMemory Datenbank. Eine solche wurde in der Arbeit mit Redis verwendet (\url{https://redis.io/}).
 
-Vor der Ausführung des Programms muss Redis gestartet und mit Daten befüllt werden, wozu ein Hilfsprogramm erstellt wurde (Code unter \url{https://github.com/soultemptation/bookinganalyzerimpl/blob/master/Services/FillRedis/fillredis.php}). Danach können die Analysen gestartet werden welche die Daten aus Redis auslesen. 
+Vor der Ausführung des Programms muss Redis gestartet und mit Daten befüllt werden, wozu ein Hilfsprogramm erstellt wurde (Code unter \url{https://github.com/soultemptation/bookinganalyzerimpl/blob/master/Services/FillRedis/fillredis.php}). Danach können die Analysen gestartet werden, welche die Daten aus Redis auslesen. 
 
-Wird die Datenbank gestoppt speichert sie die Daten auf die Festplatte ab und lädt  sie von dort wenn Redis wieder gestartet wird. Dadurch müssen die Informationen nach dem Neustart nicht nochmals importiert werden.
+Wird die Datenbank gestoppt, speichert sie die Daten auf die Festplatte ab und lädt sie von dort, wenn Redis wieder gestartet wird. Dadurch müssen die Informationen nach dem Neustart nicht nochmals importiert werden.
 
-Eingesetzt wurde Redis für den Zugriff auf die Daten mittels Iteratoren (siehe \cref{sec:proofofconcept:performance:datenzugriff} \nameref{sec:proofofconcept:performance:datenzugriff}). Diese eignen sich wenn alle Elemente der Datenbasis gelesen werden müssen, was bei der Ausführung der Algorithmen nötig ist. Die k-prototpye Analyse benötigt zu beginn jedoch zufällig ausgewählte Clusterzentren. Mit Iteratoren wäre der Zugriff langsam. Wenn z.B. das Element auf Zeile 2'000 benötigt würde, müssten zuerst die vorherigen 1'999 Einträge gelesen werden. Redis hingegen unterstützt den Zugriff über einen Identifikator, womit direkt auf eine Buchung zugegriffen werden kann. Aus diesem Grund verwendet der k-prototpye Algorithmus eine Redis Datenbank.
+Eingesetzt wurde Redis für den Zugriff auf die Daten mittels Iteratoren (siehe \cref{sec:proofofconcept:performance:datenzugriff} \nameref{sec:proofofconcept:performance:datenzugriff}). Diese eignen sich, wenn alle Elemente der Datenbasis gelesen werden müssen, was bei der Ausführung der Algorithmen nötig ist. Die k-prototpye Analyse benötigt zu Beginn jedoch zufällig ausgewählte Clusterzentren. Mit Iteratoren wäre der Zugriff langsam. Wenn zum Beispiel das Element auf Zeile 2'000 benötigt würde, müssten zuerst die vorherigen 1'999 Einträge gelesen werden. Redis hingegen unterstützt den Zugriff über einen Identifikator, womit direkt auf eine Buchung zugegriffen werden kann. Aus diesem Grund verwendet der k-prototpye Algorithmus eine Redis Datenbank.
 
 
 \section{UnitTests}
 \label{sec:proofofconcept:unittests}
-Zur zusätzlichen Kontrolle der Funktionalität wurden UnitTests eingesetzt. Diese Testen einzelne Komponenten im Code. Es werden Erwartungen definiert, anschliessend der Code ausgeführt und schlussendlich die Rückgabe gegen die Erwartungen verglichen. \cref{...} zeigt die Auswertung der Tests.
+Zur zusätzlichen Kontrolle der Funktionalität wurden UnitTests eingesetzt. Diese testen einzelne Komponenten im Code. Es werden Erwartungen definiert, anschliessend der Code ausgeführt und schlussendlich die Rückgabe gegen die Erwartungen verglichen. \cref{fig:proofofconcept:unittests:1} zeigt die Auswertung der Tests.
 
 \begin{figure}[H]
 	\RawFloats
@@ -751,14 +751,14 @@ Zur zusätzlichen Kontrolle der Funktionalität wurden UnitTests eingesetzt. Die
 	\label{fig:proofofconcept:unittests:1}
 \end{figure}
 
-Insgesammt wurden 86 Testfälle definiert, welche die Klassen in den Packages "`Business"' und "`Utilities"' abdecken. Die Models wurden nicht getestet da sie nur zur Datenhaltung verwendet werden und keine Logik enthalten. Leider konnten die Controller nicht mit UnitTests abgedeckt werden, da sie externe Abhängigkeiten zu den Services beinhalten. Würde ein Test ausgeführt werden, so hätte das zur folge dass ein Service, somit eine Analyse, gestartet würde.
+Insgesamt wurden 86 Testfälle definiert, welche die Klassen in den Packages "`Business"' und "`Utilities"' abdecken. Die Models wurden nicht getestet, da sie nur zur Datenhaltung verwendet werden und keine Logik enthalten. Leider konnten die Controller nicht mit UnitTests abgedeckt werden, da sie externe Abhängigkeiten zu den Services beinhalten. Würde ein Test ausgeführt werden, so hätte das zur Folge, dass ein Service, somit eine Analyse, gestartet würde.
 
-Um den Dateizugriff der Iteratoren (siehe \cref{sec:proofofconcept:klassenstruktur:algorithmen} \nameref{sec:proofofconcept:klassenstruktur:algorithmen}) zu testen wurde die externe Bibliothek "`vfsStream"' verwendet. Dies erzeugt ein VFS (Virtual File Stream). Damit greift der Test nicht auf ein File auf dem Computer zu, sondern auf ein virtuelles Dateisystem.
+Um den Dateizugriff der Iteratoren (siehe \cref{sec:proofofconcept:klassenstruktur:algorithmen} \nameref{sec:proofofconcept:klassenstruktur:algorithmen}) zu testen, wurde die externe Bibliothek "`vfsStream"' verwendet. Dies erzeugt ein VFS (Virtual File Stream). Damit greift der Test nicht auf ein File auf dem Computer zu, sondern auf ein virtuelles Dateisystem.
 
 \section{Installation}
 In diesem Abschnitt wird die Installation des Proof of Concepts beschrieben. Beschrieben wird die Einrichtung für ein Linux auf Debian Basis. Es ist jedoch übertragbar auf alle Betriebssysteme.
 
-Um das Programm zu installieren wird PHP 7 und Redis benötigt. Zusätzlich müssen noch alle externen Bibliotheken mit Composer geladen werden. Zuerst werden die Kommandozeilen-Befehle aufgeführt mit einer nachträglichen Erklärung. 
+Um das Programm zu installieren, wird PHP 7 und Redis benötigt. Zusätzlich müssen noch alle externen Bibliotheken mit Composer geladen werden. Zuerst werden folgende Kommandozeilen-Befehle aufgeführt, die nachträglich erklärt sind. 
 
 \begin{enumerate}
 \item sudo apt-get apache2
@@ -766,19 +766,19 @@ Um das Programm zu installieren wird PHP 7 und Redis benötigt. Zusätzlich müs
 \item sudo apt-get update
 \item sudo apt-get install php7.1-dev php-pear php7.1-mbstring php7.1-cgi
 \end{enumerate}
-Befehl 1. installiert einen Apache Webserver (siehe \url{https://httpd.apache.org/}). Die restlichen Kommandos werden benötigt um \gls{php} und all seine Abhängigkeiten zu installieren. 
+Befehl 1. installiert einen Apache Webserver (siehe \url{https://httpd.apache.org/}). Die restlichen Kommandos werden benötigt, um \gls{php} und all seine Abhängigkeiten zu installieren. 
 
-Der Sourcecode des Programms ist auf Github abgelegt (siehe \url{https://github.com/soultemptation/bookinganalyzerimpl}). Dieser muss für die Ausführung heruntergeladen werden. Dies kann entweder auf der Github Seite gemacht werden oder über die Kommandozeile. Für letzteres sollte zuerst dort hin navigiert werden, wo der Quellcode heruntergeladen werden soll. Dann kann folgender Befehl ausgeführt werden.
+Der Sourcecode des Programms ist auf Github abgelegt (siehe \url{https://github.com/soultemptation/bookinganalyzerimpl}). Dieser muss für die Ausführung heruntergeladen werden. Dies kann entweder auf der Github Seite gemacht werden, oder über die Kommandozeile. Für Letzteres sollte zuerst dort hin navigiert werden, wo der Quellcode heruntergeladen werden soll. Dann kann folgender Befehl ausgeführt werden.
 \begin{enumerate}[resume]
 \item git clone git@github.com:soultemptation/bookinganalyzerimpl.git
 \end{enumerate}
 
-Danach können alle Abhängigkeiten des Programms mittels Composer heruntergeladen werden. Dazu sollte die Kommandozeile im Ordner des Quellcodes stehen. Danach folgender Befehl ausführen.
+Danach können alle Abhängigkeiten des Programms mittels Composer heruntergeladen werden. Dazu sollte die Kommandozeile im Ordner des Quellcodes stehen. Anschliessend muss folgender Befehl ausgeführt werden.
 \begin{enumerate}[resume]
 \item php composer.phar update
 \end{enumerate}
 
-Als letztes muss Redis installiert und die Buchungsdaten in die Redis Datenbank importiert werden (siehe \cref{sec:proofofconcept:performance:datenzugriff} \nameref{sec:proofofconcept:performance:datenzugriff}).
+Als Letztes muss Redis installiert und die Buchungsdaten in die Redis Datenbank importiert werden (siehe \cref{sec:proofofconcept:performance:datenzugriff} \nameref{sec:proofofconcept:performance:datenzugriff}).
 
 \begin{enumerate}[resume]
 \item sudo pecl install redis
@@ -788,18 +788,18 @@ Als letztes muss Redis installiert und die Buchungsdaten in die Redis Datenbank 
 \item php Services/FillRedis/fillredis.php
 \end{enumerate}
 
-Befehl 7 installiert Redis als \gls{php} Erweiterung. Anschliessend wird mit dem Kommando 8 und 9 die Erweiterung in \gls{php} registriert. Schlussendlich wird der Apache Server neu gestartet und darauf hin der FillRedis Service gestartet.
+Befehl 7 installiert Redis als \gls{php} Erweiterung. Anschliessend wird mit dem Kommando 8 und 9 die Erweiterung in \gls{php} registriert. Schlussendlich wird der Apache Server neu gestartet und daraufhin der FillRedis Service gestartet.
 
 Danach kann im Browser unter der Adresse "`http://localhost"' das Programm gestartet werden.
 
 \section{Konfiguration}
 \label{sec:proofofconcept:konfiguration}
-Zur Konfigurierung der Algorithmen kann die "`Einstellungen anpassen"' Ansicht des Programms aufgerufen werden. Es können jedoch noch mehr Konfigurationen vorgenommen werden, welche nicht für die Endbenutzer gedacht sind. Zum Beispiel was für Felder in der Datenbasis verwendet werden sollen, wie die diskretierung der Felder auf die ursprünglichen Werte zurückgerechnet werden kann, etc. 
+Zur Konfigurierung der Algorithmen kann die "`Einstellungen anpassen"' Ansicht des Programms aufgerufen werden. Es können jedoch noch mehr Konfigurationen vorgenommen werden, welche nicht für die Endbenutzer gedacht sind. Zum Beispiel, was für Felder in der Datenbasis verwendet werden sollen, wie die Diskretierung der Felder auf die ursprünglichen Werte zurückgerechnet werden kann, etc. 
 
 Die Konfigurationen sind im File "`config.php"' hinterlegt (siehe \url{https://github.com/soultemptation/bookinganalyzerimpl/blob/master/config.php}). Die Struktur ist ein \gls{php} Array. Nachfolgend werden die Felder beschrieben.
 
 \begin{itemize}
-\item dataSource: Pfad zum \gls{csv} File welches alle Buchungen enthält.
+\item dataSource: Pfad zum \gls{csv} File, welches alle Buchungen enthält.
 \item pageSize: Wie viel Resultate in der "`Stammdaten einsehen"' Ansicht angezeigt werden.
 \item paginationWindow: Wie viele Seiten unterhalb der Resultate in der "`Stammdaten einsehen"' Ansicht angezeigt werden.
 \item booleanFields: Welche Felder in der Datenbasis werden als Binäre-Werte interpretiert.
@@ -808,8 +808,8 @@ Die Konfigurationen sind im File "`config.php"' hinterlegt (siehe \url{https://g
 \item stringFields: Welche Felder in der Datenbasis werden als Text-Werte interpretiert.
 \item priceFields: Welche Felder in der Datenbasis werden als Preis-Werte interpretiert.
 \item distanceFields: Welche Felder in der Datenbasis werden als Distanz-Werte interpretiert.
-\item floatFieldsBoundaries: Alle Flieskomma-Werte sind das Resultat einer diskretierung. Um diese dem Benutzer angezeigt werden muss die Diskretierung zurückgerechnet werden. Dieses Feld definiert wie das Resultat der Diskretierung rückgängig gemacht werden kann.
-\item atLeastFilterFields: Es gibt Felder welche einen "`Ab"'-Wert beinhalten. Zum Beispiel soll für den Filter "`Zimmer"' mit dem Wert "`3+"' alle Instanzen ausgewählt werden, welche 3 oder mehr Zimmer beinhalten. Dieses Feld definiert, für welche Felder solch eine "`Ab"'-Suche durchgeführt werden soll.
+\item floatFieldsBoundaries: Alle Flieskomma-Werte sind das Resultat einer Diskretierung. Um diese dem Benutzer anzuzeigen, muss die Diskretierung zurückgerechnet werden. Dieses Feld definiert, wie das Resultat der Diskretierung rückgängig gemacht werden kann.
+\item atLeastFilterFields: Es gibt Felder, welche einen "`Ab"'-Wert beinhalten. Zum Beispiel soll für den Filter "`Zimmer"' mit dem Wert "`3+"' alle Instanzen ausgewählt werden, welche 3, oder mehr Zimmer beinhalten. Dieses Feld definiert, für welche Felder solch eine "`Ab"'-Suche durchgeführt werden soll.
 \item fieldNameMapping: Dieses Feld beinhaltet die Namen der Felder. Dem Benutzer wird somit anstelle des Feldes "`CUCNTRY"' der Name "`Customer Country"' angezeigt.
 \item fileCacheDirectory: Beinhaltet den Pfad zu den Cache Dateien.
 \item apriori: Beinhaltet alle Konfigurationen für den Apriori Algorithmus.
@@ -817,14 +817,14 @@ Die Konfigurationen sind im File "`config.php"' hinterlegt (siehe \url{https://g
 \item dbscan: Beinhaltet alle Konfigurationen für den DBSCAN Algorithmus.
 \end{itemize}
 
-Wenn in der Datenbasis ein neues Feld hinzugefügt wird, so kann es in der Konfiguration erweitert werden und es wird automatisch in den Algorithmen verwendet. Dazu muss es in einem der Felder "`booleanFields"', "`integerfields"', "`floatFields"', "`stringFields"', "`priceFields"' oder "`distancefields"' hinzugefügt werden. Ist ein diskretiertes Feld, so muss zusätzlich noch ein Eintrag im Feld "`floatFieldsBoundaries"' erstellt werden.
+Wenn in der Datenbasis ein neues Feld hinzugefügt wird, so kann es in der Konfiguration erweitert werden und es wird automatisch in den Algorithmen verwendet. Dazu muss es in einem der Felder "`booleanFields"', "`integerfields"', "`floatFields"', "`stringFields"', "`priceFields"' oder "`distancefields"' hinzugefügt werden. Ist es ein diskretiertes Feld, so muss zusätzlich noch ein Eintrag im Feld "`floatFieldsBoundaries"' erstellt werden.
 
 
 \section{Fazit}
 \label{sec:proofofconcept:fazit}
-Implementiert wurden eine Webanwendung mittels \gls{php}. Im \cref{app:pocansichten} wird die Programmoberfläche der Umsetzung gezeigt. Den grössten Einfluss auf die Entwicklung hatten die Anforderungen aus dem Konzept (siehe \cref{sec:proofofconcept:architektur:anforderungen} \nameref{sec:proofofconcept:architektur:anforderungen}) sowie die Laufzeit der Algorithmen. Da diese länger als 30 Sekunden dauern wurde die Berechnung in Hintergrundprozesse ausgelagert. Nichts desto trotz wurde eine Lösung erstellt, welche Modular aufgebaut ist (siehe \cref{sec:proofofconcept:packagestruktur} \nameref{sec:proofofconcept:packagestruktur}) und leicht durch weitere Attribute erweitert werden kann (siehe \cref{sec:proofofconcept:konfiguration} \nameref{sec:proofofconcept:konfiguration}). Um die Applikation um einen Algorithmus zu erweitern kann ein weiterer Service hinzugefügt werden (siehe \cref{sec:proofofconcept:architektur:services} \nameref{sec:proofofconcept:architektur:services}).
+Implementiert wurden eine Webanwendung mittels \gls{php}. Im \cref{app:pocansichten} wird die Programmoberfläche der Umsetzung gezeigt. Den grössten Einfluss auf die Entwicklung hatten die Anforderungen aus dem Konzept (siehe \cref{sec:proofofconcept:architektur:anforderungen} \nameref{sec:proofofconcept:architektur:anforderungen}) sowie die Laufzeit der Algorithmen. Da diese länger als 30 Sekunden dauern, wurde die Berechnung in Hintergrundprozesse ausgelagert. Nichts desto trotz wurde eine Lösung erstellt, welche Modular aufgebaut ist (siehe \cref{sec:proofofconcept:packagestruktur} \nameref{sec:proofofconcept:packagestruktur}) und leicht durch weitere Attribute erweitert werden kann (siehe \cref{sec:proofofconcept:konfiguration} \nameref{sec:proofofconcept:konfiguration}). Um die Applikation um einen Algorithmus zu erweitern, kann ein weiterer Service hinzugefügt werden (siehe \cref{sec:proofofconcept:architektur:services} \nameref{sec:proofofconcept:architektur:services}).
 
-Erste Analysen welche mit dem Programm durchgeführt wurden zeigten auf, dass der Apriori-Algorithmus sehr hilfreich ist, je spezifischer die Anfrage gestellt wird. Bei einer Apriori Analyse der gesamte Datenbasis mit allen Attributen ist das Resultat nicht sonderlich aussagekräftig. 
+Erste Analysen, die mit dem Programm durchgeführt wurden, zeigten auf, dass der Apriori-Algorithmus sehr hilfreich ist, je spezifischer die Anfrage gestellt wird. Bei einer Apriori Analyse der gesamten Datenbasis mit allen Attributen ist das Resultat nicht sonderlich aussagekräftig. 
 
 \begin{figure}[H]
 	\RawFloats
@@ -834,11 +834,11 @@ Erste Analysen welche mit dem Programm durchgeführt wurden zeigten auf, dass de
 	\label{fig:proofofconcept:fazit:1}
 \end{figure}
 
-Bessere Resultate erhält man, wenn die Datenbasis eingeschränkt wird. Zum Beispiel wenn man nur Kunden aus der Schweiz in der Analyse verwendet. Anschliessend kann man dasselbe für Kunden aus Frankreich machen und die beiden Resultate gegeneinander vergleichen. Auch hilfreich ist die Einschränkung der Attribute, welche in die Analyse einfliessen. Zuerst angedacht war in der Arbeit, dass die Algorithmen möglichst oft mit möglichst vielen Attributen arbeiten. Bei der Auswertung der Hypothesen (siehe \cref{sec:einleitung:ziel:hypothesen} \nameref{sec:einleitung:ziel:hypothesen}) hat sich jedoch gezeigt dass viele Fragestellungen nur wenige Attribute benötigen. Besonders oft wurden die Wochentage, Monate, Destinationen des Objekts und des Kunden sowie die Distanzen verwendet. Die Restlichen Attribute werden in Zukunft hoffentlich bei der Analyse durch Interhome verwendet. Ansonsten können diese leicht durch eine Konfigurationsänderung entfernt werden.
+Bessere Resultate erhält man, wenn die Datenbasis eingeschränkt wird. Zum Beispiel, wenn man nur Kunden aus der Schweiz in der Analyse verwendet. Anschliessend kann man dasselbe für Kunden aus Frankreich machen und die beiden Resultate gegeneinander vergleichen. Auch hilfreich ist die Einschränkung der Attribute, welche in die Analyse einfliessen. Zuerst angedacht war in der Arbeit, dass die Algorithmen möglichst oft mit möglichst vielen Attributen arbeiten. Bei der Auswertung der Hypothesen (siehe \cref{sec:einleitung:ziel:hypothesen} \nameref{sec:einleitung:ziel:hypothesen}) hat sich jedoch gezeigt, dass viele Fragestellungen nur wenige Attribute benötigen. Besonders oft wurden die Wochentage, Monate, Destinationen des Objekts und des Kunden sowie die Distanzen verwendet. Die Restlichen Attribute werden in Zukunft hoffentlich bei der Analyse durch Interhome verwendet. Ansonsten können diese leicht durch eine Konfigurationsänderung entfernt werden.
 
-Die grösste Stärke des Apriori Algorithmus ist dessen Geschwindigkeit. Je höher der $minsup$ ist, desto schneller Arbeitet er. Bei ein Wert von 0.1 dauert eine Analyse im Durchschnitt 32 Sekunden über die gesamte Datenbasis mit allen Attributen. Das lädt ein verschiedene Kombinationen an Filtern auszuprobieren um ein brauchbares Resultat zu finden. Die Clustering Algorithmen hingegen sind sehr langsam. Wenn die Analyse auf 1'500 Instanzen eingeschränkt wird dauert ein Durchlauf bereits über 20 Minuten. Das Negative daran ist die exponentielle Laufzeit. 3'000 Instanzen brauchen demnach nicht 40 Minuten, sondern bereits Stunden. Nicht gerade hilfreich ist dabei die Tatsache, dass mehrere verschiedene Parameter die Analyse massiv beeinträchtigen (siehe \cref{sec:recherche:algorithmen:k-prototypes} \nameref{sec:recherche:algorithmen:k-prototypes} und \cref{sec:recherche:algorithmen:dbscan} \nameref{sec:recherche:algorithmen:dbscan}). Im \cref{sec:konzept:parameterauswahl} \nameref{sec:konzept:parameterauswahl} wurde zum Beispiel die Elbow-Methode zur Erhebung eines geeigneten $k$ Wertes vorgenommen. Jedoch ist dies bei der Laufzeit der Algorithmen nicht möglich weshalb sie nicht umgesetzt wurde. Die Parameter $\epsilon$, $minpts$ und $\gamma$ sollen explorativ ermittelt werden. Jedoch ist dies bei diesen Laufzeiten nicht praktikabel. 
+Die grösste Stärke des Apriori Algorithmus ist dessen Geschwindigkeit. Je höher der $minsup$ ist, desto schneller arbeitet er. Bei einem Wert von 0.1 dauert eine Analyse im Durchschnitt 32 Sekunden über die gesamte Datenbasis mit allen Attributen. Das lädt ein verschiedene Kombinationen an Filtern auszuprobieren, um ein brauchbares Resultat zu finden. Die Clustering Algorithmen hingegen sind sehr langsam. Wenn die Analyse auf 1'500 Instanzen eingeschränkt wird, dauert ein Durchlauf bereits über 20 Minuten. Das Negative daran ist die exponentielle Laufzeit. 3'000 Instanzen brauchen demnach nicht 40 Minuten, sondern bereits mehrere Stunden. Nicht gerade hilfreich ist dabei die Tatsache, dass mehrere verschiedene Parameter die Analyse massiv beeinträchtigen (siehe \cref{sec:recherche:algorithmen:k-prototypes} \nameref{sec:recherche:algorithmen:k-prototypes} und \cref{sec:recherche:algorithmen:dbscan} \nameref{sec:recherche:algorithmen:dbscan}). Im \cref{sec:konzept:parameterauswahl} \nameref{sec:konzept:parameterauswahl} wurde zum Beispiel die Elbow-Methode zur Erhebung eines geeigneten $k$ Wertes vorgenommen. Jedoch ist dies bei der Laufzeit der Algorithmen nicht möglich, weshalb sie nicht umgesetzt wurde. Die Parameter $\epsilon$, $minpts$ und $\gamma$ sollen explorativ ermittelt werden. Jedoch ist dies bei diesen Laufzeiten nicht praktikabel. 
 
-Nichts desto trotz wurden Durchläufe der Clustering Algorithmen ausgeführt. Die Resultate waren jedoch nicht besonders aufschlussreich. Der k-prototype findet per Definition immer $k$ Cluster. Erwartet wurde, dass einige Attribute in einer Gruppe sehr oft vertreten sind, und in einer anderen möglichst selten. Jedoch zeigten die Resultate die selben Attribute oft in beiden Clustern mit ähnlicher Häufigkeit, womit keine klaren Schlüsse gezogen werden konnten. Der DBSCAN findet auf den Daten von Interhome entweder nur einen Cluster, oder einen grösseren Cluster und ganz viele Noise Punkte. Entweder benötigen die Clustering Algorithmen noch weitere Feineinstellungen der Parameter, oder es sind schlichtweg keine eindeutigen Cluster in den Daten zu finden. Die Resultate lassen aber letzteres Vermuten. Denn dieses Verhalten wäre erklärbar, wenn viele Instanzen zueinander ähnlich sind und es nur wenige Ausreisser gibt. In \cref{fig:proofofconcept:fazit:2} wird die vermutete Verhalten der Buchungen in der Datenbasis Beispielhaft auf einem Koordinatensytem aufgezeigt. Grüne Punkte gehören zu einem Cluster und sind alle sehr ähnlich zu einander und irgendwo in der Mitte angesiedelt. Ausserhalb der Hauptgruppe gibt es wenige Ausreisser, welche jedoch untereinander keinen Cluster bilden können. Dann würde der k-prototype $k$ Clusters finden, diese jedoch nicht klar unterscheiden könne. Der DBSCAN findet bei solch einer Verteilung nur eine Gruppe und einige Noise Punkte.
+Nichts desto trotz wurden Durchläufe der Clustering Algorithmen ausgeführt. Die Resultate waren jedoch nicht besonders aufschlussreich. Der k-prototype findet per Definition immer $k$ Cluster. Erwartet wurde, dass einige Attribute in einer Gruppe sehr oft vertreten sind und in einer anderen möglichst selten. Jedoch zeigten die Resultate die selben Attribute oft in beiden Clustern mit ähnlicher Häufigkeit, womit keine klaren Schlüsse gezogen werden konnten. Der DBSCAN findet auf den Daten von Interhome entweder nur einen Cluster, oder einen grösseren Cluster und ganz viele Noise Punkte. Entweder benötigen die Clustering Algorithmen noch weitere Feineinstellungen der Parameter, oder es sind schlichtweg keine eindeutigen Cluster in den Daten zu finden. Die Resultate lassen aber letzteres vermuten. Denn dieses Verhalten wäre erklärbar, wenn viele Instanzen zueinander ähnlich sind und es nur wenige Ausreisser gibt. In \cref{fig:proofofconcept:fazit:2} wird das vermutete Verhalten der Buchungen in der Datenbasis beispielhaft auf einem Koordinatensytem aufgezeigt. Grüne Punkte gehören zu einem Cluster und sind alle sehr ähnlich zueinander und irgendwo in der Mitte angesiedelt. Ausserhalb der Hauptgruppe gibt es wenige Ausreisser, welche jedoch untereinander keinen Cluster bilden können. Dann würde der k-prototype $k$ Clusters finden, diese jedoch nicht klar unterscheiden können. Der DBSCAN findet bei solch einer Verteilung nur eine Gruppe und einige Noise Punkte.
 
 \begin{figure}[H]
 	\RawFloats
@@ -848,4 +848,4 @@ Nichts desto trotz wurden Durchläufe der Clustering Algorithmen ausgeführt. Di
 	\label{fig:proofofconcept:fazit:2}
 \end{figure}
 
-Mit eingeplant war die Anreicherung der Daten durch Wetterinformationen. Es wurde ein Anbieter gefunden welcher sich bereiterklärte, diese Daten kostenlos zu liefern. Schlussendlich hat es zeitlich jedoch nicht mehr gereicht und es kam keine Antwort vor Abgabe der Arbeit.
+Mit eingeplant war die Anreicherung der Daten durch Wetterinformationen. Es wurde ein Anbieter gefunden, der sich bereit erklärte, diese Daten kostenlos zu liefern. Schlussendlich hat es zeitlich jedoch nicht mehr gereicht und es kam keine Antwort vor Abgabe der Arbeit.
