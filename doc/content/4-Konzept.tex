@@ -193,9 +193,13 @@ Folgende Felder werden benötigt, sind jedoch in der Datenbasis nicht vorhanden:
 \begin{itemize}
 \item Region und Ort des Objekts. In der Datenbasis ist nur das Land vorhanden.
 \item Monat und Wochentag, in welchem das Objekt gebucht wurde. 
+\item Wochenpreis pro Person des Objektes.
+\item Wetterdaten des Kunden zum Zeitpunkt der Buchung.
 \end{itemize}
 
-Zusätzlich müssen für die Wetterdaten die genaue Geolocation des Benutzers vorhanden sein. Im Datenstamm ist die Adresse des Kunden gespeichert, mit welcher die Geolocation ermittelt werden kann.
+Der Wochenpreis wird aus dem Gesamtpreis der Buchung abgeleitet. Dieser ist für die gesamte Buchungsdauer für alle Passagiere gültig. Der Preis muss demnach durch die Anzahl Tage und Passagiere geteilt und mit "`7"' multipliziert werden.
+
+Zusätzlich müssen für die Wetterdaten die genaue Geolocation des Benutzers vorhanden sein. Im Datenstamm ist die Adresse des Kunden gespeichert, mit welcher die Geolocation ermittelt werden kann. Mittels dieser Geolocation kann das Wetter des Kunden ermittelt werden.
 
 \subsubsection{Diskretierung von Distanzen und des Wochenpreises} 
 \label{sec:recherche:datenvorbereitung:diskretierung}
@@ -219,7 +223,7 @@ Die Zeilen AK (Distanz zum Wasser), AL (Distanz zum Skigebiet), AM (Distanz zum 
 
 Ebenfalls wird der Wochenpreise in nachfolgende Intervalle unterteilt.
 \begin{table}[h] 
-	\caption{Diskretisierungswerte des Preises}
+	\caption{Diskretisierungswerte des Wochenpreises}
 	\centering
 	\rowcolors{1}{tablebodycolor}{tablerowcolor}
 	\label{fig:recherche:datenvorbereitung:2}
@@ -227,15 +231,15 @@ Ebenfalls wird der Wochenpreise in nachfolgende Intervalle unterteilt.
 		\hline 
 		\rowcolor{tableheadcolor}
 		\bfseries Min & \bfseries Max & \bfseries Wert \\ \hline 
-		0 & 2000 & budget \\ \hline 
-		2001 & 7999 &  \\ \hline 
-		8000 & $\infty$ & luxury \\ \hline 
+		0 & 200 & budget \\ \hline 
+		201 & 400 &  \\ \hline 
+		401 & $\infty$ & luxury \\ \hline 
 	\end{tabular}
 \end{table}
 
 Bei den Distanzen sind kleine Werte spannend, welche angeben, dass ein Objekt nahe beim Skilift, oder bei der Busstation liegt. Deshalb wurde definiert, dass die Werte von 0 bis 499 Metern als nahe (engl. Close) markiert werden. Darüber liegende Werte werden ignoriert.
 
-Bei den Preisen hingegen ist es interessant, wenn ein Objekt besonders günstig, oder teuer ist. Deshalb wurden zwei Intervalle definiert. Nämlich 0 bis 200 und 401 aufwärts. Alles dazwischen wird nicht weiter behandelt.
+Bei den Wochepreisen hingegen ist es interessant, wenn ein Objekt besonders günstig, oder teuer ist. Deshalb wurden zwei Intervalle definiert. Nämlich 0 bis 200 und 401 aufwärts. Alles dazwischen wird nicht weiter behandelt.
 
 %\begin{itemize}
 %%\item Das Datenformat wurde für die einfachere programmatische Handhabung von Windows Excel in das \gls{csv}-Format transferiert.
@@ -244,7 +248,7 @@ Bei den Preisen hingegen ist es interessant, wenn ein Objekt besonders günstig,
 %\item Der Preis wird normiert auf Wochenpreise. wurde diskretisiert. Spannend für die Interpretation sind nur werte welche kleiner als 500 sind oder über 2000. Siehe \cref{fig:recherche:datenvorbereitung:2}.
 %\end{itemize}
 
-In den Tabellen \ref{fig:recherche:datenvorbereitung:3} und \ref{fig:recherche:datenvorbereitung:4} wird ein Beispiel gegeben. In der Ersten Tabelle sind Buchungen vor der Diskretisierung aufgeführt und in der Tweiten danach. Distanzwerte von 500 oder mehr und Preise zwischen 499 und 2000 wurden entfernt. Dies ist zum Beispiel bei dem Wert "`Distanz zum Skilift"' der Buchung mit ID 3 geschehen.
+In den Tabellen \ref{fig:recherche:datenvorbereitung:3} und \ref{fig:recherche:datenvorbereitung:4} wird ein Beispiel gegeben. In der Ersten Tabelle sind Buchungen vor der Diskretisierung aufgeführt und in der Zweiten danach. Distanzwerte von 500 oder mehr und Preise zwischen 201 und 400 wurden entfernt. Dies ist zum Beispiel bei dem Wert "`Distanz zum Skilift"' der Buchung mit ID 6 geschehen.
 
 \begin{table}[H] 
 	\caption{Datenbestand vor der Diskretisierung}
@@ -256,13 +260,13 @@ In den Tabellen \ref{fig:recherche:datenvorbereitung:3} und \ref{fig:recherche:d
 		\rowcolor{tableheadcolor}
 		\bfseries \rotatebox{90}{ID} & \bfseries \rotatebox{90}{Ortschaft} & \bfseries \rotatebox{90}{Wochenpreis (CHF)} & \bfseries \rotatebox{90}{Tiere erlaubt} & \bfseries \rotatebox{90}{Grill vorhanden} & \bfseries \rotatebox{90}{Balkon vorhanden} & \bfseries \rotatebox{90}{Distanz zum Meer (m)} & \bfseries \rotatebox{90}{Distanz zum Skilift (m)} \\ \hline 
 		
-		1 & Zermatt & 230 & \checkmark &  &  &  & 150 \\ \hline 
-		2 & Cannes & 450 & & \checkmark & \checkmark & 260 & \\ \hline 
-		3 & Zermatt & 2301 & \checkmark & \checkmark & & 350 & 850 \\ \hline 
-		4 & Zermatt & 879 & \checkmark & & \checkmark &  & 350 \\ \hline 
+		1 & Zermatt & 199 & \checkmark &  &  &  & 150 \\ \hline 
+		2 & Cannes & 150 & & \checkmark & \checkmark & 260 & \\ \hline 
+		3 & Zermatt & 550 & \checkmark & \checkmark & & 350 & 850 \\ \hline 
+		4 & Zermatt & 350 & \checkmark & & \checkmark &  & 350 \\ \hline 
 		5 & Zermatt & 149 & \checkmark &  & \checkmark &  & 450 \\
-		6 & Cannes & 873 &  & \checkmark &  & 80 & 1200 \\ \hline 
-		7 & Zermatt & 1800 & \checkmark & \checkmark &  & 760 & \\ \hline 
+		6 & Cannes & 270 &  & \checkmark &  & 80 & 1200 \\ \hline 
+		7 & Zermatt & 649 & \checkmark & \checkmark &  & 760 & \\ \hline 
 	\end{tabular}
 \end{table}
 

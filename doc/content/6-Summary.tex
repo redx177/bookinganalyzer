@@ -1,7 +1,8 @@
 
 \chapter{Testing \& Fazit}
 \label{sec:testingfazit}
-\todo{intro}
+\todo{anpassen?}
+In diesem Kapitel werden zuerst die Testfälle ausgewertet und die Hypothesen besprochen. Danach gibt es ein Fazit sowie ein Schlusswort.
 
 \section{Testing}
 \label{sec:testingfazit:testing}
@@ -1333,7 +1334,13 @@ Für die Messung der Komplexität der nicht funktionalen Anforderung NFA1 (siehe
 Wie im \cref{sec:proofofconcept:fazit} \nameref{sec:proofofconcept:fazit} erläutert, eignet sich der Apriori Algorithmus für die explorative Suche von Mustern. Hauptsache dafür ist dessen Geschwindigkeit und die Einfachheit des Programms. Die Clustering Algorithmen konnten leider keine hilfreichen Resultate liefern. Wie im \cref{sec:proofofconcept:fazit} \nameref{sec:proofofconcept:fazit} beschrieben, ist noch unklar, ob es an falschen Parametern der Algorithmen liegt. Es wurde eine Hypothese aufgestellt, die jedoch das Verhalten der Clusteralgorithmen erklärt. Dieses würde darauf schliessen, dass es keine klaren Gruppen gibt und die beiden Algorithmen demnach nicht geeignet sind, um die Buchungen von Interhome zu analysieren.
 
 
-%\section{Mögliche Erweiterungen/Verbesserungen}
+\section{Nächste Schritte}
+Als nächstes wird der Proof of Concept der Interhome vorgestellt. Der Einkauf und das Marketing sollen das Programm ausgiebig einsetzen, wodurch hoffentlich wertvolles Feedback entsteht. Es ist zu erwarten dass sie weitere Attribute bei der Analyse benötigen. Wie zum Beispiel die Anzahl der reisenden Kindern.
+
+Im \cref{sec:recherche:datenvorbereitung:diskretierung} wurden die Distanzen und der Wochenpreis in fixe Wertebereiche diskretiert. Andere Möglichkeiten wurden erwähnt, jedoch nicht weiter untersucht. Dies ist kein Problem solange verschiedene Resultate vom Apriori Algorithmus verglichen werden. Wenn zum Beispiel analysiert wird wie viele Buchungen in Frankreich im Gegensatz zu der Schweiz nahe am Skilift sind, kann das Resultat miteinander verglichen werden. Beide Analysen verwenden die selbe Diskretisierungswerte. Wenn hingegen eine Analyse nur für Frankreich gemacht wird, sieht man dass 19.45\% aller Buchungen nahe am Skilift liegen. Hier hat die diskretierung einen Einfluss auf das Resultat, denn es macht ein Unterschied ob der Wertebereich von 0-499 oder 0-1'000 Meter gewählt wird. Es gibt verschiedene Techniken für das Diskretisieren, zum Beispiel "`equal-width"' oder "`equal-frequency"'\footcite{data_mining_concepts_and_techniques}. Dies könnte weiter untersucht werden.
+
+Die Diskretisierung ermöglicht es die numerischen Werte in der Apriori Analyse zu verwenden. Eine Distanz von 199 und 200 Metern sind beide "`close"', jedoch bei 499 und 500 Metern ist dies nicht der Fall. Da ist der erste Wert "`close"', der Zweite jedoch nicht. Dieses Verhalten ist nicht hilfreich beim Clustering. Deshalb empfiehlt es sich, die k-prototype- oder DBSCAN Algorithmen nochmals ohne die Diskretierung einzusetzen. Wohl möglich werden dadurch bessere Resultate produziert. 
+
 %Diskretiesierungsschritte \cref{sec:recherche:datenvorbereitung} nach Häufigkeitsanalyse.
 %Z.b. die Preise plotten -> man sieht ein peek bei CHF1000/Buchung. +/- 1/3 vom Peek sind die normalen Preise. Darunter Budget, darüber Luxury
 %
@@ -1346,4 +1353,8 @@ Wie im \cref{sec:proofofconcept:fazit} \nameref{sec:proofofconcept:fazit} erläu
 %ApiroriTid, AprioriHybrid
 
 \section{Schlusswort}
-Die Apriori Analyse hat sich als hilfreiches Werkzeug für die Attributanalyse der Interhome Buchungsdaten herausgestellt, solange die korrekten Anfragen gestellt werden. Die Clustering Algorithmen konnten hingegen keinen Beitrag zum Ziel dieser Arbeit leisten. Trotzdem wurden durch ihren Einsatz wertvolle Einblicke und ein besseres Verständnis der Datenbasis gewonnen. Für den produktiven Einsatz sollte jedoch die Beischreibung der möglichen Einstellungen im Programm noch verständlicher erläutert werden. 
+Die Apriori Analyse hat sich als hilfreiches Werkzeug für die Attributanalyse der Interhome Buchungsdaten herausgestellt, solange die korrekten Anfragen gestellt werden. Die Clustering Algorithmen konnten hingegen keinen Beitrag zum Ziel dieser Arbeit leisten. Trotzdem wurden durch ihren Einsatz wertvolle Einblicke und ein besseres Verständnis der Datenbasis gewonnen.
+
+Die Auswahl der Wertebereiche der Diskretierung wird noch hinterfragt und weitere Nachforschungen in diesem Bereich getätigt. Auch ein Clustering ohne diskretierung wird noch ins Auge gefasst.
+
+Das Programm kann für die Analyse mittels dem Apriori Algorithmus von Interhome verwendet werden. Für den produktiven Einsatz sollte jedoch die Beschreibung der möglichen Einstellungen im Programm noch verständlicher erläutert werden. 
