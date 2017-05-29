@@ -13,7 +13,7 @@ Ziel dieser Arbeit ist es Attribute von Objekten zu eruieren, die in einer Grupp
 
 \subsubsection{Association rule learning}
 \label{sec:konzept:disziplinauswahl:association}
-Mittels Association rule learning (siehe \cref{sec:recherche:dataminingtechniken:disziplinen:association} \nameref{sec:recherche:dataminingtechniken:disziplinen:association}) lassen sich aus allen selektierten Buchungen die Häufigkeiten von Attributkombinationen herausfinden. Dadurch können FA1, FA2, FA3 sowie FA4 erfüllt werden.
+Mittels Association rule learning (siehe \cref{sec:recherche:dataminingtechniken:disziplinen:association} \nameref{sec:recherche:dataminingtechniken:disziplinen:association}) lassen sich aus allen selektierten Buchungen die Häufigkeiten von Attributkombinationen herausfinden. Dadurch können FA1, FA2, FA3, FA4, FA5 sowie FA6 erfüllt werden.
 
 
 \subsubsection{Classification}
@@ -165,7 +165,7 @@ Nachdem alle Buchungen mit dem Status "`XX"' entfernt wurden enthält die Datenb
 \subsubsection{Datennormierung von numerischen Werten} 
 Die im \label{sec:recherche:datenvorbereitung:normierung} \cref{sec:konzept:anwendungderalgorithmen:distanzmessung} vorgestellte Distanzmessung arbeitet mit der euklidischen Distanz für numerische Werte. Wenn ein Attribut $A_1$ einer Buchung den Wert 1'000 hat und das einer anderen Buchung 300, so ergibt sich eine Distanz von 700. Betrachtet man ein anderes Attribut $A_2$, welches den Wert 1 hat, beziehungsweise 0.3, so ist die Distanz 0.7. Dadurch fällt $A_2$ in der gesamten Distanz zwischen den beiden Buchungen massiv weniger ins Gewicht, da es um einen Faktor 1'000 kleiner ist. Deshalb werden numerische Attribute genormt, damit alle in den gleichen Wertebereich liegen.
 
-In dieser Arbeit werden vier numerische Attribute verwendet.
+Eingeschränkt werden die Attribute im \cref{fig:recherche:attributeinschraenkung:2}. Normiert werden müssen nur die Werte aus den in \cref{fig:recherche:datenvorbereitung:5} vorgestellten Feldern. Die anderen werden im \cref{sec:recherche:datenvorbereitung:diskretierung} diskretiert, wodurch eine Normierung hinfällig wird. 
 \begin{table}[H] 
 	\caption{Numerische Attribute}
 	\centering
@@ -197,9 +197,9 @@ Folgende Felder werden benötigt, sind jedoch in der Datenbasis nicht vorhanden:
 \item Wetterdaten des Kunden zum Zeitpunkt der Buchung.
 \end{itemize}
 
-Der Wochenpreis wird aus dem Gesamtpreis der Buchung abgeleitet. Dieser ist für die gesamte Buchungsdauer für alle Passagiere gültig. Der Preis muss demnach durch die Anzahl Tage und Passagiere geteilt und mit "`7"' multipliziert werden.
+Der Wochenpreis wird aus dem Gesamtpreis der Buchung abgeleitet, welcher für die gesamte Buchungsdauer für alle Passagiere gültig ist. Der Gesamptpreis muss demnach durch die Anzahl Tage und Passagiere geteilt und mit "`7"' multipliziert werden, um den Wochenpreis zu erhalten.
 
-Zusätzlich müssen für die Wetterdaten die genaue Geolocation des Benutzers vorhanden sein. Im Datenstamm ist die Adresse des Kunden gespeichert, mit welcher die Geolocation ermittelt werden kann. Mittels dieser Geolocation kann das Wetter des Kunden ermittelt werden.
+Zusätzlich muss für die Anreicherung der Wetterdaten die genaue Geolocation des Benutzers vorhanden sein. Im Datenstamm ist die Adresse des Kunden gespeichert, mit welcher die Geolocation ermittelt werden kann. Mit Hilfe dieser Geolocation kann das Wetter des Kunden ausfindig gemacht werden.
 
 \subsubsection{Diskretierung von Distanzen und des Wochenpreises} 
 \label{sec:recherche:datenvorbereitung:diskretierung}
@@ -322,7 +322,7 @@ Der Datenbestand besteht aus 153 Attributen/Spalten. Aus folgenden Gründen soll
 	\end{tabular}
 \end{table}
 
-In Absprache mit Interhome wurde entschieden, dass in einem ersten Schritt jene Attribute verwendet werden sollen, welche auch direkt auf der Webseite dargestellt werden. Die zu verwendenden Spalten sind in der \cref{fig:recherche:attributeinschraenkung:2} aufgeführt. Das Feld "`NREF"' beinhaltet die Objektidentifikation. Dieses wird für die Attributanalyse nicht verwendet, hilft jedoch den Testern bei der Validierung der Resultate und sollte deshalb beim Einsehen des Datenbestandes mit angezeigt werden.
+In Absprache mit Interhome wurde entschieden, dass in einem ersten Schritt jene Attribute verwendet werden sollen, welche auch direkt auf der Webseite von Interhome dargestellt werden. Die zu verwendenden Spalten sind in der \cref{fig:recherche:attributeinschraenkung:2} aufgeführt. Das Feld "`NREF"' beinhaltet die Objektidentifikation. Dieses wird für die Attributanalyse nicht verwendet, hilft jedoch den Testern bei der Validierung der Resultate und sollte deshalb beim Einsehen des Datenbestandes mit angezeigt werden.
 
 \begin{table}[H] 
 	\caption{Zu verwendende Attribute}
@@ -1021,5 +1021,9 @@ Erwartetes Resultat vom k-prototype Algorithmus:
 	\label{fig:recherche:testcases:12:2}
 \end{longtable}
 
-\section{Programmiersprache}
-Als Programmiersprache für eine Weblösung gibt es diverse zur Auswahl. Eingesetzt werden soll \gls{php}, da die Abteilung, welche bei einem Erfolg des Projekts den Code übernehmen soll in dieser Sprache arbeitet.
+\section{Entscheid: Programm oder eigene Implementation}
+Im \cref{sec:recherche:programmevaluation} \nameref{sec:recherche:programmevaluation} wurden zwei Programme vorgestellt, die für diese Arbeit eingesetzt werden können, um die Analyse der Buchungsdaten durchzuführen. Entschieden wurde jedoch, eine eigene Software zu entwickeln. RapidMiner, sowie Weka unterstützen die im \cref{sec:recherche:algorithmen} vorgestellten Algorithmen, jedoch nur für numerische Attribute, wodurch FA6 (siehe \cref{fig:anforderungsanalyse:funktionaleanforderung:fa6} \nameref{fig:anforderungsanalyse:funktionaleanforderung:fa6}) nicht unterstützt wird.
+
+Umgesetzt werden soll eine Weblösung, welche ohne Installation von der Interhome eingesetzt werden kann. Dies wurde entschieden, da die Abteilung, welche bei einem Erfolg des Projektes den Code übernehmen soll in diesem Bereich tätig ist. Aus dem selben Grund wurde auch die Programmiersprache \gls{php} ausgewählt.
+
+Obwohl RapidMiner und Weka nicht für die Datenanalyse eingesetzt werden können, so eignen sie sich trotzdem für die Vorbereitung der Daten gemäss \cref{sec:recherche:datenvorbereitung}. Alle benötigten Operationen werden von beiden Programmen unterstützt. Verwendet wird RapidMiner, da die Oberfläche des Programms übersichtlicher ist. Bei einem Vergleich der beiden hat sich gezeigt, dass RapidMiner intuitiver zu bedienen ist und schneller Resultate erzeugt werden kann.
