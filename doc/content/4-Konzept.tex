@@ -165,7 +165,7 @@ Nachdem alle Buchungen mit dem Status "`XX"' entfernt wurden enthält die Datenb
 \subsubsection{Datennormierung von numerischen Werten} 
 Die im \label{sec:recherche:datenvorbereitung:normierung} \cref{sec:konzept:anwendungderalgorithmen:distanzmessung} vorgestellte Distanzmessung arbeitet mit der euklidischen Distanz für numerische Werte. Wenn ein Attribut $A_1$ einer Buchung den Wert 1'000 hat und das einer anderen Buchung 300, so ergibt sich eine Distanz von 700. Betrachtet man ein anderes Attribut $A_2$, welches den Wert 1 hat, beziehungsweise 0.3, so ist die Distanz 0.7. Dadurch fällt $A_2$ in der gesamten Distanz zwischen den beiden Buchungen massiv weniger ins Gewicht, da es um einen Faktor 1'000 kleiner ist. Deshalb werden numerische Attribute genormt, damit alle in den gleichen Wertebereich liegen.
 
-Eingeschränkt werden die Attribute im \cref{fig:recherche:attributeinschraenkung:2}. Normiert werden müssen nur die Werte aus den in \cref{fig:recherche:datenvorbereitung:5} vorgestellten Feldern. Die anderen werden im \cref{sec:recherche:datenvorbereitung:diskretierung} diskretiert, wodurch eine Normierung hinfällig wird. 
+Normiert werden müssen nur die Werte aus der in \cref{fig:recherche:datenvorbereitung:5} vorgestellten Feldern. Eingeschränkt werden die Attribute in der \cref{fig:recherche:attributeinschraenkung:2} wodurch viele Felder wegfallen. Die restlichen numerischen Attribute, Distanzen und der Wochenpreise, werden im \cref{sec:recherche:datenvorbereitung:diskretierung} diskretiert, wodurch eine Normierung hinfällig wird. 
 \begin{table}[H] 
 	\caption{Numerische Attribute}
 	\centering
